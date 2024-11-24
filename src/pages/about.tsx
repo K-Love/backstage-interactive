@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
-import { motion } from 'framer-motion';
 
 const About: NextPage = () => {
   return (
