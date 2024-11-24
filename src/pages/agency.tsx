@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
@@ -89,7 +90,7 @@ const Agency: NextPage = () => {
       <section className="py-16 bg-dark text-white">
         <div className="container">
           <h2 className="text-4xl font-bold text-center mb-12 gradient-text">Showcase</h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {portfolio.map((item, index) => (
               <motion.a
                 key={item.title}
@@ -101,9 +102,15 @@ const Agency: NextPage = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="block group"
               >
-                <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300">
-                  <div className="relative h-48 mb-4 overflow-hidden rounded">
-                    <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+                <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300">
+                  <div className="relative w-full h-[300px] mb-4 overflow-hidden rounded">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill={true}
+                      className="object-contain hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-center group-hover:text-accent transition-colors">
                     {item.title}
