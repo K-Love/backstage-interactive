@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -19,8 +20,15 @@ export default function Header() {
             <div className="container">
               <div className="relative flex h-20 items-center justify-between">
                 <div className="flex items-center">
-                  <Link href="/" className="text-2xl font-bold gradient-text hover:scale-105 transition-transform duration-300">
-                    Backstage Interactive
+                  <Link href="/" className="hover:scale-105 transition-transform duration-300">
+                    <Image
+                      src="/images/bi-logo.png"
+                      alt="Backstage Interactive"
+                      width={180}
+                      height={40}
+                      className="h-auto w-auto"
+                      priority
+                    />
                   </Link>
                 </div>
                 
