@@ -52,6 +52,10 @@ const Contact: NextPage = () => {
 
       <section className="py-16">
         <div className="container max-w-2xl">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
+            Connect with BI
+          </h2>
+          
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

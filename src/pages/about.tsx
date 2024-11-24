@@ -37,20 +37,31 @@ const About: NextPage = () => {
                   (organic and paid), and content marketing.
                 </p>
               </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-              <div>
-                <h2 className="text-3xl font-bold mb-6">So, who is this one man?</h2>
-                <div className="bg-gray-50 p-8 rounded-lg">
-                  <h3 className="text-2xl font-bold mb-4">Kevin Love</h3>
-                  <p className="text-gray-600 mb-4">
-                    Kevin Love is a self-taught entrepreneur, web developer, and digital marketer. 
-                    He started Backstage Interactive in 2012 as an agency, but he always knew he 
-                    wanted to build his own projects as well.
-                  </p>
-                  <p className="text-gray-600">
-                    He added the Startup Studio arm to the company in January 2020 to fulfill this destiny.
-                  </p>
-                </div>
+      <section className="bg-gray-50 py-16">
+        <div className="container">
+          <div className="max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="prose prose-lg"
+            >
+              <h2 className="text-3xl font-bold mb-6">So, who is this one man?</h2>
+              <div className="bg-white p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-bold mb-4">Kevin Love</h3>
+                <p className="text-gray-600 mb-4">
+                  Kevin Love is a self-taught entrepreneur, web developer, and digital marketer. 
+                  He started Backstage Interactive in 2012 as an agency, but he always knew he 
+                  wanted to build his own projects as well.
+                </p>
+                <p className="text-gray-600">
+                  He added the Startup Studio arm to the company in January 2020 to fulfill this destiny.
+                </p>
               </div>
             </motion.div>
           </div>

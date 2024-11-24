@@ -3,7 +3,6 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Studio', href: '/studio' },
   { name: 'Agency', href: '/agency' },
@@ -13,14 +12,14 @@ const navigation = [
 export default function Header() {
   return (
     <>
-      <div className="h-20"></div> {/* Spacer for fixed header */}
+      <div className="h-20"></div>
       <Disclosure as="nav" className="bg-white/90 backdrop-blur-md shadow-lg fixed w-full top-0 z-50">
         {({ open }) => (
           <>
             <div className="container">
               <div className="relative flex h-20 items-center justify-between">
                 <div className="flex items-center">
-                  <Link href="/" className="text-2xl font-bold gradient-text">
+                  <Link href="/" className="text-2xl font-bold gradient-text hover:scale-105 transition-transform duration-300">
                     Backstage Interactive
                   </Link>
                 </div>
@@ -31,7 +30,7 @@ export default function Header() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent transition-colors duration-200 hover:scale-105 transform"
+                        className="px-4 py-2 text-base font-medium text-gray-700 hover:text-accent transition-colors duration-200 hover:scale-105 transform"
                       >
                         {item.name}
                       </Link>
@@ -58,7 +57,7 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent hover:bg-gray-50"
+                    className="block px-3 py-2 text-lg font-medium text-gray-700 hover:text-accent hover:bg-gray-50"
                   >
                     {item.name}
                   </Link>
