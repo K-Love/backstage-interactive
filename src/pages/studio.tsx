@@ -16,32 +16,32 @@ const processSteps = [
   {
     title: "Idea",
     description: "It all starts with the idea. It could come out of thin air, or it could be an improvement on a concept that already exists.",
-    icon: <LightBulbIcon className="w-6 h-6" />
+    icon: <LightBulbIcon className="w-8 h-8 text-accent stroke-2" />
   },
   {
     title: "Validation",
     description: "When an idea sounds good, we put it through the wringer, looking at search volume, social media interest, business models, and more.",
-    icon: <MagnifyingGlassIcon className="w-6 h-6" />
+    icon: <MagnifyingGlassIcon className="w-8 h-8 text-accent2 stroke-2" />
   },
   {
     title: "Development",
     description: "Projects for validated ideas are built according to modern standards.",
-    icon: <CommandLineIcon className="w-6 h-6" />
+    icon: <CommandLineIcon className="w-8 h-8 text-primary stroke-2" />
   },
   {
     title: "Launch",
     description: "The project gets launched to a pre-built email list, social media following, and/or partnerships, among other methods.",
-    icon: <RocketLaunchIcon className="w-6 h-6" />
+    icon: <RocketLaunchIcon className="w-8 h-8 text-accent stroke-2" />
   },
   {
     title: "Marketing",
     description: "Share it with an interested audience wherever they hang out – search engines, social media, forums, groups, etc.",
-    icon: <MegaphoneIcon className="w-6 h-6" />
+    icon: <MegaphoneIcon className="w-8 h-8 text-accent2 stroke-2" />
   },
   {
     title: "Growth & Scaling",
     description: "Once traction is gained, efforts are scaled. This could mean an increase in paid advertising, hiring, and expanding on the project.",
-    icon: <ChartBarIcon className="w-6 h-6" />
+    icon: <ChartBarIcon className="w-8 h-8 text-primary stroke-2" />
   }
 ];
 
@@ -97,7 +97,7 @@ const Studio: NextPage = () => {
                     {index + 1}
                   </span>
                   <div className="flex items-center">
-                    <span className="text-accent mr-3">{step.icon}</span>
+                    <span className="mr-3">{step.icon}</span>
                     <h3 className="text-xl font-bold">{step.title}</h3>
                   </div>
                 </div>

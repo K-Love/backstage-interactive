@@ -15,25 +15,25 @@ const services = [
     title: "Design",
     subtitle: "Crafting Visuals",
     description: "Design is where imagination meets strategy... transforming concepts into compelling visuals that capture a brand's essence. A blend of aesthetics and functionality creates designs that not only look stunning but also communicate messages effectively.",
-    icon: <PaintBrushIcon className="w-8 h-8" />
+    icon: <PaintBrushIcon className="w-10 h-10 text-accent stroke-2" />
   },
   {
     title: "Development",
     subtitle: "Building Solutions",
     description: "Development turns visionary ideas into reality... building robust, scalable solutions tailored to specific needs. Love WordPress, Shopify, or another popular platform? Great, let's use it. Want to get back to the basics and use good old HTML, CSS, and JavaScript? Let's do it.",
-    icon: <CodeBracketIcon className="w-8 h-8" />
+    icon: <CodeBracketIcon className="w-10 h-10 text-primary stroke-2" />
   },
   {
     title: "Sharing",
     subtitle: "Spreading the Word",
     description: "Sharing is about making connections and amplifying voices. Digital marketing strategies are designed to maximize reach and engagement. Through targeted social media campaigns, SEO, content marketing, and more, brands can connect with their audience on a deeper level.",
-    icon: <ShareIcon className="w-8 h-8" />
+    icon: <ShareIcon className="w-10 h-10 text-accent2 stroke-2" />
   },
   {
     title: "Consulting",
     subtitle: "Guiding Success",
     description: "Consulting is where expertise meets partnership. Strategic guidance is provided to navigate the complexities of the digital landscape... working closely to understand goals and challenges, offering tailored solutions to drive growth and success.",
-    icon: <LightBulbIcon className="w-8 h-8" />
+    icon: <LightBulbIcon className="w-10 h-10 text-accent stroke-2" />
   }
 ];
 
@@ -77,7 +77,7 @@ const Agency: NextPage = () => {
                 <div className="text-accent mb-6 transform transition-transform duration-300 group-hover:scale-110">
                   {service.icon}
                 </div>
-                <h3 className="text-2xl font-bold mb-2 gradient-text">{service.title}</h3>
+                <h3 className="text-2xl font-bold mb-2 text-gray-900">{service.title}</h3>
                 <h4 className="text-accent2 font-medium mb-4">{service.subtitle}</h4>
                 <p className="text-gray-600">{service.description}</p>
               </motion.div>

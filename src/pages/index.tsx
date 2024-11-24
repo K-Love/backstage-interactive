@@ -45,7 +45,7 @@ const Home: NextPage = () => {
       <section className="py-20 bg-light">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 gradient-text">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-900">
               Transforming Ideas into Reality
             </h2>
             <p className="text-lg text-gray-600">
