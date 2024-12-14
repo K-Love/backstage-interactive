@@ -1,6 +1,7 @@
 // src/components/layout/Header.tsx
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
 
@@ -17,7 +18,6 @@ const Header = () => {
   }, [])
 
   const navigation = [
-    { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Studio', href: '/studio' },
     { name: 'Agency', href: '/agency' },
@@ -33,9 +33,13 @@ const Header = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link href="/">
-            <span className="text-2xl font-bold text-primary">
-              Backstage Interactive
-            </span>
+            <Image
+              src="/images/bi-logo.png"
+              alt="Backstage Interactive"
+              width={200}
+              height={40}
+              priority
+            />
           </Link>
 
           <div className="hidden md:flex space-x-8">
