@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import OptimizedImage from './OptimizedImage'
 
 interface ProjectCardProps {
   title: string
@@ -25,14 +25,14 @@ const ProjectCard = ({ title, description, image, url, tags, status }: ProjectCa
       viewport={{ once: true }}
       className="bg-white rounded-lg shadow-lg overflow-hidden"
     >
-      <div className="relative aspect-video">
-        <Image
+      <div className="relative">
+        <OptimizedImage
           src={image}
           alt={title}
-          fill
-          className="object-cover"
+          enableZoom
+          className="w-full h-full"
         />
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 z-10">
           <span className={`px-3 py-1 rounded-full text-sm text-white ${statusColors[status]}`}>
             {status}
           </span>
