@@ -1,18 +1,25 @@
 import type { Config } from "tailwindcss";
 
-export default {
+module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: '#2E3192',
+        amber: '#F5A623',
+        purple: '#8E44AD',
+        magenta: '#EC008C',
+        teal: '#16A085',
+        yellow: '#FFD200',
+        charcoal: '#4A4A4A',
+      },
+      fontFamily: {
+        sans: ['Poppins', 'system-ui', 'sans-serif'],
+        heading: ['Helvetica Neue', 'sans-serif'],
       },
     },
   },
   plugins: [],
-} satisfies Config;
+}
