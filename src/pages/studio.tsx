@@ -1,5 +1,8 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
+import StudioHero from '@/components/sections/studio/Hero'
+import Projects from '@/components/sections/studio/Projects'
+import Process from '@/components/sections/studio/Process'
 
 const StudioPage: NextPage = () => {
   return (
@@ -8,15 +11,14 @@ const StudioPage: NextPage = () => {
         <title>Studio | Backstage Interactive</title>
         <meta 
           name="description" 
-          content="Discover our studio projects and innovative solutions at Backstage Interactive." 
+          content="Explore our innovative studio projects and experiments at Backstage Interactive." 
         />
       </Head>
       
-      <div className="pt-20 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-8">Studio</h1>
-          {/* Content will be added later */}
-        </div>
+      <div>
+        <StudioHero />
+        <Projects />
+        <Process />
       </div>
     </>
   )
