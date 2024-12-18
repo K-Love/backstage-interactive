@@ -126,4 +126,32 @@ async function optimizeImages(): Promise<void> {
   }
 }
 
+async function detectImageFormat(inputPath: string) {
+  const image = sharp(inputPath);
+  const metadata = await image.metadata();
+  return {
+    format: metadata.format,
+    width: metadata.width,
+    height: metadata.height,
+    hasAlpha: metadata.hasAlpha,
+  };
+}
+
+async function optimizeImageFormat(
+  image: sharp.Sharp,
+  originalFormat: string,
+  hasAlpha: boolean
+) {
+  if (hasAlpha) {
+    return image.webp({ quality: 85, alphaQuality: 85 });
+  }
+  
+  // Use AVIF for better compression when possible
+  try {
+    return image.avif({ quality: 85 });
+  } catch {
+    return image.webp({ quality: 85 });
+  }
+}
+
 export { optimizeImages, type OptimizationResult };

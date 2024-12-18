@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import { trackImageLoad } from '@/utils/imageAnalytics';
 
 interface OptimizedImageProps {
   src: string
@@ -66,7 +67,7 @@ const OptimizedImage = ({
   // Generate thumbnail path
   const thumbnailSrc = src.replace(/\.(webp|jpg|jpeg|png)$/, '-thumb.webp')
 
-  const handleLoad = useCallback(() => {
+  const handleLoad = useCallback((event: any) => {
     setIsLoading(false)
   }, [])
 
