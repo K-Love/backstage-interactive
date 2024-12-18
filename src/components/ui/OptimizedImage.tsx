@@ -1,4 +1,3 @@
-// src/components/ui/OptimizedImage.tsx
 import { useState, useCallback } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
