@@ -1,7 +1,7 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { trackImageLoad } from '@/utils/imageAnalytics';
+import { trackImageLoad } from '@/utils/imageAnalytics'
 
 interface OptimizedImageProps {
   src: string
@@ -27,6 +27,7 @@ const OptimizedImage = ({
   const [isError, setIsError] = useState(false)
   const [isZoomed, setIsZoomed] = useState(false)
   const [blurDataUrl, setBlurDataUrl] = useState<string>('')
+  const loadStartTime = useRef<number>(0)
 
   // Generate paths for different variants
   const getImageVariants = (basePath: string): ImageVariant[] => {
@@ -59,6 +60,11 @@ const OptimizedImage = ({
     }
   }, [src, priority]);
 
+  // Set load start time when component mounts
+  useEffect(() => {
+    loadStartTime.current = performance.now();
+  }, []);
+
   const variants = getImageVariants(src);
   const srcSet = variants
     .map(variant => `${variant.src} ${variant.width}w`)
@@ -69,12 +75,34 @@ const OptimizedImage = ({
 
   const handleLoad = useCallback((event: any) => {
     setIsLoading(false)
-  }, [])
+    
+    // Track loading performance
+    const loadTime = performance.now() - loadStartTime.current;
+    const imageElement = event?.target as HTMLImageElement;
+    
+    if (imageElement) {
+      trackImageLoad({
+        src,
+        loadTime,
+        size: imageElement.naturalWidth * imageElement.naturalHeight,
+        timestamp: Date.now(),
+      });
+    }
+  }, [src])
 
   const handleError = useCallback(() => {
     setIsLoading(false)
     setIsError(true)
-  }, [])
+    
+    // Track loading error
+    trackImageLoad({
+      src,
+      loadTime: performance.now() - loadStartTime.current,
+      size: 0,
+      timestamp: Date.now(),
+      error: true,
+    });
+  }, [src])
 
   const toggleZoom = useCallback(() => {
     if (enableZoom) {
@@ -115,6 +143,7 @@ const OptimizedImage = ({
                   ${className}
                 `}
                 priority={true}
+                unoptimized // Skip optimization for blur placeholder
               />
             )}
             <Image
@@ -127,6 +156,7 @@ const OptimizedImage = ({
                 ${className}
               `}
               priority={priority}
+              quality={60} // Lower quality for thumbnail
             />
             <Image
               src={variants[1].src} // Default to large size
@@ -144,6 +174,7 @@ const OptimizedImage = ({
               onClick={toggleZoom}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               srcSet={srcSet}
+              quality={85} // Optimal quality for main image
             />
           </>
         )}
@@ -171,6 +202,15 @@ const OptimizedImage = ({
                 className="object-contain cursor-zoom-out"
                 quality={100}
                 priority
+                onLoadingComplete={(e) => {
+                  trackImageLoad({
+                    src: variants[0].src,
+                    loadTime: performance.now() - loadStartTime.current,
+                    size: e.naturalWidth * e.naturalHeight,
+                    timestamp: Date.now(),
+                    isZoomed: true,
+                  });
+                }}
               />
             </motion.div>
           </motion.div>

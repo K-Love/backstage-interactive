@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ImageMetrics {
+  id        String   @id @default(cuid())
+  src       String
+  loadTime  Float
+  size      Int
+  timestamp DateTime @default(now())
+  error     Boolean  @default(false)
+  isZoomed  Boolean  @default(false)
+}
