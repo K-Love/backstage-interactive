@@ -1,8 +1,6 @@
 // pages/api/metrics/images.ts
-import { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import type { NextApiRequest, NextApiResponse } from 'next'
+import prisma from '@/lib/prisma'
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,12 +10,16 @@ export default async function handler(
     try {
       const metrics = await prisma.imageMetrics.create({
         data: {
-          ...req.body,
-          timestamp: new Date(req.body.timestamp)
+          src: req.body.src,
+          loadTime: req.body.loadTime,
+          size: req.body.size,
+          error: req.body.error || false,
+          isZoomed: req.body.isZoomed || false,
         }
       })
       return res.status(200).json(metrics)
     } catch (error) {
+      console.error('Failed to save metrics:', error)
       return res.status(500).json({ error: 'Failed to save metrics' })
     }
   }
@@ -30,7 +32,10 @@ export default async function handler(
       })
       return res.status(200).json(metrics)
     } catch (error) {
+      console.error('Failed to fetch metrics:', error)
       return res.status(500).json({ error: 'Failed to fetch metrics' })
     }
   }
+
+  return res.status(405).json({ error: 'Method not allowed' })
 }
