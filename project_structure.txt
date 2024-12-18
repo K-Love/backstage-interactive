@@ -1,75 +1,100 @@
-.git
-.next
-node_modules
-public
-scripts
-src
-.gitignore
-eslint.config.mjs
-next-env.d.ts
-next.config.ts
-package-lock.json
-package.json
-postcss.config.mjs
-README.md
-tailwind.config.ts
-tsconfig.json
-public\images
-public\favicon.ico
-public\file.svg
-public\globe.svg
-public\next.svg
-public\vercel.svg
-public\window.svg
-public\images\projects
-public\images\bi-logo.png
-public\images\projects\ai-writer.jpg
-public\images\projects\cwc-screenshot.png
-public\images\projects\digital-garden.jpg
-public\images\projects\sharrey-dore.png
-public\images\projects\web3-dashboard.jpg
-scripts\optimize-images.ts
-src\components
-src\content
-src\lib
-src\pages
-src\styles
-src\utils
-src\components\layout
-src\components\sections
-src\components\ui
-src\components\layout\Footer.tsx
-src\components\layout\Header.tsx
-src\components\layout\Layout.tsx
-src\components\sections\about
-src\components\sections\studio
-src\components\sections\FeaturedWork.tsx
-src\components\sections\Hero.tsx
-src\components\sections\Portfolio.tsx
-src\components\sections\Services.tsx
-src\components\sections\about\Divisions.tsx
-src\components\sections\about\Vision.tsx
-src\components\sections\studio\Hero.tsx
-src\components\sections\studio\Process.tsx
-src\components\sections\studio\Projects.tsx
-src\components\ui\Button.tsx
-src\components\ui\Card.tsx
-src\components\ui\Container.tsx
-src\components\ui\OptimizedImage.tsx
-src\components\ui\ProjectCard.tsx
-src\components\ui\ScrollToTop.tsx
-src\components\ui\Section.tsx
-src\content\pages
-src\content\pages\about.mdx
-src\content\pages\agency.mdx
-src\content\pages\studio.mdx
-src\lib\constants.ts
-src\lib\mdx.ts
-src\pages\_app.tsx
-src\pages\about.tsx
-src\pages\agency.tsx
-src\pages\contact.tsx
-src\pages\index.tsx
-src\pages\studio.tsx
-src\styles\globals.css
-src\utils\useLazyLoad.ts
+project/
+├── .git/
+├── .next/
+├── lib/
+│   └── prisma.ts
+├── node_modules/
+├── pages/
+│   ├── admin/
+│   │   └── analytics/
+│   │       └── images.tsx
+│   └── api/
+│       └── metrics/
+│           └── images.ts
+├── prisma/
+│   ├── migrations/
+│   │   ├── 20241218035636_init/
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   ├── dev.db
+│   ├── dev.db-journal
+│   └── schema.prisma
+├── public/
+│   ├── images/
+│   │   ├── projects/
+│   │   │   ├── ai-writer.jpg
+│   │   │   ├── cwc-screenshot.png
+│   │   │   ├── digital-garden.jpg
+│   │   │   ├── sharrey-dore.png
+│   │   │   └── web3-dashboard.jpg
+│   │   └── bi-logo.png
+│   ├── favicon.ico
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── scripts/
+│   ├── build.ts
+│   ├── optimize-images.ts
+│   ├── seed-test-data.ts
+│   └── validate-images.ts
+├── src/
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Footer.tsx
+│   │   │   ├── Header.tsx
+│   │   │   └── Layout.tsx
+│   │   ├── sections/
+│   │   │   ├── about/
+│   │   │   │   ├── Divisions.tsx
+│   │   │   │   └── Vision.tsx
+│   │   │   ├── studio/
+│   │   │   │   ├── Hero.tsx
+│   │   │   │   ├── Process.tsx
+│   │   │   │   └── Projects.tsx
+│   │   │   ├── FeaturedWork.tsx
+│   │   │   ├── Hero.tsx
+│   │   │   ├── Portfolio.tsx
+│   │   │   └── Services.tsx
+│   │   └── ui/
+│   │       ├── Button.tsx
+│   │       ├── Card.tsx
+│   │       ├── Container.tsx
+│   │       ├── OptimizedImage.tsx
+│   │       ├── ProjectCard.tsx
+│   │       ├── ScrollToTop.tsx
+│   │       └── Section.tsx
+│   ├── content/
+│   │   └── pages/
+│   │       ├── about.mdx
+│   │       ├── agency.mdx
+│   │       └── studio.mdx
+│   ├── lib/
+│   │   ├── constants.ts
+│   │   └── mdx.ts
+│   ├── pages/
+│   │   ├── _app.tsx
+│   │   ├── about.tsx
+│   │   ├── agency.tsx
+│   │   ├── contact.tsx
+│   │   ├── index.tsx
+│   │   └── studio.tsx
+│   ├── styles/
+│   │   └── globals.css
+│   └── utils/
+│       ├── imageAnalytics.ts
+│       ├── imageCache.ts
+│       ├── progress.ts
+│       └── useLazyLoad.ts
+├── .env
+├── .gitignore
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── README.md
+├── tailwind.config.ts
+└── tsconfig.json
