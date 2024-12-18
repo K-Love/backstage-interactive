@@ -12,7 +12,7 @@ const divisions = [
   {
     title: 'The Studio',
     subtitle: 'Innovating from Within',
-    description: 'Our Studio focuses on building and operating its own web projects. This division allows for the exploration of new ideas, experimentation with cutting-edge technologies, and the development of innovative solutions that push the boundaries of what's possible.',
+    description: 'Our Studio focuses on building and operating its own web projects. This division allows for the exploration of new ideas, experimentation with cutting-edge technologies, and the development of innovative solutions that push the boundaries of what\'s possible.',
     icon: BeakerIcon,
   },
 ]
