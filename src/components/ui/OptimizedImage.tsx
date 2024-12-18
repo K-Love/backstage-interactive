@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -8,6 +8,11 @@ interface OptimizedImageProps {
   className?: string
   priority?: boolean
   enableZoom?: boolean
+}
+
+interface ImageVariant {
+  src: string
+  width: number
 }
 
 const OptimizedImage = ({
@@ -20,6 +25,43 @@ const OptimizedImage = ({
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [isZoomed, setIsZoomed] = useState(false)
+  const [blurDataUrl, setBlurDataUrl] = useState<string>('')
+
+  // Generate paths for different variants
+  const getImageVariants = (basePath: string): ImageVariant[] => {
+    const fileName = basePath.split('/').pop()?.split('.')[0];
+    return [
+      { src: `/images/optimized/${fileName}-xl.webp`, width: 1920 },
+      { src: `/images/optimized/${fileName}-lg.webp`, width: 1200 },
+      { src: `/images/optimized/${fileName}-md.webp`, width: 800 },
+      { src: `/images/optimized/${fileName}-sm.webp`, width: 400 },
+    ];
+  };
+
+  // Load blur placeholder
+  useEffect(() => {
+    const loadBlurPlaceholder = async () => {
+      const fileName = src.split('/').pop()?.split('.')[0];
+      const placeholderPath = `/images/optimized/${fileName}-placeholder.webp`;
+      try {
+        const response = await fetch(placeholderPath);
+        const blob = await response.blob();
+        const dataUrl = URL.createObjectURL(blob);
+        setBlurDataUrl(dataUrl);
+      } catch (error) {
+        console.error('Error loading blur placeholder:', error);
+      }
+    };
+
+    if (!priority) {
+      loadBlurPlaceholder();
+    }
+  }, [src, priority]);
+
+  const variants = getImageVariants(src);
+  const srcSet = variants
+    .map(variant => `${variant.src} ${variant.width}w`)
+    .join(', ');
 
   // Generate thumbnail path
   const thumbnailSrc = src.replace(/\.(webp|jpg|jpeg|png)$/, '-thumb.webp')
@@ -61,6 +103,19 @@ const OptimizedImage = ({
           </div>
         ) : (
           <>
+            {!priority && blurDataUrl && (
+              <Image
+                src={blurDataUrl}
+                alt={alt}
+                fill
+                className={`
+                  object-cover transition-opacity duration-300
+                  ${isLoading ? 'opacity-100 blur-lg scale-110' : 'opacity-0'}
+                  ${className}
+                `}
+                priority={true}
+              />
+            )}
             <Image
               src={thumbnailSrc}
               alt={alt}
@@ -73,7 +128,7 @@ const OptimizedImage = ({
               priority={priority}
             />
             <Image
-              src={src}
+              src={variants[1].src} // Default to large size
               alt={alt}
               fill
               className={`
@@ -87,6 +142,7 @@ const OptimizedImage = ({
               onError={handleError}
               onClick={toggleZoom}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              srcSet={srcSet}
             />
           </>
         )}
@@ -108,7 +164,7 @@ const OptimizedImage = ({
               className="relative w-full h-full max-w-7xl max-h-[90vh] m-4"
             >
               <Image
-                src={src}
+                src={variants[0].src} // Use highest quality for zoom view
                 alt={alt}
                 fill
                 className="object-contain cursor-zoom-out"
