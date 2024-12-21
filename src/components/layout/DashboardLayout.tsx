@@ -39,6 +39,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               My Tools
             </a>
             <a
+  href="/dashboard/subscriptions"
+  className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+>
+  Subscriptions
+</a>
+            <a
               href="/dashboard/profile"
               className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900"
             >
