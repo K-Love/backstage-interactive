@@ -36,30 +36,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         const usage = await prisma.toolUsage.create({
-          data: {
-            userId: user.id,
-            toolId,
-            subscriptionId: activeSubscription.id,
-            metadata,
-          },
-        });
+            data: {
+              userId: user.id,
+              toolId,
+              subscriptionId: activeSubscription.id,
+              metadata: JSON.stringify(metadata), // Serialize to string
+            },
+          });
         return res.status(200).json(usage);
 
       case 'end':
         const { usageId } = req.body;
         const updatedUsage = await prisma.toolUsage.update({
-          where: {
-            id: usageId,
-            userId: user.id,
-          },
-          data: {
-            endTime: new Date(),
-            status: 'completed',
-            metadata: {
-              ...metadata,
+            where: {
+              id: usageId,
+              userId: user.id,
             },
-          },
-        });
+            data: {
+              endTime: new Date(),
+              status: 'completed',
+              metadata: JSON.stringify({
+                ...JSON.parse(metadata || '{}'),
+                ...metadata,
+              }), // Merge and serialize
+            },
+          });
+
+        const parsedMetadata = JSON.parse(usage.metadata || '{}');
+        
         return res.status(200).json(updatedUsage);
 
       default:
