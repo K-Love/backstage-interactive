@@ -2,6 +2,8 @@ import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { useTools, Tool } from '@/hooks/useTools';
+import { useToolUsage } from '@/hooks/useToolUsage';
+import UsageStats from '@/components/dashboard/UsageStats';
 
 export default function ToolsManagement() {
   const { tools, isLoading, error, subscribeTool } = useTools();
@@ -10,7 +12,17 @@ export default function ToolsManagement() {
     if (await subscribeTool(tool.id, tool.type)) {
       alert('Successfully subscribed to ' + tool.name);
     }
+
+    const handleToolUse = async (toolId: string) => {
+      if (currentUsage) {
+        await endUsage();
+      } else {
+        await startUsage(toolId, { source: 'dashboard' });
+      }
+    };
   };
+
+  const { startUsage, endUsage, isTracking, currentUsage } = useToolUsage();
 
   return (
     <DashboardLayout>
@@ -24,6 +36,9 @@ export default function ToolsManagement() {
         )}
 
         {isLoading ? (
+          <div className="mb-8">
+            <UsageStats />
+          </div>
           <div className="text-center">Loading tools...</div>
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
