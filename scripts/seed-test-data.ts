@@ -1,5 +1,5 @@
 // scripts/seed-test-data.ts
-import prisma from '../lib/prisma'
+import prisma from '../src/lib/prisma'
 
 async function main() {
   // Create some test metrics
