@@ -1,9 +1,15 @@
+// src/pages/agency.tsx
 import { NextPage } from 'next'
 import Head from 'next/head'
+import Layout from '@/components/layout/Layout'  // Check if this is the correct import path
+import { AgencyHero } from '@/components/sections/agency/Hero'
+import { Services } from '@/components/sections/agency/Services'
+import { Portfolio } from '@/components/sections/agency/Portfolio'
+import { CTASection } from '@/components/sections/agency/CTASection'
 
 const AgencyPage: NextPage = () => {
   return (
-    <>
+    <Layout>
       <Head>
         <title>Agency | Backstage Interactive</title>
         <meta 
@@ -12,13 +18,11 @@ const AgencyPage: NextPage = () => {
         />
       </Head>
       
-      <div className="pt-20 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-8">Agency</h1>
-          {/* Content will be added later */}
-        </div>
-      </div>
-    </>
+      <AgencyHero />
+      <Services />
+      <Portfolio />
+      <CTASection />
+    </Layout>
   )
 }
 
