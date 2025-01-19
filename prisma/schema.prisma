@@ -53,3 +53,18 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// prisma/schema.prisma
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  company   String?
+  title     String?
+  email     String
+  source    String
+  category  String
+  message   String
+  createdAt DateTime @default(now())
+}
