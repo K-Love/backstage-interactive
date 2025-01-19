@@ -4,11 +4,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Select } from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { toast } from 'sonner'
 
 const contactFormSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -25,6 +20,7 @@ type ContactFormData = z.infer<typeof contactFormSchema>
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const {
     register,
@@ -35,42 +31,49 @@ export default function ContactPage() {
     resolver: zodResolver(contactFormSchema),
   })
 
-  // In the onSubmit function, add console.log for testing:
-const onSubmit = async (data: ContactFormData) => {
-  setIsSubmitting(true)
-  try {
-    console.log('Submitting form data:', data)
-    
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true)
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
-    const result = await response.json()
-    console.log('Server response:', result)
+      if (!response.ok) {
+        throw new Error('Submission failed')
+      }
 
-    if (!response.ok) {
-      throw new Error(result.message || 'Submission failed')
+      setSubmitStatus('success')
+      reset()
+    } catch (error) {
+      console.error('Contact form error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+      setTimeout(() => setSubmitStatus('idle'), 5000)
     }
-
-    toast.success('Message sent successfully! We\'ll get back to you soon.')
-    reset()
-  } catch (error) {
-    console.error('Contact form error:', error)
-    toast.error('Something went wrong. Please try again.')
-  } finally {
-    setIsSubmitting(false)
   }
-}
 
   return (
     <div className="container max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
         Give Me a Holler
       </h1>
+
+      {submitStatus === 'success' && (
+        <div className="mb-6 p-4 bg-green-900/50 border border-green-500 rounded-lg text-green-200">
+          Message sent successfully! We'll get back to you soon.
+        </div>
+      )}
+
+      {submitStatus === 'error' && (
+        <div className="mb-6 p-4 bg-red-900/50 border border-red-500 rounded-lg text-red-200">
+          Something went wrong. Please try again.
+        </div>
+      )}
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -78,9 +81,11 @@ const onSubmit = async (data: ContactFormData) => {
             <label className="block text-sm font-medium mb-1 text-gray-200">
               First Name <span className="text-purple-500">*</span>
             </label>
-            <Input
+            <input
               {...register('firstName')}
-              className={`bg-gray-900 border-gray-700 ${errors.firstName ? 'border-red-500' : ''}`}
+              className={`w-full px-3 py-2 bg-gray-900 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors ${
+                errors.firstName ? 'border-red-500' : 'border-gray-700'
+              }`}
             />
             {errors.firstName && (
               <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
@@ -91,9 +96,11 @@ const onSubmit = async (data: ContactFormData) => {
             <label className="block text-sm font-medium mb-1 text-gray-200">
               Last Name <span className="text-purple-500">*</span>
             </label>
-            <Input
+            <input
               {...register('lastName')}
-              className={`bg-gray-900 border-gray-700 ${errors.lastName ? 'border-red-500' : ''}`}
+              className={`w-full px-3 py-2 bg-gray-900 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors ${
+                errors.lastName ? 'border-red-500' : 'border-gray-700'
+              }`}
             />
             {errors.lastName && (
               <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
@@ -106,9 +113,9 @@ const onSubmit = async (data: ContactFormData) => {
             <label className="block text-sm font-medium mb-1 text-gray-200">
               Company
             </label>
-            <Input
+            <input
               {...register('company')}
-              className="bg-gray-900 border-gray-700"
+              className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors"
             />
           </div>
 
@@ -116,9 +123,9 @@ const onSubmit = async (data: ContactFormData) => {
             <label className="block text-sm font-medium mb-1 text-gray-200">
               Title
             </label>
-            <Input
+            <input
               {...register('title')}
-              className="bg-gray-900 border-gray-700"
+              className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors"
             />
           </div>
         </div>
@@ -127,10 +134,12 @@ const onSubmit = async (data: ContactFormData) => {
           <label className="block text-sm font-medium mb-1 text-gray-200">
             Email <span className="text-purple-500">*</span>
           </label>
-          <Input
-            {...register('email')}
+          <input
             type="email"
-            className={`bg-gray-900 border-gray-700 ${errors.email ? 'border-red-500' : ''}`}
+            {...register('email')}
+            className={`w-full px-3 py-2 bg-gray-900 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors ${
+              errors.email ? 'border-red-500' : 'border-gray-700'
+            }`}
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -141,9 +150,11 @@ const onSubmit = async (data: ContactFormData) => {
           <label className="block text-sm font-medium mb-1 text-gray-200">
             How did you hear about BI? <span className="text-purple-500">*</span>
           </label>
-          <Select
+          <select
             {...register('source')}
-            className={`bg-gray-900 border-gray-700 ${errors.source ? 'border-red-500' : ''}`}
+            className={`w-full px-3 py-2 bg-gray-900 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors ${
+              errors.source ? 'border-red-500' : 'border-gray-700'
+            }`}
           >
             <option value="">Please Select</option>
             <option value="Search">Search</option>
@@ -153,7 +164,7 @@ const onSubmit = async (data: ContactFormData) => {
             <option value="Instagram">Instagram</option>
             <option value="Referral">Referral</option>
             <option value="Other">Other</option>
-          </Select>
+          </select>
           {errors.source && (
             <p className="text-red-500 text-sm mt-1">{errors.source.message}</p>
           )}
@@ -163,9 +174,11 @@ const onSubmit = async (data: ContactFormData) => {
           <label className="block text-sm font-medium mb-1 text-gray-200">
             Which category best describes your inquiry? <span className="text-purple-500">*</span>
           </label>
-          <Select
+          <select
             {...register('category')}
-            className={`bg-gray-900 border-gray-700 ${errors.category ? 'border-red-500' : ''}`}
+            className={`w-full px-3 py-2 bg-gray-900 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors ${
+              errors.category ? 'border-red-500' : 'border-gray-700'
+            }`}
           >
             <option value="">Please Select</option>
             <option value="Web Development">Web Development</option>
@@ -174,7 +187,7 @@ const onSubmit = async (data: ContactFormData) => {
             <option value="Social Media">Social Media</option>
             <option value="Consulting">Consulting</option>
             <option value="Other">Other</option>
-          </Select>
+          </select>
           {errors.category && (
             <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>
           )}
@@ -182,24 +195,27 @@ const onSubmit = async (data: ContactFormData) => {
 
         <div>
           <label className="block text-sm font-medium mb-1 text-gray-200">
-            Your Thoughts <span className="text-purple-500">*</span>
+            Your Message <span className="text-purple-500">*</span>
           </label>
-          <Textarea
+          <textarea
             {...register('message')}
-            className={`bg-gray-900 border-gray-700 h-32 ${errors.message ? 'border-red-500' : ''}`}
+            rows={4}
+            className={`w-full px-3 py-2 bg-gray-900 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors ${
+              errors.message ? 'border-red-500' : 'border-gray-700'
+            }`}
           />
           {errors.message && (
             <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
           )}
         </div>
 
-        <Button
+        <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-purple-600 hover:bg-purple-700 transition-colors"
+          className="w-full px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors disabled:opacity-50"
         >
-          {isSubmitting ? 'Sending...' : 'Send'}
-        </Button>
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </button>
       </form>
     </div>
   )
