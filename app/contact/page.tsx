@@ -1,4 +1,3 @@
-// app/(main)/contact/page.tsx
 'use client'
 
 import { useState } from 'react'
@@ -19,7 +18,7 @@ const contactFormSchema = z.object({
   email: z.string().email('Invalid email address'),
   source: z.enum(['Search', 'YouTube', 'X', 'Facebook', 'Instagram', 'Referral', 'Other']),
   category: z.enum(['Web Development', 'AI', 'SEO', 'Social Media', 'Consulting', 'Other']),
-  message: z.string().min(1, 'Message is required'),
+  message: z.string().min(1, 'Message is required').max(1000, 'Message is too long'),
 })
 
 type ContactFormData = z.infer<typeof contactFormSchema>
@@ -36,34 +35,41 @@ export default function ContactPage() {
     resolver: zodResolver(contactFormSchema),
   })
 
-  const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true)
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
+  // In the onSubmit function, add console.log for testing:
+const onSubmit = async (data: ContactFormData) => {
+  setIsSubmitting(true)
+  try {
+    console.log('Submitting form data:', data)
+    
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
 
-      if (response.ok) {
-        toast.success('Message sent successfully!')
-        reset()
-      } else {
-        toast.error('Failed to send message. Please try again.')
-      }
-    } catch (error) {
-      toast.error('An error occurred. Please try again.')
-    } finally {
-      setIsSubmitting(false)
+    const result = await response.json()
+    console.log('Server response:', result)
+
+    if (!response.ok) {
+      throw new Error(result.message || 'Submission failed')
     }
+
+    toast.success('Message sent successfully! We\'ll get back to you soon.')
+    reset()
+  } catch (error) {
+    console.error('Contact form error:', error)
+    toast.error('Something went wrong. Please try again.')
+  } finally {
+    setIsSubmitting(false)
   }
+}
 
   return (
     <div className="container max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-        Contact Us
+        Give Me a Holler
       </h1>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -74,9 +80,11 @@ export default function ContactPage() {
             </label>
             <Input
               {...register('firstName')}
-              className="bg-gray-900 border-gray-700"
-              error={errors.firstName?.message}
+              className={`bg-gray-900 border-gray-700 ${errors.firstName ? 'border-red-500' : ''}`}
             />
+            {errors.firstName && (
+              <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
+            )}
           </div>
 
           <div>
@@ -85,9 +93,11 @@ export default function ContactPage() {
             </label>
             <Input
               {...register('lastName')}
-              className="bg-gray-900 border-gray-700"
-              error={errors.lastName?.message}
+              className={`bg-gray-900 border-gray-700 ${errors.lastName ? 'border-red-500' : ''}`}
             />
+            {errors.lastName && (
+              <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
+            )}
           </div>
         </div>
 
@@ -120,9 +130,11 @@ export default function ContactPage() {
           <Input
             {...register('email')}
             type="email"
-            className="bg-gray-900 border-gray-700"
-            error={errors.email?.message}
+            className={`bg-gray-900 border-gray-700 ${errors.email ? 'border-red-500' : ''}`}
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+          )}
         </div>
 
         <div>
@@ -131,10 +143,9 @@ export default function ContactPage() {
           </label>
           <Select
             {...register('source')}
-            className="bg-gray-900 border-gray-700"
-            error={errors.source?.message}
+            className={`bg-gray-900 border-gray-700 ${errors.source ? 'border-red-500' : ''}`}
           >
-            <option value="" disabled>Please Select</option>
+            <option value="">Please Select</option>
             <option value="Search">Search</option>
             <option value="YouTube">YouTube</option>
             <option value="X">X</option>
@@ -143,6 +154,9 @@ export default function ContactPage() {
             <option value="Referral">Referral</option>
             <option value="Other">Other</option>
           </Select>
+          {errors.source && (
+            <p className="text-red-500 text-sm mt-1">{errors.source.message}</p>
+          )}
         </div>
 
         <div>
@@ -151,10 +165,9 @@ export default function ContactPage() {
           </label>
           <Select
             {...register('category')}
-            className="bg-gray-900 border-gray-700"
-            error={errors.category?.message}
+            className={`bg-gray-900 border-gray-700 ${errors.category ? 'border-red-500' : ''}`}
           >
-            <option value="" disabled>Please Select</option>
+            <option value="">Please Select</option>
             <option value="Web Development">Web Development</option>
             <option value="AI">AI</option>
             <option value="SEO">SEO</option>
@@ -162,6 +175,9 @@ export default function ContactPage() {
             <option value="Consulting">Consulting</option>
             <option value="Other">Other</option>
           </Select>
+          {errors.category && (
+            <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>
+          )}
         </div>
 
         <div>
@@ -170,15 +186,17 @@ export default function ContactPage() {
           </label>
           <Textarea
             {...register('message')}
-            className="bg-gray-900 border-gray-700 h-32"
-            error={errors.message?.message}
+            className={`bg-gray-900 border-gray-700 h-32 ${errors.message ? 'border-red-500' : ''}`}
           />
+          {errors.message && (
+            <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
+          )}
         </div>
 
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-purple-600 hover:bg-purple-700"
+          className="w-full bg-purple-600 hover:bg-purple-700 transition-colors"
         >
           {isSubmitting ? 'Sending...' : 'Send'}
         </Button>

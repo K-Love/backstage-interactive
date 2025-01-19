@@ -1,26 +1,19 @@
-// app/api/contact/route.ts
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 
 export async function POST(request: Request) {
   try {
     const data = await request.json()
     
-    // Store the contact form submission in the database
-    await prisma.contactSubmission.create({
-      data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        company: data.company,
-        title: data.title,
-        email: data.email,
-        source: data.source,
-        category: data.category,
-        message: data.message,
-      },
-    })
+    // Log the submission for testing
+    console.log('Form submission received:', data)
     
-    return NextResponse.json({ message: 'Success' }, { status: 200 })
+    // Simulate a slight delay (optional, for testing loading state)
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    return NextResponse.json({ 
+      message: 'Success',
+      data: data 
+    }, { status: 200 })
   } catch (error) {
     console.error('Contact form submission error:', error)
     return NextResponse.json(
