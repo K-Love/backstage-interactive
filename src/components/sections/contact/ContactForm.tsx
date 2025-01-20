@@ -4,9 +4,14 @@ import { useState } from 'react'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
+    company: '',
+    title: '',
     email: '',
-    message: '',
+    source: '',
+    category: '',
+    thoughts: '',
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
@@ -26,7 +31,16 @@ export default function ContactForm() {
       if (!response.ok) throw new Error('Failed to send message')
       
       setStatus('success')
-      setFormData({ name: '', email: '', message: '' })
+      setFormData({
+        firstName: '',
+        lastName: '',
+        company: '',
+        title: '',
+        email: '',
+        source: '',
+        category: '',
+        thoughts: ''
+      })
     } catch (error) {
       setStatus('error')
     }
@@ -34,23 +48,67 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-          Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          required
-          className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        />
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div>
+          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+            First Name *
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            required
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            value={formData.firstName}
+            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+            Last Name *
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            required
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            value={formData.lastName}
+            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div>
+          <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+            Company
+          </label>
+          <input
+            type="text"
+            id="company"
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            value={formData.company}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          />
+        </div>
       </div>
 
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-          Email
+          Email *
         </label>
         <input
           type="email"
@@ -63,16 +121,59 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-          Message
+        <label htmlFor="source" className="block text-sm font-medium text-gray-700">
+          How did you hear about BI? *
+        </label>
+        <select
+          id="source"
+          required
+          className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          value={formData.source}
+          onChange={(e) => setFormData({ ...formData, source: e.target.value })}
+        >
+          <option value="">Please Select</option>
+          <option value="search">Search</option>
+          <option value="youtube">YouTube</option>
+          <option value="x">X</option>
+          <option value="facebook">Facebook</option>
+          <option value="instagram">Instagram</option>
+          <option value="referral">Referral</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+          Which category best describes your inquiry? *
+        </label>
+        <select
+          id="category"
+          required
+          className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          value={formData.category}
+          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+        >
+          <option value="">Please Select</option>
+          <option value="web-development">Web Development</option>
+          <option value="ai">AI</option>
+          <option value="seo">SEO</option>
+          <option value="social-media">Social Media</option>
+          <option value="consulting">Consulting</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="thoughts" className="block text-sm font-medium text-gray-700">
+          Your Thoughts *
         </label>
         <textarea
-          id="message"
+          id="thoughts"
           required
           rows={4}
           className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          value={formData.thoughts}
+          onChange={(e) => setFormData({ ...formData, thoughts: e.target.value })}
         />
       </div>
 
@@ -81,7 +182,7 @@ export default function ContactForm() {
         disabled={status === 'loading'}
         className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
       >
-        {status === 'loading' ? 'Sending...' : 'Send Message'}
+        {status === 'loading' ? 'Sending...' : 'Send'}
       </button>
 
       {status === 'success' && (
