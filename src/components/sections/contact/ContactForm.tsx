@@ -35,42 +35,42 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-200">
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
           Name
         </label>
         <input
           type="text"
           id="name"
           required
-          className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-800 py-2 px-3 text-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-200">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
           Email
         </label>
         <input
           type="email"
           id="email"
           required
-          className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-800 py-2 px-3 text-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-200">
+        <label htmlFor="message" className="block text-sm font-medium text-gray-700">
           Message
         </label>
         <textarea
           id="message"
           required
           rows={4}
-          className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-800 py-2 px-3 text-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
         />
@@ -79,16 +79,16 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
+        className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
       >
         {status === 'loading' ? 'Sending...' : 'Send Message'}
       </button>
 
       {status === 'success' && (
-        <p className="text-green-400 text-sm">Message sent successfully!</p>
+        <p className="text-green-600 text-sm">Message sent successfully!</p>
       )}
       {status === 'error' && (
-        <p className="text-red-400 text-sm">Failed to send message. Please try again.</p>
+        <p className="text-red-600 text-sm">Failed to send message. Please try again.</p>
       )}
     </form>
   )
