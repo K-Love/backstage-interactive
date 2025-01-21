@@ -1,4 +1,3 @@
-// src/lib/db/models/EmailEvent.ts
 import mongoose from 'mongoose'
 
 const emailEventSchema = new mongoose.Schema({
@@ -11,7 +10,7 @@ const emailEventSchema = new mongoose.Schema({
   },
   email: { type: String, required: true },
   category: { type: String, required: true },
-  formType: { type: String, required: true }, // 'notification' or 'confirmation'
+  formType: { type: String, required: true },
   deviceInfo: {
     userAgent: String,
     platform: String,
@@ -32,7 +31,6 @@ const emailEventSchema = new mongoose.Schema({
   timestamps: true
 })
 
-// Create indexes for common queries
 emailEventSchema.index({ timestamp: -1 })
 emailEventSchema.index({ email: 1, type: 1 })
 emailEventSchema.index({ category: 1, type: 1 })
