@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import Hero from '@/components/sections/Hero'
 import Services from '@/components/sections/Services'
-import FeaturedWork from '@/components/sections/FeaturedWork'
+import CallToAction from '@/components/sections/CallToAction'
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
       </Head>
       <Hero />
       <Services />
-      <FeaturedWork />
+      <CallToAction />
     </>
   )
 }
