@@ -1,67 +1,76 @@
 import { motion } from 'framer-motion';
-import { Container } from '@/components/ui/Container';
+import Section from '@/components/ui/Section';
 import Image from 'next/image';
 
-interface ProjectCardProps {
-  title: string;
-  image: string;
-  url: string;
-}
-
-const ProjectCard = ({ title, image, url }: ProjectCardProps) => (
-  <motion.a
-    href={url}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="group block relative overflow-hidden rounded-2xl"
-    whileHover={{ y: -5 }}
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-  >
-    <div className="aspect-video relative overflow-hidden">
-      <Image
-        src={image}
-        alt={title}
-        layout="fill"
-        objectFit="cover"
-        className="transition-transform duration-300 group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-        <span className="text-white font-bold text-xl">View Project</span>
-      </div>
-    </div>
-    <h3 className="text-xl font-bold mt-4 text-primary">{title}</h3>
-  </motion.a>
-);
-
-const projects: ProjectCardProps[] = [
+const projects = [
   {
-    title: "Chris Willburn Coaching",
-    image: "/images/projects/cwc-screenshot.png",
-    url: "https://www.chriswillburncoaching.com"
+    title: 'Chris Willburn Coaching',
+    description: 'Personal development and coaching platform',
+    image: '/images/projects/cwc-logo.png',
+    url: 'https://www.chriswillburncoaching.com'
   },
   {
-    title: "Sharrey Dore",
-    image: "/images/projects/sharrey-dore.png",
-    url: "https://www.sharreydore.com"
+    title: 'Sharrey Dore',
+    description: 'Professional portfolio and services showcase',
+    image: '/images/projects/sharrey-dore-logo.png',
+    url: 'https://www.sharreydore.com'
   }
 ];
 
-export const Portfolio = () => (
-  <Container className="py-24 bg-gray-50">
-    <motion.h2 
-      className="text-3xl md:text-4xl font-bold text-center mb-16"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-    >
-      Featured Work
-    </motion.h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-      {projects.map((project) => (
-        <ProjectCard key={project.title} {...project} />
-      ))}
-    </div>
-  </Container>
-);
+export const Portfolio = () => {
+  return (
+    <Section dark>
+      <div className="text-center mb-16">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-4xl font-bold mb-4 text-white"
+        >
+          Featured Work
+        </motion.h2>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-xl text-gray-200 max-w-2xl mx-auto"
+        >
+          Some of our recent projects that showcase our expertise and creativity.
+        </motion.p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {projects.map((project, index) => (
+          <motion.a
+            key={project.title}
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.2 }}
+            className="group relative overflow-hidden rounded-lg"
+          >
+            <div className="aspect-w-16 aspect-h-9 relative h-[300px]">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain transition-transform group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <div className="text-center p-4">
+                  <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-200">{project.description}</p>
+                </div>
+              </div>
+            </div>
+          </motion.a>
+        ))}
+      </div>
+    </Section>
+  );
+};

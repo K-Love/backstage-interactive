@@ -1,25 +1,27 @@
-import { NextPage } from 'next'
-import Head from 'next/head'
+import { Metadata } from 'next'
+import ContactForm from 'src/components/sections/contact/ContactForm'
 
-const ContactPage: NextPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Contact | Backstage Interactive</title>
-        <meta 
-          name="description" 
-          content="Get in touch with Backstage Interactive for your web development and digital marketing needs." 
-        />
-      </Head>
-      
-      <div className="pt-20 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-8">Contact Us</h1>
-          {/* Contact form will be added later */}
-        </div>
-      </div>
-    </>
-  )
+export const metadata: Metadata = {
+  title: 'Contact Us | Backstage Interactive',
+  description: 'Get in Touch',
 }
 
-export default ContactPage
+export default function ContactPage() {
+    return (
+      <main className="min-h-screen bg-white">
+        <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+              Contact
+            </h1>
+            <p className="mt-4 text-lg text-gray-600">
+              Get in Touch
+            </p>
+          </div>
+          <div className="mt-12">
+            <ContactForm />
+          </div>
+        </div>
+      </main>
+    )
+}
