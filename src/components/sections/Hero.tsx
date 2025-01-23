@@ -1,5 +1,6 @@
 // src/components/sections/Hero.tsx
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 const Hero = () => {
   return (
@@ -19,13 +20,15 @@ const Hero = () => {
             Backstage Interactive builds digital experiences, delivers consumer and
             client projects, and consults businesses on strategy and execution.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-amber hover:bg-amber/90 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
-          >
-            Get Started
-          </motion.button>
+          <Link href="/contact">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-amber hover:bg-amber/90 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
+            >
+              Get Started
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>

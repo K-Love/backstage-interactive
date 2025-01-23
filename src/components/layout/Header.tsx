@@ -38,6 +38,7 @@ const Header = () => {
               alt="Backstage Interactive"
               width={200}
               height={40}
+              className="w-auto h-auto"
               priority
             />
           </Link>
