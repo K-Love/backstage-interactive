@@ -20,8 +20,8 @@ export async function POST(request: Request) {
     const { firstName, lastName, company, title, email, source, category, thoughts } = result.data
 
     // Send notification email to business
-    await resend.emails.send({
-      from: 'Contact Form <contact@yourdomain.com>',
+    const notificationResult = await resend.emails.send({
+      from: 'Backstage Interactive <contact@backstageinteractive.com>',
       to: 'info@backstageinteractive.com',
       subject: `New Contact Form Submission - ${category}`,
       html: `
@@ -36,19 +36,20 @@ export async function POST(request: Request) {
         <p>${thoughts}</p>
       `,
     })
+    console.log('Notification email result:', notificationResult)
 
     // Send confirmation email to user
-    await resend.emails.send({
-      from: 'Backstage Interactive <no-reply@yourdomain.com>',
+    const confirmationResult = await resend.emails.send({
+      from: 'Backstage Interactive <no-reply@backstageinteractive.com>',
       to: email,
-      subject: 'We've Received Your Message',
+      subject: 'We have Received Your Message',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #1e40af; margin-bottom: 24px;">Thank You for Contacting Us</h1>
           
           <p>Dear ${firstName},</p>
           
-          <p>Thank you for reaching out to Backstage Interactive. We've received your message regarding ${category.toLowerCase()} and will get back to you as soon as possible.</p>
+          <p>Thank you for reaching out to Backstage Interactive. We have received your message regarding ${category.toLowerCase()} and will get back to you as soon as possible.</p>
           
           <h2 style="color: #1e40af; margin-top: 32px;">Your Message Details</h2>
           
@@ -58,7 +59,7 @@ export async function POST(request: Request) {
             <p style="margin-left: 16px;">${thoughts}</p>
           </div>
           
-          <p style="margin-top: 32px;">Our team typically responds within 1-2 business days. If you have any urgent matters, please don't hesitate to call us directly.</p>
+          <p style="margin-top: 32px;">Our team typically responds within 1-2 business days. If you have any urgent matters, please do not hesitate to call us directly.</p>
           
           <p style="margin-top: 32px;">Best regards,<br>The Backstage Interactive Team</p>
           
@@ -68,15 +69,16 @@ export async function POST(request: Request) {
         </div>
       `,
     })
+    console.log('Confirmation email result:', confirmationResult)
 
     return NextResponse.json(
       { message: 'Form submitted successfully' },
       { status: 200 }
     )
   } catch (error) {
-    console.error('Form submission error:', error)
+    console.error('Detailed form submission error:', error)
     return NextResponse.json(
-      { error: 'Failed to submit form' },
+      { error: 'Failed to submit form', details: error.message },
       { status: 500 }
     )
   }
