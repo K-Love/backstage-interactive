@@ -15,17 +15,10 @@ const Hero = () => {
             Building Digital
             <span className="text-magenta"> Experiences</span>
           </h1>
-          <p className="text-xl md:text-2xl text-charcoal max-w-3xl mx-auto mb-12">
+          <p className="text-xl md:text-2xl text-charcoal max-w-3xl mx-auto">
             Backstage Interactive builds digital experiences, delivers consumer and
             client projects, and consults businesses on strategy and execution.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-amber hover:bg-amber/90 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
-          >
-            Get Started
-          </motion.button>
         </motion.div>
       </div>
     </section>
