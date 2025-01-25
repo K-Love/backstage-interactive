@@ -1,16 +1,42 @@
 import { NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 import { ContactFormSchema } from '@/lib/validation/contact'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Create reusable transporter using SMTP
+const transporter = nodemailer.createTransport({
+  host: 'smtp.zoho.eu',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_APP_PASSWORD
+  },
+  debug: true,
+  logger: true
+})
 
 export async function POST(request: Request) {
+  // Add more detailed logging
+  console.log('Starting email process...')
+  console.log('Environment Variables Check:', {
+    EMAIL_USER: process.env.EMAIL_USER ? 'Set' : 'Not Set',
+    EMAIL_APP_PASSWORD: process.env.EMAIL_APP_PASSWORD ? 'Set' : 'Not Set',
+    EMAIL_USER_VALUE: process.env.EMAIL_USER // Log the actual email (be careful with this in production)
+  })
+
   try {
+    // Test SMTP connection first
+    console.log('Verifying SMTP connection...')
+    await transporter.verify()
+    console.log('SMTP connection verified successfully')
+
     const body = await request.json()
+    console.log('Received form data:', body)
     
     // Validate the input
     const result = ContactFormSchema.safeParse(body)
     if (!result.success) {
+      console.error('Validation error:', result.error)
       return NextResponse.json(
         { error: 'Invalid form data', details: result.error.flatten() },
         { status: 400 }
@@ -19,10 +45,16 @@ export async function POST(request: Request) {
 
     const { firstName, lastName, company, title, email, source, category, thoughts } = result.data
 
-    // Send notification email to business
-    const notificationResult = await resend.emails.send({
-      from: 'Backstage Interactive <contact@backstageinteractive.com>',
-      to: 'info@backstageinteractive.com',
+    // Log environment variables (remove sensitive info in production)
+    console.log('Environment check:', {
+      hasEmailUser: !!process.env.EMAIL_USER,
+      hasEmailAppPassword: !!process.env.EMAIL_APP_PASSWORD,
+      emailUser: process.env.EMAIL_USER
+    })
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER, // Send to yourself
       subject: `New Contact Form Submission - ${category}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -34,42 +66,17 @@ export async function POST(request: Request) {
         <p><strong>Category:</strong> ${category}</p>
         <p><strong>Message:</strong></p>
         <p>${thoughts}</p>
-      `,
-    })
-    console.log('Notification email result:', notificationResult)
+      `
+    }
 
-    // Send confirmation email to user
-    const confirmationResult = await resend.emails.send({
-      from: 'Backstage Interactive <no-reply@backstageinteractive.com>',
-      to: email,
-      subject: 'We have Received Your Message',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #1e40af; margin-bottom: 24px;">Thank You for Contacting Us</h1>
-          
-          <p>Dear ${firstName},</p>
-          
-          <p>Thank you for reaching out to Backstage Interactive. We have received your message regarding ${category.toLowerCase()} and will get back to you as soon as possible.</p>
-          
-          <h2 style="color: #1e40af; margin-top: 32px;">Your Message Details</h2>
-          
-          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 16px 0;">
-            <p><strong>Category:</strong> ${category}</p>
-            <p><strong>Message:</strong></p>
-            <p style="margin-left: 16px;">${thoughts}</p>
-          </div>
-          
-          <p style="margin-top: 32px;">Our team typically responds within 1-2 business days. If you have any urgent matters, please do not hesitate to call us directly.</p>
-          
-          <p style="margin-top: 32px;">Best regards,<br>The Backstage Interactive Team</p>
-          
-          <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e5e7eb; font-size: 14px; color: #6b7280;">
-            <p>This is an automated response to your contact form submission. Please do not reply to this email.</p>
-          </div>
-        </div>
-      `,
-    })
-    console.log('Confirmation email result:', confirmationResult)
+    console.log('Attempting to send email...')
+    try {
+      const info = await transporter.sendMail(mailOptions)
+      console.log('Email sent successfully:', info)
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError)
+      throw new Error(`Email sending failed: ${emailError.message}`)
+    }
 
     return NextResponse.json(
       { message: 'Form submitted successfully' },

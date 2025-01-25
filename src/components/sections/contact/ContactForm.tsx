@@ -20,7 +20,8 @@ export default function ContactForm() {
     setStatus('loading')
     
     try {
-      const response = await fetch('/api/contact', {
+      // Replace YOUR_FORM_ID with the actual form ID from Formspree
+      const response = await fetch('https://formspree.io/f/xnnjnzzo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,7 +29,10 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       })
 
-      if (!response.ok) throw new Error('Failed to send message')
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.message || 'Failed to send message')
+      }
       
       setStatus('success')
       setFormData({
@@ -42,6 +46,7 @@ export default function ContactForm() {
         thoughts: ''
       })
     } catch (error) {
+      console.error('Form submission error:', error)
       setStatus('error')
     }
   }
