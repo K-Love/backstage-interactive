@@ -200,7 +200,3 @@ Recommended VS Code extensions:
 ## Questions?
 
 If you have questions about this workflow, please reach out to the team lead or create an issue with the `workflow` label.
-
-
-
-
