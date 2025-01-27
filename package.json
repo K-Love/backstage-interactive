@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "ts-node scripts/build.ts",
+    "dev": "npm run clean && next dev",
+     "build": "ts-node scripts/build.ts",
     "start": "next start",
     "lint": "next lint",
-    "optimize-images": "npx ts-node scripts/optimize-images.ts"
+    "optimize-images": "npx ts-node scripts/optimize-images.ts",
+    "seed": "ts-node -P tsconfig-scripts.json prisma/seed.ts",
+    "generate-placeholders": "ts-node -P tsconfig-scripts.json scripts/generate-placeholders.ts",
+    "clean": "node scripts/clean.js",
+    "clean-build": "npm run clean && npm run build"
   },
   "dependencies": {
     "@auth/core": "^0.37.4",
