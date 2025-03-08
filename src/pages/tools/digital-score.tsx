@@ -37,49 +37,24 @@ const DigitalScore = () => {
       if (!url) return
 
       try {
-        // TODO: Replace with actual API call
-        // Simulating API call for now
-        await new Promise(resolve => setTimeout(resolve, 3000))
-        
-        // Temporary mock data
-        setScoreData({
-          overall: 72,
-          performance: 85,
-          mobile: 90,
-          seo: 65,
-          security: 70,
-          social: 50,
-          details: {
-            performance: [
-              'Good page load speed (2.3s)',
-              'Optimize images to improve performance',
-              'Enable browser caching',
-            ],
-            mobile: [
-              'Responsive design detected',
-              'Good viewport configuration',
-              'Touch elements well-spaced',
-            ],
-            seo: [
-              'Missing meta descriptions',
-              'Good heading structure',
-              'Improve URL structure',
-            ],
-            security: [
-              'SSL certificate is valid',
-              'Update security headers',
-              'Enable HSTS',
-            ],
-            social: [
-              'Add Open Graph tags',
-              'Improve social media integration',
-              'Add social sharing buttons',
-            ],
+        const response = await fetch('/api/analyze-site', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
+          body: JSON.stringify({ url }),
         })
+
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || 'Analysis failed')
+        }
+
+        const data = await response.json()
+        setScoreData(data)
         setLoading(false)
       } catch (err) {
-        setError('Failed to analyze website. Please try again.')
+        setError(err instanceof Error ? err.message : 'Failed to analyze website. Please try again.')
         setLoading(false)
       }
     }
