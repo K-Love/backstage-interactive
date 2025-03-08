@@ -3,8 +3,12 @@ import { motion } from 'framer-motion'
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-purple/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+    <section className="relative min-h-screen flex items-center justify-center">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple/30" />
+      
+      {/* Simplified pattern */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4yIj48cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4Ii8+PHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIvPjwvc3ZnPg==')] bg-[length:40px_40px] opacity-40" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
