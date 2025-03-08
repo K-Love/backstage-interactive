@@ -11,6 +11,8 @@ import {
   BeakerIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline'
+import Head from 'next/head'
+import '@/styles/print.css'
 
 interface ScoreData {
   overall: number
@@ -33,13 +35,15 @@ interface ScoreData {
 const DigitalScore = () => {
   const router = useRouter()
   const { url } = router.query
+  const urlString = typeof url === 'string' ? url : ''
   const [loading, setLoading] = useState(true)
   const [scoreData, setScoreData] = useState<ScoreData | null>(null)
   const [error, setError] = useState('')
+  const [reportDate] = useState(new Date().toLocaleDateString())
 
   useEffect(() => {
     const analyzeWebsite = async () => {
-      if (!url) return
+      if (!urlString) return
 
       try {
         const response = await fetch('/api/analyze-site', {
@@ -47,7 +51,7 @@ const DigitalScore = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ url }),
+          body: JSON.stringify({ url: urlString }),
         })
 
         if (!response.ok) {
@@ -64,10 +68,10 @@ const DigitalScore = () => {
       }
     }
 
-    if (url) {
+    if (urlString) {
       analyzeWebsite()
     }
-  }, [url])
+  }, [urlString])
 
   const ScoreCard = ({ title, score, icon: Icon, details }: { 
     title: string
@@ -124,6 +128,10 @@ const DigitalScore = () => {
   if (!url) {
     return (
       <div className="min-h-screen bg-gray-50 pt-20 px-4">
+        <Head>
+          <title>Digital Presence Scorer | Backstage Interactive</title>
+          <meta name="description" content="Analyze your website's digital presence with our comprehensive scoring tool." />
+        </Head>
         <div className="max-w-4xl mx-auto text-center py-20">
           <h1 className="text-3xl font-bold text-primary mb-4">No URL Provided</h1>
           <p className="text-charcoal mb-8">Please provide a URL to analyze your digital presence.</p>
@@ -141,6 +149,9 @@ const DigitalScore = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 pt-20 px-4">
+        <Head>
+          <title>Analyzing {url} | Digital Presence Scorer</title>
+        </Head>
         <div className="max-w-4xl mx-auto text-center py-20">
           <motion.div
             initial={{ opacity: 0 }}
@@ -164,6 +175,9 @@ const DigitalScore = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 pt-20 px-4">
+        <Head>
+          <title>Analysis Error | Digital Presence Scorer</title>
+        </Head>
         <div className="max-w-4xl mx-auto text-center py-20">
           <h1 className="text-3xl font-bold text-primary mb-4">Analysis Failed</h1>
           <p className="text-charcoal mb-8">{error}</p>
@@ -181,6 +195,9 @@ const DigitalScore = () => {
   if (!scoreData) {
     return (
       <div className="min-h-screen bg-gray-50 pt-20 px-4">
+        <Head>
+          <title>Analysis Error | Digital Presence Scorer</title>
+        </Head>
         <div className="max-w-4xl mx-auto text-center py-20">
           <h1 className="text-3xl font-bold text-primary mb-4">Analysis Error</h1>
           <p className="text-charcoal mb-8">Failed to load analysis data. Please try again.</p>
@@ -197,15 +214,21 @@ const DigitalScore = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20 px-4">
+      <Head>
+        <title>Digital Presence Score: {scoreData.overall}/100 | {urlString}</title>
+        <meta name="robots" content="noindex" />
+      </Head>
+
       <div className="max-w-6xl mx-auto py-12">
-        <div className="text-center mb-12">
+        <div className="report-header text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-4"
           >
             <h1 className="text-3xl font-bold text-primary">Digital Presence Score</h1>
-            <p className="text-xl text-charcoal">Results for {url}</p>
+            <p className="text-xl text-charcoal">Results for {urlString}</p>
+            <p className="text-sm text-charcoal">Generated on {reportDate}</p>
             <div className="inline-flex items-center bg-white px-6 py-3 rounded-full shadow-md">
               <span className="text-2xl font-bold text-primary mr-2">Overall Score:</span>
               <span className={`text-2xl font-bold ${
@@ -219,7 +242,7 @@ const DigitalScore = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="score-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <ScoreCard
             title="Performance"
             score={scoreData.performance}
@@ -262,13 +285,13 @@ const DigitalScore = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 text-center"
+          className="mt-12 text-center screen-only"
         >
           <h2 className="text-2xl font-bold text-primary mb-6">Ready to Improve Your Score?</h2>
           <div className="flex flex-col items-center gap-6">
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="/contact"
+                href={`/contact?score=${scoreData.overall}&url=${encodeURIComponent(urlString)}`}
                 className="px-8 py-4 bg-magenta hover:bg-magenta/90 text-white rounded-lg font-semibold transition-colors"
               >
                 Get a Custom Action Plan
@@ -281,10 +304,29 @@ const DigitalScore = () => {
               </button>
             </div>
             <p className="text-sm text-charcoal mt-4">
-              Want to save this report? <button onClick={() => window.print()} className="text-primary hover:underline">Download PDF</button>
+              Want to save this report?{' '}
+              <button 
+                onClick={() => {
+                  // Set filename for print
+                  document.title = `Digital-Presence-Score-${urlString.replace(/[^a-zA-Z0-9]/g, '-')}-${reportDate}`
+                  window.print()
+                  // Reset title
+                  document.title = `Digital Presence Score: ${scoreData.overall}/100 | ${urlString}`
+                }}
+                className="text-primary hover:underline"
+              >
+                Download PDF
+              </button>
             </p>
           </div>
         </motion.div>
+
+        <div className="print-only mt-12 text-center">
+          <p className="text-sm">
+            This report was generated by Backstage Interactive's Digital Presence Scorer.
+            Visit {process.env.NEXT_PUBLIC_WEBSITE_URL} to analyze your website.
+          </p>
+        </div>
       </div>
     </div>
   )
