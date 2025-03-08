@@ -1,9 +1,22 @@
 // src/components/sections/Hero.tsx
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [url, setUrl] = useState('')
+  const [isValidUrl, setIsValidUrl] = useState(true)
+
+  const handleUrlSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (url) {
+      // Add URL validation here if needed
+      window.location.href = `/tools/digital-score?url=${encodeURIComponent(url)}`
+    } else {
+      setIsValidUrl(false)
+    }
+  }
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -61,13 +74,13 @@ const Hero = () => {
               onClick={() => setIsModalOpen(true)}
               className="px-8 py-4 border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-semibold transition-colors"
             >
-              Get Free Strategy Session
+              Score Your Digital Presence
             </button>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Strategy Session Modal */}
+      {/* Digital Presence Scorer Modal */}
       {isModalOpen && (
         <motion.div 
           initial={{ opacity: 0 }}
@@ -81,25 +94,56 @@ const Hero = () => {
             className="bg-white rounded-xl p-8 max-w-lg w-full shadow-xl"
             onClick={e => e.stopPropagation()}
           >
-            <h3 className="text-2xl font-bold text-primary mb-4">Free Strategy Session</h3>
+            <h3 className="text-2xl font-bold text-primary mb-2">Digital Presence Scorer</h3>
             <p className="text-charcoal mb-6">
-              Book a complimentary 30-minute strategy session with our experts. We'll analyze your digital presence 
-              and provide actionable insights for growth.
+              Get an instant analysis of your digital presence. Our AI-powered tool will evaluate your:
             </p>
-            <div className="flex flex-col gap-4">
-              <a 
-                href="/contact?session=strategy"
-                className="w-full px-6 py-3 bg-magenta text-white rounded-lg font-semibold text-center hover:bg-magenta/90 transition-colors"
-              >
-                Schedule Your Session
-              </a>
+            <ul className="list-none space-y-2 mb-6">
+              {[
+                'Website Performance & SEO',
+                'Mobile Responsiveness',
+                'Social Media Integration',
+                'Security & Technical Health',
+                'Brand Consistency'
+              ].map((item, index) => (
+                <li key={index} className="flex items-center text-charcoal">
+                  <ArrowRightIcon className="w-4 h-4 text-magenta mr-2" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <form onSubmit={handleUrlSubmit} className="space-y-4">
+              <div>
+                <input
+                  type="url"
+                  placeholder="Enter your website URL"
+                  value={url}
+                  onChange={(e) => {
+                    setUrl(e.target.value)
+                    setIsValidUrl(true)
+                  }}
+                  className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-primary transition-colors ${
+                    isValidUrl ? 'border-gray-200' : 'border-red-500'
+                  }`}
+                />
+                {!isValidUrl && (
+                  <p className="text-red-500 text-sm mt-1">Please enter a valid URL</p>
+                )}
+              </div>
               <button 
+                type="submit"
+                className="w-full px-6 py-3 bg-magenta text-white rounded-lg font-semibold hover:bg-magenta/90 transition-colors"
+              >
+                Get Your Score
+              </button>
+              <button 
+                type="button"
                 onClick={() => setIsModalOpen(false)}
                 className="w-full px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors"
               >
                 Maybe Later
               </button>
-            </div>
+            </form>
           </motion.div>
         </motion.div>
       )}
