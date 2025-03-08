@@ -1,19 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import axios from 'axios'
-import { load } from 'cheerio'
 import { isValidUrl } from '@/utils/validation'
+import { analyzePageSpeed, analyzeSecurityHeaders, analyzeSocialPresence } from '@/utils/analyzers'
 
 // Types for our analysis
 interface AnalysisResult {
   overall: number
   performance: number
-  mobile: number
+  accessibility: number
+  bestPractices: number
   seo: number
   security: number
   social: number
   details: {
     performance: string[]
-    mobile: string[]
+    accessibility: string[]
+    bestPractices: string[]
     seo: string[]
     security: string[]
     social: string[]
@@ -39,97 +40,60 @@ export default async function handler(
     const result: AnalysisResult = {
       overall: 0,
       performance: 0,
-      mobile: 0,
+      accessibility: 0,
+      bestPractices: 0,
       seo: 0,
       security: 0,
       social: 0,
       details: {
         performance: [],
-        mobile: [],
+        accessibility: [],
+        bestPractices: [],
         seo: [],
         security: [],
         social: [],
       },
     }
 
-    // Fetch the website content
-    const response = await axios.get(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; DigitalPresenceScorer/1.0)',
-      },
-      timeout: 10000,
-    })
+    // Run all analyses in parallel
+    const [pageSpeedResult, securityResult, socialResult] = await Promise.all([
+      analyzePageSpeed(url),
+      analyzeSecurityHeaders(url),
+      analyzeSocialPresence(url),
+    ])
 
-    const $ = load(response.data)
+    // Combine results
+    result.performance = pageSpeedResult.performance
+    result.accessibility = pageSpeedResult.accessibility
+    result.bestPractices = pageSpeedResult.bestPractices
+    result.seo = Math.round((pageSpeedResult.seo + socialResult.score * 0.4) / 1.4) // Weighted average
+    result.security = securityResult.score
+    result.social = socialResult.score
 
-    // Performance Analysis
-    const startTime = performance.now()
-    const responseTime = performance.now() - startTime
-    result.performance = Math.min(100, Math.max(0, 100 - (responseTime / 100)))
-    result.details.performance.push(
-      `Page load time: ${(responseTime / 1000).toFixed(2)}s`,
-      response.headers['content-encoding'] ? 'Compression enabled' : 'Compression not detected',
-      $('img[src]:not([loading="lazy"])').length === 0 ? 'Images use lazy loading' : 'Add lazy loading to images'
-    )
+    // Combine details
+    result.details = {
+      performance: pageSpeedResult.details.performance,
+      accessibility: pageSpeedResult.details.accessibility,
+      bestPractices: pageSpeedResult.details.bestPractices,
+      seo: [...pageSpeedResult.details.seo, ...socialResult.details.filter(d => d.includes('SEO'))],
+      security: securityResult.details,
+      social: socialResult.details,
+    }
 
-    // Mobile Responsiveness
-    const hasViewport = $('meta[name="viewport"]').length > 0
-    const hasMobileMediaQueries = response.data.includes('@media') && response.data.includes('max-width')
-    result.mobile = ((hasViewport ? 50 : 0) + (hasMobileMediaQueries ? 50 : 0))
-    result.details.mobile.push(
-      hasViewport ? 'Viewport meta tag present' : 'Add viewport meta tag',
-      hasMobileMediaQueries ? 'Mobile media queries detected' : 'Add mobile-responsive design',
-      'Touch elements analysis pending'
-    )
-
-    // SEO Analysis
-    const hasTitle = $('title').length > 0
-    const hasDescription = $('meta[name="description"]').length > 0
-    const hasH1 = $('h1').length > 0
-    result.seo = ((hasTitle ? 33 : 0) + (hasDescription ? 33 : 0) + (hasH1 ? 34 : 0))
-    result.details.seo.push(
-      hasTitle ? 'Title tag present' : 'Add a title tag',
-      hasDescription ? 'Meta description present' : 'Add meta description',
-      hasH1 ? 'H1 heading present' : 'Add H1 heading'
-    )
-
-    // Security Analysis
-    const isHttps = url.startsWith('https')
-    const hasCSP = !!response.headers['content-security-policy']
-    const hasXFrame = !!response.headers['x-frame-options']
-    result.security = (
-      (isHttps ? 40 : 0) +
-      (hasCSP ? 30 : 0) +
-      (hasXFrame ? 30 : 0)
-    )
-    result.details.security.push(
-      isHttps ? 'HTTPS enabled' : 'Enable HTTPS',
-      hasCSP ? 'Content Security Policy present' : 'Add Content Security Policy',
-      hasXFrame ? 'X-Frame-Options header present' : 'Add X-Frame-Options header'
-    )
-
-    // Social Integration
-    const hasOG = $('meta[property^="og:"]').length > 0
-    const hasTwitter = $('meta[name^="twitter:"]').length > 0
-    const hasSocialLinks = $('a[href*="facebook.com"], a[href*="twitter.com"], a[href*="linkedin.com"], a[href*="instagram.com"]').length > 0
-    result.social = (
-      (hasOG ? 33 : 0) +
-      (hasTwitter ? 33 : 0) +
-      (hasSocialLinks ? 34 : 0)
-    )
-    result.details.social.push(
-      hasOG ? 'Open Graph tags present' : 'Add Open Graph tags',
-      hasTwitter ? 'Twitter Card tags present' : 'Add Twitter Card tags',
-      hasSocialLinks ? 'Social media links found' : 'Add social media links'
-    )
-
-    // Calculate overall score
+    // Calculate overall score (weighted average)
     result.overall = Math.round(
-      (result.performance +
-        result.mobile +
-        result.seo +
-        result.security +
-        result.social) / 5
+      (result.performance * 0.25 +
+        result.accessibility * 0.15 +
+        result.bestPractices * 0.15 +
+        result.seo * 0.20 +
+        result.security * 0.15 +
+        result.social * 0.10)
+    )
+
+    // Cache the result for 24 hours
+    res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=86400, stale-while-revalidate=43200'
     )
 
     return res.status(200).json(result)

@@ -7,18 +7,23 @@ import {
   GlobeAltIcon,
   ShieldCheckIcon,
   ShareIcon,
+  CheckCircleIcon,
+  BeakerIcon,
+  UserGroupIcon,
 } from '@heroicons/react/24/outline'
 
 interface ScoreData {
   overall: number
   performance: number
-  mobile: number
+  accessibility: number
+  bestPractices: number
   seo: number
   security: number
   social: number
   details: {
     performance: string[]
-    mobile: string[]
+    accessibility: string[]
+    bestPractices: string[]
     seo: string[]
     security: string[]
     social: string[]
@@ -214,7 +219,7 @@ const DigitalScore = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <ScoreCard
             title="Performance"
             score={scoreData.performance}
@@ -222,10 +227,16 @@ const DigitalScore = () => {
             details={scoreData.details.performance}
           />
           <ScoreCard
-            title="Mobile Responsiveness"
-            score={scoreData.mobile}
-            icon={DevicePhoneMobileIcon}
-            details={scoreData.details.mobile}
+            title="Accessibility"
+            score={scoreData.accessibility}
+            icon={UserGroupIcon}
+            details={scoreData.details.accessibility}
+          />
+          <ScoreCard
+            title="Best Practices"
+            score={scoreData.bestPractices}
+            icon={CheckCircleIcon}
+            details={scoreData.details.bestPractices}
           />
           <ScoreCard
             title="SEO & Visibility"
@@ -254,19 +265,24 @@ const DigitalScore = () => {
           className="mt-12 text-center"
         >
           <h2 className="text-2xl font-bold text-primary mb-6">Ready to Improve Your Score?</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="/contact"
-              className="px-8 py-4 bg-magenta hover:bg-magenta/90 text-white rounded-lg font-semibold transition-colors"
-            >
-              Get a Custom Action Plan
-            </a>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-8 py-4 border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-semibold transition-colors"
-            >
-              Analyze Again
-            </button>
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="/contact"
+                className="px-8 py-4 bg-magenta hover:bg-magenta/90 text-white rounded-lg font-semibold transition-colors"
+              >
+                Get a Custom Action Plan
+              </a>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-8 py-4 border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-semibold transition-colors"
+              >
+                Analyze Again
+              </button>
+            </div>
+            <p className="text-sm text-charcoal mt-4">
+              Want to save this report? <button onClick={() => window.print()} className="text-primary hover:underline">Download PDF</button>
+            </p>
           </div>
         </motion.div>
       </div>
