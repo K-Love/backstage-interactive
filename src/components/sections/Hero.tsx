@@ -4,10 +4,12 @@ import { motion } from 'framer-motion'
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center">
+      {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-purple/10" />
       
-      {/* Final pattern adjustment */}
-      <div className="absolute inset-0 bg-hero-pattern bg-[length:100px_100px] opacity-40" />
+      {/* Pattern background - adjusted to start below navbar */}
+      <div className="absolute inset-x-0 top-20 bottom-0 bg-hero-pattern bg-[length:100px_100px] opacity-40" />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
