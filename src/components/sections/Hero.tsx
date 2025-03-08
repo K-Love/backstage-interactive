@@ -1,7 +1,10 @@
 // src/components/sections/Hero.tsx
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 const Hero = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Gradient background */}
@@ -30,7 +33,6 @@ const Hero = () => {
             <span className="text-primary">Building Digital</span>
             <br />
             <span className="text-magenta">Experiences</span>
-            <span className="text-primary"> with AI</span>
           </motion.h1>
           
           <motion.p 
@@ -55,15 +57,52 @@ const Hero = () => {
             >
               Start Your Project
             </a>
-            <a 
-              href="/services" 
+            <button 
+              onClick={() => setIsModalOpen(true)}
               className="px-8 py-4 border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-semibold transition-colors"
             >
-              Explore Services
-            </a>
+              Get Free Strategy Session
+            </button>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Strategy Session Modal */}
+      {isModalOpen && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white rounded-xl p-8 max-w-lg w-full shadow-xl"
+            onClick={e => e.stopPropagation()}
+          >
+            <h3 className="text-2xl font-bold text-primary mb-4">Free Strategy Session</h3>
+            <p className="text-charcoal mb-6">
+              Book a complimentary 30-minute strategy session with our experts. We'll analyze your digital presence 
+              and provide actionable insights for growth.
+            </p>
+            <div className="flex flex-col gap-4">
+              <a 
+                href="/contact?session=strategy"
+                className="w-full px-6 py-3 bg-magenta text-white rounded-lg font-semibold text-center hover:bg-magenta/90 transition-colors"
+              >
+                Schedule Your Session
+              </a>
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="w-full px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors"
+              >
+                Maybe Later
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   )
 }
