@@ -9,12 +9,12 @@ import {
 const steps = [
   {
     title: 'Ideation',
-    description: 'We start with a problem or opportunity and brainstorm innovative solutions.',
+    description: 'Starting with a problem or opportunity, we brainstorm innovative solutions.',
     icon: LightBulbIcon
   },
   {
     title: 'Experimentation',
-    description: 'We build prototypes and test new technologies to find the best approach.',
+    description: 'Prototyping and testing new technologies to find the best approach.',
     icon: BeakerIcon
   },
   {

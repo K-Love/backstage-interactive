@@ -40,7 +40,7 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-4xl font-bold mb-4"
         >
-          Our Services
+          Services
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +49,7 @@ const Services = () => {
           transition={{ delay: 0.2 }}
           className="text-xl text-gray-600 max-w-2xl mx-auto"
         >
-          We offer comprehensive digital solutions to help your business thrive in the modern world.
+          Comprehensive digital solutions to help your business thrive in the modern world.
         </motion.p>
       </div>
 

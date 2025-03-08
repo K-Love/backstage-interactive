@@ -20,7 +20,7 @@ export const AgencyHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          We craft digital experiences that inspire, engage, and deliver results
+          Crafting digital experiences that inspire, engage, and deliver results
         </motion.p>
       </div>
     </Container>
