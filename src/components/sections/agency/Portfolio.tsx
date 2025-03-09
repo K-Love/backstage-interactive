@@ -13,25 +13,29 @@ const ProjectCard = ({ title, image, url }: ProjectCardProps) => (
     href={url}
     target="_blank"
     rel="noopener noreferrer"
-    className="group block relative overflow-hidden rounded-2xl"
+    className="group block relative overflow-hidden rounded-2xl bg-white shadow-lg"
     whileHover={{ y: -5 }}
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
   >
-    <div className="aspect-video relative overflow-hidden">
+    <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
       <Image
         src={image}
         alt={title}
-        layout="fill"
-        objectFit="cover"
-        className="transition-transform duration-300 group-hover:scale-105"
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        priority
+        className="object-contain transition-transform duration-300 group-hover:scale-105"
+        quality={95}
       />
       <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
         <span className="text-white font-bold text-xl">View Project</span>
       </div>
     </div>
-    <h3 className="text-xl font-bold mt-4 text-primary">{title}</h3>
+    <div className="p-6">
+      <h3 className="text-xl font-bold text-primary">{title}</h3>
+    </div>
   </motion.a>
 );
 
@@ -58,7 +62,7 @@ export const Portfolio = () => (
     >
       Featured Work
     </motion.h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
       {projects.map((project) => (
         <ProjectCard key={project.title} {...project} />
       ))}

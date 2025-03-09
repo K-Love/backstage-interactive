@@ -1,6 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
+
+const inputClasses = "mt-1 block w-full rounded-lg border-0 px-4 py-3 bg-gray-50 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary/60 transition-shadow duration-200"
+const labelClasses = "block text-sm font-medium text-gray-900 mb-1"
+const selectClasses = "mt-1 block w-full rounded-lg border-0 px-4 py-3 bg-gray-50 text-gray-900 ring-1 ring-inset ring-gray-200 focus:ring-2 focus:ring-inset focus:ring-primary/60 transition-shadow duration-200"
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -20,8 +25,7 @@ export default function ContactForm() {
     setStatus('loading')
     
     try {
-      // Replace YOUR_FORM_ID with the actual form ID from Formspree
-      const response = await fetch('https://formspree.io/f/xnnjnzzo', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,87 +56,117 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <motion.form 
+      onSubmit={handleSubmit} 
+      className="space-y-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div>
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <label htmlFor="firstName" className={labelClasses}>
             First Name *
           </label>
           <input
             type="text"
             id="firstName"
             required
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className={inputClasses}
             value={formData.firstName}
             onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
           />
-        </div>
+        </motion.div>
 
-        <div>
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <label htmlFor="lastName" className={labelClasses}>
             Last Name *
           </label>
           <input
             type="text"
             id="lastName"
             required
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className={inputClasses}
             value={formData.lastName}
             onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
           />
-        </div>
+        </motion.div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <label htmlFor="company" className={labelClasses}>
             Company
           </label>
           <input
             type="text"
             id="company"
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className={inputClasses}
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
           />
-        </div>
+        </motion.div>
 
-        <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <label htmlFor="title" className={labelClasses}>
             Title
           </label>
           <input
             type="text"
             id="title"
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className={inputClasses}
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           />
-        </div>
+        </motion.div>
       </div>
 
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <label htmlFor="email" className={labelClasses}>
           Email *
         </label>
         <input
           type="email"
           id="email"
           required
-          className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className={inputClasses}
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
-      </div>
+      </motion.div>
 
-      <div>
-        <label htmlFor="source" className="block text-sm font-medium text-gray-700">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+      >
+        <label htmlFor="source" className={labelClasses}>
           How did you hear about BI? *
         </label>
         <select
           id="source"
           required
-          className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className={selectClasses}
           value={formData.source}
           onChange={(e) => setFormData({ ...formData, source: e.target.value })}
         >
@@ -145,16 +179,20 @@ export default function ContactForm() {
           <option value="referral">Referral</option>
           <option value="other">Other</option>
         </select>
-      </div>
+      </motion.div>
 
-      <div>
-        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7 }}
+      >
+        <label htmlFor="category" className={labelClasses}>
           Which category best describes your inquiry? *
         </label>
         <select
           id="category"
           required
-          className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className={selectClasses}
           value={formData.category}
           onChange={(e) => setFormData({ ...formData, category: e.target.value })}
         >
@@ -166,36 +204,67 @@ export default function ContactForm() {
           <option value="consulting">Consulting</option>
           <option value="other">Other</option>
         </select>
-      </div>
+      </motion.div>
 
-      <div>
-        <label htmlFor="thoughts" className="block text-sm font-medium text-gray-700">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+      >
+        <label htmlFor="thoughts" className={labelClasses}>
           Your Thoughts *
         </label>
         <textarea
           id="thoughts"
           required
           rows={4}
-          className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className={inputClasses}
           value={formData.thoughts}
           onChange={(e) => setFormData({ ...formData, thoughts: e.target.value })}
         />
-      </div>
+      </motion.div>
 
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9 }}
+        className="pt-4"
       >
-        {status === 'loading' ? 'Sending...' : 'Send'}
-      </button>
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="w-full rounded-lg bg-gradient-to-r from-primary to-magenta px-6 py-4 text-base font-semibold text-white shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 disabled:opacity-50 transition-all duration-200"
+        >
+          {status === 'loading' ? (
+            <span className="flex items-center justify-center">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Sending...
+            </span>
+          ) : 'Send Message'}
+        </button>
+      </motion.div>
 
       {status === 'success' && (
-        <p className="text-green-600 text-sm">Message sent successfully!</p>
+        <motion.p 
+          className="text-green-600 text-sm bg-green-50 p-4 rounded-lg"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Message sent successfully! I'll get back to you soon.
+        </motion.p>
       )}
       {status === 'error' && (
-        <p className="text-red-600 text-sm">Failed to send message. Please try again.</p>
+        <motion.p 
+          className="text-red-600 text-sm bg-red-50 p-4 rounded-lg"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Failed to send message. Please try again or email me directly.
+        </motion.p>
       )}
-    </form>
+    </motion.form>
   )
 }
