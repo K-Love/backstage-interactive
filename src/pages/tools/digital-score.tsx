@@ -12,7 +12,6 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/24/outline'
 import Head from 'next/head'
-import '@/styles/print.css'
 
 interface ScoreData {
   overall: number
