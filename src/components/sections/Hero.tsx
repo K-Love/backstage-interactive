@@ -25,8 +25,8 @@ const Hero = () => {
       
       {/* Animated circuit pattern background */}
       <div className="absolute inset-x-0 top-20 bottom-0">
-        <div className="absolute inset-0 bg-hero-pattern opacity-70" />
-        <div className="absolute inset-0 bg-hero-pattern opacity-70 scale-75" style={{ transform: 'rotate(30deg)' }} />
+        <div className="absolute inset-0 bg-hero-pattern opacity-80" />
+        <div className="absolute inset-0 bg-hero-pattern opacity-80 scale-75" style={{ transform: 'rotate(30deg)' }} />
       </div>
 
       {/* Content */}
