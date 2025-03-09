@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="800" height="600" fill="#F8FAFC"/>
-  <rect x="250" y="200" width="300" height="40" rx="4" fill="#2E3192" fillOpacity="0.1"/>
-  <rect x="250" y="260" width="200" height="40" rx="4" fill="#2E3192" fillOpacity="0.1"/>
-  <rect x="250" y="320" width="250" height="40" rx="4" fill="#2E3192" fillOpacity="0.1"/>
-  <text x="400" y="150" textAnchor="middle" fill="#2E3192" fontSize="24" fontFamily="system-ui">Content Generator</text>
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" rx="8" fill="#E5E7EB" fillOpacity="0.5"/>
+  <path d="M34 16H14C13.4477 16 13 16.4477 13 17V31C13 31.5523 13.4477 32 14 32H34C34.5523 32 35 31.5523 35 31V17C35 16.4477 34.5523 16 34 16Z" stroke="#6366F1" strokeWidth="2"/>
+  <path d="M17 22H31M17 26H27" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round"/>
+  <circle cx="31" cy="26" r="2" fill="#4F46E5"/>
 </svg>

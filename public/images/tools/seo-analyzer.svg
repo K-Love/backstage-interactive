@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="800" height="600" fill="#F8FAFC"/>
-  <circle cx="400" cy="300" r="150" fill="#2E3192" fillOpacity="0.1"/>
-  <path d="M300 250L500 250" stroke="#2E3192" strokeWidth="4" strokeLinecap="round"/>
-  <path d="M350 300L450 300" stroke="#2E3192" strokeWidth="4" strokeLinecap="round"/>
-  <path d="M250 350L550 350" stroke="#2E3192" strokeWidth="4" strokeLinecap="round"/>
-  <text x="400" y="200" textAnchor="middle" fill="#2E3192" fontSize="24" fontFamily="system-ui">SEO Analyzer</text>
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" rx="8" fill="#E5E7EB" fillOpacity="0.5"/>
+  <path d="M24 14C18.477 14 14 18.477 14 24C14 29.523 18.477 34 24 34C29.523 34 34 29.523 34 24C34 18.477 29.523 14 24 14ZM27.707 27.707L23 23V18H25V22.414L29.293 26.707L27.707 27.707Z" fill="#6366F1"/>
+  <path d="M31 21.5858V17H26.4142L24 14.5858L21.5858 17H17V21.5858L14.5858 24L17 26.4142V31H21.5858L24 33.4142L26.4142 31H31V26.4142L33.4142 24L31 21.5858ZM24 30C20.6863 30 18 27.3137 18 24C18 20.6863 20.6863 18 24 18C27.3137 18 30 20.6863 30 24C30 27.3137 27.3137 30 24 30Z" fill="#4F46E5"/>
 </svg>
