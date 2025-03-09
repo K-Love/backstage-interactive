@@ -19,6 +19,24 @@ jobs:
         node-version: '18'
         cache: 'npm'
     
+    - name: Verify Secrets
+      run: |
+        if [ -n "$GOOGLE_PAGESPEED_API_KEY" ]; then
+          echo "✓ PageSpeed API key is set"
+        else
+          echo "✗ PageSpeed API key is missing"
+          exit 1
+        fi
+        if [ -n "$NEXT_PUBLIC_WEBSITE_URL" ]; then
+          echo "✓ Website URL is set"
+        else
+          echo "✗ Website URL is missing"
+          exit 1
+        fi
+      env:
+        GOOGLE_PAGESPEED_API_KEY: ${{ secrets.GOOGLE_PAGESPEED_API_KEY }}
+        NEXT_PUBLIC_WEBSITE_URL: ${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}
+    
     - name: Install dependencies
       run: npm ci
     
