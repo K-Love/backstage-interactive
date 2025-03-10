@@ -7,13 +7,12 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    unoptimized: true
   },
   env: {
     GOOGLE_PAGESPEED_API_KEY: process.env.GOOGLE_PAGESPEED_API_KEY,
   },
-  experimental: {
-    serverActions: true,
-  },
+  output: 'standalone',
 };
 
 export default nextConfig;
