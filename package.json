@@ -2,16 +2,14 @@
   "name": "backstage-interactive",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
-    "dev": "npm run clean && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "optimize-images": "npx ts-node scripts/optimize-images.ts",
-    "seed": "ts-node -P tsconfig-scripts.json prisma/seed.ts",
-    "generate-placeholders": "ts-node -P tsconfig-scripts.json scripts/generate-placeholders.ts",
-    "clean": "node scripts/clean.js",
-    "clean-build": "npm run clean && npm run build"
+    "lint": "next lint"
   },
   "dependencies": {
     "@auth/core": "0.34.2",
