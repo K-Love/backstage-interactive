@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F8FAFC"/>
+  <circle cx="400" cy="300" r="150" fill="#2E3192" fillOpacity="0.1"/>
+  <path d="M300 250L500 250" stroke="#2E3192" strokeWidth="4" strokeLinecap="round"/>
+  <path d="M350 300L450 300" stroke="#2E3192" strokeWidth="4" strokeLinecap="round"/>
+  <path d="M250 350L550 350" stroke="#2E3192" strokeWidth="4" strokeLinecap="round"/>
+  <text x="400" y="200" textAnchor="middle" fill="#2E3192" fontSize="24" fontFamily="system-ui">SEO Analyzer</text>
+</svg>

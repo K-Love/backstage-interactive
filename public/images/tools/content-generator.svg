@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F8FAFC"/>
+  <rect x="250" y="200" width="300" height="40" rx="4" fill="#2E3192" fillOpacity="0.1"/>
+  <rect x="250" y="260" width="200" height="40" rx="4" fill="#2E3192" fillOpacity="0.1"/>
+  <rect x="250" y="320" width="250" height="40" rx="4" fill="#2E3192" fillOpacity="0.1"/>
+  <text x="400" y="150" textAnchor="middle" fill="#2E3192" fontSize="24" fontFamily="system-ui">Content Generator</text>
+</svg>

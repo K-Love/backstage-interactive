@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F8FAFC"/>
+  <rect x="250" y="200" width="50" height="200" rx="4" fill="#2E3192" fillOpacity="0.1"/>
+  <rect x="350" y="150" width="50" height="250" rx="4" fill="#2E3192" fillOpacity="0.2"/>
+  <rect x="450" y="250" width="50" height="150" rx="4" fill="#2E3192" fillOpacity="0.1"/>
+  <rect x="550" y="100" width="50" height="300" rx="4" fill="#2E3192" fillOpacity="0.2"/>
+  <text x="400" y="150" textAnchor="middle" fill="#2E3192" fontSize="24" fontFamily="system-ui">Analytics Dashboard</text>
+</svg>
