@@ -73,19 +73,19 @@ export async function POST(request: Request) {
     try {
       const info = await transporter.sendMail(mailOptions)
       console.log('Email sent successfully:', info)
-    } catch (emailError) {
+    } catch (emailError: any) {
       console.error('Email sending failed:', emailError)
-      throw new Error(`Email sending failed: ${emailError.message}`)
+      throw new Error(`Email sending failed: ${emailError?.message || 'Unknown error'}`)
     }
 
     return NextResponse.json(
       { message: 'Form submitted successfully' },
       { status: 200 }
     )
-  } catch (error) {
+  } catch (error: any) {
     console.error('Detailed form submission error:', error)
     return NextResponse.json(
-      { error: 'Failed to submit form', details: error.message },
+      { error: 'Failed to submit form', details: error?.message || 'Unknown error' },
       { status: 500 }
     )
   }

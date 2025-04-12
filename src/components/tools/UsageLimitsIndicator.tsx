@@ -12,8 +12,8 @@ export default function UsageLimitsIndicator({ toolId, onLimitReached }: UsageLi
   if (error) return <div className="text-red-500">{error}</div>;
   if (!limits) return null;
 
-  const status = getUsageStatus();
-  const statusColors = {
+  const status = getUsageStatus() || 'normal';
+  const statusColors: Record<string, string> = {
     normal: 'bg-green-100 text-green-800',
     warning: 'bg-yellow-100 text-yellow-800',
     critical: 'bg-red-100 text-red-800',

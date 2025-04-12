@@ -1,7 +1,16 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { trackImageLoad } from '@/utils/imageAnalytics'
+import { trackImageLoad, ImageLoadMetrics } from '@/utils/imageAnalytics'
+
+// Moved interface to shared types file
+  src: string
+  loadTime: number
+  size: number
+  timestamp: number
+  error?: boolean
+  isZoomed?: boolean
+}
 
 interface OptimizedImageProps {
   src: string

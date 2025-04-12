@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['backstageinteractive.com'], // Add any domains you'll be loading images from
-  },
-};
+    domains: ['backstageinteractive.com'],
+  }
+}
 
-export default nextConfig;
+export default nextConfig

@@ -1,16 +1,13 @@
-import { optimizeImages } from './optimize-images';
+#!/usr/bin/env node
 import chalk from 'chalk';
 import { execSync } from 'child_process';
-import { rmSync } from 'fs';
-import { join } from 'path';
 
 async function build() {
   console.log(chalk.blue('🚀 Starting build process...'));
 
   try {
-    // Run image optimization
-    console.log(chalk.blue('\n📸 Optimizing images...'));
-    await optimizeImages();
+    // Skip image optimization for now to avoid circular dependencies
+    // We'll run it separately if needed
 
     console.log(chalk.blue('\n⚙️ Generating Prisma client...'));
     execSync('npx prisma generate', { stdio: 'inherit' });

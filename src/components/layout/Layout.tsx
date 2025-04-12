@@ -3,7 +3,6 @@ import Header from './Header'
 import Footer from './Footer'
 import ScrollToTop from '../ui/ScrollToTop'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LayoutProps } from '@/types';
 
 interface LayoutProps {
   children: ReactNode

@@ -28,15 +28,14 @@ const Button = ({
     lg: 'px-8 py-4 text-lg'
   }
 
+  // Use a regular button to avoid type issues with motion.button
   return (
-    <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+    <button
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}
-    </motion.button>
+    </button>
   )
 }
 

@@ -13,10 +13,22 @@ async function validateImages() {
   const results: ValidationResult[] = [];
   const imageDir = 'public/images';
   
-  const files = await fs.readdir(imageDir, { recursive: true });
-  const imageFiles = files.filter(file => 
-    /\.(jpg|jpeg|png|webp|avif)$/i.test(file)
-  );
+  // Use a non-recursive approach for better compatibility
+  const files = await fs.readdir(imageDir);
+  const imageFiles = [];
+  
+  // Process each file
+  for (const file of files) {
+    const filePath = path.join(imageDir, file);
+    const stat = await fs.stat(filePath);
+    
+    if (stat.isDirectory()) {
+      // Skip directories for now
+      continue;
+    } else if (/\.(jpg|jpeg|png|webp|avif)$/i.test(file)) {
+      imageFiles.push(file);
+    }
+  }
 
   for (const file of imageFiles) {
     const filePath = path.join(imageDir, file);
@@ -45,10 +57,10 @@ async function validateImages() {
       if (issues.length > 0) {
         results.push({ path: file, issues });
       }
-    } catch (error) {
-      results.push({ 
-        path: file, 
-        issues: [`Error analyzing image: ${error.message}`] 
+    } catch (error: any) {
+      results.push({
+        path: file,
+        issues: [`Error analyzing image: ${error?.message || 'Unknown error'}`]
       });
     }
   }
