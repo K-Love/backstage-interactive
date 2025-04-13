@@ -1,9 +1,10 @@
 // src/utils/imageAnalytics.ts
 interface ImageLoadMetrics {
     src: string;
-    loadTime: number;
     size: number;
     timestamp: number;
+    loadTime?: number;
+    error?: boolean;
   }
   
   const METRICS_ENDPOINT = '/api/metrics/images';

@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect, useRef } from 'react'
-import Image from 'next/image'
+import { useState, useCallback, useRef, useEffect } from 'react'
+import Image, { type StaticImageData } from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { trackImageLoad } from '@/utils/imageAnalytics'
 
@@ -9,11 +9,6 @@ interface OptimizedImageProps {
   className?: string
   priority?: boolean
   enableZoom?: boolean
-}
-
-interface ImageVariant {
-  src: string
-  width: number
 }
 
 const OptimizedImage = ({
@@ -29,66 +24,21 @@ const OptimizedImage = ({
   const [blurDataUrl, setBlurDataUrl] = useState<string>('')
   const loadStartTime = useRef<number>(0)
 
-  // Generate paths for different variants
-  const getImageVariants = (basePath: string): ImageVariant[] => {
-    const fileName = basePath.split('/').pop()?.split('.')[0];
-    return [
-      { src: `/images/optimized/${fileName}-xl.webp`, width: 1920 },
-      { src: `/images/optimized/${fileName}-lg.webp`, width: 1200 },
-      { src: `/images/optimized/${fileName}-md.webp`, width: 800 },
-      { src: `/images/optimized/${fileName}-sm.webp`, width: 400 },
-    ];
-  };
-
-  // Load blur placeholder
-  useEffect(() => {
-    const loadBlurPlaceholder = async () => {
-      const fileName = src.split('/').pop()?.split('.')[0];
-      const placeholderPath = `/images/optimized/${fileName}-placeholder.webp`;
-      try {
-        const response = await fetch(placeholderPath);
-        const blob = await response.blob();
-        const dataUrl = URL.createObjectURL(blob);
-        setBlurDataUrl(dataUrl);
-      } catch (error) {
-        console.error('Error loading blur placeholder:', error);
-      }
-    };
-
-    if (!priority) {
-      loadBlurPlaceholder();
-    }
-  }, [src, priority]);
-
   // Set load start time when component mounts
   useEffect(() => {
     loadStartTime.current = performance.now();
   }, []);
 
-  const variants = getImageVariants(src);
-  const srcSet = variants
-    .map(variant => `${variant.src} ${variant.width}w`)
-    .join(', ');
-
-  // Generate thumbnail path
-  const thumbnailSrc = src.replace(/\.(webp|jpg|jpeg|png)$/, '-thumb.webp')
-
-  const handleLoad = useCallback((event: any) => {
-    setIsLoading(false)
-    
-    // Track loading performance
-    const loadTime = performance.now() - loadStartTime.current;
-    const imageElement = event?.target as HTMLImageElement;
-    
-    if (imageElement) {
-      trackImageLoad({
-        src,
-        loadTime,
-        size: imageElement.naturalWidth * imageElement.naturalHeight,
-        timestamp: Date.now(),
-      });
-    }
-  }, [src])
+  const handleLoad = useCallback(({ naturalWidth, naturalHeight }: {
+    naturalWidth: number
+    naturalHeight: number
+  }) => {
+    trackImageLoad({
+      src,
+      size: naturalWidth * naturalHeight,
+      timestamp: Date.now()
+    });
+  }, [src]);
 
   const handleError = useCallback(() => {
     setIsLoading(false)
@@ -146,36 +96,23 @@ const OptimizedImage = ({
                 unoptimized // Skip optimization for blur placeholder
               />
             )}
-            <Image
-              src={thumbnailSrc}
-              alt={alt}
-              fill
-              className={`
-                object-cover transition-opacity duration-300
-                ${isLoading ? 'opacity-100 blur-sm scale-105' : 'opacity-0'}
-                ${className}
-              `}
-              priority={priority}
-              quality={60} // Lower quality for thumbnail
-            />
-            <Image
-              src={variants[1].src} // Default to large size
-              alt={alt}
-              fill
-              className={`
-                object-cover transition-opacity duration-300
-                ${isLoading ? 'opacity-0' : 'opacity-100'}
-                ${enableZoom ? 'cursor-zoom-in' : ''}
-                ${className}
-              `}
-              priority={priority}
-              onLoadingComplete={handleLoad}
-              onError={handleError}
-              onClick={toggleZoom}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              srcSet={srcSet}
-              quality={85} // Optimal quality for main image
-            />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className={`
+          object-cover transition-opacity duration-300
+          ${enableZoom ? 'cursor-zoom-in' : ''}
+          ${className}
+        `}
+        priority={priority}
+        onLoad={handleLoad}
+        onError={() => setIsError(true)}
+        onClick={toggleZoom}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        placeholder="blur"
+        blurDataURL={`data:image/svg+xml;base64,...`} // Simple SVG placeholder
+      />
           </>
         )}
       </div>
