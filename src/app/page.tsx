@@ -1,103 +1,64 @@
-import Image from "next/image";
+import React from 'react';
+import Head from 'next/head';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import Button from '@/components/Button';
+import Card from '@/components/Card';
+import { colors } from '@/design-tokens';
+import { Globe, Paintbrush, Megaphone, Lightbulb } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    <div className="flex flex-col min-h-screen" style={{ backgroundColor: colors.neutralBg }}>
+      <Head>
+        <title>Backstage Interactive | Building Digital Experiences</title>
+        <meta name="description" content="Backstage Interactive builds digital experiences, delivers consumer and client projects, and consults businesses on strategy and execution." />
+        <meta name="keywords" content="digital experiences, web development, design, marketing, consulting" />
+        <meta property="og:title" content="Backstage Interactive | Building Digital Experiences" />
+        <meta property="og:description" content="Backstage Interactive builds digital experiences, delivers consumer and client projects, and consults businesses on strategy and execution." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Backstage Interactive | Building Digital Experiences" />
+        <meta name="twitter:description" content="Backstage Interactive builds digital experiences, delivers consumer and client projects, and consults businesses on strategy and execution." />
+      </Head>
+      <Navbar />
+      <main className="flex-grow">
+        {/* Hero Section with SVG Illustration */}
+        <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primary, color: 'white' }}>
+          <div className="container mx-auto">
+            <h1 className="text-5xl font-bold mb-4">Building Digital Experiences</h1>
+            <p className="text-xl mb-8 max-w-3xl mx-auto">Backstage Interactive builds digital experiences, delivers consumer and client projects, and consults businesses on strategy and execution.</p>
+            {/* SVG Illustration Idea: A dynamic stage with digital elements (screens, gears, lights) symbolizing creation and interaction */}
+            <div className="mt-8 h-64 flex items-center justify-center">
+              <div className="text-accent1" style={{ color: colors.accent1 }}>
+                {/* Placeholder for SVG or Three.js scene */}
+                <Globe size={128} />
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Services Section */}
+        <section className="py-16 px-4">
+          <div className="container mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-12" style={{ color: colors.neutralText }}>Offering comprehensive digital solutions to help your business thrive in the modern world.</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card title="Web Development" description="Custom websites and applications built with modern technologies and best practices." icon={<Globe size={24} />} />
+              <Card title="Design" description="Beautiful, functional designs that enhance user experience and drive engagement." icon={<Paintbrush size={24} />} />
+              <Card title="Digital Marketing" description="Strategic marketing solutions to grow your online presence and reach your target audience." icon={<Megaphone size={24} />} />
+              <Card title="Consulting" description="Expert guidance to help you make informed decisions about your digital strategy." icon={<Lightbulb size={24} />} />
+            </div>
+          </div>
+        </section>
+        {/* CTA Section */}
+        <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primaryLight, color: 'white' }}>
+          <div className="container mx-auto">
+            <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Digital Presence?</h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto">Let's collaborate to create exceptional digital experiences that drive results and exceed expectations.</p>
+            <Button variant="accent" size="large">Get Started</Button>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }
