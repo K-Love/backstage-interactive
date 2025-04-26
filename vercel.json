@@ -1,16 +1,16 @@
 {
-    "version": 3,
-    "name": "backstage-interactive",
-    "framework": "nextjs",
-    "buildCommand": "pnpm run build",
-    "outputDirectory": ".next",
-    "env": {
-      "NEXT_PUBLIC_SITE_URL": "https://backstageinteractive.com"
-    },
-    "git": {
-      "pushCommand": "pnpm i --frozen-lockfile && pnpm run build"
-    },
-    "routes": [
-      { "src": "/robots.txt", "dest": "/robots.txt" }
-    ]
-  }
+  "version": 2,
+  "name": "backstage-interactive",
+  "framework": "nextjs",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_SITE_URL": "https://backstageinteractive.com"
+  },
+  "git": {
+    "pushCommand": "pnpm i --frozen-lockfile && pnpm run build"
+  },
+  "routes": [
+    { "src": "/robots.txt", "dest": "/robots.txt" }
+  ]
+}
