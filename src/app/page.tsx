@@ -4,12 +4,21 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
-import { colors } from '@/design-tokens';
 import { Globe, Paintbrush, Megaphone, Lightbulb } from 'lucide-react';
+import HomeHeroIllustration from '@/components/HomeHeroIllustration';
+
+// Import Bebas Neue font from next/font/google
+import { Bebas_Neue } from 'next/font/google';
+
+const bebas = Bebas_Neue({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+});
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen" style={{ backgroundColor: colors.neutralBg }}>
+    <div className="min-h-screen flex flex-col bg-white text-neutral-900">
       <Head>
         <title>Backstage Interactive | Building Digital Experiences</title>
         <meta name="description" content="Backstage Interactive builds digital experiences, delivers consumer and client projects, and consults businesses on strategy and execution." />
@@ -23,39 +32,45 @@ export default function Home() {
       </Head>
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section with SVG Illustration */}
-        <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primary, color: 'white' }}>
-          <div className="container mx-auto">
-            <h1 className="text-5xl font-bold mb-4">Building Digital Experiences</h1>
-            <p className="text-xl mb-8 max-w-3xl mx-auto">Backstage Interactive builds digital experiences, delivers consumer and client projects, and consults businesses on strategy and execution.</p>
-            {/* SVG Illustration Idea: A dynamic stage with digital elements (screens, gears, lights) symbolizing creation and interaction */}
-            <div className="mt-8 h-64 flex items-center justify-center">
-              <div className="text-accent1" style={{ color: colors.accent1 }}>
-                {/* Placeholder for SVG or Three.js scene */}
-                <Globe size={128} />
-              </div>
-            </div>
+        {/* HEADER SECTION */}
+        <section className="relative py-16 text-center overflow-hidden bg-gradient-to-b from-indigo-50 to-white" style={{ minHeight: 400 }}>
+          {/* SVG Illustration as background */}
+          <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+            <HomeHeroIllustration />
+          </div>
+          {/* Overlay for readability */}
+          <div className="absolute inset-0 bg-white/70 z-10 pointer-events-none" />
+          {/* Header Content */}
+          <div className="relative z-20 px-4 md:px-8">
+            <h1 className={`text-4xl md:text-5xl font-bold text-neutral-900 mb-4 drop-shadow-sm ${bebas.className}`}>
+              Building Digital Experiences
+            </h1>
+            <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 text-neutral-800 drop-shadow-sm">
+              Backstage Interactive builds digital experiences, delivers consumer and client projects, and consults businesses on strategy and execution.
+            </p>
           </div>
         </section>
-        {/* Services Section */}
-        <section className="py-16 px-4">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12" style={{ color: colors.neutralText }}>Offering comprehensive digital solutions to help your business thrive in the modern world.</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card title="Web Development" description="Custom websites and applications built with modern technologies and best practices." icon={<Globe size={24} />} />
-              <Card title="Design" description="Beautiful, functional designs that enhance user experience and drive engagement." icon={<Paintbrush size={24} />} />
-              <Card title="Digital Marketing" description="Strategic marketing solutions to grow your online presence and reach your target audience." icon={<Megaphone size={24} />} />
-              <Card title="Consulting" description="Expert guidance to help you make informed decisions about your digital strategy." icon={<Lightbulb size={24} />} />
-            </div>
+        {/* SERVICES SECTION */}
+        <section className="py-16 px-4 md:px-8 bg-white">
+          <p className="text-xl text-center max-w-3xl mx-auto mb-12 text-neutral-800">
+            Offering comprehensive digital solutions to help your business thrive in the modern world.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <Card title="Web Development" description="Custom websites and applications built with modern technologies and best practices." icon={<Globe className="w-8 h-8 text-primary" />} />
+            <Card title="Design" description="Beautiful, functional designs that enhance user experience and drive engagement." icon={<Paintbrush className="w-8 h-8 text-primary" />} />
+            <Card title="Digital Marketing" description="Strategic marketing solutions to grow your online presence and reach your target audience." icon={<Megaphone className="w-8 h-8 text-primary" />} />
+            <Card title="Consulting" description="Expert guidance to help you make informed decisions about your digital strategy." icon={<Lightbulb className="w-8 h-8 text-primary" />} />
           </div>
         </section>
-        {/* CTA Section */}
-        <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primaryLight, color: 'white' }}>
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Digital Presence?</h2>
-            <p className="text-xl mb-8 max-w-3xl mx-auto">Let's collaborate to create exceptional digital experiences that drive results and exceed expectations.</p>
-            <Button variant="accent" size="large">Get Started</Button>
-          </div>
+        {/* CTA SECTION */}
+        <section className="py-16 px-4 md:px-8 text-center bg-gradient-to-b from-white to-indigo-50">
+          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4 drop-shadow-sm">
+            Ready to Transform Your Digital Presence?
+          </h2>
+          <p className="text-xl max-w-3xl mx-auto mb-8 text-neutral-800 drop-shadow-sm">
+            Let's collaborate to create exceptional digital experiences that drive results and exceed expectations.
+          </p>
+          <Button variant="primary" size="large">Get Started</Button>
         </section>
       </main>
       <Footer />

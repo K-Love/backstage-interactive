@@ -1,4 +1,4 @@
-// src/app/agency/page.tsx
+// src/app/agency/page.tsx (updated portfolio section)
 import React from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
@@ -7,6 +7,7 @@ import Button from '@/components/Button';
 import Card from '@/components/Card';
 import { colors } from '@/design-tokens';
 import Link from 'next/link';
+import AgencyHeader from '@/components/headers/AgencyHeader';
 
 export default function Agency() {
   return (
@@ -27,12 +28,12 @@ export default function Agency() {
         {/* Hero Section */}
         <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primary, color: 'white' }}>
           <div className="container mx-auto">
-            <h1 className="text-5xl font-bold mb-4">Transforming Ideas into Digital Reality</h1>
+            <h1 className="text-5xl font-bold mb-4 gradient-title">Transforming Ideas into Digital Reality</h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">We craft digital experiences that inspire, engage, and deliver results. Your vision, amplified by our expertise, becomes an irresistible online presence.</p>
             {/* SVG Illustration Idea: A blueprint turning into a vibrant digital interface */}
             <div className="mt-8 h-64 flex items-center justify-center">
               <div className="text-accent2" style={{ color: colors.accent2 }}>
-                {/* Placeholder for SVG or Three.js */}
+              <AgencyHeader />
                 <span className="text-8xl">💻</span>
               </div>
             </div>
@@ -54,20 +55,20 @@ export default function Agency() {
             <Button variant="accent" size="medium">Learn More About White Label</Button>
           </div>
         </section>
-        {/* Portfolio Section */}
+        {/* Portfolio Section – Updated to Two-Column Responsive Layout */}
         <section className="py-16 px-4">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12" style={{ color: colors.neutralText }}>Our Work Speaks for Itself</h2>
-            <div className="grid grid-cols-1 md:grid-cols  gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-6 rounded-lg shadow-md text-center" style={{ backgroundColor: colors.neutralBg }}>
                 <Link href="https://www.chriswillburncoaching.com" target="_blank" rel="noopener noreferrer">
-                  <img src="/images/cwc-logo.png" alt="Chris Willburn Coaching" className="mx-auto mb-4 h-24 w-auto" />
+                  <img src="/images/cwc-logo.png" alt="Chris Willburn Coaching" className="mx-auto mb-4 h-24 w-auto object-contain" />
                   <h3 className="text-xl font-bold" style={{ color: colors.neutralText }}>Chris Willburn Coaching</h3>
                 </Link>
               </div>
               <div className="p-6 rounded-lg shadow-md text-center" style={{ backgroundColor: colors.neutralBg }}>
                 <Link href="https://www.sharreydore.com" target="_blank" rel="noopener noreferrer">
-                  <img src="/images/sharrey-dore-logo.png" alt="Sharreydore" className="mx-auto mb-4 h-24 w-auto" />
+                  <img src="/images/sharrey-dore-logo.png" alt="Sharreydore" className="mx-auto mb-4 h-24 w-auto object-contain" />
                   <h3 className="text-xl font-bold" style={{ color: colors.neutralText }}>Sharreydore</h3>
                 </Link>
               </div>

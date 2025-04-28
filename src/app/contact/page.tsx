@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { colors } from '@/design-tokens';
+import ContactHeader from '@/components/headers/ContactHeader';
 
 export default function Contact() {
   return (
@@ -26,12 +27,12 @@ export default function Contact() {
         {/* Hero Section */}
         <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primary, color: 'white' }}>
           <div className="container mx-auto">
-            <h1 className="text-5xl font-bold mb-4">Let's Connect</h1>
+            <h1 className="text-5xl font-bold mb-4 gradient-title">Let's Connect</h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">Have a question or ready to start a project? Reach out to us, and we'll get back to you as soon as possible.</p>
             {/* SVG Illustration Idea: A digital mailbox with incoming messages */}
             <div className="mt-8 h-64 flex items-center justify-center">
               <div className="text-accent2" style={{ color: colors.accent2 }}>
-                {/* Placeholder for SVG or Three.js */}
+              <ContactHeader />
                 <span className="text-8xl">✉️</span>
               </div>
             </div>

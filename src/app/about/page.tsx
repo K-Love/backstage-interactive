@@ -3,6 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AboutHeader from '@/components/headers/AboutHeader';
 import { colors } from '@/design-tokens';
 
 export default function About() {
@@ -24,13 +25,12 @@ export default function About() {
         {/* Hero Section */}
         <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primary, color: 'white' }}>
           <div className="container mx-auto">
-            <h1 className="text-5xl font-bold mb-4">Where Innovation Meets Imagination</h1>
+            <h1 className="text-5xl font-bold mb-4 gradient-title">Where Innovation Meets Imagination</h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">Welcome to the intersection of tech and creativity. Backstage Interactive brings cutting-edge web development, AI integration, and Web3 innovations together to craft digital experiences that simply work better.</p>
             {/* SVG Illustration Idea: A crossroads with tech (circuits, AI nodes) on one side and creativity (art, colors) on the other */}
             <div className="mt-8 h-64 flex items-center justify-center">
               <div className="text-accent2" style={{ color: colors.accent2 }}>
-                {/* Placeholder for SVG or Three.js */}
-                <span className="text-8xl">⚡️</span>
+                <AboutHeader />
               </div>
             </div>
           </div>

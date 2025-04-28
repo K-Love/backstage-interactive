@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.gradient-title {
+  background: linear-gradient(90deg, #2e3192, #585bca);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

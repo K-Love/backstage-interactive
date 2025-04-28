@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Card from '@/components/Card';
 import { colors } from '@/design-tokens';
+import StudioHeader from '@/components/headers/StudioHeader';
 
 export default function Studio() {
   return (
@@ -25,12 +26,12 @@ export default function Studio() {
         {/* Hero Section */}
         <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primary, color: 'white' }}>
           <div className="container mx-auto">
-            <h1 className="text-5xl font-bold mb-4">Pushing the Boundaries of Web Innovation</h1>
+            <h1 className="text-5xl font-bold mb-4 gradient-title">Pushing the Boundaries of Web Innovation</h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">Backstage Interactive Studio is a lab for experimentation, where we explore cutting-edge web technologies and build in-house projects that redefine digital possibilities.</p>
             {/* SVG Illustration Idea: A futuristic lab with bubbling experiments and digital screens */}
             <div className="mt-8 h-64 flex items-center justify-center">
               <div className="text-accent1" style={{ color: colors.accent1 }}>
-                {/* Placeholder for SVG or Three.js */}
+              <StudioHeader />
                 <span className="text-8xl">🧪</span>
               </div>
             </div>
