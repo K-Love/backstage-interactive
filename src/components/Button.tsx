@@ -1,3 +1,4 @@
+// src/components/Button.tsx (updated for hover animation)
 import React from 'react';
 import { colors } from '@/design-tokens';
 
@@ -30,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ${variantStyles} ${sizeStyles} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`rounded-md font-medium transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ${variantStyles} ${sizeStyles} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       style={{ backgroundColor: variant === 'primary' ? colors.primary : variant === 'accent' ? colors.accent1 : colors.neutralBg }}
       disabled={disabled}
       onClick={onClick}

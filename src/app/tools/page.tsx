@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import { colors } from '@/design-tokens';
+import ToolsHeader from '@/components/headers/ToolsHeader';
 
 export default function Tools() {
   return (
@@ -26,12 +27,12 @@ export default function Tools() {
         {/* Hero Section */}
         <section className="py-16 px-4 text-center" style={{ backgroundColor: colors.primary, color: 'white' }}>
           <div className="container mx-auto">
-            <h1 className="text-5xl font-bold mb-4">Tools to Elevate Your Digital Game</h1>
+            <h1 className="text-5xl font-bold mb-4 gradient-title">Tools to Elevate Your Digital Game</h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">Whether you're a small business owner or a marketing professional, our suite of tools—free and premium—helps you build a stronger online presence without needing a tech degree.</p>
             {/* SVG Illustration Idea: A toolbox with digital tools spilling out */}
             <div className="mt-8 h-64 flex items-center justify-center">
               <div className="text-accent1" style={{ color: colors.accent1 }}>
-                {/* Placeholder for SVG or Three.js */}
+              <ToolsHeader />
                 <span className="text-8xl">🛠️</span>
               </div>
             </div>
