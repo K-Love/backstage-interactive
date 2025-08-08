@@ -198,12 +198,17 @@ function initAnimations() {
 
 // Set active navigation link based on current page
 function setActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
-        if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
+        // Handle home page special case
+        if ((currentPath === '/' || currentPath === '/index.html') && linkHref === '/') {
+            link.classList.add('active');
+        }
+        // Handle other pages
+        else if (currentPath.includes(linkHref) && linkHref !== '/') {
             link.classList.add('active');
         }
     });
