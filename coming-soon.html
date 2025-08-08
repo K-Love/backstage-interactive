@@ -40,31 +40,23 @@
 </head>
 <body>
     <div class="coming-soon-container">
-        <div class="coming-soon-svg">
-            <svg width="220" height="120" viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <radialGradient id="soonBg" cx="60%" cy="40%" r="80%">
-                        <stop offset="0%" stop-color="#17a398" stop-opacity="0.7"/>
-                        <stop offset="100%" stop-color="#2e3192" stop-opacity="0.9"/>
-                    </radialGradient>
-                </defs>
-                <ellipse cx="110" cy="60" rx="100" ry="40" fill="url(#soonBg)" opacity="0.3">
-                    <animate attributeName="rx" values="100;110;100" dur="6s" repeatCount="indefinite"/>
-                </ellipse>
-                <ellipse cx="60" cy="40" rx="30" ry="10" fill="#ff6f61" opacity="0.2">
-                    <animate attributeName="rx" values="30;40;30" dur="4s" repeatCount="indefinite"/>
-                </ellipse>
-                <ellipse cx="170" cy="90" rx="40" ry="15" fill="#17a398" opacity="0.2">
-                    <animate attributeName="rx" values="40;50;40" dur="5s" repeatCount="indefinite"/>
-                </ellipse>
-                <circle cx="190" cy="30" r="12" fill="#fff" opacity="0.08">
-                    <animate attributeName="r" values="12;18;12" dur="3.5s" repeatCount="indefinite"/>
-                </circle>
-                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="32" font-weight="700" fill="#fff" opacity="0.12">Soon</text>
-            </svg>
-        </div>
         <div class="coming-soon-title">Coming Soon</div>
         <div class="coming-soon-text">We're working on something amazing.<br>Check back soon for the new Backstage Interactive experience!</div>
+        <form class="contact-form" action="https://formspree.io/f/mwkzqgqg" method="POST" style="margin-top:2.5rem; text-align:left;">
+            <div style="margin-bottom:1.5rem;">
+                <label for="name" style="display:block; font-weight:600; margin-bottom:0.5rem;">Name</label>
+                <input type="text" id="name" name="name" required style="width:100%; padding:0.8rem; border-radius:8px; border:1px solid #ccc; font-size:1.6rem;">
+            </div>
+            <div style="margin-bottom:1.5rem;">
+                <label for="email" style="display:block; font-weight:600; margin-bottom:0.5rem;">Email</label>
+                <input type="email" id="email" name="email" required style="width:100%; padding:0.8rem; border-radius:8px; border:1px solid #ccc; font-size:1.6rem;">
+            </div>
+            <div style="margin-bottom:1.5rem;">
+                <label for="message" style="display:block; font-weight:600; margin-bottom:0.5rem;">Message</label>
+                <textarea id="message" name="message" rows="4" required style="width:100%; padding:0.8rem; border-radius:8px; border:1px solid #ccc; font-size:1.6rem;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%; font-size:1.8rem;">Send Message</button>
+        </form>
     </div>
 </body>
 </html>
