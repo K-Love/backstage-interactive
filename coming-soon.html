@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Backstage Interactive</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        body {
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .coming-soon-container {
+            background: rgba(255,255,255,0.15);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(46,49,146,0.2);
+            padding: 4rem 3rem;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            max-width: 480px;
+        }
+        .coming-soon-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        .coming-soon-text {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+        }
+        .coming-soon-svg {
+            margin-bottom: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="coming-soon-container">
+        <div class="coming-soon-svg">
+            <svg width="220" height="120" viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="soonBg" cx="60%" cy="40%" r="80%">
+                        <stop offset="0%" stop-color="#17a398" stop-opacity="0.7"/>
+                        <stop offset="100%" stop-color="#2e3192" stop-opacity="0.9"/>
+                    </radialGradient>
+                </defs>
+                <ellipse cx="110" cy="60" rx="100" ry="40" fill="url(#soonBg)" opacity="0.3">
+                    <animate attributeName="rx" values="100;110;100" dur="6s" repeatCount="indefinite"/>
+                </ellipse>
+                <ellipse cx="60" cy="40" rx="30" ry="10" fill="#ff6f61" opacity="0.2">
+                    <animate attributeName="rx" values="30;40;30" dur="4s" repeatCount="indefinite"/>
+                </ellipse>
+                <ellipse cx="170" cy="90" rx="40" ry="15" fill="#17a398" opacity="0.2">
+                    <animate attributeName="rx" values="40;50;40" dur="5s" repeatCount="indefinite"/>
+                </ellipse>
+                <circle cx="190" cy="30" r="12" fill="#fff" opacity="0.08">
+                    <animate attributeName="r" values="12;18;12" dur="3.5s" repeatCount="indefinite"/>
+                </circle>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="32" font-weight="700" fill="#fff" opacity="0.12">Soon</text>
+            </svg>
+        </div>
+        <div class="coming-soon-title">Coming Soon</div>
+        <div class="coming-soon-text">We're working on something amazing.<br>Check back soon for the new Backstage Interactive experience!</div>
+    </div>
+</body>
+</html>

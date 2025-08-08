@@ -244,6 +244,10 @@ p {
 /* Buttons */
 .btn {
   display: inline-block;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(2px);
+  transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   padding: 1.2rem 3rem;
   font-size: 1.6rem;
   font-weight: 600;
@@ -255,20 +259,30 @@ p {
 }
 
 .btn-primary {
-  background-color: var(--accent-teal);
+  background: var(--gradient-primary);
   color: var(--white);
+  border: none;
+  box-shadow: var(--shadow-lg);
+  transform: scale(1);
+  animation: btnPulse 2s infinite alternate;
+
+@keyframes btnPulse {
+  0% { box-shadow: var(--shadow-lg); transform: scale(1); }
+  100% { box-shadow: var(--shadow-xl); transform: scale(1.05); }
+}
 }
 
 .btn-primary:hover {
-  background-color: #138a7f;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  background: var(--gradient-accent);
+  transform: scale(1.07);
+  box-shadow: var(--shadow-xl);
 }
 
 .btn-secondary {
-  background-color: transparent;
+  background: var(--gradient-accent);
   color: var(--white);
-  border: 2px solid var(--white);
+  border: none;
+  box-shadow: var(--shadow-md);
 }
 
 .btn-secondary:hover {
