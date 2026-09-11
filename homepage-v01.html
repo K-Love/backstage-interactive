@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backstage Interactive — Studio</title>
+  <meta name="description" content="A creative studio building things that otherwise might not exist." />
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #08080f; --paper: #f5f4f0;
+      --glow: #7b6ef6; --glow-warm: #c084fc; --accent: #e8e0ff;
+      --muted: rgba(245,244,240,0.38); --ghost: rgba(245,244,240,0.05);
+      --rule: rgba(245,244,240,0.07);
+      --f-display: 'Georgia','Times New Roman',serif;
+      --f-sans: -apple-system,'Helvetica Neue',Arial,sans-serif;
+      --f-mono: 'SF Mono','Fira Code','Courier New',monospace;
+      --ease: cubic-bezier(0.16,1,0.3,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--ink); color:var(--paper); font-family:var(--f-sans); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+    #atmo { position:fixed; inset:0; z-index:0; pointer-events:none; }
+    .layer { position:relative; z-index:1; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:2rem 3rem; }
+    .nav-logo { font-size:.7rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .3s; }
+    .nav-logo:hover { color:var(--paper); }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; }
+    .nav-links a { font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .3s; }
+    .nav-links a:hover { color:var(--paper); }
+
+    /* HERO */
+    .hero { min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding:8rem 3rem 6rem; max-width:1400px; margin:0 auto; position:relative; }
+    .hero-eyebrow { font-size:.65rem; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); margin-bottom:3rem; display:flex; align-items:center; gap:1rem; opacity:0; animation:fadeUp 1s var(--ease) .2s forwards; }
+    .hero-eyebrow::before { content:''; display:block; width:2rem; height:1px; background:var(--glow); opacity:.7; }
+    .hero-headline { font-family:var(--f-display); font-size:clamp(3rem,8vw,9rem); font-weight:400; line-height:1.02; letter-spacing:-.02em; max-width:14ch; margin-bottom:4rem; opacity:0; animation:fadeUp 1.1s var(--ease) .4s forwards; }
+    .hero-headline em { font-style:italic; background:linear-gradient(135deg,var(--glow-warm),var(--glow)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .hero-sub { font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--muted); max-width:44ch; line-height:1.75; margin-bottom:4rem; opacity:0; animation:fadeUp 1.1s var(--ease) .6s forwards; }
+    .hero-cta { display:inline-flex; align-items:center; gap:.75rem; font-size:.75rem; letter-spacing:.18em; text-transform:uppercase; color:var(--paper); text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:.5rem; width:fit-content; transition:border-color .3s,color .3s; opacity:0; animation:fadeUp 1.1s var(--ease) .8s forwards; }
+    .hero-cta:hover { border-color:var(--glow); color:var(--accent); }
+    .hero-cta svg { transition:transform .3s var(--ease); }
+    .hero-cta:hover svg { transform:translateX(5px); }
+    .scroll-hint { position:absolute; bottom:3rem; left:3rem; display:flex; flex-direction:column; align-items:center; gap:.75rem; font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); opacity:0; animation:fadeIn 1s ease 1.4s forwards; writing-mode:vertical-rl; }
+    .scroll-line { width:1px; height:3.5rem; background:linear-gradient(to bottom,var(--glow),transparent); animation:pulse 2.4s ease-in-out infinite; }
+
+    /* MANIFESTO */
+    .manifesto { padding:10rem 3rem; max-width:1400px; margin:0 auto; }
+    .manifesto-grid { display:grid; grid-template-columns:1fr 2.5fr; gap:6rem; align-items:start; }
+    .manifesto-label { font-size:.62rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); padding-top:.5rem; position:sticky; top:8rem; }
+    .manifesto-body { display:flex; flex-direction:column; gap:4rem; }
+    .manifesto-statement { font-family:var(--f-display); font-size:clamp(1.6rem,3vw,2.6rem); font-weight:400; line-height:1.3; opacity:0; transform:translateY(2rem); transition:opacity .9s var(--ease),transform .9s var(--ease); }
+    .manifesto-statement.visible { opacity:1; transform:translateY(0); }
+    .manifesto-statement .dim { color:var(--muted); }
+
+    /* DOMAINS */
+    .domains { padding:8rem 3rem; max-width:1400px; margin:0 auto; }
+    .domains-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:5rem; flex-wrap:wrap; gap:2rem; }
+    .domains-title { font-family:var(--f-display); font-size:clamp(2rem,4vw,3.5rem); font-weight:400; line-height:1.1; }
+    .domains-note { font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); max-width:24ch; text-align:right; line-height:1.7; }
+    .domain-list { list-style:none; border-top:1px solid var(--rule); }
+    .domain-item { display:grid; grid-template-columns:3.5rem 1fr auto; align-items:center; gap:2rem; padding:2rem 0; border-bottom:1px solid var(--rule); transition:padding .3s var(--ease); }
+    .domain-item:hover { padding-left:1rem; }
+    .domain-num { font-family:var(--f-mono); font-size:.62rem; color:var(--muted); letter-spacing:.1em; }
+    .domain-name { font-family:var(--f-display); font-size:clamp(1.3rem,2.2vw,1.9rem); font-weight:400; transition:color .3s; }
+    .domain-item:hover .domain-name { color:var(--accent); }
+    .domain-tag { font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); border:1px solid var(--rule); padding:.3rem .8rem; border-radius:2rem; white-space:nowrap; }
+
+    /* CLOSING */
+    .closing { padding:12rem 3rem 10rem; max-width:1400px; margin:0 auto; text-align:center; }
+    .closing-headline { font-family:var(--f-display); font-size:clamp(2.4rem,6vw,6rem); font-weight:400; line-height:1.1; letter-spacing:-.02em; margin-bottom:3rem; }
+    .closing-headline strong { display:block; font-weight:400; font-style:italic; background:linear-gradient(135deg,var(--glow-warm),var(--glow),var(--accent)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .closing-sub { font-size:1rem; color:var(--muted); max-width:38ch; margin:0 auto 4rem; line-height:1.75; }
+    .closing-contact { display:inline-flex; align-items:center; gap:.75rem; font-size:.75rem; letter-spacing:.18em; text-transform:uppercase; color:var(--paper); text-decoration:none; border:1px solid var(--rule); padding:1rem 2.5rem; border-radius:.2rem; transition:border-color .3s,background .3s; }
+    .closing-contact:hover { border-color:var(--glow); background:rgba(123,110,246,.08); }
+
+    /* FOOTER */
+    footer { border-top:1px solid var(--rule); padding:2.5rem 3rem; display:flex; align-items:center; justify-content:space-between; max-width:1400px; margin:0 auto; flex-wrap:wrap; gap:1rem; }
+    .footer-copy { font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+    .footer-links { display:flex; gap:2rem; list-style:none; }
+    .footer-links a { font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .3s; }
+    .footer-links a:hover { color:var(--paper); }
+
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(1.5rem); transition:opacity .8s var(--ease),transform .8s var(--ease); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { to { opacity:.5; } }
+    @keyframes pulse { 0%,100% { opacity:.25; } 50% { opacity:.9; } }
+
+    @media (max-width:768px) {
+      nav { padding:1.5rem; } .nav-links { display:none; }
+      .hero { padding:7rem 1.5rem 5rem; } .scroll-hint { display:none; }
+      .manifesto { padding:6rem 1.5rem; } .manifesto-grid { grid-template-columns:1fr; gap:3rem; } .manifesto-label { position:static; }
+      .domains { padding:5rem 1.5rem; } .domains-note { text-align:left; }
+      .domain-item { grid-template-columns:2.5rem 1fr; } .domain-tag { display:none; }
+      .closing { padding:8rem 1.5rem 6rem; } footer { padding:2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="atmo" aria-hidden="true"></canvas>
+
+<nav class="layer">
+  <a href="#top" class="nav-logo">Backstage Interactive</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="layer">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <p class="hero-eyebrow">Creative Studio &mdash; Los Angeles</p>
+    <h1 class="hero-headline">
+      Where ideas become <em>real things.</em>
+    </h1>
+    <p class="hero-sub">
+      Backstage is a studio that imagines, builds, and owns digital work.
+      One person. Modern tools. Unreasonable ambition.
+    </p>
+    <a href="#work" class="hero-cta">
+      See the work
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto" id="studio">
+    <div class="manifesto-grid">
+      <div class="manifesto-label">The Belief</div>
+      <div class="manifesto-body">
+        <p class="manifesto-statement">
+          Possibility is far greater than<br>
+          <span class="dim">convention suggests.</span>
+        </p>
+        <p class="manifesto-statement">
+          One person, equipped with the right tools,<br>
+          <span class="dim">can now build what once required entire organizations.</span>
+        </p>
+        <p class="manifesto-statement">
+          Backstage exists to find out<br>
+          <span class="dim">what that actually means.</span>
+        </p>
+        <p class="manifesto-statement">
+          Not as a theory.<br>
+          <span class="dim">As a practice.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOMAINS / WORK -->
+  <section class="domains" id="work">
+    <div class="domains-header reveal">
+      <h2 class="domains-title">Things being<br>built here.</h2>
+      <p class="domains-note">Studio work &amp; owned assets.<br>Client work is fuel, not identity.</p>
+    </div>
+    <ul class="domain-list">
+      <li class="domain-item reveal">
+        <span class="domain-num">01</span>
+        <span class="domain-name">HerbCraft</span>
+        <span class="domain-tag">pSEO Directory</span>
+      </li>
+      <li class="domain-item reveal">
+        <span class="domain-num">02</span>
+        <span class="domain-name">Bonsai Zenith</span>
+        <span class="domain-tag">Niche Affiliate</span>
+      </li>
+      <li class="domain-item reveal">
+        <span class="domain-num">03</span>
+        <span class="domain-name">Phanterra</span>
+        <span class="domain-tag">KDP Publishing</span>
+      </li>
+      <li class="domain-item reveal">
+        <span class="domain-num">04</span>
+        <span class="domain-name">Digital Products</span>
+        <span class="domain-tag">SaaS &amp; Tools</span>
+      </li>
+      <li class="domain-item reveal">
+        <span class="domain-num">05</span>
+        <span class="domain-name">Client Work</span>
+        <span class="domain-tag">By Invitation</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing" id="contact">
+    <h2 class="closing-headline reveal">
+      Something should exist<br>
+      <strong>that doesn't yet.</strong>
+    </h2>
+    <p class="closing-sub reveal">
+      If you have an idea worth building, or a problem worth solving,
+      Backstage might be the right place to start.
+    </p>
+    <a href="mailto:hello@backstageinteractive.com" class="closing-contact reveal">
+      Start a conversation
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </section>
+
+</main>
+
+<footer class="layer">
+  <p class="footer-copy">&copy; 2026 Backstage Interactive</p>
+  <ul class="footer-links">
+    <li><a href="/tools/idea-validator/">Alpha Score</a></li>
+    <li><a href="/coming-soon.html">Coming Soon</a></li>
+  </ul>
+</footer>
+
+<script>
+  // ── Atmosphere canvas ──────────────────────────────────────────
+  (function () {
+    const canvas = document.getElementById('atmo');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function Particle() {
+      this.reset();
+    }
+    Particle.prototype.reset = function () {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.r = Math.random() * 1.2 + 0.2;
+      this.a = Math.random() * 0.35 + 0.05;
+      this.vx = (Math.random() - 0.5) * 0.12;
+      this.vy = (Math.random() - 0.5) * 0.12;
+      this.life = Math.random() * 300 + 200;
+      this.age = 0;
+    };
+    Particle.prototype.update = function () {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.age++;
+      if (this.age > this.life) this.reset();
+    };
+    Particle.prototype.draw = function () {
+      const fade = Math.min(this.age / 60, 1) * Math.min((this.life - this.age) / 60, 1);
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(123,110,246,${this.a * fade})`;
+      ctx.fill();
+    };
+
+    // Soft radial glow in upper-right
+    function drawGlow() {
+      const gx = W * 0.75, gy = H * 0.2, gr = Math.min(W, H) * 0.55;
+      const grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, gr);
+      grad.addColorStop(0, 'rgba(123,110,246,0.06)');
+      grad.addColorStop(0.5, 'rgba(192,132,252,0.03)');
+      grad.addColorStop(1, 'rgba(8,8,15,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    function init() {
+      resize();
+      particles = Array.from({ length: 80 }, () => new Particle());
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      drawGlow();
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', resize);
+    init();
+    loop();
+  })();
+
+  // ── Scroll reveal ──────────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal, .manifesto-statement');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

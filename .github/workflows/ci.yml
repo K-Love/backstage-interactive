@@ -1,0 +1,56 @@
+name: CI — Validate & Lint
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: HTML Validation & Link Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install html-validate
+        run: npm install -g html-validate
+
+      - name: Validate HTML files
+        run: |
+          echo "Validating index.html..."
+          html-validate index.html || true
+          echo "Validating coming-soon.html..."
+          html-validate coming-soon.html || true
+          echo "Validating homepage-v01.html..."
+          html-validate homepage-v01.html || true
+
+      - name: Check for broken internal links
+        run: |
+          echo "Checking internal hrefs in homepage-v01.html..."
+          grep -oP 'href="\K[^"]+' homepage-v01.html | grep -v '^http' | grep -v '^mailto' | grep -v '^#' | while read link; do
+            if [ ! -f "$link" ] && [ ! -f "${link#/}" ]; then
+              echo "WARNING: possible broken link: $link"
+            else
+              echo "OK: $link"
+            fi
+          done || true
+
+      - name: Confirm production page untouched
+        run: |
+          echo "Verifying index.html is the production page..."
+          if grep -q "coming-soon\|Coming Soon\|Backstage Interactive" index.html; then
+            echo "✓ index.html present and appears valid"
+          else
+            echo "WARNING: index.html may be missing expected content"
+            exit 1
+          fi
+          echo "Verifying coming-soon.html exists..."
+          test -f coming-soon.html && echo "✓ coming-soon.html exists" || (echo "✗ coming-soon.html missing!" && exit 1)

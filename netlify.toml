@@ -1,0 +1,37 @@
+# Backstage Interactive — Netlify config
+# Production: index.html (current coming-soon/studio page)
+# Experimental: homepage-v01.html (preview only, not routed to /)
+
+[build]
+  publish = "."
+
+# Redirect /v01 → experimental homepage for easy preview
+[[redirects]]
+  from = "/v01"
+  to = "/homepage-v01.html"
+  status = 200
+
+# Redirect /coming-soon → preserved original page
+[[redirects]]
+  from = "/coming-soon"
+  to = "/coming-soon.html"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Noindex the experimental page
+[[headers]]
+  for = "/homepage-v01.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/v01"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
