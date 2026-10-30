@@ -722,6 +722,24 @@
     .js #phone-wrap { display: none; }
     .js #email-wrap.is-on,
     .js #phone-wrap.is-on { display: block; }
+    div[data-netlify-recaptcha]:not(:empty) {
+      position: relative;
+      width: 100%;
+      max-width: 304px;
+      height: 78px;
+      margin-top: 1rem;
+      overflow: hidden;
+    }
+    @media (max-width: 380px) {
+      div[data-netlify-recaptcha]:not(:empty) { height: 66px; }
+      div[data-netlify-recaptcha]:not(:empty) > * {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: scale(0.82);
+        transform-origin: left top;
+      }
+    }
     .contact-form .btn { width: 100%; margin-top: 1.1rem; }
     .promise { margin-top: 0.75rem; font-size: 0.95rem; }
     .form-note { margin-top: 0.45rem; font-size: 0.85rem; }
@@ -821,7 +839,6 @@
         <p class="subhead">Flat-price Google Business Profile fixes for roofing, HVAC, plumbing, electrical, cleaning and carpet care pros. Built to bring in calls and built to stay live.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#audit">Get a free 2-minute video audit of your profile</a>
-          <p class="talk">Prefer email? <a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a></p>
         </div>
       </div>
     </section>
@@ -849,7 +866,6 @@
         </ol>
         <div class="cta-row">
           <a class="btn btn-primary" href="#audit">Get a free 2-minute video audit of your profile</a>
-          <p class="talk">Prefer email? <a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a></p>
         </div>
       </div>
     </section>
@@ -1060,9 +1076,8 @@
         <div>
           <h2 id="audit-title" tabindex="-1">Find out what your Google profile is costing you.</h2>
           <p class="lede">Send your profile link. We'll show you the 3 biggest fixes in a 2-minute video.</p>
-          <p class="talk">Prefer email? <a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a></p>
         </div>
-        <form class="contact-form" id="audit-form" name="gbp-video-audit" method="POST" action="/google-business-profile-home-services/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" aria-labelledby="form-title">
+        <form class="contact-form" id="audit-form" name="gbp-video-audit" method="POST" action="/google-business-profile-home-services/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" aria-labelledby="form-title">
           <input type="hidden" name="form-name" value="gbp-video-audit">
           <input type="hidden" name="page" value="google-business-profile-home-services">
           <p class="hp" aria-hidden="true"><label>Leave this blank <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
@@ -1091,6 +1106,7 @@
             <input id="audit-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" aria-describedby="phone-help">
             <p class="help" id="phone-help">Required if text is the best way to reach you. This is your number.</p>
           </div>
+          <div data-netlify-recaptcha="true"></div>
           <button class="btn btn-primary" type="submit">Get my free video audit</button>
           <p class="promise" id="audit-promise">You'll get a 2-minute video of the top 3 fixes within 2 business days. No obligation.</p>
           <p class="form-note">Do not send your Google password or owner login.</p>
@@ -1103,7 +1119,7 @@
   <footer class="site-footer">
     <div class="container">
       <p><strong>Backstage Interactive</strong></p>
-      <p><a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a></p>
+      <p><a href="#audit">Request a free video audit</a></p>
       <p><a href="/">backstageinteractive.com</a></p>
     </div>
   </footer>
@@ -1119,8 +1135,8 @@
     /* ============================================================
        LAUNCH — edit these strings. Leave a value "" to keep the
        orange placeholder on the page. No secrets belong here.
-       There is no business phone. Contact is the audit form and
-       kevin@backstageinteractive.com.
+       Do not add a phone number or email address. The audit form
+       is the only public contact path.
        years         "12"
        photo         "/assets/kevin-love.jpg"
        video         "/assets/kevin-intro.mp4"  or an https link
