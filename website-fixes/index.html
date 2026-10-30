@@ -88,7 +88,7 @@
     .brand-link{display:inline-flex;align-items:center;flex-shrink:0;text-decoration:none}
     .brand-logo{display:block;width:200px;max-width:45vw;height:auto}
     .nav-actions{display:flex;align-items:center;gap:10px 16px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
-    .nav-cta,.header-email{color:#222666;text-decoration:none;border:1px solid #b8bfd7;padding:8px 15px;border-radius:30px;font-size:.89rem;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
+    .nav-cta{color:#222666;text-decoration:none;border:1px solid #b8bfd7;padding:8px 15px;border-radius:30px;font-size:.89rem;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
     .hero{background:radial-gradient(circle at 83% 20%,#3238a5 0,transparent 45%),linear-gradient(125deg,#12152d,#1b2460 75%);color:#fff;padding:88px 0 96px}
     .kicker{display:inline-flex;color:#b8c2ff;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:800}
     .hero h1{max-width:920px;margin:16px 0 20px;line-height:1.08;font-size:clamp(2.4rem,5.6vw,4.6rem);letter-spacing:-.055em;text-wrap:balance}
@@ -99,7 +99,6 @@
     .btn-primary{background:var(--orange);color:#1a1832;white-space:normal}
     .btn-outline{border:1px solid rgba(255,255,255,.48);color:#fff;background:transparent}
     .btn-dark{background:var(--indigo);color:#fff}
-    .email-link{color:#ffb089;font-weight:700}
     .section{padding:86px 0}
     .section h2{font-size:clamp(2rem,4vw,3.05rem);line-height:1.18;letter-spacing:-.04em;margin:10px 0 15px;text-wrap:balance}
     .section-intro{max-width:740px;color:var(--muted);font-size:1.08rem;margin-bottom:36px}
@@ -146,16 +145,22 @@
     .years span{display:block;font-weight:500;color:var(--muted)}
     .band{background:#141a44;color:#fff;padding:64px 0}
     .band-inner{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:start}
+    .band-inner > *{min-width:0}
     .band h2{font-size:clamp(1.7rem,3.3vw,2.6rem);line-height:1.2;letter-spacing:-.035em;margin:0 0 10px;text-wrap:balance}
     .band p{color:#d6defb;margin:0;max-width:620px}
     .fine{padding:35px 0;font-size:.84rem;color:var(--muted);border-top:1px solid var(--line)}
     .fine a{color:var(--indigo);font-weight:700}
     footer{background:#f7f8fb}
-    .contact-form{background:#fff;color:var(--ink);border-radius:var(--radius);padding:30px;box-shadow:0 12px 38px #080b252e}
+    .contact-form{background:#fff;color:var(--ink);border-radius:var(--radius);padding:30px;box-shadow:0 12px 38px #080b252e;min-width:0}
     .contact-form h3{margin:0 0 8px;font-size:1.35rem}
     .contact-form label,.reach legend{display:block;font-size:.9rem;font-weight:700;margin:14px 0 5px;padding:0}
     .contact-form input[type="text"],.contact-form input[type="tel"],.contact-form input[type="email"]{display:block;width:100%;font:inherit;color:var(--ink);padding:10px 12px;background:#fff;border:1px solid #aeb5c7;border-radius:7px;min-height:48px}
     .contact-form .btn{margin-top:18px;width:100%}
+    .recaptcha-slot{margin-top:16px;width:100%;max-width:304px;height:78px;overflow:hidden;container-type:inline-size}
+    .recaptcha{width:304px;height:78px}
+    @container (max-width: 303px) {
+      .recaptcha{transform:scale(calc(100cqi / 304px));transform-origin:top left}
+    }
     .contact-form .form-note,.contact-form .field-hint{color:var(--muted);font-size:.8rem;margin:8px 0 0}
     .contact-form .service-choice{margin:16px 0 0;padding:10px 12px;border-radius:8px;background:#eef0fb;color:#222666;font-weight:700;font-size:.92rem}
     .reach{border:0;margin:8px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -170,7 +175,7 @@
       .hero{padding:64px 0 72px}
       .section{padding:65px 0}
       .steps,.band-inner,.ba{grid-template-columns:1fr}
-      .nav-cta,.header-email{font-size:.8rem}
+      .nav-cta{font-size:.8rem}
       .brand-logo{max-width:160px}
       .card,.contact-form,.bundle,.guarantee{padding:24px}
     }
@@ -186,7 +191,6 @@
     <div class="container nav">
       <a class="brand-link" href="#top" aria-label="Backstage Interactive — back to top"><img class="brand-logo" src="/assets/bi-logo.png" alt="Backstage Interactive" width="200" height="51"></a>
       <div class="nav-actions">
-        <a class="header-email" href="mailto:kevin@backstageinteractive.com">Email Kevin</a>
         <a class="nav-cta" href="#contact">Free video review</a>
       </div>
     </div>
@@ -331,10 +335,9 @@
         <div>
           <span class="kicker">Free 2-minute video</span>
           <h2>Send the site. Get the review.</h2>
-          <p>Kevin watches the site and sends a short video on what to fix. The review is free. Paid work waits until you approve a written scope.</p>
-          <p style="margin-top:18px">Or email <a class="email-link" href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a>.</p>
+          <p>Kevin watches the site and sends a short video on what to fix. The review is free. Paid work waits until you approve a written scope. Use the form to send the site.</p>
         </div>
-        <form class="contact-form" name="backstage-website-inquiry" method="POST" action="/website-fixes/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
+        <form class="contact-form" name="backstage-website-inquiry" method="POST" action="/website-fixes/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
           <input type="hidden" name="form-name" value="backstage-website-inquiry">
           <input type="hidden" name="service" id="contact-package" value="Free 2-minute video site review">
           <p class="hp" aria-hidden="true"><label>Leave this blank <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
@@ -360,6 +363,7 @@
             <label for="contact-phone">Mobile number for text</label>
             <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" disabled>
           </div>
+          <div class="recaptcha-slot"><div class="recaptcha" data-netlify-recaptcha="true"></div></div>
           <button class="btn btn-primary" type="submit">Get my free video review</button>
           <p class="form-note">The video review is free. Do not send passwords or admin logins.</p>
         </form>
@@ -369,7 +373,7 @@
   <footer class="fine">
     <div class="container">
       <strong>Backstage Interactive</strong> · Kevin Love · <a href="https://backstageinteractive.com/">backstageinteractive.com</a> · <a href="/google-business-profile-home-services">GBP Fix-and-Protect</a>
-      <p>Email <a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a>. Paid work follows a written scope. Fixed as scoped, or you don't pay for that item. No ranking or sales result is promised.</p>
+      <p>Paid work follows a written scope. Fixed as scoped, or you don't pay for that item. No ranking or sales result is promised. <a href="#contact">Request a video review</a>.</p>
     </div>
   </footer>
   <script>
