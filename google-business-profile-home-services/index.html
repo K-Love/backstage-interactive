@@ -378,8 +378,14 @@
     .cta-row .btn-primary { width: 100%; max-width: 34rem; }
     .talk { max-width: 40rem; color: var(--ink); line-height: 1.7; }
     .keep { white-space: nowrap; }
-    .talk .ph { white-space: nowrap; }
+    .talk .ph {
+      display: inline-block;
+      max-width: 100%;
+      white-space: normal;
+      vertical-align: baseline;
+    }
     .talk [data-ph-group="booking"] { display: inline-block; max-width: 100%; vertical-align: top; }
+    .final .talk [data-ph-group] { display: block; max-width: 100%; margin-top: 0.35rem; }
     .sticky-cta .btn { min-width: 0; }
     .hero .talk, .final .talk { color: #e4e9f7; }
     .talk a { font-weight: 800; text-underline-offset: 0.15em; }
@@ -801,10 +807,12 @@
       .package h3 { min-height: 2.5em; }
     }
     @media (max-width: 859px) {
-      body:not(:has(.sticky-cta.is-hidden)) { padding-bottom: calc(5.6rem + env(safe-area-inset-bottom)); }
+      body:not(:has(.sticky-cta.is-hidden)) { padding-bottom: calc(4.6rem + env(safe-area-inset-bottom)); }
       .sticky-cta { display: flex; }
       .sticky-cta.is-hidden { display: none; }
-      .talk [data-ph-group="booking"] { display: block; margin-top: 0.2rem; }
+      .sticky-long { display: none; }
+      .sticky-short { display: inline; }
+      .talk [data-ph-group="booking"] { display: block; margin-top: 0.35rem; }
       body.form-focus { padding-bottom: 0; }
       body.form-focus .sticky-cta { display: none; }
     }
@@ -1084,7 +1092,7 @@
         <div>
           <h2 id="audit-title" tabindex="-1">Find out what your Google profile is costing you.</h2>
           <p class="lede">Send your profile link. We'll show you the 3 biggest fixes in a 2-minute video.</p>
-          <p class="talk">Or <span data-ph-group="phone"><span class="keep">text or call</span> <span class="ph">[PLACEHOLDER: phone number]</span></span><span data-ph-group="booking" data-prefix=" / " data-phrase="book a call"><span class="keep"> / book a call</span> <span class="ph">[PLACEHOLDER: booking URL]</span></span></p>
+          <p class="talk"><span data-ph-group="phone"><span class="keep">Or text or call</span> <span class="ph">[PLACEHOLDER: phone number]</span></span><span data-ph-group="booking" data-prefix="" data-phrase="book a call"><span class="keep">Book a call:</span> <span class="ph">[PLACEHOLDER: booking URL]</span></span></p>
         </div>
         <form class="contact-form" id="audit-form" name="gbp-video-audit" method="POST" action="/google-business-profile-home-services/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" aria-labelledby="form-title">
           <input type="hidden" name="form-name" value="gbp-video-audit">
