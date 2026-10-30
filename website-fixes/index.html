@@ -88,8 +88,7 @@
     .brand-link{display:inline-flex;align-items:center;flex-shrink:0;text-decoration:none}
     .brand-logo{display:block;width:200px;max-width:45vw;height:auto}
     .nav-actions{display:flex;align-items:center;gap:10px 16px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
-    .nav-cta,.header-call{color:#222666;text-decoration:none;border:1px solid #b8bfd7;padding:8px 15px;border-radius:30px;font-size:.89rem;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
-    .header-call{border-color:#ff6b35;color:#9a3412}
+    .nav-cta,.header-email{color:#222666;text-decoration:none;border:1px solid #b8bfd7;padding:8px 15px;border-radius:30px;font-size:.89rem;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
     .hero{background:radial-gradient(circle at 83% 20%,#3238a5 0,transparent 45%),linear-gradient(125deg,#12152d,#1b2460 75%);color:#fff;padding:88px 0 96px}
     .kicker{display:inline-flex;color:#b8c2ff;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:800}
     .hero h1{max-width:920px;margin:16px 0 20px;line-height:1.08;font-size:clamp(2.4rem,5.6vw,4.6rem);letter-spacing:-.055em;text-wrap:balance}
@@ -100,9 +99,7 @@
     .btn-primary{background:var(--orange);color:#1a1832;white-space:normal}
     .btn-outline{border:1px solid rgba(255,255,255,.48);color:#fff;background:transparent}
     .btn-dark{background:var(--indigo);color:#fff}
-    .btn-call{background:#fff;color:#9a3412}
-    .call-note{margin:14px 0 0;color:#d6defb;font-size:.92rem;max-width:640px}
-    .call-note strong{color:#fff}
+    .email-link{color:#ffb089;font-weight:700}
     .section{padding:86px 0}
     .section h2{font-size:clamp(2rem,4vw,3.05rem);line-height:1.18;letter-spacing:-.04em;margin:10px 0 15px;text-wrap:balance}
     .section-intro{max-width:740px;color:var(--muted);font-size:1.08rem;margin-bottom:36px}
@@ -161,7 +158,7 @@
     .contact-form .btn{margin-top:18px;width:100%}
     .contact-form .form-note,.contact-form .field-hint{color:var(--muted);font-size:.8rem;margin:8px 0 0}
     .contact-form .service-choice{margin:16px 0 0;padding:10px 12px;border-radius:8px;background:#eef0fb;color:#222666;font-weight:700;font-size:.92rem}
-    .reach{border:0;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .reach{border:0;margin:8px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
     .reach legend{grid-column:1 / -1;margin-bottom:4px}
     .reach label{margin:0;min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #aeb5c7;border-radius:8px;background:#fff;font-weight:700}
     .reach input{width:1.05rem;height:1.05rem;margin:0;accent-color:var(--indigo)}
@@ -173,7 +170,7 @@
       .hero{padding:64px 0 72px}
       .section{padding:65px 0}
       .steps,.band-inner,.ba{grid-template-columns:1fr}
-      .nav-cta,.header-call{font-size:.8rem}
+      .nav-cta,.header-email{font-size:.8rem}
       .brand-logo{max-width:160px}
       .card,.contact-form,.bundle,.guarantee{padding:24px}
     }
@@ -189,7 +186,7 @@
     <div class="container nav">
       <a class="brand-link" href="#top" aria-label="Backstage Interactive — back to top"><img class="brand-logo" src="/assets/bi-logo.png" alt="Backstage Interactive" width="200" height="51"></a>
       <div class="nav-actions">
-        <a class="header-call" href="tel:+15550100199">Call (555) 010-0199</a>
+        <a class="header-email" href="mailto:kevin@backstageinteractive.com">Email Kevin</a>
         <a class="nav-cta" href="#contact">Free video review</a>
       </div>
     </div>
@@ -203,9 +200,7 @@
         <div class="actions">
           <a class="btn btn-primary" data-package="Free 2-minute video site review" href="#contact">Get a free 2-minute video site review</a>
           <a class="btn btn-outline" href="#services">See the fixes</a>
-          <a class="btn btn-call" href="tel:+15550100199">Tap to call (555) 010-0199</a>
         </div>
-        <p class="call-note"><strong>Placeholder number.</strong> (555) 010-0199 is not a live line. Replace it with Kevin Love’s real phone before launch.</p>
       </div>
     </section>
 
@@ -282,7 +277,7 @@
         <span class="kicker" style="color:var(--indigo)">How it works</span>
         <h2>Video first. Then the fix.</h2>
         <div class="steps">
-          <div class="step"><b>01</b><h3>Send the site</h3><p>Name, business, website, phone, and how you want to hear back. That is the whole form.</p></div>
+          <div class="step"><b>01</b><h3>Send the site</h3><p>Name, business, website, and whether you want a text or an email. That is the whole form.</p></div>
           <div class="step"><b>02</b><h3>Watch a 2-minute review</h3><p>Kevin records a short video of what is in the way of a call or a form, and which fix fits.</p></div>
           <div class="step"><b>03</b><h3>Approve the scope</h3><p>You get the price and the list in writing. Work starts after you approve it.</p></div>
         </div>
@@ -323,8 +318,8 @@
             <p class="years">Years of experience<span>Placeholder. Add the real number before launch.</span></p>
           </div>
           <div class="who">
-            <p>Kevin Love runs Backstage Interactive. He works with home-service businesses: roofers, HVAC, plumbers, electricians, cleaners, and carpet care.</p>
-            <p>You get the video review from him, and he does the scoped website work. The Google Business Profile side of the $695 bundle is <a href="/google-business-profile-home-services">GBP Fix-and-Protect</a>.</p>
+            <p>Kevin Love runs Backstage Interactive. He builds and runs his own websites, takes on client work when it’s a good fit, and works with AI.</p>
+            <p>For this offer, he records the video review and does the website work you approve. The Google Business Profile side of the $695 bundle is <a href="/google-business-profile-home-services">GBP Fix-and-Protect</a>.</p>
             <p><a class="btn btn-dark" data-package="Free 2-minute video site review" href="#contact">Get a free 2-minute video site review</a></p>
           </div>
         </div>
@@ -337,8 +332,7 @@
           <span class="kicker">Free 2-minute video</span>
           <h2>Send the site. Get the review.</h2>
           <p>Kevin watches the site and sends a short video on what to fix. The review is free. Paid work waits until you approve a written scope.</p>
-          <p style="margin-top:18px"><a class="btn btn-call" href="tel:+15550100199">Tap to call (555) 010-0199</a></p>
-          <p class="call-note"><strong>Placeholder number.</strong> Replace (555) 010-0199 with Kevin’s real phone before launch.</p>
+          <p style="margin-top:18px">Or email <a class="email-link" href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a>.</p>
         </div>
         <form class="contact-form" name="backstage-website-inquiry" method="POST" action="/website-fixes/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="backstage-website-inquiry">
@@ -353,17 +347,18 @@
           <label for="contact-site">Website</label>
           <input id="contact-site" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="https://example.com" required maxlength="400" aria-describedby="site-hint">
           <p class="field-hint" id="site-hint">A domain is enough. https:// is added if you leave it off.</p>
-          <label for="contact-phone">Phone</label>
-          <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="40">
           <fieldset class="reach">
             <legend>Best way to reach you</legend>
-            <label><input type="radio" name="reach" value="Text" required> Text</label>
-            <label><input type="radio" name="reach" value="Call"> Call</label>
-            <label><input type="radio" name="reach" value="Email"> Email</label>
+            <label><input type="radio" name="reach" value="Email" required> Email</label>
+            <label><input type="radio" name="reach" value="Text"> Text</label>
           </fieldset>
           <div id="email-wrap" hidden>
             <label for="contact-email">Email address</label>
             <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="200" disabled>
+          </div>
+          <div id="phone-wrap" hidden>
+            <label for="contact-phone">Mobile number for text</label>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" disabled>
           </div>
           <button class="btn btn-primary" type="submit">Get my free video review</button>
           <p class="form-note">The video review is free. Do not send passwords or admin logins.</p>
@@ -374,7 +369,7 @@
   <footer class="fine">
     <div class="container">
       <strong>Backstage Interactive</strong> · Kevin Love · <a href="https://backstageinteractive.com/">backstageinteractive.com</a> · <a href="/google-business-profile-home-services">GBP Fix-and-Protect</a>
-      <p>Paid work follows a written scope. Fixed as scoped, or you don't pay for that item. No ranking or sales result is promised. Call (555) 010-0199 is a placeholder number.</p>
+      <p>Email <a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a>. Paid work follows a written scope. Fixed as scoped, or you don't pay for that item. No ranking or sales result is promised.</p>
     </div>
   </footer>
   <script>
@@ -386,6 +381,7 @@
       var note = document.getElementById("service-choice");
       var emailWrap = document.getElementById("email-wrap");
       var email = document.getElementById("contact-email");
+      var phoneWrap = document.getElementById("phone-wrap");
       var reachInputs = document.querySelectorAll('input[name="reach"]');
 
       function showChoice(value) {
@@ -410,17 +406,29 @@
         return chosen ? chosen.value : "";
       }
 
-      function syncEmail() {
-        var useEmail = selectedReach() === "Email";
-        if (!emailWrap || !email) return;
-        emailWrap.hidden = !useEmail;
-        email.disabled = !useEmail;
-        email.required = useEmail;
-        if (!useEmail) email.value = "";
+      function syncReach() {
+        var reach = selectedReach();
+        var useEmail = reach === "Email";
+        var useText = reach === "Text";
+        if (emailWrap && email) {
+          emailWrap.hidden = !useEmail;
+          email.disabled = !useEmail;
+          email.required = useEmail;
+          if (!useEmail) email.value = "";
+        }
+        if (phoneWrap && phone) {
+          phoneWrap.hidden = !useText;
+          phone.disabled = !useText;
+          phone.required = useText;
+          if (!useText) {
+            phone.value = "";
+            phone.setCustomValidity("");
+          }
+        }
       }
 
       reachInputs.forEach(function (input) {
-        input.addEventListener("change", syncEmail);
+        input.addEventListener("change", syncReach);
       });
 
       function normalizeWebsite(value) {
@@ -460,10 +468,10 @@
             site.setCustomValidity("");
             site.value = normalizeWebsite(site.value);
           }
-          if (phone) {
+          if (phone && selectedReach() === "Text") {
             var digits = phone.value.replace(/\D/g, "");
             if (digits.length < 10) {
-              phone.setCustomValidity("Enter a phone number with area code.");
+              phone.setCustomValidity("Enter a mobile number with area code.");
               phone.reportValidity();
               event.preventDefault();
               return;
