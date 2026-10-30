@@ -269,16 +269,6 @@
     .brand { display: inline-flex; align-items: center; text-decoration: none; }
     .brand img { display: block; width: 158px; height: auto; }
     .header-actions { display: none; align-items: center; gap: 0.6rem; }
-    .header-phone {
-      color: var(--navy);
-      font-weight: 800;
-      text-decoration: none;
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      padding: 0 0.4rem;
-      white-space: nowrap;
-    }
     .btn {
       display: inline-block;
       max-width: 100%;
@@ -304,11 +294,6 @@
     .btn-primary:hover { background: var(--orange-press); border-color: var(--orange-press); }
     .btn-primary:active { background: #dc4e18; border-color: #dc4e18; }
     .btn:disabled { opacity: 0.72; cursor: wait; }
-    .btn-ghost {
-      background: #fff;
-      color: var(--navy);
-      border-color: var(--navy);
-    }
     .hero {
       position: relative;
       overflow: hidden;
@@ -377,20 +362,10 @@
     }
     .cta-row .btn-primary { width: 100%; max-width: 34rem; }
     .talk { max-width: 40rem; color: var(--ink); line-height: 1.7; }
-    .keep { white-space: nowrap; }
-    .talk .ph {
-      display: inline-block;
-      max-width: 100%;
-      white-space: normal;
-      vertical-align: baseline;
-    }
-    .talk [data-ph-group="booking"] { display: inline-block; max-width: 100%; vertical-align: top; }
-    .final .talk [data-ph-group] { display: block; max-width: 100%; margin-top: 0.35rem; }
     .sticky-cta .btn { min-width: 0; }
     .hero .talk, .final .talk { color: #e4e9f7; }
     .talk a { font-weight: 800; text-underline-offset: 0.15em; }
     .hero .talk a, .final .talk a { color: #fff; }
-    .phone-links a { white-space: nowrap; }
     .ph {
       display: inline;
       padding: 0.08rem 0.4rem;
@@ -720,7 +695,7 @@
     .help { margin-top: 0.35rem; font-size: 0.92rem; }
     .choices {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 0.5rem;
     }
     .choice {
@@ -743,8 +718,10 @@
       background: var(--green-soft);
       border-color: var(--green);
     }
-    .js #email-wrap { display: none; }
-    .js #email-wrap.is-on { display: block; }
+    .js #email-wrap,
+    .js #phone-wrap { display: none; }
+    .js #email-wrap.is-on,
+    .js #phone-wrap.is-on { display: block; }
     .contact-form .btn { width: 100%; margin-top: 1.1rem; }
     .promise { margin-top: 0.75rem; font-size: 0.95rem; }
     .form-note { margin-top: 0.45rem; font-size: 0.85rem; }
@@ -778,10 +755,6 @@
     }
     .sticky-cta .btn-primary { flex: 1; }
     .sticky-short { display: none; }
-    .sticky-cta.has-phone .sticky-long { display: none; }
-    .sticky-cta.has-phone .sticky-short { display: inline; }
-    .sticky-phone { display: flex; gap: 0.45rem; }
-    .sticky-phone .btn { padding-inline: 0.85rem; }
     #audit, #what-you-get, #pricing, #faqs { scroll-margin-top: calc(var(--header) + 0.75rem); }
 
     @media (min-width: 720px) {
@@ -812,12 +785,8 @@
       .sticky-cta.is-hidden { display: none; }
       .sticky-long { display: none; }
       .sticky-short { display: inline; }
-      .talk [data-ph-group="booking"] { display: block; margin-top: 0.35rem; }
       body.form-focus { padding-bottom: 0; }
       body.form-focus .sticky-cta { display: none; }
-    }
-    @media (max-width: 380px) {
-      .choices { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -839,7 +808,6 @@
         <img src="/assets/bi-logo.png" alt="Backstage Interactive" width="200" height="51" fetchpriority="high">
       </a>
       <div class="header-actions">
-        <span data-header-phone></span>
         <a class="btn btn-primary header-cta" href="#audit">Free video audit</a>
       </div>
     </div>
@@ -853,7 +821,7 @@
         <p class="subhead">Flat-price Google Business Profile fixes for roofing, HVAC, plumbing, electrical, cleaning and carpet care pros. Built to bring in calls and built to stay live.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#audit">Get a free 2-minute video audit of your profile</a>
-          <p class="talk">Rather talk? <span data-ph-group="phone" data-cap="1"><span class="keep">Text or call</span> <span class="ph">[PLACEHOLDER: phone number]</span></span><span data-ph-group="booking" data-prefix=" or " data-phrase="book a 15-minute call"><span class="keep"> or book a 15-minute call:</span> <span class="ph">[PLACEHOLDER: booking URL]</span></span></p>
+          <p class="talk">Prefer email? <a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a></p>
         </div>
       </div>
     </section>
@@ -881,7 +849,7 @@
         </ol>
         <div class="cta-row">
           <a class="btn btn-primary" href="#audit">Get a free 2-minute video audit of your profile</a>
-          <p class="talk">Rather talk? <span data-ph-group="phone" data-cap="1"><span class="keep">Text or call</span> <span class="ph">[PLACEHOLDER: phone number]</span></span><span data-ph-group="booking" data-prefix=" or " data-phrase="book a 15-minute call"><span class="keep"> or book a 15-minute call:</span> <span class="ph">[PLACEHOLDER: booking URL]</span></span></p>
+          <p class="talk">Prefer email? <a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a></p>
         </div>
       </div>
     </section>
@@ -1002,7 +970,7 @@
             <p class="ph">[PHOTO: Kevin headshot]</p>
           </figure>
           <div>
-            <p class="bio-lead">Kevin Love, Backstage Interactive. A web and SEO background, now focused on one thing: Google profiles for home service pros. You deal with Kevin directly, not a call center.</p>
+            <p class="bio-lead">Kevin Love, Backstage Interactive. A web and SEO background. I build and run my own websites, take on client work when it's a good fit, and offer this as a focused, fixed-price service for home service pros. You deal with Kevin directly, not a call center.</p>
             <p class="ph" id="years-slot">[YEARS OF EXPERIENCE: __ years in web and SEO]</p>
           </div>
         </div>
@@ -1092,7 +1060,7 @@
         <div>
           <h2 id="audit-title" tabindex="-1">Find out what your Google profile is costing you.</h2>
           <p class="lede">Send your profile link. We'll show you the 3 biggest fixes in a 2-minute video.</p>
-          <p class="talk"><span data-ph-group="phone"><span class="keep">Or text or call</span> <span class="ph">[PLACEHOLDER: phone number]</span></span><span data-ph-group="booking" data-prefix="" data-phrase="book a call"><span class="keep">Book a call:</span> <span class="ph">[PLACEHOLDER: booking URL]</span></span></p>
+          <p class="talk">Prefer email? <a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a></p>
         </div>
         <form class="contact-form" id="audit-form" name="gbp-video-audit" method="POST" action="/google-business-profile-home-services/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" aria-labelledby="form-title">
           <input type="hidden" name="form-name" value="gbp-video-audit">
@@ -1106,20 +1074,22 @@
           <label for="audit-profile">Google profile link, or business name + city <span class="req" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
           <input id="audit-profile" name="profile" type="text" required maxlength="500" spellcheck="false" aria-describedby="profile-help" placeholder="Maps link, or Ace Roofing, Tulsa">
           <p class="help" id="profile-help">Either works.</p>
-          <label for="audit-phone">Phone <span class="req" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
-          <input id="audit-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="40">
           <fieldset>
             <legend>Best way to reach you <span class="req" aria-hidden="true">*</span><span class="sr-only">(required)</span></legend>
             <div class="choices">
-              <label class="choice"><input type="radio" name="reach" value="Text" required> Text</label>
-              <label class="choice"><input type="radio" name="reach" value="Call"> Call</label>
-              <label class="choice"><input type="radio" name="reach" value="Email"> Email</label>
+              <label class="choice"><input type="radio" name="reach" value="Email" required> Email</label>
+              <label class="choice"><input type="radio" name="reach" value="Text"> Text</label>
             </div>
           </fieldset>
           <div id="email-wrap">
-            <label for="audit-email">Email</label>
+            <label for="audit-email">Email <span class="req" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
             <input id="audit-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="200" aria-describedby="email-help">
             <p class="help" id="email-help">Required if email is the best way to reach you.</p>
+          </div>
+          <div id="phone-wrap">
+            <label for="audit-phone">Your mobile number <span class="req" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
+            <input id="audit-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" aria-describedby="phone-help">
+            <p class="help" id="phone-help">Required if text is the best way to reach you. This is your number.</p>
           </div>
           <button class="btn btn-primary" type="submit">Get my free video audit</button>
           <p class="promise" id="audit-promise">You'll get a 2-minute video of the top 3 fixes within 2 business days. No obligation.</p>
@@ -1133,12 +1103,12 @@
   <footer class="site-footer">
     <div class="container">
       <p><strong>Backstage Interactive</strong></p>
+      <p><a href="mailto:kevin@backstageinteractive.com">kevin@backstageinteractive.com</a></p>
       <p><a href="/">backstageinteractive.com</a></p>
     </div>
   </footer>
 
   <div class="sticky-cta" role="region" aria-label="Get a free video audit">
-    <span class="sticky-phone" data-sticky-phone hidden></span>
     <a class="btn btn-primary" href="#audit">
       <span class="sticky-long">Get a free 2-minute video audit of your profile</span>
       <span class="sticky-short">Free video audit</span>
@@ -1149,9 +1119,8 @@
     /* ============================================================
        LAUNCH — edit these strings. Leave a value "" to keep the
        orange placeholder on the page. No secrets belong here.
-       phoneDisplay  "(317) 555-0148"
-       phoneTel      "+13175550148"
-       bookingUrl    "https://cal.com/your-link"
+       There is no business phone. Contact is the audit form and
+       kevin@backstageinteractive.com.
        years         "12"
        photo         "/assets/kevin-love.jpg"
        video         "/assets/kevin-intro.mp4"  or an https link
@@ -1159,19 +1128,11 @@
        Spots left: edit #spots-left in the founding section. No countdown.
        ============================================================ */
     var LAUNCH = {
-      phoneDisplay: "",
-      phoneTel: "",
-      bookingUrl: "",
       years: "",
       photo: "",
       video: "",
       sampleReport: ""
     };
-
-    function cleanTel(value) {
-      var tel = String(value || "").trim().replace(/[^\d+]/g, "");
-      return /^\+?[0-9]{10,15}$/.test(tel) ? tel : "";
-    }
 
     function safeHttpsOrRoot(value) {
       var url = String(value || "").trim();
@@ -1179,67 +1140,6 @@
       if (url.charAt(0) === "/" && url.charAt(1) !== "/") return url;
       if (url.indexOf("https://") === 0) return url;
       return "";
-    }
-
-    function upgradeContacts() {
-      var tel = cleanTel(LAUNCH.phoneTel);
-      var display = String(LAUNCH.phoneDisplay || "").trim();
-      var booking = safeHttpsOrRoot(LAUNCH.bookingUrl);
-      if (booking && booking.charAt(0) === "/") booking = "";
-
-      if (tel && display) {
-        document.querySelectorAll("[data-ph-group='phone']").forEach(function (el) {
-          var cap = el.getAttribute("data-cap") === "1";
-          var sms = document.createElement("a");
-          sms.href = "sms:" + tel + "?body=" + encodeURIComponent("Hi Kevin, I'd like the free 2-minute video audit of my Google profile.");
-          sms.textContent = cap ? "Text" : "text";
-          var call = document.createElement("a");
-          call.href = "tel:" + tel;
-          call.textContent = "call " + display;
-          var span = document.createElement("span");
-          span.className = "phone-links";
-          span.append(sms, document.createTextNode(" or "), call);
-          el.replaceWith(span);
-        });
-
-        var headerSlot = document.querySelector("[data-header-phone]");
-        if (headerSlot) {
-          var headerLink = document.createElement("a");
-          headerLink.className = "header-phone";
-          headerLink.href = "tel:" + tel;
-          headerLink.textContent = "Call " + display;
-          headerSlot.replaceWith(headerLink);
-        }
-
-        var sticky = document.querySelector("[data-sticky-phone]");
-        var bar = document.querySelector(".sticky-cta");
-        if (sticky && bar) {
-          var stickyCall = document.createElement("a");
-          stickyCall.className = "btn btn-ghost";
-          stickyCall.href = "tel:" + tel;
-          stickyCall.textContent = "Call";
-          stickyCall.setAttribute("aria-label", "Call " + display);
-          var stickyText = document.createElement("a");
-          stickyText.className = "btn btn-ghost";
-          stickyText.href = "sms:" + tel;
-          stickyText.textContent = "Text";
-          stickyText.setAttribute("aria-label", "Text " + display);
-          sticky.append(stickyCall, stickyText);
-          sticky.hidden = false;
-          bar.classList.add("has-phone");
-        }
-      }
-
-      if (booking) {
-        document.querySelectorAll("[data-ph-group='booking']").forEach(function (el) {
-          var link = document.createElement("a");
-          link.href = booking;
-          link.textContent = el.getAttribute("data-phrase") || "book a call";
-          var span = document.createElement("span");
-          span.append(document.createTextNode(el.getAttribute("data-prefix") || " "), link);
-          el.replaceWith(span);
-        });
-      }
     }
 
     function fillMedia() {
@@ -1309,18 +1209,26 @@
       if (!form) return;
       var emailWrap = document.getElementById("email-wrap");
       var email = document.getElementById("audit-email");
+      var phoneWrap = document.getElementById("phone-wrap");
+      var phone = document.getElementById("audit-phone");
 
-      function syncEmail(moveFocus) {
+      function syncReach(moveFocus) {
         var selected = form.querySelector('input[name="reach"]:checked');
-        var show = !!(selected && selected.value === "Email");
-        emailWrap.classList.toggle("is-on", show);
-        email.required = show;
-        if (!show) email.value = "";
-        if (show && moveFocus) email.focus();
+        var mode = selected ? selected.value : "";
+        var showEmail = mode === "Email";
+        var showPhone = mode === "Text";
+        emailWrap.classList.toggle("is-on", showEmail);
+        phoneWrap.classList.toggle("is-on", showPhone);
+        email.required = showEmail;
+        phone.required = showPhone;
+        if (!showEmail) email.value = "";
+        if (!showPhone) phone.value = "";
+        if (showEmail && moveFocus) email.focus();
+        if (showPhone && moveFocus) phone.focus();
       }
 
       form.querySelectorAll('input[name="reach"]').forEach(function (radio) {
-        radio.addEventListener("change", function () { syncEmail(true); });
+        radio.addEventListener("change", function () { syncReach(true); });
       });
 
       form.addEventListener("focusin", function () {
@@ -1377,7 +1285,6 @@
       targets.forEach(function (target) { observer.observe(target); });
     }
 
-    upgradeContacts();
     fillMedia();
     bindForm();
     bindAuditFocus();
