@@ -127,16 +127,48 @@
     .step h3{margin:9px 0 4px}
     .step p{color:var(--muted);margin:0}
     .example-flag{display:inline-flex;align-items:center;min-height:32px;padding:4px 10px;border-radius:999px;background:#9a3412;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-    .ba{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-    .shot{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
-    .shot b{display:block;margin-bottom:10px}
-    .wire{display:grid;gap:8px;min-height:150px;padding:14px;border:2px dashed #b7bfd4;border-radius:10px;background:#f4f6fb}
-    .wire span{display:block;border-radius:6px;background:#d5dbeb}
-    .wire .bar{height:14px;width:46%;background:#9aa3be}
-    .wire .line{height:8px}
-    .wire .short{width:68%}
-    .wire .btn-fake{height:28px;width:42%;background:#c5cada;margin-top:8px}
-    .shot.after .btn-fake{background:#ff6b35;width:70%}
+    .ba{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:28px;margin-top:8px;align-items:start}
+    .compare{min-width:0}
+    .compare-label{margin:0 0 12px;font-size:1.15rem;letter-spacing:-.03em}
+    .after-pair{display:grid;grid-template-columns:minmax(240px,300px) minmax(200px,1fr);gap:18px;align-items:center}
+    .phone{width:min(280px,100%);margin:0 auto;background:#1b2033;border-radius:32px;padding:10px 10px 14px;box-shadow:0 18px 40px rgba(16,20,45,.16)}
+    .phone-notch{width:78px;height:8px;margin:0 auto 8px;border-radius:0 0 8px 8px;background:#0e1220}
+    .screen{border-radius:22px;overflow:hidden;min-height:540px;padding:12px}
+    .screen.before{background:#efefef;color:#c8c8c8}
+    .brand-tiny{margin:0;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#b0b0b0}
+    .slider{position:relative;height:118px;margin-top:8px;border-radius:8px;background:#e4e4e4;overflow:hidden}
+    .slider i{position:absolute;display:flex;align-items:flex-end;padding:6px;font-style:normal;font-size:10px;color:#8a8a8a;background:#dedede;border:1px solid #d5d5d5}
+    .slider i:nth-child(1){inset:8px 28px 18px 8px}
+    .slider i:nth-child(2){inset:18px 8px 8px 36px;background:#e8e8e8}
+    .slider i:nth-child(3){inset:28px 18px 4px 48px;background:#f2f2f2}
+    .dots{display:flex;gap:4px;justify-content:center;margin-top:6px}
+    .dots b{width:5px;height:5px;border-radius:50%;background:#ddd;display:block}
+    .vague{margin:10px 0 4px;font-size:13px;line-height:1.3;font-weight:600;color:#8a8a8a}
+    .tiny{margin:0;font-size:10px;line-height:1.35;color:#b5b5b5}
+    .fold{margin:14px 0 8px;padding-top:8px;border-top:1px dashed #c5c5c5;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5c6578}
+    .buried{margin:0;padding:6px;background:#e6e6e6;border-radius:6px}
+    .buried b{display:block;font-size:10px;color:#9a9a9a;font-weight:600}
+    .buried span{display:block;height:12px;margin-top:4px;border-radius:3px;background:#dedede}
+    .screen.after{background:#fff;color:#121527}
+    .mock-brand{margin:0;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#2e3192}
+    .mock-h{margin:8px 0 10px;font-size:1.28rem;line-height:1.12;letter-spacing:-.03em}
+    .mock-actions{display:grid;gap:6px}
+    .qbtn,.tbtn,.send{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:8px;font-weight:800;font-size:.92rem}
+    .qbtn{background:#ff6b35;color:#1a1832}
+    .tap-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    .tbtn{background:#2e3192;color:#fff;font-size:.84rem}
+    .trust{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 6px;font-size:.82rem;font-weight:700}
+    .chip{display:inline-flex;align-items:center;padding:2px 7px;border-radius:999px;background:#eef0fb;color:#243056;font-size:.68rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+    .svc{margin:0 0 10px;padding-left:16px;font-size:.84rem}
+    .svc li{margin:2px 0}
+    .qform{margin-top:4px;padding:10px;border:1px solid #dfe3ed;border-radius:10px;background:#f7f8fb}
+    .qform b{display:block;margin-bottom:6px}
+    .qform span.field{display:block;height:28px;margin-top:5px;border-radius:6px;background:#fff;border:1px solid #d5dbeb}
+    .send{margin-top:8px;background:#121527;color:#fff;min-height:36px;font-size:.82rem}
+    .badge{display:inline-grid;place-items:center;width:22px;height:22px;margin-left:4px;border-radius:50%;background:#2e3192;color:#fff;font-size:.75rem;font-weight:800;vertical-align:middle}
+    .callouts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+    .callouts li{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:12px;font-weight:700;color:var(--ink)}
+    .callouts .badge{flex:none;margin:0}
     .who-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:start}
     .placeholder{display:grid;place-items:center;text-align:center;min-height:240px;padding:20px;border:2px dashed #9aa3be;border-radius:12px;background:#fff;color:#243056}
     .placeholder b{font-size:1.05rem}
@@ -174,7 +206,7 @@
     @media(max-width:800px){
       .hero{padding:64px 0 72px}
       .section{padding:65px 0}
-      .steps,.band-inner,.ba{grid-template-columns:1fr}
+      .steps,.band-inner,.ba,.after-pair{grid-template-columns:1fr}
       .nav-cta{font-size:.8rem}
       .brand-logo{max-width:160px}
       .card,.contact-form,.bundle,.guarantee{padding:24px}
@@ -292,18 +324,50 @@
       <div class="container">
         <span class="example-flag">Example only</span>
         <h2>What a fix can look like.</h2>
-        <p class="section-intro">This before-and-after is a sample layout, drawn for this page. It is not a client project, and it is not a result.</p>
+        <p class="section-intro">Example only, not a client project or a measured result. Example Roofing Co. is not a real business. [City] is a stand-in, not a place we serve.</p>
         <div class="ba">
-          <div class="shot">
-            <b>Before — example</b>
-            <div class="wire" aria-hidden="true"><span class="bar"></span><span class="line"></span><span class="line short"></span><span class="btn-fake"></span></div>
+          <div class="compare">
+            <h3 class="compare-label">Before</h3>
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="screen before" aria-label="Before example. The headline says Welcome to our website. There is a cluttered slider, no service area, no quote button on the first screen, tiny low-contrast text, and the contact form sits below the fold.">
+                <p class="brand-tiny">Example Roofing Co.</p>
+                <div class="slider" aria-hidden="true"><i>Slide 1</i><i>Our history</i><i>Photo</i></div>
+                <div class="dots" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></div>
+                <p class="vague">Welcome to our website</p>
+                <p class="tiny">We are a company. Please look around our pages to learn more about the many things we might do. More text continues in the same pale gray.</p>
+                <p class="fold">Below the first screen</p>
+                <div class="buried" aria-hidden="true"><b>Contact</b><span></span><span></span><span></span></div>
+              </div>
+            </div>
           </div>
-          <div class="shot after">
-            <b>After — example</b>
-            <div class="wire" aria-hidden="true"><span class="bar"></span><span class="line"></span><span class="line short"></span><span class="btn-fake"></span></div>
+          <div class="compare">
+            <h3 class="compare-label">After</h3>
+            <div class="after-pair">
+              <div class="phone">
+                <div class="phone-notch"></div>
+                <div class="screen after" aria-label="After example. Headline says Roof repair and replacement in [City]. A Get a free quote button and text and call buttons are on the first screen, with an example licensed-and-insured label, a short service list, and a visible quote form.">
+                  <p class="mock-brand">Example Roofing Co.</p>
+                  <p class="mock-h">Roof repair and replacement in [City] <span class="badge">1</span></p>
+                  <div class="mock-actions">
+                    <span class="qbtn">Get a free quote <span class="badge">2</span></span>
+                    <div class="tap-row"><span class="tbtn">Text</span><span class="tbtn">Call</span></div>
+                  </div>
+                  <p class="trust">Licensed and insured <span class="chip">Example label</span> <span class="badge">3</span></p>
+                  <ul class="svc"><li>Roof repair</li><li>Replacement</li><li>Leak check</li></ul>
+                  <div class="qform"><b>Free quote <span class="badge">4</span></b><span class="field"></span><span class="field"></span><span class="send">Send</span></div>
+                </div>
+              </div>
+              <ol class="callouts">
+                <li><span class="badge">1</span> Says what you do and where</li>
+                <li><span class="badge">2</span> Quote button visible without scrolling</li>
+                <li><span class="badge">3</span> Readable on a phone</li>
+                <li><span class="badge">4</span> Form in two taps</li>
+              </ol>
+            </div>
           </div>
         </div>
-        <p>Example only. Not a real website, not a customer, and not a measured outcome.</p>
+        <p>Example only, not a client project or a measured result.</p>
       </div>
     </section>
 
