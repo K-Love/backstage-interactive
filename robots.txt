@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /google-business-profile-home-services/thank-you.html
+
+Sitemap: https://backstageinteractive.com/sitemap.xml
