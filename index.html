@@ -193,13 +193,20 @@
       flex-shrink: 0;
       line-height: 0;
     }
-    .site-header .brand img {
+    .site-header .brand img,
+    .site-footer .brand img {
       display: block;
-      width: 160px;
+      width: 190px;
       height: auto;
       aspect-ratio: 200 / 51;
       filter: url("#logo-stroke");
     }
+    .site-footer .brand {
+      flex-direction: row;
+      flex-shrink: 0;
+      line-height: 0;
+    }
+    .site-footer .brand img { width: 148px; }
     .logo-filters { position: absolute; width: 0; height: 0; }
     .nav-list {
       display: flex;
@@ -467,7 +474,8 @@
     }
 
     @media (min-width: 860px) {
-      .site-header .brand img { width: 200px; }
+      .site-header .brand img { width: 240px; }
+      .site-footer .brand img { width: 168px; }
       .piece { grid-template-columns: 1.15fr 0.85fr; align-items: center; }
       .piece.is-flip { grid-template-columns: 0.85fr 1.15fr; }
       .piece.is-flip .frame { order: 2; }
@@ -484,7 +492,8 @@
 
     @media (max-width: 420px) {
       .wrap { width: min(var(--wrap), calc(100% - 1.7rem)); }
-      .nav-list a { padding-inline: 0.4rem; }
+      .nav-list { flex-wrap: nowrap; gap: 0.05rem; }
+      .nav-list a { padding-inline: 0.32rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -506,7 +515,7 @@
   <svg class="logo-filters" width="0" height="0" aria-hidden="true" focusable="false">
     <filter id="logo-stroke" x="-20%" y="-55%" width="140%" height="210%" color-interpolation-filters="sRGB">
       <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="dilated"/>
-      <feFlood flood-color="#f4f3f8" result="flood"/>
+      <feFlood flood-color="#c8c7d4" flood-opacity="0.72" result="flood"/>
       <feComposite in="flood" in2="dilated" operator="in" result="outline"/>
       <feMerge>
         <feMergeNode in="outline"/>
@@ -730,7 +739,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <a class="brand" href="#top" aria-label="Backstage Interactive">Backstage<span aria-hidden="true">Interactive</span></a>
+      <a class="brand" href="/"><img src="/assets/bi-logo.png" alt="Backstage Interactive" width="200" height="51"></a>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#studio">Studio</a>
         <a href="#services">Services</a>
