@@ -188,6 +188,20 @@
       font-weight: 500;
       margin-top: 0.38em;
     }
+    .site-header .brand {
+      flex-direction: row;
+      flex-shrink: 0;
+      background: #f4f3f8;
+      border-radius: 8px;
+      padding: 6px 10px;
+      line-height: 0;
+    }
+    .site-header .brand img {
+      display: block;
+      width: 160px;
+      height: auto;
+      aspect-ratio: 200 / 51;
+    }
     .nav-list {
       display: flex;
       flex-wrap: wrap;
@@ -454,6 +468,7 @@
     }
 
     @media (min-width: 860px) {
+      .site-header .brand img { width: 200px; }
       .piece { grid-template-columns: 1.15fr 0.85fr; align-items: center; }
       .piece.is-flip { grid-template-columns: 0.85fr 1.15fr; }
       .piece.is-flip .frame { order: 2; }
@@ -492,7 +507,7 @@
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top" aria-label="Backstage Interactive">Backstage<span aria-hidden="true">Interactive</span></a>
+      <a class="brand" href="/"><img src="/assets/bi-logo.png" alt="Backstage Interactive" width="200" height="51"></a>
       <nav aria-label="Primary">
         <ul class="nav-list">
           <li><a href="#studio">Studio</a></li>
