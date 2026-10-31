@@ -9,10 +9,9 @@
     Route: /google-business-profile-home-services
 
     GBP Fix-and-Protect landing page.
-    Experience line and sample report are filled in.
+    Experience line, headshot, and sample report are filled in.
     There is no intro video, so #kevin-video stays hidden.
-    Headshot markup belongs in #kevin when /assets/kevin-love.jpg is in the repo.
-    Alt text for that photo: Kevin Love, Backstage Interactive.
+    Headshot alt text: Kevin Love, Backstage Interactive.
     Update the founding-client spot count (id="spots-left") when someone books.
     Form setup is in the README.
     Keep #results hidden until a real case study exists. Do not invent one.
@@ -588,7 +587,7 @@
     }
     .headshot.is-filled { display: block; padding: 0; overflow: hidden; background: #e8ebf2; }
     .headshot picture { display: block; width: 100%; height: 100%; }
-    .headshot img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
+    .headshot img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
     .bio-lead { font-size: 1.1rem; max-width: 40rem; }
     #years-slot { margin-top: 0.85rem; color: var(--muted); font-weight: 700; }
     .video-frame {
@@ -1001,6 +1000,12 @@
       <div class="container">
         <h2 id="kevin-title">Who you're working with</h2>
         <div class="bio">
+          <figure class="headshot is-filled" id="kevin-photo">
+            <picture>
+              <source srcset="/assets/kevin-love.webp" type="image/webp">
+              <img src="/assets/kevin-love-portrait.jpg" width="464" height="574" alt="Kevin Love, Backstage Interactive">
+            </picture>
+          </figure>
           <div>
             <p class="bio-lead">Kevin Love, Backstage Interactive. A web and SEO background. I build and run my own websites, take on client work when it's a good fit, and offer this as a focused, fixed-price service for home service pros. You deal with Kevin directly, not a call center.</p>
             <p id="years-slot">10+ years in web development and digital marketing</p>
@@ -1146,14 +1151,14 @@
        Do not add a phone number or email address. The audit form
        is the only public contact path.
        years         "10+ years in web development and digital marketing"
-       photo         ""   add /assets/kevin-love.jpg when the source file is in the repo
+       photo         "/assets/kevin-love.jpg"   original, 800px wide
        video         ""   no intro video; #kevin-video stays hidden
        sampleReport  "/assets/sample-gbp-report.png"
        Spots left: edit #spots-left in the founding section. No countdown.
        ============================================================ */
     var LAUNCH = {
       years: "10+ years in web development and digital marketing",
-      photo: "",
+      photo: "/assets/kevin-love.jpg",
       video: "",
       sampleReport: "/assets/sample-gbp-report.png"
     };
