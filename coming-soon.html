@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backstage Interactive — Coming Soon</title>
+  <meta name="description" content="Backstage Interactive is an independent creative studio crafting digital experiences, products, and ideas. Something substantial is in development.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://backstageinteractive.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Backstage Interactive — Coming Soon">
+  <meta property="og:description" content="An independent creative studio. Something substantial is in development.">
+  <meta property="og:site_name" content="Backstage Interactive">
+
+  <!-- Typography: Cormorant Garant (display) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:           #07070f;
+      --glow-color:   #1a1d5e;
+      --text-primary: #e8e8f0;
+      --text-muted:   #6b6b88;
+      --accent-line:  #2e3192;
+      --font-display: 'Cormorant Garant', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+
+    /* ─── Base ───────────────────────────────────────────────── */
+    html, body {
+      height: 100%;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden; /* prevent scroll on this single-screen experience */
+    }
+
+    /* ─── Stage ──────────────────────────────────────────────── */
+    .stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 2rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* ─── Atmospheric glow ───────────────────────────────────── */
+    .stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 70% 50% at 50% 45%,
+          rgba(46, 49, 146, 0.18) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      animation: glow-in 3s ease forwards;
+    }
+
+    /* ─── Content wrapper ────────────────────────────────────── */
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ─── Wordmark ───────────────────────────────────────────── */
+    .wordmark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-family: var(--font-display);
+      font-weight: 300;
+      color: var(--text-primary);
+    }
+
+    .wordmark__backstage {
+      font-size: clamp(2.8rem, 8vw, 7rem);
+      animation: word-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+    }
+
+    .wordmark__interactive {
+      font-size: clamp(1rem, 2.8vw, 2.4rem);
+      letter-spacing: 0.55em;
+      color: var(--text-muted);
+      margin-top: 0.35em;
+      animation: word-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both;
+    }
+
+    /* ─── Divider ────────────────────────────────────────────── */
+    .divider {
+      width: 1px;
+      height: 3rem;
+      background: linear-gradient(to bottom, transparent, var(--accent-line), transparent);
+      margin: 2.8rem 0 2.4rem;
+      animation: line-in 1s ease 2.2s both;
+    }
+
+    /* ─── Supporting copy ────────────────────────────────────── */
+    .tagline {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(0.78rem, 1.6vw, 0.92rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      animation: word-in 1s ease 2.6s both;
+    }
+
+    .statement {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--text-primary);
+      margin-top: 1.6rem;
+      opacity: 0.85;
+      animation: word-in 1s ease 3s both;
+    }
+
+    .coming {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2.8rem;
+      animation: word-in 1s ease 3.4s both;
+    }
+
+    /* ─── Footer mark ────────────────────────────────────────── */
+    .mark {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #2e2e42;
+      white-space: nowrap;
+      animation: word-in 1s ease 4s both;
+    }
+
+    .mark a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .mark a:hover { color: var(--text-muted); }
+
+    .mark a:focus-visible {
+      outline: 2px solid var(--text-primary);
+      outline-offset: 4px;
+    }
+
+    /* ─── Keyframes ──────────────────────────────────────────── */
+    @keyframes glow-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes word-in {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes line-in {
+      from {
+        opacity: 0;
+        transform: scaleY(0);
+      }
+      to {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
+
+    /* ─── Reduced motion ─────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .stage::before,
+      .wordmark__backstage,
+      .wordmark__interactive,
+      .divider,
+      .tagline,
+      .statement,
+      .coming,
+      .mark {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .wordmark__interactive {
+        letter-spacing: 0.35em;
+      }
+      .divider {
+        height: 2rem;
+        margin: 2rem 0 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="stage" role="main">
+
+    <div class="content">
+
+      <h1 class="wordmark" aria-label="Backstage Interactive">
+        <span class="wordmark__backstage" aria-hidden="true">Backstage</span>
+        <span class="wordmark__interactive" aria-hidden="true">Interactive</span>
+      </h1>
+
+      <div class="divider" role="presentation" aria-hidden="true"></div>
+
+      <p class="tagline">A creative studio for digital experiences, products, and ideas.</p>
+
+      <p class="statement">The next production is in development.</p>
+
+      <p class="coming" aria-label="Coming soon">Coming Soon</p>
+
+    </div>
+
+    <p class="mark"><a href="/">The studio is open</a></p>
+
+  </main>
+
+</body>
+</html>
