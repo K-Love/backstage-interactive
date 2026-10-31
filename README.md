@@ -30,7 +30,7 @@ A local server will not store form submissions. Netlify does that after deploy.
 | `LAUNCH` key | Current value | What visitors see |
 | --- | --- | --- |
 | `years` | `10+ years in web development and digital marketing` | That sentence. Do not raise the number. |
-| `photo` | `/assets/kevin-love.jpg` | Original headshot, 800px wide. The about slot uses the cropped portrait `/assets/kevin-love.webp` (JPEG fallback `/assets/kevin-love-portrait.jpg`). Alt text: “Kevin Love, Backstage Interactive”. |
+| `photo` | `/assets/kevin-love.jpg` | Original headshot, 800px wide. The about slot uses the cropped portrait `/assets/kevin-love-gbp.webp` (JPEG fallback `/assets/kevin-love-gbp.jpg`). Alt text: “Kevin Love, Backstage Interactive”. Website Fixes keeps `/assets/kevin-love.webp` and `/assets/kevin-love-portrait.jpg`. The home page keeps `/assets/kevin-love-home.webp`. |
 | `video` | empty | No intro video. `#kevin-video` stays hidden, so there is no empty player. |
 | `sampleReport` | `/assets/sample-gbp-report.png` | Screenshot of the fictional checklist. WebP twin: `/assets/sample-gbp-report.webp`. |
 
