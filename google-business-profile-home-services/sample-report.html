@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#10183a">
+  <title>Sample GBP checklist report (fictional) | Backstage Interactive</title>
+  <meta name="description" content="SAMPLE / FICTIONAL EXAMPLE: not a real business or real results. A made-up Fix + Protect checklist for Summit Ridge Plumbing.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #e7ebf4;
+      color: #14182b;
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+    :root {
+      --navy: #10183a;
+      --ink: #14182b;
+      --muted: #3d4558;
+      --line: #d5dbe8;
+      --paper: #f4f6fb;
+      --orange: #ff6b35;
+      --green: #0c6b3a;
+      --green-soft: #e6f5ec;
+      --amber-soft: #fff4ec;
+    }
+    p, h1, h2, h3, figure { margin: 0; }
+    a { color: var(--green); font-weight: 800; }
+    :focus-visible { outline: 3px solid #c2410c; outline-offset: 3px; }
+    .skip {
+      position: absolute;
+      left: 0.75rem;
+      top: -4rem;
+      z-index: 5;
+      background: #fff;
+      color: var(--navy);
+      font-weight: 800;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .skip:focus { top: 0.75rem; }
+    .sheet {
+      width: min(440px, 100%);
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+    }
+    .accent {
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b35 0 46%, #1f8a4c 46% 100%);
+    }
+    .mast {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    .mast img { display: block; width: 148px; height: auto; }
+    .mast span {
+      color: var(--navy);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+    .banner {
+      margin: 0;
+      padding: 0.85rem 1rem;
+      background: #10183a;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1.35;
+    }
+    .banner strong { color: #ffd7c8; }
+    .intro { padding: 1rem 1rem 0.25rem; }
+    h1 {
+      font-size: 1.55rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      font-weight: 800;
+    }
+    .who {
+      margin-top: 0.45rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .who b { color: var(--ink); }
+    .lede {
+      margin-top: 0.7rem;
+      color: var(--ink);
+    }
+    .group { padding: 0.35rem 1rem 0.15rem; }
+    h2 {
+      margin-top: 0.85rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.45rem;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 1rem;
+    }
+    th {
+      width: 5.6rem;
+      padding-right: 0.45rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .done { color: var(--green); }
+    .owner { color: #9a3412; }
+    .noted { color: var(--muted); }
+    .grid-note { margin-top: 0.45rem; color: var(--muted); font-size: 0.92rem; }
+    .points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.4rem;
+      margin-top: 0.65rem;
+    }
+    .points span {
+      display: grid;
+      place-items: center;
+      min-height: 3.1rem;
+      padding: 0.35rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper);
+      color: var(--navy);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.25;
+    }
+    .points span small {
+      display: block;
+      color: var(--green);
+      font-size: 0.68rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .close {
+      margin-top: 1rem;
+      background: var(--paper);
+    }
+    .fine { padding: 1rem; color: var(--ink); }
+    .fine p + p { margin-top: 0.55rem; }
+    .back {
+      display: inline-block;
+      margin-top: 0.35rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+    @media print {
+      body { background: #fff; }
+      .sheet { width: auto; }
+      a { text-decoration: underline; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#report">Skip to report</a>
+  <article class="sheet" id="report">
+    <div class="accent" aria-hidden="true"></div>
+    <header class="mast">
+      <img src="/assets/bi-logo.png" alt="Backstage Interactive" width="200" height="51">
+      <span>Fix + Protect<br>checklist</span>
+    </header>
+    <p class="banner"><strong>SAMPLE / FICTIONAL EXAMPLE:</strong> not a real business or real results.</p>
+    <div class="intro">
+      <h1>Profile checklist report</h1>
+      <p class="who"><b>Summit Ridge Plumbing (fictional)</b><br>Sample town: Cedar Hollow. Package shown: Fix + Protect.</p>
+      <p class="lede">This is the shape of the report that comes with an order. Every line below is made up so you can see the checklist. It is not a client, not a live Google profile, and not a result.</p>
+    </div>
+
+    <section class="group" aria-labelledby="complete-title">
+      <h2 id="complete-title">Profile completeness</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Business name no longer has an extra phrase after the pipe. It now matches the name the owner uses.</td>
+          </tr>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Description rewritten in plain language. The old line was stuffed with search phrases.</td>
+          </tr>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Hours filled in, including a closed day that had been left blank. Service area limited to the towns the owner named.</td>
+          </tr>
+          <tr>
+            <th class="owner" scope="row">Owner step</th>
+            <td>Website field points at a parked page. Owner confirms the real site before that field is changed.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="group" aria-labelledby="cat-title">
+      <h2 id="cat-title">Category and services</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Primary category set to Plumber. It had been the broader Contractor category.</td>
+          </tr>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Services list expanded from 4 items to the work the owner described, including drains and water heaters.</td>
+          </tr>
+          <tr>
+            <th class="noted" scope="row">Noted</th>
+            <td>Checked against three other public plumbing profiles in the sample town. Notes only. No rank attached.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="group" aria-labelledby="nap-title">
+      <h2 id="nap-title">NAP consistency</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Name and city on the profile match the website footer. Ten directories checked.</td>
+          </tr>
+          <tr>
+            <th class="owner" scope="row">Owner step</th>
+            <td>Two of those directories still show an older phone. Owner updates them on those sites. The number is not printed in this sample.</td>
+          </tr>
+          <tr>
+            <th class="noted" scope="row">Noted</th>
+            <td>Service-area business with no storefront, so the street address stays hidden. That matches how the owner works.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="group" aria-labelledby="photo-title">
+      <h2 id="photo-title">Photos</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th class="noted" scope="row">Noted</th>
+            <td>Three photos on the profile: a logo and two far shots of a van. No crew and no finished job.</td>
+          </tr>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Shot list delivered: crew, van lettering, a water-heater job, a drain job. No stock photos added.</td>
+          </tr>
+          <tr>
+            <th class="owner" scope="row">Owner step</th>
+            <td>Owner takes those photos and adds them. The report does not pretend they are already live.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="group" aria-labelledby="review-title">
+      <h2 id="review-title">Review-response hygiene</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Reply drafts for reviews that had no public answer. Each draft thanks the customer. No discount, no request to change or remove the review.</td>
+          </tr>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Request script asks every customer, not only the happy ones. No incentive and no filter.</td>
+          </tr>
+          <tr>
+            <th class="noted" scope="row">Noted</th>
+            <td>No reviews were written, bought, or gated for this sample. None are quoted here.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="group" aria-labelledby="posts-title">
+      <h2 id="posts-title">Posts</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th class="noted" scope="row">Noted</th>
+            <td>No Google post in the last few months. Two short outlines are in the notes (drain season, water-heater checkup).</td>
+          </tr>
+          <tr>
+            <th class="noted" scope="row">Noted</th>
+            <td>Four weeks of posts belong to Rescue, not Fix + Protect. Nothing was scheduled in this sample.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="group" aria-labelledby="protect-title">
+      <h2 id="protect-title">Protection</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Owner stays the owner. Access requested as Manager only. No password and no owner login.</td>
+          </tr>
+          <tr>
+            <th class="owner" scope="row">Owner step</th>
+            <td>One old vendor is still a manager. Owner removes that access.</td>
+          </tr>
+          <tr>
+            <th class="done" scope="row">Done</th>
+            <td>Edit watch list: business name, primary category, phone, website, and hours. Check monthly.</td>
+          </tr>
+          <tr>
+            <th class="owner" scope="row">Owner step</th>
+            <td>Confirm the Google account recovery options are current. They are not printed here.</td>
+          </tr>
+          <tr>
+            <th class="noted" scope="row">Noted</th>
+            <td>No suspension appeal in this package. Google decides reinstatement. This sample does not promise it.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="group" aria-labelledby="grid-title">
+      <h2 id="grid-title">Rank grid</h2>
+      <p class="grid-note">Baseline snapshot for the main service in the sample town. The after-grid is saved at delivery. This sample does not show a change, a Map Pack position, or a call count.</p>
+      <div class="points" aria-label="Baseline map points, with no ranking numbers">
+        <span>Northwest<small>Baseline saved</small></span>
+        <span>North<small>Baseline saved</small></span>
+        <span>Northeast<small>Baseline saved</small></span>
+        <span>West<small>Baseline saved</small></span>
+        <span>Center<small>Baseline saved</small></span>
+        <span>East<small>Baseline saved</small></span>
+        <span>Southwest<small>Baseline saved</small></span>
+        <span>South<small>Baseline saved</small></span>
+        <span>Southeast<small>Baseline saved</small></span>
+      </div>
+    </section>
+
+    <footer class="close">
+      <p class="banner">SAMPLE / FICTIONAL EXAMPLE: not a real business or real results.</p>
+      <div class="fine">
+        <p>What you get: the fixes and protection steps on this checklist, done on your profile within the delivery window, and this report showing what was changed.</p>
+        <p>What I don't promise: a ranking, a number of reviews, or getting a suspended profile reinstated.</p>
+        <p><a class="back" href="/google-business-profile-home-services">Back to GBP Fix-and-Protect</a></p>
+      </div>
+    </footer>
+    <div class="accent" aria-hidden="true"></div>
+  </article>
+</body>
+</html>
