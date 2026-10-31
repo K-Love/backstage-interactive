@@ -8,10 +8,14 @@
     GBP Fix-and-Protect landing page
     Route: /google-business-profile-home-services
 
-    Kevin — before sending people here, search this file for PLACEHOLDER
-    and edit the LAUNCH object at the bottom. Also update the founding-client
-    spot count (id="spots-left"). Form setup is in the README.
-    Keep #results hidden until a real case study exists.
+    GBP Fix-and-Protect landing page.
+    Experience line and sample report are filled in.
+    There is no intro video, so #kevin-video stays hidden.
+    Headshot markup belongs in #kevin when /assets/kevin-love.jpg is in the repo.
+    Alt text for that photo: Kevin Love, Backstage Interactive.
+    Update the founding-client spot count (id="spots-left") when someone books.
+    Form setup is in the README.
+    Keep #results hidden until a real case study exists. Do not invent one.
   -->
   <title>Google Business Profile Fix for Home Service Pros | Backstage</title>
   <meta name="description" content="Roofers, HVAC, plumbers, electricians and cleaners: get your Google Business Profile fixed, policy-checked and protected. Free 2-minute video audit.">
@@ -532,16 +536,17 @@
     }
     .sample-frame { padding: 1rem; }
     .sample-frame figcaption {
-      display: inline-block;
+      display: block;
       margin-bottom: 0.75rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
-      background: #fff;
-      color: var(--navy);
-      font-size: 0.75rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 10px;
+      background: #fff4ec;
+      border: 1.5px solid var(--orange);
+      color: #9a3412;
+      font-size: 0.92rem;
       font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      line-height: 1.35;
     }
     .sample-frame .ph, .headshot .ph, .video-frame .ph { display: block; }
     .sample-frame.is-filled, .headshot.is-filled {
@@ -549,6 +554,13 @@
       border: 1px solid var(--line);
     }
     .sample-frame img { display: block; width: 100%; height: auto; border-radius: 8px; }
+    .sample-frame a { display: block; }
+    .sample-open {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-weight: 800;
+    }
+    .sample-frame { max-width: 28rem; }
     .guarantee, .offer {
       margin-top: 1rem;
       max-width: 44rem;
@@ -575,9 +587,10 @@
       text-align: center;
     }
     .headshot.is-filled { display: block; padding: 0; overflow: hidden; background: #e8ebf2; }
-    .headshot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .headshot picture { display: block; width: 100%; height: 100%; }
+    .headshot img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
     .bio-lead { font-size: 1.1rem; max-width: 40rem; }
-    #years-slot { margin-top: 0.85rem; }
+    #years-slot { margin-top: 0.85rem; color: var(--muted); font-weight: 700; }
     .video-frame {
       display: grid;
       place-items: center;
@@ -778,7 +791,7 @@
     @media (min-width: 720px) {
       .container { width: min(1080px, calc(100% - 3rem)); }
       .brand img { width: 200px; }
-      .bio { grid-template-columns: 10.5rem 1fr; }
+      .bio:has(.headshot) { grid-template-columns: 10.5rem 1fr; }
       .gets, .steps { grid-template-columns: 1fr 1fr; }
     }
     @media (min-width: 960px) {
@@ -789,7 +802,7 @@
       .hero { padding: 4.25rem 0 4.6rem; }
       .section { padding: 4.75rem 0; }
       .final { padding: 4.75rem 0; }
-      .sample-grid { grid-template-columns: 1.15fr 0.85fr; align-items: center; }
+      .sample-grid { grid-template-columns: 1fr; }
       .final-grid { grid-template-columns: 0.9fr 1.1fr; gap: 2.5rem; align-items: start; }
       .contact-form { padding: 1.4rem 1.3rem 1.3rem; }
     }
@@ -959,11 +972,17 @@
       <div class="container sample-grid">
         <div>
           <h2 id="sample-title">See exactly what you get</h2>
-          <p class="sample-copy">Every order ends with a one-page checklist report: each item in your package, marked done, with a before and after note (for example: primary category changed from X to Y, 12 services added, 5 photos uploaded). Fix + Protect and Rescue also include a before and after rank grid for your main service in your town.</p>
+          <p class="sample-copy">Every order ends with a checklist report: each item in your package, marked done, with a before and after note (for example: primary category changed from X to Y, 12 services added, 5 photos uploaded). Fix + Protect and Rescue also include a before and after rank grid for your main service in your town. The sample below is a fictional business, not a client result.</p>
         </div>
-        <figure class="sample-frame" id="sample-report">
-          <figcaption>Sample report</figcaption>
-          <p class="ph">[SCREENSHOT: sample audit and checklist report, made on a demo profile or Backstage Interactive's own Google profile. Label it "Sample report".]</p>
+        <figure class="sample-frame is-filled" id="sample-report">
+          <figcaption>SAMPLE / FICTIONAL EXAMPLE: not a real business or real results</figcaption>
+          <a href="/google-business-profile-home-services/sample-report.html">
+            <picture>
+              <source srcset="/assets/sample-gbp-report.webp" type="image/webp">
+              <img src="/assets/sample-gbp-report.png" width="880" height="6660" alt="Sample checklist report for Summit Ridge Plumbing, a fictional business. SAMPLE / FICTIONAL EXAMPLE: not a real business or real results.">
+            </picture>
+          </a>
+          <a class="sample-open" href="/google-business-profile-home-services/sample-report.html">Open the full sample report</a>
         </figure>
       </div>
     </section>
@@ -982,17 +1001,12 @@
       <div class="container">
         <h2 id="kevin-title">Who you're working with</h2>
         <div class="bio">
-          <figure class="headshot" id="kevin-photo">
-            <p class="ph">[PHOTO: Kevin headshot]</p>
-          </figure>
           <div>
             <p class="bio-lead">Kevin Love, Backstage Interactive. A web and SEO background. I build and run my own websites, take on client work when it's a good fit, and offer this as a focused, fixed-price service for home service pros. You deal with Kevin directly, not a call center.</p>
-            <p class="ph" id="years-slot">[YEARS OF EXPERIENCE: __ years in web and SEO]</p>
+            <p id="years-slot">10+ years in web development and digital marketing</p>
           </div>
         </div>
-        <figure class="video-frame" id="kevin-video">
-          <p class="ph">[VIDEO: 60-second intro, who Kevin is and what the audit covers]</p>
-        </figure>
+        <figure class="video-frame" id="kevin-video" hidden></figure>
       </div>
     </section>
 
@@ -1014,18 +1028,13 @@
 
     <!--
       CASE STUDY: hidden until real results exist.
-      To publish: remove the hidden attribute and replace the placeholder
-      with the trade, town, what was fixed, a before and after rank grid,
-      and calls or direction requests from Google's profile insights.
+      To publish: remove the hidden attribute and write the trade, town,
+      what was fixed, a before and after rank grid, and calls or direction
+      requests from Google's profile insights.
       Only with the client's permission. Business name is optional.
       Do not invent testimonials, stats, or results.
     -->
-    <section class="section" id="results" hidden aria-label="Results">
-      <div class="container">
-        <h2>Results</h2>
-        <p class="ph">[CASE STUDY: trade, town, what was fixed, before and after rank grid, calls or direction requests from Google's profile insights, with client permission. Hide this block until real results exist.]</p>
-      </div>
-    </section>
+    <section class="section" id="results" hidden aria-label="Results"></section>
 
     <section class="section" id="faqs" aria-labelledby="faq-title">
       <div class="container">
@@ -1133,21 +1142,20 @@
 
   <script>
     /* ============================================================
-       LAUNCH — edit these strings. Leave a value "" to keep the
-       orange placeholder on the page. No secrets belong here.
+       LAUNCH — public facts only. No secrets belong here.
        Do not add a phone number or email address. The audit form
        is the only public contact path.
-       years         "12"
-       photo         "/assets/kevin-love.jpg"
-       video         "/assets/kevin-intro.mp4"  or an https link
+       years         "10+ years in web development and digital marketing"
+       photo         ""   add /assets/kevin-love.jpg when the source file is in the repo
+       video         ""   no intro video; #kevin-video stays hidden
        sampleReport  "/assets/sample-gbp-report.png"
        Spots left: edit #spots-left in the founding section. No countdown.
        ============================================================ */
     var LAUNCH = {
-      years: "",
+      years: "10+ years in web development and digital marketing",
       photo: "",
       video: "",
-      sampleReport: ""
+      sampleReport: "/assets/sample-gbp-report.png"
     };
 
     function safeHttpsOrRoot(value) {
@@ -1161,25 +1169,30 @@
     function fillMedia() {
       var years = String(LAUNCH.years || "").trim();
       var yearsSlot = document.getElementById("years-slot");
-      if (yearsSlot && /^\d{1,2}$/.test(years)) {
-        yearsSlot.textContent = years + " years in web and SEO";
+      var yearsLine = "10+ years in web development and digital marketing";
+      if (yearsSlot && (years === "10+" || years === yearsLine)) {
+        yearsSlot.textContent = yearsLine;
         yearsSlot.classList.remove("ph");
       }
 
       var photo = safeHttpsOrRoot(LAUNCH.photo);
       var photoFig = document.getElementById("kevin-photo");
-      if (photo && photoFig) {
+      if (photo && photoFig && !photoFig.querySelector("img")) {
         var img = document.createElement("img");
         img.src = photo;
         img.alt = "Kevin Love, Backstage Interactive";
         var photoPh = photoFig.querySelector(".ph");
         if (photoPh) photoPh.replaceWith(img);
+        else photoFig.append(img);
         photoFig.classList.add("is-filled");
       }
 
       var videoUrl = safeHttpsOrRoot(LAUNCH.video);
       var videoFig = document.getElementById("kevin-video");
-      if (videoUrl && videoFig) {
+      if (videoFig && !videoUrl) {
+        videoFig.hidden = true;
+        videoFig.replaceChildren();
+      } else if (videoUrl && videoFig) {
         var videoPh = videoFig.querySelector(".ph");
         var path = videoUrl.toLowerCase().split("?")[0];
         if (path.endsWith(".mp4") || path.endsWith(".webm")) {
@@ -1193,6 +1206,9 @@
           source.type = path.endsWith(".webm") ? "video/webm" : "video/mp4";
           video.append(source);
           if (videoPh) videoPh.replaceWith(video);
+          else videoFig.append(video);
+          videoFig.hidden = false;
+          videoFig.classList.add("is-filled");
         } else if (videoUrl.indexOf("https://") === 0) {
           var watch = document.createElement("a");
           watch.href = videoUrl;
@@ -1204,18 +1220,21 @@
           hint.textContent = " (opens in a new tab)";
           watch.append(hint);
           if (videoPh) videoPh.replaceWith(watch);
+          else videoFig.append(watch);
+          videoFig.hidden = false;
+          videoFig.classList.add("is-filled");
         }
-        videoFig.classList.add("is-filled");
       }
 
       var sample = safeHttpsOrRoot(LAUNCH.sampleReport);
       var sampleFig = document.getElementById("sample-report");
-      if (sample && sampleFig) {
+      if (sample && sampleFig && !sampleFig.querySelector("img")) {
         var shot = document.createElement("img");
         shot.src = sample;
-        shot.alt = "Sample report: checklist of profile fixes with before and after notes";
+        shot.alt = "Sample checklist report for Summit Ridge Plumbing, a fictional business. SAMPLE / FICTIONAL EXAMPLE: not a real business or real results.";
         var samplePh = sampleFig.querySelector(".ph");
         if (samplePh) samplePh.replaceWith(shot);
+        else sampleFig.append(shot);
         sampleFig.classList.add("is-filled");
       }
     }

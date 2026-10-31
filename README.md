@@ -23,23 +23,24 @@ Open [http://localhost:8080/google-business-profile-home-services/](http://local
 
 A local server will not store form submissions. Netlify does that after deploy.
 
-## Placeholders to fill in
+## Launch values
 
-Search `google-business-profile-home-services/index.html` for `PLACEHOLDER` and for `var LAUNCH`. Empty strings leave the orange placeholder chips on the page. Put files you own in `/assets` and point at them with a root-relative path.
+`var LAUNCH` in `google-business-profile-home-services/index.html` is filled in. The video-audit form is the only public contact path. Do not publish a phone number or email address on the page.
 
-The video-audit form is the only public contact path. Do not publish a phone number or email address on the page.
-
-| `LAUNCH` key | Example | What visitors see |
+| `LAUNCH` key | Current value | What visitors see |
 | --- | --- | --- |
-| `years` | `12` | “12 years in web and SEO”. Digits only. |
-| `photo` | `/assets/kevin-love.jpg` | Headshot. Replaces `[PHOTO: Kevin headshot]`. |
-| `video` | `/assets/kevin-intro.mp4` | Plays on the page. An `https://` link becomes “Watch the 60-second intro”. |
-| `sampleReport` | `/assets/sample-gbp-report.png` | Screenshot labeled “Sample report”. Use a demo profile or Backstage Interactive’s own Google profile. |
+| `years` | `10+ years in web development and digital marketing` | That sentence. Do not raise the number. |
+| `photo` | empty until the file is added | Intended path `/assets/kevin-love.jpg` (800px original) plus a cropped portrait `/assets/kevin-love.webp` and `/assets/kevin-love-portrait.jpg`. Alt text: “Kevin Love, Backstage Interactive”. The page does not show an empty photo box. |
+| `video` | empty | No intro video. `#kevin-video` stays hidden, so there is no empty player. |
+| `sampleReport` | `/assets/sample-gbp-report.png` | Screenshot of the fictional checklist. WebP twin: `/assets/sample-gbp-report.webp`. |
+
+The sample is Summit Ridge Plumbing in the made-up town of Cedar Hollow. The report page is `/google-business-profile-home-services/sample-report.html` (`noindex`). The image and the page both say “SAMPLE / FICTIONAL EXAMPLE: not a real business or real results”. It is not a ranking claim, a revenue claim, or a testimonial.
 
 Also edit by hand:
 
 - **Spots left.** The number in `#spots-left` (founding-client section). Update it when someone books. Do not add a countdown. At 0, remove the founding prices and that offer.
 - **Case study.** `#results` stays `hidden` until you have a real result: trade, town, what was fixed, a before-and-after rank grid, and calls or direction requests from Google’s insights, with the client’s permission. Do not invent stats or testimonials.
+- **Intro video.** Leave `video` empty until a real file exists. Putting a URL in `LAUNCH.video` shows the player; an empty value keeps it hidden.
 
 ## Audit form (Netlify Forms)
 
