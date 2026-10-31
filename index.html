@@ -198,8 +198,7 @@
       display: block;
       width: 190px;
       height: auto;
-      aspect-ratio: 200 / 51;
-      filter: url("#logo-stroke");
+      aspect-ratio: 240.6 / 54;
     }
     .site-footer .brand {
       flex-direction: row;
@@ -207,7 +206,6 @@
       line-height: 0;
     }
     .site-footer .brand img { width: 148px; }
-    .logo-filters { position: absolute; width: 0; height: 0; }
     .nav-list {
       display: flex;
       flex-wrap: wrap;
@@ -512,21 +510,10 @@
   </style>
 </head>
 <body>
-  <svg class="logo-filters" width="0" height="0" aria-hidden="true" focusable="false">
-    <filter id="logo-stroke" x="-20%" y="-55%" width="140%" height="210%" color-interpolation-filters="sRGB">
-      <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="dilated"/>
-      <feFlood flood-color="#c8c7d4" flood-opacity="0.72" result="flood"/>
-      <feComposite in="flood" in2="dilated" operator="in" result="outline"/>
-      <feMerge>
-        <feMergeNode in="outline"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </svg>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="/"><img src="/assets/bi-logo.png" alt="Backstage Interactive" width="200" height="51"></a>
+      <a class="brand" href="/"><img src="/assets/bi-logo.svg" alt="Backstage Interactive" width="241" height="54"></a>
       <nav aria-label="Primary">
         <ul class="nav-list">
           <li><a href="#studio">Studio</a></li>
@@ -739,7 +726,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <a class="brand" href="/"><img src="/assets/bi-logo.png" alt="Backstage Interactive" width="200" height="51"></a>
+      <a class="brand" href="/"><img src="/assets/bi-logo.svg" alt="Backstage Interactive" width="241" height="54"></a>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#studio">Studio</a>
         <a href="#services">Services</a>
