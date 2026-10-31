@@ -188,6 +188,24 @@
       font-weight: 500;
       margin-top: 0.38em;
     }
+    .site-header .brand {
+      flex-direction: row;
+      flex-shrink: 0;
+      line-height: 0;
+    }
+    .site-header .brand img,
+    .site-footer .brand img {
+      display: block;
+      width: 190px;
+      height: auto;
+      aspect-ratio: 223.70 / 53.00;
+    }
+    .site-footer .brand {
+      flex-direction: row;
+      flex-shrink: 0;
+      line-height: 0;
+    }
+    .site-footer .brand img { width: 148px; }
     .nav-list {
       display: flex;
       flex-wrap: wrap;
@@ -454,6 +472,8 @@
     }
 
     @media (min-width: 860px) {
+      .site-header .brand img { width: 240px; }
+      .site-footer .brand img { width: 168px; }
       .piece { grid-template-columns: 1.15fr 0.85fr; align-items: center; }
       .piece.is-flip { grid-template-columns: 0.85fr 1.15fr; }
       .piece.is-flip .frame { order: 2; }
@@ -470,7 +490,8 @@
 
     @media (max-width: 420px) {
       .wrap { width: min(var(--wrap), calc(100% - 1.7rem)); }
-      .nav-list a { padding-inline: 0.4rem; }
+      .nav-list { flex-wrap: nowrap; gap: 0.05rem; }
+      .nav-list a { padding-inline: 0.32rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -492,7 +513,7 @@
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top" aria-label="Backstage Interactive">Backstage<span aria-hidden="true">Interactive</span></a>
+      <a class="brand" href="/"><img src="/assets/bi-logo.svg" alt="Backstage Interactive" width="224" height="53"></a>
       <nav aria-label="Primary">
         <ul class="nav-list">
           <li><a href="#studio">Studio</a></li>
@@ -705,7 +726,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <a class="brand" href="#top" aria-label="Backstage Interactive">Backstage<span aria-hidden="true">Interactive</span></a>
+      <a class="brand" href="/"><img src="/assets/bi-logo.svg" alt="Backstage Interactive" width="224" height="53"></a>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#studio">Studio</a>
         <a href="#services">Services</a>
