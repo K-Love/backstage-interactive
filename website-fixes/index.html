@@ -110,7 +110,7 @@
     .card h3{line-height:1.15;letter-spacing:-.035em;font-size:1.55rem;margin:14px 0 4px}
     .price{font-size:2.5rem;font-weight:800;letter-spacing:-.065em;line-height:1.2;margin:12px 0}
     .price small{font-size:1rem;font-weight:500;letter-spacing:0;color:var(--muted)}
-    .card p,.who p,.example p{color:var(--muted)}
+    .card p,.example p{color:var(--muted)}
     ul{padding-left:20px;margin:8px 0}
     li{margin:9px 0}
     .card .btn{align-self:flex-start;margin-top:auto}
@@ -169,12 +169,13 @@
     .callouts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
     .callouts li{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:12px;font-weight:700;color:var(--ink)}
     .callouts .badge{flex:none;margin:0}
-    .who-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:start}
-    .placeholder{display:grid;place-items:center;text-align:center;min-height:240px;padding:20px;border:2px dashed #9aa3be;border-radius:12px;background:#fff;color:#243056}
-    .placeholder b{font-size:1.05rem}
-    .placeholder span{display:block;margin-top:6px;color:var(--muted);font-size:.92rem}
-    .years{margin-top:14px;padding:12px 14px;border-radius:10px;background:#fff;border:1px dashed #9aa3be;font-weight:700}
-    .years span{display:block;font-weight:500;color:var(--muted)}
+    .bio{display:grid;gap:1rem;margin-top:1.1rem;align-items:start}
+    .bio p{margin:0}
+    .headshot{width:10.5rem;height:13rem;margin:0;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#e8ebf2}
+    .headshot picture{display:block;width:100%;height:100%}
+    .headshot img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+    .bio-lead{font-size:1.1rem;max-width:40rem}
+    #years-slot{margin-top:0.85rem;color:var(--muted);font-weight:700}
     .band{background:#141a44;color:#fff;padding:64px 0}
     .band-inner{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:start}
     .band-inner > *{min-width:0}
@@ -201,7 +202,7 @@
     .reach input{width:1.05rem;height:1.05rem;margin:0;accent-color:var(--indigo)}
     .hp{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
     @media(max-width:980px){
-      .cards,.who-grid,.bundle{grid-template-columns:1fr}
+      .cards,.bundle{grid-template-columns:1fr}
     }
     @media(max-width:800px){
       .hero{padding:64px 0 72px}
@@ -210,6 +211,9 @@
       .nav-cta{font-size:.8rem}
       .brand-logo{max-width:160px}
       .card,.contact-form,.bundle,.guarantee{padding:24px}
+    }
+    @media(min-width:720px){
+      .bio:has(.headshot){grid-template-columns:10.5rem 1fr}
     }
     @media(max-width:420px){
       .reach{grid-template-columns:1fr}
@@ -371,24 +375,19 @@
       </div>
     </section>
 
-    <section class="section light" id="kevin">
+    <section class="section light" id="kevin" aria-labelledby="kevin-title">
       <div class="container">
-        <span class="kicker" style="color:var(--indigo)">Who you're working with</span>
-        <h2>Kevin Love</h2>
-        <div class="who-grid">
+        <h2 id="kevin-title">Who you're working with</h2>
+        <div class="bio">
+          <figure class="headshot is-filled" id="kevin-photo">
+            <picture>
+              <source srcset="/assets/kevin-love.webp" type="image/webp">
+              <img src="/assets/kevin-love-portrait.jpg" width="464" height="574" alt="Kevin Love, Backstage Interactive">
+            </picture>
+          </figure>
           <div>
-            <div class="placeholder" role="img" aria-label="Placeholder for a photo of Kevin Love. Add the real photo before launch.">
-              <div>
-                <b>Photo of Kevin Love</b>
-                <span>Placeholder. Add the real photo before launch.</span>
-              </div>
-            </div>
-            <p class="years">Years of experience<span>Placeholder. Add the real number before launch.</span></p>
-          </div>
-          <div class="who">
-            <p>Kevin Love runs Backstage Interactive. He builds and runs his own websites, takes on client work when it’s a good fit, and works with AI.</p>
-            <p>For this offer, he records the video review and does the website work you approve. The Google Business Profile side of the $695 bundle is <a href="/google-business-profile-home-services">GBP Fix-and-Protect</a>.</p>
-            <p><a class="btn btn-dark" data-package="Free 2-minute video site review" href="#contact">Get a free 2-minute video site review</a></p>
+            <p class="bio-lead">Kevin Love, Backstage Interactive. I build and run my own websites, take on client work when it's a good fit, and work with AI. I'm strongest in WordPress, and I pick up other site builders quickly. I record the video review and do the website work you approve. You deal with me directly.</p>
+            <p id="years-slot">10+ years in web development and digital marketing</p>
           </div>
         </div>
       </div>
