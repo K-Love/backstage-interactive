@@ -191,9 +191,6 @@
     .site-header .brand {
       flex-direction: row;
       flex-shrink: 0;
-      background: #f4f3f8;
-      border-radius: 8px;
-      padding: 6px 10px;
       line-height: 0;
     }
     .site-header .brand img {
@@ -201,7 +198,9 @@
       width: 160px;
       height: auto;
       aspect-ratio: 200 / 51;
+      filter: url("#logo-stroke");
     }
+    .logo-filters { position: absolute; width: 0; height: 0; }
     .nav-list {
       display: flex;
       flex-wrap: wrap;
@@ -504,6 +503,17 @@
   </style>
 </head>
 <body>
+  <svg class="logo-filters" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="logo-stroke" x="-20%" y="-55%" width="140%" height="210%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="dilated"/>
+      <feFlood flood-color="#f4f3f8" result="flood"/>
+      <feComposite in="flood" in2="dilated" operator="in" result="outline"/>
+      <feMerge>
+        <feMergeNode in="outline"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </svg>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
