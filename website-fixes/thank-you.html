@@ -16,8 +16,10 @@
   .eyebrow{color:#c6ccff;text-transform:uppercase;letter-spacing:.15em;font-weight:700;font-size:.78rem}
   h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.12;letter-spacing:-.05em;margin:14px 0 20px}
   p{color:#d9def6;max-width:540px}
-  a.back{display:inline-flex;align-items:center;min-height:48px;margin-top:20px;background:#ff6b35;color:#17172e;padding:13px 23px;border-radius:8px;text-decoration:none;font-weight:700}
+  a.back{display:inline-flex;align-items:center;align-self:flex-start;min-height:48px;margin-top:20px;background:#ff6b35;color:#17172e;padding:13px 23px;border-radius:8px;text-decoration:none;font-weight:700}
   a:focus-visible{outline:3px solid white;outline-offset:4px}
+  .policies{width:min(640px,calc(100% - 44px));margin:0 auto 24px;display:flex;flex-wrap:wrap;gap:4px 18px}
+  .policies a{display:inline-flex;align-items:center;min-height:44px;color:#c6ccff;font-weight:700;text-underline-offset:.2em}
   @media(max-width:800px){.brand-logo{max-width:160px}}
 </style>
 </head>
@@ -29,5 +31,6 @@
 <p>Your request for a free 2-minute video site review is in. Kevin Love reviews each site and replies by email or text, whichever you chose.</p>
 <a class="back" href="/website-fixes/#contact">Return to the form</a>
 </main>
+<footer><nav class="policies" aria-label="Policies"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></footer>
 </body>
 </html>

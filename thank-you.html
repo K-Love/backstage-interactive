@@ -30,15 +30,23 @@
     body {
       margin: 0;
       min-height: 100vh;
-      display: grid;
-      place-items: center;
+      display: flex;
+      flex-direction: column;
       background:
         radial-gradient(ellipse 60% 50% at 70% 0%, rgba(46, 49, 146, 0.35), transparent 60%),
         #07070f;
       color: #efedf6;
       font: 1.0625rem/1.65 Inter, system-ui, sans-serif;
     }
-    main { width: min(40rem, calc(100% - 2.5rem)); padding: 4.5rem 0; }
+    main {
+      width: min(40rem, calc(100% - 2.5rem));
+      margin: 0 auto;
+      padding: 4.5rem 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     p.kicker {
       margin: 0;
       color: #a7a6bc;
@@ -56,8 +64,9 @@
       letter-spacing: -0.02em;
     }
     p { margin: 0; max-width: 36rem; color: #c4c3d4; }
-    a {
+    a.back {
       display: inline-flex;
+      align-self: flex-start;
       align-items: center;
       min-height: 48px;
       margin-top: 1.5rem;
@@ -68,6 +77,22 @@
       font-weight: 560;
     }
     a:focus-visible { outline: 3px solid #c9ccff; outline-offset: 3px; }
+    .policies {
+      width: min(40rem, calc(100% - 2.5rem));
+      margin: 0 auto;
+      padding: 0 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.1rem;
+    }
+    .policies a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: #c9ccff;
+      font-weight: 560;
+      text-underline-offset: 0.2em;
+    }
   </style>
 </head>
 <body>
@@ -75,7 +100,13 @@
     <p class="kicker">Backstage Interactive</p>
     <h1>Thank you.</h1>
     <p>The note is in. I read every one, and I reply by email when it’s a fit.</p>
-    <a href="/">Back to the studio</a>
+    <a class="back" href="/">Back to the studio</a>
   </main>
+  <footer>
+    <nav class="policies" aria-label="Policies">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </nav>
+  </footer>
 </body>
 </html>

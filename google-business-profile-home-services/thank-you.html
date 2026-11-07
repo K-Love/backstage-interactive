@@ -77,6 +77,23 @@
       text-decoration: none;
     }
     a.back:hover { background: #f25a22; }
+    .policies {
+      width: min(720px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 0 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.1rem;
+    }
+    .policies a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: #c6ccff;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
   </style>
 </head>
 <body>
@@ -93,5 +110,11 @@
     <p>No obligation. You keep the video either way.</p>
     <a class="back" href="/google-business-profile-home-services">Back to GBP Fix-and-Protect</a>
   </main>
+  <footer>
+    <nav class="policies" aria-label="Policies">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </nav>
+  </footer>
 </body>
 </html>
