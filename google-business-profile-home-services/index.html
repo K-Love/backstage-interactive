@@ -769,6 +769,17 @@
     .site-footer strong { color: #fff; }
     .site-footer p + p { margin-top: 0.35rem; }
     .site-footer a { color: #fff; font-weight: 700; }
+    .site-footer nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 1rem;
+      margin-top: 0.65rem;
+    }
+    .site-footer nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
     .sticky-cta {
       display: none;
       position: fixed;
@@ -1135,6 +1146,7 @@
       <p><strong>Backstage Interactive</strong></p>
       <p><a href="#audit">Request a free video audit</a></p>
       <p><a href="/">backstageinteractive.com</a></p>
+      <nav aria-label="Policies"><a href="/privacy/">Privacy</a> <a href="/terms/">Terms</a></nav>
     </div>
   </footer>
 

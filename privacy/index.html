@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Backstage Interactive</title>
+  <meta name="description" content="Privacy Policy for the Backstage Interactive website: contact forms, Netlify hosting, and what this site does not collect.">
+  <meta name="theme-color" content="#07070f">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://backstageinteractive.com/privacy/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Backstage Interactive">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Privacy Policy — Backstage Interactive">
+  <meta property="og:description" content="How the Backstage Interactive website handles form submissions and ordinary hosting data.">
+  <meta property="og:url" content="https://backstageinteractive.com/privacy/">
+  <meta property="og:image" content="https://backstageinteractive.com/assets/og.png">
+  <link rel="preload" href="/assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face {
+      font-family: "Cormorant";
+      src: url("/assets/fonts/cormorant-latin.woff2") format("woff2");
+      font-weight: 300 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Cormorant";
+      src: url("/assets/fonts/cormorant-italic-latin.woff2") format("woff2");
+      font-weight: 300 700;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Inter";
+      src: url("/assets/fonts/inter-latin.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --bg: #07070f;
+      --ink: #efedf6;
+      --muted: #c4c3d4;
+      --faint: #a7a6bc;
+      --line: rgba(239, 237, 246, 0.14);
+      --blue: #2e3192;
+      --blue-ink: #c9ccff;
+      --warm: #e7a07a;
+      --display: "Cormorant", "Iowan Old Style", Palatino, Georgia, serif;
+      --sans: "Inter", system-ui, sans-serif;
+      --wrap: 1120px;
+      --header: 4.5rem;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      font-weight: 420;
+      line-height: 1.65;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, p { overflow-wrap: break-word; }
+    ::selection { background: #2e3192; color: #fff; }
+    .skip {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      z-index: 50;
+      background: var(--ink);
+      color: var(--bg);
+      padding: 0.7rem 1rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .skip:focus { top: 1rem; }
+    :focus-visible {
+      outline: 3px solid var(--blue-ink);
+      outline-offset: 3px;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .wrap {
+      width: min(var(--wrap), calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(7, 7, 15, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.35rem 1.25rem;
+      min-height: var(--header);
+      padding-block: 0.7rem;
+    }
+    .brand {
+      display: flex;
+      flex-shrink: 0;
+      line-height: 0;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .brand img {
+      display: block;
+      width: 190px;
+      height: auto;
+      aspect-ratio: 222.71 / 53.20;
+    }
+    .nav-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.15rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-list a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 0.55rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+    .nav-list a:hover { color: var(--ink); }
+    .prose {
+      max-width: 42rem;
+      padding: clamp(2.4rem, 6vw, 4.2rem) 0 clamp(3rem, 7vw, 5rem);
+    }
+    .kicker {
+      margin: 0 0 0.85rem;
+      color: var(--faint);
+      font-size: 0.75rem;
+      font-weight: 560;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    h1, h2 {
+      font-family: var(--display);
+      font-weight: 520;
+      letter-spacing: -0.02em;
+    }
+    h3 {
+      margin: 1.5rem 0 0.35rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 560;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 7vw, 4.6rem);
+      line-height: 0.95;
+    }
+    .effective {
+      margin: 1rem 0 0;
+      color: var(--muted);
+    }
+    .callout {
+      margin: 1.6rem 0 0;
+      padding: 1rem 1.05rem;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--warm);
+      background: #101018;
+    }
+    .callout p { margin: 0; color: var(--ink); }
+    .callout p + p { margin-top: 0.75rem; }
+    .toc {
+      margin: 1.6rem 0 0;
+      padding: 0.9rem 1.05rem 1rem;
+      border: 1px solid var(--line);
+    }
+    .toc h2 {
+      margin: 0 0 0.45rem;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 560;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+    .toc ol { margin: 0; padding-left: 1.2rem; }
+    .toc li { margin: 0.2rem 0; }
+    .toc a { color: var(--ink); }
+    h2 {
+      margin: 2.4rem 0 0.7rem;
+      font-size: clamp(1.7rem, 3vw, 2.15rem);
+      line-height: 1.1;
+      scroll-margin-top: 6rem;
+    }
+    p, li { color: var(--muted); }
+    .prose > p, .prose section p { margin: 0.8rem 0 0; }
+    ul, ol { margin: 0.7rem 0 0; padding-left: 1.2rem; }
+    li + li { margin-top: 0.35rem; }
+    a { color: var(--blue-ink); text-underline-offset: 0.22em; }
+    a:hover { color: var(--ink); }
+    strong { color: var(--ink); font-weight: 560; }
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0 2.6rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem 1.5rem;
+    }
+    .site-footer .brand img { width: 148px; }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.15rem 0.2rem;
+    }
+    .footer-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 0.45rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-nav a:hover,
+    .footer-nav a[aria-current="page"] { color: var(--ink); }
+    .colophon {
+      width: 100%;
+      margin: 0.2rem 0 0;
+      color: var(--faint);
+      font-size: 0.86rem;
+    }
+    @media (min-width: 860px) {
+      .brand img { width: 240px; }
+      .site-footer .brand img { width: 168px; }
+    }
+    @media (max-width: 420px) {
+      .wrap { width: min(var(--wrap), calc(100% - 1.7rem)); }
+      .nav-list { gap: 0; }
+      .nav-list a { padding-inline: 0.32rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+    @media print {
+      body, .site-header { background: #fff; color: #111; }
+      .site-header { position: static; }
+      p, li, .effective, .colophon, .footer-nav a, .nav-list a { color: #111; }
+      a { color: #111; }
+      .callout, .toc { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/"><img src="/assets/bi-logo.svg" alt="Backstage Interactive" width="223" height="53"></a>
+      <nav aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="/#studio">Studio</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/#work">Client work</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="wrap prose">
+      <p class="kicker">Backstage Interactive</p>
+      <h1>Privacy Policy</h1>
+      <p class="effective">Effective date: November 6, 2026.</p>
+
+      <div class="callout">
+        <p>This policy covers the public website at backstageinteractive.com only. I run that site as Backstage Interactive, a one-person studio. It does not cover KeyProse, WildThesis, client websites, or any other product.</p>
+        <p>The pages on this website do not ask you to sign in with a Google account, and they do not request access to Google Drive or other data inside a Google account. Pasting a public Google Business Profile link, or a business name and city, into the audit form is not a connection to a Google account.</p>
+      </div>
+
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ol>
+          <li><a href="#who">Who this is</a></li>
+          <li><a href="#contact-path">How to reach me</a></li>
+          <li><a href="#forms">What the forms collect</a></li>
+          <li><a href="#use">How I use form submissions</a></li>
+          <li><a href="#recipients">Who else receives information</a></li>
+          <li><a href="#hosting">Hosting, logs, and fonts</a></li>
+          <li><a href="#cookies">Cookies and analytics</a></li>
+          <li><a href="#other-sites">Other sites</a></li>
+          <li><a href="#retention">How long information stays</a></li>
+          <li><a href="#deletion">Asking for a copy or deletion</a></li>
+          <li><a href="#children">Children</a></li>
+          <li><a href="#changes">Changes</a></li>
+        </ol>
+      </nav>
+
+      <section id="who" aria-labelledby="who-title">
+        <h2 id="who-title">Who this is</h2>
+        <p>“I” and “the studio” mean Kevin Love. Backstage Interactive is the name of this one-person studio. It is not a team, and this page does not name a separate company. The public pages do not publish a street address, a phone number, or an email address.</p>
+      </section>
+
+      <section id="contact-path" aria-labelledby="contact-path-title">
+        <h2 id="contact-path-title">How to reach me</h2>
+        <p>The public contact path is a form. For a note about the studio, a privacy question, or a request to delete a submission, use the form on the <a href="/#contact">studio homepage</a>. The service pages have their own forms for a website review or a Google Business Profile video audit. Those forms are for those requests. A privacy request belongs on the homepage form, because that form always asks for an email address I can reply to.</p>
+      </section>
+
+      <section id="forms" aria-labelledby="forms-title">
+        <h2 id="forms-title">What the forms collect</h2>
+        <p>This site has three forms. Each one is marked for <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">Netlify Forms<span class="visually-hidden"> (opens in a new tab)</span></a>. After the site is published, Netlify stores the submission in that site’s form inbox so I can read it. A local preview of the files does not store the submission. Each form also has a field that is hidden from view and meant to stay empty. It is there to catch automated spam. It is not a contact method.</p>
+        <p>The forms ask you not to send passwords, admin logins, or private customer information. If you send that anyway, it is stored in the same submission as the rest of the form.</p>
+
+        <h3>Studio homepage</h3>
+        <p>The form is named <strong>backstage-home-inquiry</strong>. It asks for:</p>
+        <ul>
+          <li>Your name, required, up to 120 characters</li>
+          <li>Email, required, up to 200 characters</li>
+          <li>About, a choice of “Not sure yet,” “Studio — a product or a collaboration,” “Website fixes,” or “Google Business Profile”</li>
+          <li>The note, required, up to 5,000 characters</li>
+        </ul>
+        <p>This form does not include a Google reCAPTCHA checkbox. The page says no payment is required to write. After a successful submit, the browser goes to the thank-you page, which says I read every note and reply by email when it is a fit.</p>
+
+        <h3>Website Fixes</h3>
+        <p>The form on <a href="/website-fixes/">Website Fixes</a> is named <strong>backstage-website-inquiry</strong>. It asks for:</p>
+        <ul>
+          <li>Which offer the request is about. The buttons on the page set this. If you do not choose one, it is the free 2-minute video site review.</li>
+          <li>Your name, required, up to 100 characters</li>
+          <li>Business, required, up to 150 characters</li>
+          <li>Website, required, up to 400 characters. The page may add https:// if you leave it off.</li>
+          <li>Best way to reach you: Email or Text</li>
+          <li>Email address, only if you choose Email, up to 200 characters</li>
+          <li>Mobile number for text, only if you choose Text, up to 40 characters</li>
+        </ul>
+        <p>The page is set up so Netlify can add a Google reCAPTCHA checkbox. Netlify adds that checkbox when reCAPTCHA 2 is switched on for the site. The page includes the setup. It does not show whether that switch is on. If you see the checkbox, the check goes to Google. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy policy<span class="visually-hidden"> (opens in a new tab)</span></a> describes what Google does with it. The thank-you page says I reply by email or text, whichever you chose.</p>
+
+        <h3>Google Business Profile</h3>
+        <p>The form on <a href="/google-business-profile-home-services">GBP Fix-and-Protect</a> is named <strong>gbp-video-audit</strong>. It asks for:</p>
+        <ul>
+          <li>Your name, required, up to 100 characters</li>
+          <li>Business name, required, up to 150 characters</li>
+          <li>A Google profile link, or a business name and city, required, up to 500 characters</li>
+          <li>Best way to reach you: Email or Text</li>
+          <li>Email, only if you choose Email, up to 200 characters</li>
+          <li>Your mobile number, only if you choose Text, up to 40 characters</li>
+          <li>The page name, filled in by the page so this submission can be told apart from the other forms</li>
+        </ul>
+        <p>This form uses the same reCAPTCHA setup as the Website Fixes form. The same limit applies: the checkbox appears when Netlify’s reCAPTCHA 2 switch is on. The page says not to send a Google password or owner login. It also says that, for later paid work, you can add me as a Manager on the profile and remove me. That step happens in Google’s product if you choose it later. This website does not receive that access by itself.</p>
+      </section>
+
+      <section id="use" aria-labelledby="use-title">
+        <h2 id="use-title">How I use form submissions</h2>
+        <p>I use a submission to read what you sent, to see which offer you asked about, and to reply when the note is a fit. A reply uses the email address you gave, or the mobile number if you chose text on a service form. A Website Fixes or Google Business Profile request is also what I use to prepare the free video review or video audit described on that page.</p>
+        <p>Sending a form is not a purchase and not an agreement for paid work. If we later agree on a job, a written scope or other written agreement covers that job. The <a href="/terms/">Terms of Use</a> say the same thing.</p>
+        <p>Nothing in this website’s code sends a form submission to an advertising network, sells it, or sends it to an AI model for training. This sentence describes this website. It does not describe KeyProse, WildThesis, or any other product.</p>
+      </section>
+
+      <section id="recipients" aria-labelledby="recipients-title">
+        <h2 id="recipients-title">Who else receives information</h2>
+        <p>These are the recipients I can account for from the site itself:</p>
+        <ul>
+          <li><strong>Netlify</strong> hosts the site and, through Netlify Forms, stores form submissions. Netlify can also email me a copy if a form notification is turned on in the Netlify account. That notification address is not in the website files, so this policy does not claim a copy is always emailed.</li>
+          <li><strong>Google</strong> receives the reCAPTCHA check on the Website Fixes form and the Google Business Profile form when that checkbox is shown.</li>
+          <li><strong>The email or text service used to reply.</strong> The website files do not name that service. If you chose email, a reply goes to the address you submitted. If you chose text on a service form, a reply goes to the number you submitted.</li>
+        </ul>
+      </section>
+
+      <section id="hosting" aria-labelledby="hosting-title">
+        <h2 id="hosting-title">Hosting, logs, and fonts</h2>
+        <p>The site is a set of static pages. Netlify is the host named in the site configuration. When your browser requests a page, the host receives the ordinary connection data needed to deliver it, such as your IP address, the page address, the time, and the browser’s user-agent string. This repository does not set how long the host keeps those logs. Netlify’s privacy policy is the host’s own description: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">netlify.com/privacy<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+        <p>The site configuration also sends a referrer policy of strict-origin-when-cross-origin. When you follow a link to another website, that site is sent the origin backstageinteractive.com, not the full address of the page you were on. The same configuration says these pages do not use the camera, microphone, or location. The pages do not ask for those.</p>
+        <p>The current studio page, the service pages, and these legal pages use font files stored on this site. A separate page at <a href="/coming-soon.html">/coming-soon.html</a> is still published, is marked noindex, and is not linked from the current navigation. That page requests fonts from fonts.googleapis.com and fonts.gstatic.com. That request can include your IP address and browser details. The pages linked from the current homepage do not make that request.</p>
+      </section>
+
+      <section id="cookies" aria-labelledby="cookies-title">
+        <h2 id="cookies-title">Cookies and analytics</h2>
+        <p>The pages in this site do not include an analytics script, an advertising pixel, or a cookie banner. Their own page code does not set a cookie. I am not describing optional products that can be switched on in a hosting account, because those switches are not in the website files.</p>
+        <p>The exception is Google reCAPTCHA on the two service forms, and only when Netlify shows the checkbox. Google’s reCAPTCHA can use a cookie as part of that check.</p>
+      </section>
+
+      <section id="other-sites" aria-labelledby="other-sites-title">
+        <h2 id="other-sites-title">Other sites</h2>
+        <p>The homepage links to other websites. When you follow a link, you leave this site, and this policy stops.</p>
+        <ul>
+          <li><a href="https://keyprose.com" target="_blank" rel="noopener noreferrer">KeyProse<span class="visually-hidden"> (opens in a new tab)</span></a> is a separate product site. This policy does not cover it. I am not linking a KeyProse privacy policy from here. The addresses keyprose.com/privacy and keyprose.com/terms were not published pages when this policy was prepared.</li>
+          <li><a href="https://wildthesis.com" target="_blank" rel="noopener noreferrer">WildThesis<span class="visually-hidden"> (opens in a new tab)</span></a> is a separate website. It publishes its own <a href="https://wildthesis.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy<span class="visually-hidden"> (opens in a new tab)</span></a> and its own <a href="https://wildthesis.com/terms" target="_blank" rel="noopener noreferrer">terms<span class="visually-hidden"> (opens in a new tab)</span></a>. Those pages govern WildThesis, not this website.</li>
+          <li>Client sites linked from the homepage are their own sites: <a href="https://ninalara.com" target="_blank" rel="noopener noreferrer">Nina Lara Design<span class="visually-hidden"> (opens in a new tab)</span></a>, <a href="https://www.sharreydore.com" target="_blank" rel="noopener noreferrer">Sharrey Doré<span class="visually-hidden"> (opens in a new tab)</span></a>, and <a href="https://chriswillburn.com" target="_blank" rel="noopener noreferrer">Chris Willburn<span class="visually-hidden"> (opens in a new tab)</span></a>.</li>
+        </ul>
+      </section>
+
+      <section id="retention" aria-labelledby="retention-title">
+        <h2 id="retention-title">How long information stays</h2>
+        <p>This website does not set a number of days or years for keeping a form submission. A submission stays in the Netlify form inbox until it is deleted there. I have not published a schedule for deleting mail or notes that I keep after reading a form. Host logs are kept on the host’s schedule, which is not stated in this website’s files.</p>
+      </section>
+
+      <section id="deletion" aria-labelledby="deletion-title">
+        <h2 id="deletion-title">Asking for a copy or deletion</h2>
+        <p>To ask for a copy of what you sent, or to ask me to delete it, use the <a href="/#contact">contact form on the studio homepage</a>. In the note, say that you want a copy or a deletion. Include the name you used, the email or phone number you used, which form it was (the studio note, Website Fixes, or the Google Business Profile audit), and roughly when you sent it.</p>
+        <p>That form is the public contact path. This page does not add an email address or a phone number. I read notes sent through the form. The homepage says I reply by email when a note is a fit. This policy does not promise a number of days for that reply.</p>
+        <p>If I can match the submission, I will delete it from the form inbox I control. I cannot describe here what copy a host, an email provider, or a phone carrier keeps, because those systems are not fully described in this website’s files.</p>
+      </section>
+
+      <section id="children" aria-labelledby="children-title">
+        <h2 id="children-title">Children</h2>
+        <p>This site is written for adults asking about studio work or a service for a business. It is not directed at children, and the forms do not ask for a child’s information.</p>
+      </section>
+
+      <section id="changes" aria-labelledby="changes-title">
+        <h2 id="changes-title">Changes</h2>
+        <p>If I change this policy, I will update this page and the effective date at the top. This version is effective November 6, 2026. This site has no mailing list for policy notices. The rules for using the site are in the <a href="/terms/">Terms of Use</a>.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <a class="brand" href="/"><img src="/assets/bi-logo.svg" alt="Backstage Interactive" width="223" height="53"></a>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/#studio">Studio</a>
+        <a href="/#services">Services</a>
+        <a href="/#work">Client work</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a href="/privacy/" aria-current="page">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+      <p class="colophon">Where ideas become real things. © 2026 Backstage Interactive.</p>
+    </div>
+  </footer>
+</body>
+</html>
