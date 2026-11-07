@@ -88,7 +88,7 @@ def main():
     ):
         audit.errors.append("Expected Netlify homepage inquiry form is missing")
 
-    for expected in ("KeyProse", "WildThesis", "Where ideas become", "id=\"contact\""):
+    for expected in ("KeyProse", "Wild Thesis", "keyprose-title", "wildthesis-title", "Where ideas become", "id=\"contact\""):
         if expected not in html:
             audit.errors.append(f"Expected homepage content missing: {expected}")
 
