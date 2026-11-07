@@ -25,6 +25,31 @@ Open [http://localhost:8080/](http://localhost:8080/) for the flagship homepage,
 
 A local server will not store form submissions. Netlify does that after deploy.
 
+## Homepage theme preview (dark / light)
+
+The homepage supports a dark/light toggle in its header. On an initial visit,
+JavaScript reads the device's `prefers-color-scheme` preference; after a manual
+choice, a `backstage-theme` localStorage value takes precedence. A system
+preference change is followed only when no manual choice is stored.
+
+The dark header/footer stay midnight in both modes so the current Backstage
+wordmark remains legible. The light palette uses a warm paper background and
+dark text; the body, project cards, and inquiry form change together. The two
+palettes were checked mathematically for foreground/background text contrast
+at or above 4.5:1. These checks are not a substitute for visual, keyboard,
+focus, and accessibility-device tests.
+
+**Scope:** This release previews the theme switch on `/` only. The separate
+GBP, Website Fixes, thank-you and legal pages have independent styles and are
+not yet themed by the homepage preference. Expand the theme system only after
+the homepage review approves the light palette.
+
+Acceptance: test 320/375/768/1440px, click the toggle, reload to confirm
+persistence, remove `backstage-theme` from local storage to restore device
+preference behavior, test keyboard activation, inspect forms and cards, then
+test the opposite OS theme. Do not merge or publish without a Netlify preview
+check.
+
 ## Homepage v0.2 — Production Bible alignment
 
 The homepage deliberately makes two paths visible: **Studio / owned work** and
