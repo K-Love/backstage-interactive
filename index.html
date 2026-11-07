@@ -497,6 +497,12 @@
 
     /* Studio productions: an editorial presentation grounded in the actual work. */
     .studio-art { margin: 0; }
+    /* Crop the existing 1200 × 750 product screenshot below its toolkit subtitle,
+       before the next row of cards begins. Preserve the original source asset. */
+    .studio-art--keyprose .studio-shot {
+      aspect-ratio: 1200 / 666;
+      overflow: hidden;
+    }
     .studio-art figcaption {
       padding: 0.65rem 0.95rem;
       background: var(--panel);
@@ -707,6 +713,14 @@
       form .btn { width: auto; min-width: 11rem; }
     }
 
+    /* The desktop alternating composition becomes image-first for both products
+       on narrower screens; keep source and keyboard order aligned. */
+    @media (max-width: 859px) {
+      .piece { grid-template-columns: minmax(0, 1fr); }
+      .piece .studio-art { order: 0; }
+      .piece > div { order: 1; }
+    }
+
     @media (max-width: 760px) {
       .header-inner {
         display: grid;
@@ -796,19 +810,21 @@
       <div class="wrap">
         <p class="kicker">01 — Studio</p>
         <h2 id="studio-title">Work I own.</h2>
-        <p class="section-intro">Two different fields. One practice: make complex work easier to navigate, and keep human judgment in the loop.</p>
+        <p class="section-intro">Original products, built to be useful, thoughtful, and real.</p>
 
         <article class="piece" aria-labelledby="keyprose-title">
-          <figure class="frame studio-art">
-            <img
-              src="/assets/work/keyprose.webp"
+          <figure class="frame studio-art studio-art--keyprose">
+            <div class="studio-shot">
+              <img
+                src="/assets/work/keyprose.webp"
               srcset="/assets/work/keyprose-720.webp 720w, /assets/work/keyprose.webp 1200w"
               sizes="(min-width: 860px) 36rem, calc(100vw - 2.5rem)"
               width="1200"
               height="750"
               alt="KeyProse interface showing an AI back office for real-estate listing agents."
               loading="lazy"
-              decoding="async">
+                decoding="async">
+            </div>
             <figcaption>01 / Real-estate workflows — product interface</figcaption>
           </figure>
           <div>
