@@ -6,7 +6,19 @@
   <title>Backstage Interactive — Where ideas become real things</title>
   <meta name="description" content="Kevin Love’s one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes for home service pros.">
   <meta name="theme-color" content="#07070f">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
+  <script>
+    // Apply an existing choice or the device preference before styles render.
+    (function () {
+      var choice = null;
+      try { choice = localStorage.getItem("backstage-theme"); } catch (error) {}
+      if (choice !== "dark" && choice !== "light") {
+        choice = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", choice);
+      document.querySelector('meta[name="theme-color"]').setAttribute("content", choice === "light" ? "#f7f5f0" : "#07070f");
+    })();
+  </script>
   <link rel="canonical" href="https://backstageinteractive.com/">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -86,6 +98,7 @@
     }
 
     :root {
+      color-scheme: dark;
       --bg: #07070f;
       --ink: #efedf6;
       --muted: #c4c3d4;
@@ -94,10 +107,37 @@
       --blue: #2e3192;
       --blue-ink: #c9ccff;
       --warm: #e7a07a;
+      --panel: #101018;
+      --field-bg: #07070f;
+      --field-line: rgba(239, 237, 246, 0.28);
+      --placeholder: #a7a6bc;
+      --light-beam: rgba(46, 49, 146, 0.24);
+      --warm-beam: rgba(231, 160, 122, 0.065);
+      --stage-line: rgba(201, 204, 255, 0.38);
+      --type-glow: rgba(46, 49, 146, 0.55);
       --display: "Cormorant", "Iowan Old Style", Palatino, Georgia, serif;
       --sans: "Inter", system-ui, sans-serif;
       --wrap: 1120px;
       --header: 4.5rem;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f7f5f0;
+      --ink: #182134;
+      --muted: #37445a;
+      --faint: #506078;
+      --line: rgba(24, 33, 52, 0.20);
+      --blue: #2e3192;
+      --blue-ink: #343786;
+      --warm: #8a3e1c;
+      --panel: #fffdf9;
+      --field-bg: #ffffff;
+      --field-line: rgba(24, 33, 52, 0.46);
+      --placeholder: #58657b;
+      --light-beam: rgba(46, 49, 146, 0.09);
+      --warm-beam: rgba(170, 87, 47, 0.06);
+      --stage-line: rgba(46, 49, 146, 0.27);
+      --type-glow: rgba(46, 49, 146, 0.16);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -153,6 +193,16 @@
       margin-inline: auto;
     }
 
+    /* Keep the branded header and footer midnight in either theme, including the logo. */
+    .site-header, .site-footer {
+      --ink: #efedf6;
+      --muted: #c4c3d4;
+      --faint: #a7a6bc;
+      --blue-ink: #c9ccff;
+      --line: rgba(239, 237, 246, 0.14);
+      color: var(--ink);
+      background: #07070f;
+    }
     .site-header {
       position: sticky;
       top: 0;
@@ -231,6 +281,26 @@
       border-bottom: 1px solid var(--blue-ink);
       border-radius: 0;
     }
+    .theme-toggle {
+      display: none;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 44px;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(239, 237, 246, 0.48);
+      border-radius: 99px;
+      background: rgba(239, 237, 246, 0.08);
+      color: #efedf6;
+      font: 560 0.8rem var(--sans);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    html[data-theme] .theme-toggle { display: inline-flex; }
+    .theme-toggle:hover { background: rgba(239, 237, 246, 0.17); }
+    .theme-toggle:focus-visible { outline: 3px solid #c9ccff; outline-offset: 3px; }
+    .theme-symbol { font-size: 1.12rem; line-height: 1; }
 
     .hero {
       position: relative;
@@ -245,8 +315,8 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(ellipse 58% 75% at 78% 43%, rgba(46, 49, 146, 0.24), transparent 78%),
-        radial-gradient(ellipse 30% 42% at 95% 87%, rgba(231, 160, 122, 0.065), transparent 85%);
+        radial-gradient(ellipse 58% 75% at 78% 43%, var(--light-beam), transparent 78%),
+        radial-gradient(ellipse 30% 42% at 95% 87%, var(--warm-beam), transparent 85%);
     }
     .hero::after {
       content: "";
@@ -256,7 +326,7 @@
       bottom: 12%;
       width: 1px;
       pointer-events: none;
-      background: linear-gradient(to bottom, transparent, rgba(201, 204, 255, 0.38), transparent);
+      background: linear-gradient(to bottom, transparent, var(--stage-line), transparent);
     }
     .kicker {
       margin: 0 0 1.1rem;
@@ -370,7 +440,7 @@
       border-top: 1px solid var(--line);
     }
     .frame {
-      background: #101018;
+      background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 2px;
       overflow: hidden;
@@ -384,8 +454,8 @@
       gap: 0.45rem;
       padding: 1.2rem 1.25rem 1.3rem;
       background:
-        radial-gradient(ellipse 80% 70% at 0% 0%, rgba(46, 49, 146, 0.55), transparent 60%),
-        #101018;
+        radial-gradient(ellipse 80% 70% at 0% 0%, var(--type-glow), transparent 60%),
+        var(--panel);
     }
     .typecard b {
       font-family: var(--display);
@@ -441,7 +511,7 @@
     .about-grid p:first-child, .contact-copy .section-intro { margin-top: 0.9rem; }
 
     form {
-      background: #101018;
+      background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 2px;
       padding: 1.25rem 1.15rem 1.3rem;
@@ -458,14 +528,14 @@
       width: 100%;
       min-height: 48px;
       padding: 0.65rem 0.75rem;
-      background: #07070f;
+      background: var(--field-bg);
       color: var(--ink);
-      border: 1px solid rgba(239, 237, 246, 0.28);
+      border: 1px solid var(--field-line);
       border-radius: 2px;
       font: inherit;
     }
     textarea { min-height: 140px; resize: vertical; }
-    input::placeholder, textarea::placeholder { color: #a7a6bc; opacity: 1; }
+    input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
     .form-note { margin: 0.85rem 0 0; color: var(--faint); font-size: 0.86rem; }
     form .btn { margin-top: 1.1rem; width: 100%; }
     .hp {
@@ -536,12 +606,14 @@
     @media (max-width: 760px) {
       .header-inner {
         display: grid;
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr) auto;
         gap: 0.45rem;
         padding-block: 0.6rem 0.35rem;
       }
-      .site-header .brand img { width: min(190px, 70vw); }
-      .site-header nav { width: 100%; min-width: 0; }
+      .site-header .brand { grid-column: 1; grid-row: 1; }
+      .site-header .brand img { width: min(190px, 52vw); }
+      .site-header nav { grid-column: 1 / -1; grid-row: 2; width: 100%; min-width: 0; }
+      .theme-toggle { grid-column: 2; grid-row: 1; justify-self: end; }
       .nav-list {
         display: flex;
         flex-wrap: wrap;
@@ -562,6 +634,8 @@
       .wrap { width: min(var(--wrap), calc(100% - 1.7rem)); }
       .nav-list { justify-content: flex-start; gap: 0 0.35rem; }
       .nav-list a { padding-inline: 0.2rem; font-size: 0.8rem; }
+      .site-header .brand img { width: min(165px, 48vw); }
+      .theme-toggle { padding-inline: 0.55rem; font-size: 0.75rem; }
       .hero-cue { font-size: 0.68rem; }
       section[id] { scroll-margin-top: 10.5rem; }
     }
@@ -595,6 +669,10 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode">
+        <span class="theme-symbol" aria-hidden="true">☼</span>
+        <span class="theme-label">Light mode</span>
+      </button>
     </div>
   </header>
 
@@ -790,7 +868,7 @@
           </select>
           <label for="contact-message">The note</label>
           <textarea id="contact-message" name="message" required maxlength="5000" placeholder="What are you trying to make, or what needs fixing?"></textarea>
-          <button class="btn" type="submit">Send the note</button>
+          <button class="btn" type="submit">Send</button>
           <p class="form-note">No payment is required to write. Don’t include passwords or private customer information.</p>
         </form>
       </div>
@@ -812,5 +890,43 @@
       <p class="colophon">Where ideas become real things. © 2026 Backstage Interactive.</p>
     </div>
   </footer>
+  <script>
+    (function () {
+      var button = document.getElementById("theme-toggle");
+      var label = button.querySelector(".theme-label");
+      var icon = button.querySelector(".theme-symbol");
+      var root = document.documentElement;
+      var preference = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+
+      function paint() {
+        var isDark = root.getAttribute("data-theme") !== "light";
+        label.textContent = isDark ? "Light mode" : "Dark mode";
+        icon.textContent = isDark ? "☼" : "☾";
+        button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", isDark ? "#07070f" : "#f7f5f0");
+      }
+
+      button.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("backstage-theme", next); } catch (error) {}
+        paint();
+      });
+
+      if (preference) {
+        var systemChanged = function (event) {
+          var saved = null;
+          try { saved = localStorage.getItem("backstage-theme"); } catch (error) {}
+          if (saved !== "dark" && saved !== "light") {
+            root.setAttribute("data-theme", event.matches ? "dark" : "light");
+            paint();
+          }
+        };
+        if (preference.addEventListener) preference.addEventListener("change", systemChanged);
+        else if (preference.addListener) preference.addListener(systemChanged);
+      }
+      paint();
+    })();
+  </script>
 </body>
 </html>
