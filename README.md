@@ -39,16 +39,26 @@ palettes were checked mathematically for foreground/background text contrast
 at or above 4.5:1. These checks are not a substitute for visual, keyboard,
 focus, and accessibility-device tests.
 
-**Scope:** This release previews the theme switch on `/` only. The separate
-GBP, Website Fixes, thank-you and legal pages have independent styles and are
-not yet themed by the homepage preference. Expand the theme system only after
-the homepage review approves the light palette.
+**Scope as of this update:** The homepage, Privacy Policy, Terms of Use,
+and studio thank-you page honor the same `backstage-theme` preference.
+The legal and thank-you pages use the shared `/assets/theme-preference.js`
+controller; the homepage retains its existing inline controller and key.
+The Website Fixes and GBP pages are separate, intentionally light service
+designs, with their own inquiry flows; they do not inherit this theme toggle.
+The service-specific thank-you pages and archived/tools pages also remain
+independent. Do not imply that every site route is theme-enabled.
+
+The theme preference is localStorage only, not a cookie, analytics event,
+or form field. The Privacy Policy discloses the optional preference.
 
 Acceptance: test 320/375/768/1440px, click the toggle, reload to confirm
 persistence, remove `backstage-theme` from local storage to restore device
 preference behavior, test keyboard activation, inspect forms and cards, then
-test the opposite OS theme. Do not merge or publish without a Netlify preview
-check.
+test the opposite OS theme. On `/privacy/` and `/terms/`, verify
+the same preference survives navigation, the sticky header does not obscure
+in-page section links, and the pages print legibly. Submit a studio inquiry
+on Netlify and confirm the `/thank-you.html` screen follows the chosen
+reading mode. Do not merge or publish without a Netlify preview check.
 
 ## Homepage v0.2 — Production Bible alignment
 
