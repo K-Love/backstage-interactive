@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Backstage Interactive — Where ideas become real things</title>
-  <meta name="description" content="Kevin Love’s one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes for home service pros.">
+  <meta name="description" content="Kevin Love’s one-person studio. Owned products KeyProse and Wild Thesis, plus client sites and practical fixes for home service pros.">
   <meta name="theme-color" content="#07070f">
   <meta name="color-scheme" content="dark light">
   <script>
@@ -27,7 +27,7 @@
   <meta property="og:site_name" content="Backstage Interactive">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Backstage Interactive — Where ideas become real things">
-  <meta property="og:description" content="A one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes.">
+  <meta property="og:description" content="A one-person studio. Owned products KeyProse and Wild Thesis, plus client sites and practical fixes.">
   <meta property="og:url" content="https://backstageinteractive.com/">
   <meta property="og:image" content="https://backstageinteractive.com/assets/og.png">
   <meta property="og:image:width" content="1200">
@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Backstage Interactive — Where ideas become real things">
-  <meta name="twitter:description" content="A one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes.">
+  <meta name="twitter:description" content="A one-person studio. Owned products KeyProse and Wild Thesis, plus client sites and practical fixes.">
   <meta name="twitter:image" content="https://backstageinteractive.com/assets/og.png">
 
   <link rel="preload" href="/assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -51,7 +51,7 @@
         "@id": "https://backstageinteractive.com/#website",
         "url": "https://backstageinteractive.com/",
         "name": "Backstage Interactive",
-        "description": "Kevin Love’s one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes.",
+        "description": "Kevin Love’s one-person studio. Owned products KeyProse and Wild Thesis, plus client sites and practical fixes.",
         "publisher": { "@id": "https://backstageinteractive.com/#studio" }
       },
       {
@@ -495,6 +495,110 @@
     }
     .more:hover { color: var(--blue-ink); }
 
+    /* Studio productions: an editorial presentation grounded in the actual work. */
+    .studio-art { margin: 0; }
+    .studio-art figcaption {
+      padding: 0.65rem 0.95rem;
+      background: var(--panel);
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 0.71rem;
+      font-weight: 560;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .studio-art--botanical .botanical-plate {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 240px;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      padding: clamp(1.4rem, 4vw, 2.25rem);
+      color: #f3eedf;
+      background: radial-gradient(ellipse 95% 92% at 85% 10%, #34534a 0%, #162a27 72%, #10211f 100%);
+    }
+    .botanical-plate::after {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      pointer-events: none;
+      border: 1px solid rgba(225, 233, 210, 0.22);
+    }
+    .botanical-drawing {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: min(65%, 390px);
+      height: 100%;
+      color: #b9d3af;
+      opacity: 0.84;
+      pointer-events: none;
+    }
+    .botanical-edition {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      color: #cbdcc6;
+    }
+    .botanical-name {
+      position: relative;
+      z-index: 1;
+      margin-top: 0.85rem;
+      font-family: var(--display);
+      font-size: clamp(2.35rem, 5vw, 4.3rem);
+      font-weight: 520;
+      line-height: 0.93;
+      letter-spacing: -0.035em;
+    }
+    .botanical-tagline {
+      position: relative;
+      z-index: 1;
+      margin-top: 0.65rem;
+      color: #d9e3d3;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+    .piece .project-hook {
+      margin-top: 0.65rem;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      font-weight: 520;
+      line-height: 1.13;
+      letter-spacing: -0.015em;
+    }
+    .piece .project-description { margin-top: 0.9rem; }
+    .project-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0 0;
+    }
+    .project-points li {
+      padding: 0.33rem 0.65rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 550;
+      letter-spacing: 0.01em;
+    }
+    .piece .project-boundary {
+      margin-top: 0.9rem;
+      color: var(--faint);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    .piece .project-link { margin-top: 1.15rem; }
+
     .offers, .work-grid {
       display: grid;
       gap: 2rem;
@@ -692,39 +796,72 @@
       <div class="wrap">
         <p class="kicker">01 — Studio</p>
         <h2 id="studio-title">Work I own.</h2>
-        <p class="section-intro">Products built to be useful beyond the first launch. The work—not a pitch deck—is the evidence.</p>
+        <p class="section-intro">Two different fields. One practice: make complex work easier to navigate, and keep human judgment in the loop.</p>
 
-        <article class="piece">
-          <div class="frame">
+        <article class="piece" aria-labelledby="keyprose-title">
+          <figure class="frame studio-art">
             <img
               src="/assets/work/keyprose.webp"
               srcset="/assets/work/keyprose-720.webp 720w, /assets/work/keyprose.webp 1200w"
               sizes="(min-width: 860px) 36rem, calc(100vw - 2.5rem)"
               width="1200"
               height="750"
-              alt="KeyProse homepage. The headline reads: the AI back office for listing agents."
+              alt="KeyProse interface showing an AI back office for real-estate listing agents."
+              loading="lazy"
               decoding="async">
-          </div>
+            <figcaption>01 / Real-estate workflows — product interface</figcaption>
+          </figure>
           <div>
-            <p class="eyebrow">Owned product</p>
-            <h3>KeyProse</h3>
-            <p>The AI back office for listing agents. A self-hosted toolkit that drafts MLS listings, CMA reports, social posts, and email campaigns. The public demo runs without an API key. Listing copy and CMA figures on the site are samples for review, not an appraisal.</p>
-            <a class="more" href="https://keyprose.com" target="_blank" rel="noopener noreferrer">Visit KeyProse<span class="visually-hidden"> (opens in a new tab)</span></a>
+            <p class="eyebrow">Production 01 / Real estate</p>
+            <h3 id="keyprose-title">KeyProse</h3>
+            <p class="project-hook">One property brief. Multiple useful drafts.</p>
+            <p class="project-description">A toolkit for listing agents that brings listing descriptions, comparative market analysis drafts, social posts, and email campaigns into one workflow. Built around turning supplied property details into materials a person can review and refine.</p>
+            <ul class="project-points" aria-label="KeyProse capabilities">
+              <li>Listing copy</li>
+              <li>CMA drafts</li>
+              <li>Social posts</li>
+              <li>Email campaigns</li>
+            </ul>
+            <p class="project-boundary">Demo copy and figures are illustrative. CMA outputs are not appraisals; professional review remains essential.</p>
+            <a class="more project-link" href="https://keyprose.com" target="_blank" rel="noopener noreferrer">Explore KeyProse<span class="visually-hidden"> (opens in a new tab)</span></a>
           </div>
         </article>
 
-        <article class="piece is-flip">
-          <div class="frame" aria-hidden="true">
-            <div class="typecard">
-              <span>Owned product</span>
-              <b>WildThesis</b>
+        <article class="piece is-flip" aria-labelledby="wildthesis-title">
+          <figure class="frame studio-art studio-art--botanical">
+            <div class="botanical-plate" aria-hidden="true">
+              <svg class="botanical-drawing" viewBox="0 0 320 290" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <circle cx="203" cy="135" r="108" stroke="currentColor" stroke-opacity=".25" stroke-width="1"/>
+                <circle cx="203" cy="135" r="81" stroke="currentColor" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 7"/>
+                <path d="M168 270C178 218 182 191 189 154C199 106 211 69 228 25" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M188 169C157 143 143 127 126 99M198 130C226 105 244 92 268 80M180 211C149 192 123 178 111 159M208 97C186 78 179 62 175 44" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M126 99C88 90 76 64 72 45C100 48 123 62 126 99Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".09"/>
+                <path d="M268 80C282 53 290 31 289 18C259 28 244 51 268 80Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".11"/>
+                <path d="M111 159C78 159 62 143 50 124C82 118 100 130 111 159Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".10"/>
+                <path d="M175 44C155 33 148 17 149 6C170 12 177 25 175 44Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".09"/>
+                <path d="M228 25C225 11 229 4 240 0C245 17 241 26 228 25Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".10"/>
+                <path d="M153 235C123 236 109 221 101 205C127 202 143 212 153 235Z" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity=".07"/>
+                <path d="M181 202C210 188 225 173 234 151M234 151C252 151 267 139 274 123C248 121 236 133 234 151Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+              <span class="botanical-edition">Wild Thesis / Field notes</span>
+              <span class="botanical-name">Wild Thesis</span>
+              <span class="botanical-tagline">Research · Sources · Context</span>
             </div>
-          </div>
+            <figcaption>02 / Botanical research — illustrative art direction</figcaption>
+          </figure>
           <div>
-            <p class="eyebrow">Owned product</p>
-            <h3>WildThesis</h3>
-            <p>An educational herbal research reference: a herb library, a five-question herb finder, and a checker for known herb–herb and herb–drug interactions. It organizes source material. It does not diagnose, recommend, or give medical advice.</p>
-            <a class="more" href="https://wildthesis.com" target="_blank" rel="noopener noreferrer">Visit WildThesis<span class="visually-hidden"> (opens in a new tab)</span></a>
+            <p class="eyebrow">Production 02 / Botanical research</p>
+            <h3 id="wildthesis-title">Wild Thesis</h3>
+            <p class="project-hook">Find the source. Understand the limits.</p>
+            <p class="project-description">An educational herbal research reference that organizes herb information alongside source material and safety context. Explore herb profiles, use the guided finder, and investigate documented herb–herb and herb–drug interaction notes.</p>
+            <ul class="project-points" aria-label="Wild Thesis capabilities">
+              <li>Herb directory</li>
+              <li>Guided finder</li>
+              <li>Source context</li>
+              <li>Interaction notes</li>
+            </ul>
+            <p class="project-boundary">For research and education only. Not a diagnostic service, treatment recommendation, or substitute for professional medical advice.</p>
+            <a class="more project-link" href="https://wildthesis.com" target="_blank" rel="noopener noreferrer">Explore Wild Thesis<span class="visually-hidden"> (opens in a new tab)</span></a>
           </div>
         </article>
       </div>
