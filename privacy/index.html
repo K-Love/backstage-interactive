@@ -6,7 +6,8 @@
   <title>Privacy Policy — Backstage Interactive</title>
   <meta name="description" content="Privacy Policy for the Backstage Interactive website: contact forms, Netlify hosting, and what this site does not collect.">
   <meta name="theme-color" content="#07070f">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
+  <script src="/assets/theme-preference.js"></script>
   <link rel="canonical" href="https://backstageinteractive.com/privacy/">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -50,10 +51,23 @@
       --blue: #2e3192;
       --blue-ink: #c9ccff;
       --warm: #e7a07a;
+      --panel: #101018;
+      color-scheme: dark;
       --display: "Cormorant", "Iowan Old Style", Palatino, Georgia, serif;
       --sans: "Inter", system-ui, sans-serif;
       --wrap: 1120px;
       --header: 4.5rem;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f7f5f0;
+      --ink: #182134;
+      --muted: #37445a;
+      --faint: #506078;
+      --line: rgba(24, 33, 52, 0.20);
+      --blue-ink: #343786;
+      --warm: #8a3e1c;
+      --panel: #fffdf9;
     }
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -101,6 +115,16 @@
     .wrap {
       width: min(var(--wrap), calc(100% - 2.5rem));
       margin-inline: auto;
+    }
+    /* Preserve the original midnight wordmark treatment across themes. */
+    .site-header, .site-footer {
+      --ink: #efedf6;
+      --muted: #c4c3d4;
+      --faint: #a7a6bc;
+      --blue-ink: #c9ccff;
+      --line: rgba(239, 237, 246, 0.14);
+      color: var(--ink);
+      background: #07070f;
     }
     .site-header {
       position: sticky;
@@ -151,6 +175,26 @@
       font-size: 0.92rem;
     }
     .nav-list a:hover { color: var(--ink); }
+    .theme-toggle {
+      display: none;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 44px;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(239, 237, 246, 0.48);
+      border-radius: 99px;
+      background: rgba(239, 237, 246, 0.08);
+      color: #efedf6;
+      font: 560 0.8rem var(--sans);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    html[data-theme] .theme-toggle { display: inline-flex; }
+    .theme-toggle:hover { background: rgba(239, 237, 246, 0.17); }
+    .theme-toggle:focus-visible { outline: 3px solid #c9ccff; outline-offset: 3px; }
+    .theme-symbol { font-size: 1.12rem; line-height: 1; }
     .prose {
       max-width: 42rem;
       padding: clamp(2.4rem, 6vw, 4.2rem) 0 clamp(3rem, 7vw, 5rem);
@@ -191,7 +235,7 @@
       padding: 1rem 1.05rem;
       border: 1px solid var(--line);
       border-left: 3px solid var(--warm);
-      background: #101018;
+      background: var(--panel);
     }
     .callout p { margin: 0; color: var(--ink); }
     .callout p + p { margin-top: 0.75rem; }
@@ -262,16 +306,36 @@
       .brand img { width: 240px; }
       .site-footer .brand img { width: 168px; }
     }
+    @media (max-width: 760px) {
+      .header-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.45rem;
+        padding-block: 0.6rem 0.35rem;
+      }
+      .site-header .brand { grid-column: 1; grid-row: 1; }
+      .site-header .brand img { width: min(190px, 52vw); }
+      .site-header nav { grid-column: 1 / -1; grid-row: 2; width: 100%; min-width: 0; }
+      .theme-toggle { grid-column: 2; grid-row: 1; justify-self: end; }
+      .nav-list { justify-content: space-between; }
+      .nav-list a { padding-inline: 0.35rem; font-size: 0.84rem; }
+      h2 { scroll-margin-top: 9rem; }
+    }
     @media (max-width: 420px) {
+      .site-header .brand img { width: min(165px, 48vw); }
+      .theme-toggle { padding-inline: 0.55rem; font-size: 0.75rem; }
       .wrap { width: min(var(--wrap), calc(100% - 1.7rem)); }
       .nav-list { gap: 0; }
-      .nav-list a { padding-inline: 0.32rem; }
+      .nav-list a { padding-inline: 0.32rem; font-size: 0.8rem; }
+      h2 { scroll-margin-top: 10.5rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
     @media print {
-      body, .site-header { background: #fff; color: #111; }
+      body, .site-header, .site-footer { background: #fff; color: #111; }
+      .site-header, .site-footer { --ink: #111; --muted: #111; --faint: #111; --blue-ink: #111; --line: #ccc; }
+      .theme-toggle { display: none !important; }
       .site-header { position: static; }
       p, li, .effective, .colophon, .footer-nav a, .nav-list a { color: #111; }
       a { color: #111; }
@@ -293,6 +357,10 @@
           <li><a href="/#contact">Contact</a></li>
         </ul>
       </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode">
+        <span class="theme-symbol" aria-hidden="true">☼</span>
+        <span class="theme-label">Light mode</span>
+      </button>
     </div>
   </header>
 
@@ -300,7 +368,7 @@
     <article class="wrap prose">
       <p class="kicker">Backstage Interactive</p>
       <h1>Privacy Policy</h1>
-      <p class="effective">Effective date: November 6, 2026.</p>
+      <p class="effective">Effective date: November 7, 2026.</p>
 
       <div class="callout">
         <p>This policy covers the public website at backstageinteractive.com only. I run that site as Backstage Interactive, a one-person studio. It does not cover KeyProse, WildThesis, client websites, or any other product.</p>
@@ -404,6 +472,7 @@
       <section id="cookies" aria-labelledby="cookies-title">
         <h2 id="cookies-title">Cookies and analytics</h2>
         <p>The pages in this site do not include an analytics script, an advertising pixel, or a cookie banner. Their own page code does not set a cookie. I am not describing optional products that can be switched on in a hosting account, because those switches are not in the website files.</p>
+        <p>The homepage, these policy pages, and the studio confirmation page can store an optional dark/light reading preference in your browser under the localStorage key <code>backstage-theme</code>. That preference is used only to display the theme you chose; it is not a tracking cookie or included in form submissions.</p>
         <p>The exception is Google reCAPTCHA on the two service forms, and only when Netlify shows the checkbox. Google’s reCAPTCHA can use a cookie as part of that check.</p>
       </section>
 
@@ -436,7 +505,7 @@
 
       <section id="changes" aria-labelledby="changes-title">
         <h2 id="changes-title">Changes</h2>
-        <p>If I change this policy, I will update this page and the effective date at the top. This version is effective November 6, 2026. This site has no mailing list for policy notices. The rules for using the site are in the <a href="/terms/">Terms of Use</a>.</p>
+        <p>If I change this policy, I will update this page and the effective date at the top. This version is effective November 7, 2026. This site has no mailing list for policy notices. The rules for using the site are in the <a href="/terms/">Terms of Use</a>.</p>
       </section>
     </article>
   </main>
