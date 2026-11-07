@@ -6,9 +6,11 @@ Static site for [backstageinteractive.com](https://backstageinteractive.com/). [
 
 | Route | What it is |
 | --- | --- |
-| `/` | Coming Soon. Leave this page as it is until the studio home page is ready. |
-| `/google-business-profile-home-services` | GBP Fix-and-Protect landing page for home service pros. |
+| `/` | Studio homepage: owned products, client work, service offers, about, and inquiry form. |
+| `/coming-soon.html` | Archived launch page; not the production homepage. |
+| `/google-business-profile-home-services/` | GBP Fix-and-Protect landing page for home service pros. |
 | `/website-fixes/` | Website improvement services (noindex). |
+| `/privacy/` and `/terms/` | Website policies linked from the public footer. |
 | `/tools/idea-validator/` | Internal preview tool. |
 
 ## Preview locally
@@ -19,9 +21,41 @@ From the repository root:
 python3 -m http.server 8080
 ```
 
-Open [http://localhost:8080/google-business-profile-home-services/](http://localhost:8080/google-business-profile-home-services/).
+Open [http://localhost:8080/](http://localhost:8080/) for the flagship homepage, or [the GBP offer](http://localhost:8080/google-business-profile-home-services/).
 
 A local server will not store form submissions. Netlify does that after deploy.
+
+## Homepage v0.2 — Production Bible alignment
+
+The homepage deliberately makes two paths visible: **Studio / owned work** and
+**Agency / client work**. Its creative direction is restrained and cinematic,
+rather than a literal theater set. Keep the site's official wordmark and the
+headline “Where ideas become real things”; favor real projects and accurate
+claims over decorative manifesto copy.
+
+The v0.2 pass improves mobile navigation, clarifies both paths in the hero,
+and refines the studio/about language. It does not change any existing form
+names, thank-you URLs, legal pages, or the separate GBP/Website Fixes offers.
+
+Before proposing or publishing future homepage changes:
+
+1. Run `python3 scripts/check_homepage.py` from the repository root.
+2. Preview at **320, 375, 768, and 1440 CSS pixels**. Verify the header has no
+   horizontal overflow, all navigation links are visible, and anchor headings
+   aren't obscured by the sticky header.
+3. Open Studio, Services, Client work, About, and Contact. Check the project
+   links and local assets, including responsive images.
+4. On a Netlify deploy preview, verify the inquiry form markup still appears.
+   After a production deployment, submit a real test, check the Netlify
+   notification, and confirm `/thank-you.html`. A local HTTP server cannot
+   verify form submission.
+5. Check keyboard navigation and reduced-motion behavior.
+
+**Deployment note:** `netlify.toml` publishes the repository root. Check the
+actual Netlify site's connected repository, branch, and deploy status before
+concluding that the live domain is serving this commit. Do not equate a merge
+with a verified public deployment.
+
 
 ## Launch values
 
