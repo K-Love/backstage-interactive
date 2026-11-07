@@ -190,6 +190,33 @@
     a { color: var(--blue-ink); text-underline-offset: 0.22em; }
     a:hover { color: var(--ink); }
     strong { color: var(--ink); font-weight: 560; }
+    .table-scroll {
+      overflow-x: auto;
+      margin-top: 1rem;
+      border: 1px solid var(--line);
+    }
+    .table-scroll:focus-visible { outline-offset: 2px; }
+    table {
+      width: 100%;
+      min-width: 40rem;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    caption {
+      caption-side: bottom;
+      padding: 0.75rem 0.8rem 0.9rem;
+      color: var(--faint);
+      text-align: left;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.7rem 0.75rem;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+    th { color: var(--ink); font-weight: 560; }
+    td strong { font-weight: 560; }
     .site-footer { border-top: 1px solid var(--line); padding: 2rem 0 2.6rem; }
     .footer-inner {
       display: flex;
@@ -253,7 +280,8 @@
       <p class="effective">Draft date: November 7, 2026. This is not the privacy policy in effect. The website policy remains <a href="/privacy/">the Privacy Policy for backstageinteractive.com</a>. This page is only a draft about a private tool.</p>
 
       <div class="callout">
-        <p>The facts below were supplied for this draft on November 7, 2026. The DigitalOcean server and the Google account were not inspected while the page was written. Where a fact was not supplied, the page says it is not established. It does not fill the gap with a promise.</p>
+        <p>The facts below were supplied for this draft on November 7, 2026. The server and the Google account were not inspected for this page. The same day, I adopted a retention and deletion policy. I say a copy of that policy is saved on the server. This page was not compared with that file, and it is not an audit of the server.</p>
+        <p>Adopting the policy did not delete anything already stored. Periodic cleanup, complete deletion tooling, and a restore drill are not implemented. Until those are validated, the day counts below are manual targets. They are not a promise that material disappears on that day, and they are not automatic expiry.</p>
       </div>
 
       <nav class="toc" aria-label="On this page">
@@ -264,8 +292,11 @@
           <li><a href="#drive">Drive access now</a></li>
           <li><a href="#test">What was tested</a></li>
           <li><a href="#services">Server and other services</a></li>
-          <li><a href="#open">What is not established</a></li>
+          <li><a href="#retention">How long material is kept</a></li>
+          <li><a href="#deletion">Deleting material</a></li>
           <li><a href="#revoke">Revoking Google access</a></li>
+          <li><a href="#restore">Restore safeguard, not yet drilled</a></li>
+          <li><a href="#open">What is still not established</a></li>
           <li><a href="#contact">Questions about this draft</a></li>
           <li><a href="#decisions">Decisions required before publication</a></li>
         </ol>
@@ -286,6 +317,7 @@
       <section id="drive" aria-labelledby="drive-title">
         <h2 id="drive-title">Drive access now</h2>
         <p>A dedicated Google account has authorized Drive access for this app. This draft does not publish that account, and it does not publish a password or a client secret.</p>
+        <p>The Google app is in Testing mode. That is not a production publishing status. This draft does not list test users.</p>
         <p>The permission was described as broad. The exact scope strings were not supplied. This draft does not name scopes, because a guessed name would be false precision.</p>
         <p>The connector is configured for a folder named Backstage Work. That is a configuration choice on the tool. It is not the same fact as the Google permission. This draft does not say Google enforces a folder-only sandbox, and it does not say the broad permission is limited to that folder by the provider.</p>
       </section>
@@ -293,29 +325,139 @@
       <section id="test" aria-labelledby="test-title">
         <h2 id="test-title">What was tested</h2>
         <p>One upload test passed, and one download test passed. This draft does not name the file, list metadata fields, or say whether that test file is still in the folder. Those details were not supplied.</p>
-        <p>Automatic transfers of Drive files are not implemented. Bringing Drive files into Chief’s workflow is not implemented. That is a statement of what is absent, not a roadmap.</p>
+        <p>Routine Drive exchange is not enabled. Chief integration is not enabled. Rules for removing transfer and staging copies are a future requirement if that exchange is turned on. They are not an active workflow, and this page is not announcing a build schedule.</p>
       </section>
 
       <section id="services" aria-labelledby="services-title">
         <h2 id="services-title">Server and other services</h2>
-        <p>OpenClaw runs on a DigitalOcean server. Daily backups of that server are enabled. Restoring from a backup has not been tested. This draft does not say what the backup copies, how long a backup is kept, or whether a backup can be wiped on request.</p>
+        <p>OpenClaw runs on a DigitalOcean server. Daily backups of that server are enabled. I had already confirmed that they were turned on. DigitalOcean’s documents for the daily plan describe a standard seven-day rolling retention. I checked those documents on November 7, 2026: the <a href="https://docs.digitalocean.com/products/backups/getting-started/quickstart/" target="_blank" rel="noopener noreferrer">backups quick start<span class="visually-hidden"> (opens in a new tab)</span></a> and <a href="https://docs.digitalocean.com/products/backups/how-to/convert-to-snapshot/" target="_blank" rel="noopener noreferrer">how backups convert to snapshots<span class="visually-hidden"> (opens in a new tab)</span></a>. Seven days is that documented standard. It is not a fresh audit of this account’s expiry setting. A copy can remain until that restore point actually expires.</p>
+        <p>This draft does not say one file can be deleted out of a full-server backup image. It does not say daily backups are routinely converted into snapshots that are kept indefinitely. Restoring a backup has not been tested. Manual snapshots, exported backups, and migration archives are a different hold, described with the other targets below. They are not covered by the seven-day daily rule.</p>
         <p>OpenClaw uses Abacus for model requests. It uses Telegram for conversations with me. Drive file content going to Abacus or Telegram has not been demonstrated. This draft does not convert that gap into a promise that file content never goes there, and it does not claim the opposite. What those services receive from this app is not established.</p>
         <p>The website itself is hosted on Netlify. That host is described in the website Privacy Policy. This draft does not move the private tool onto Netlify, and it does not say Netlify stores Drive files.</p>
       </section>
 
-      <section id="open" aria-labelledby="open-title">
-        <h2 id="open-title">What is not established</h2>
-        <div class="unsettled">
-          <p>A complete retention and deletion policy is not established. That includes working copies of files, logs, server backups, and copies a provider may hold. No time period is stated.</p>
-          <p>No statement is made here that data is not stored, not shared, encrypted, or excluded from model training. Those promises were not supported by supplied facts.</p>
-          <p>No Limited Use sentence is made. Google’s Workspace user-data policy asks apps that use the relevant scopes to say, in substance, that use of information received from Google Workspace scopes adheres to the Google User Data Policy, including the Limited Use requirements. This draft does not say that. The scopes, the providers, and the retention rules are not verified. Saying it now would claim a practice this page cannot show.</p>
-          <p>This draft is not an assurance that Google will approve the app, and it is not legal advice. The documents a later review would have to face include the <a href="https://developers.google.com/identity/protocols/oauth2/policies" target="_blank" rel="noopener noreferrer">OAuth 2.0 policies<span class="visually-hidden"> (opens in a new tab)</span></a>, the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy<span class="visually-hidden"> (opens in a new tab)</span></a>, and the <a href="https://developers.google.com/workspace/workspace-api-user-data-developer-policy" target="_blank" rel="noopener noreferrer">Workspace user data and developer policy<span class="visually-hidden"> (opens in a new tab)</span></a>. Linking them is not a claim of compliance.</p>
+      <section id="retention" aria-labelledby="retention-title">
+        <h2 id="retention-title">How long material is kept</h2>
+        <p>This is the operating policy I adopted on November 7, 2026. It is the rule I intend to follow. It is not a report that the server already enforces it. No cleanup was run when I adopted it.</p>
+        <div class="callout">
+          <p>Saved work stays until I ask for it to be deleted, or until an expiry I set for that project. Other copies follow the manual targets in the table. Automatic cleanup is not fully implemented. A deletion request covers controlled live copies first. Backups and outside providers are a separate step. Daily DigitalOcean backups follow that plan’s standard seven-day window. Manual archives do not. Revoking Google access does not delete copies. None of the day counts is a guaranteed deadline, a full automatic purge, or a promise that Abacus, Telegram, or a model provider keeps nothing or skips training.</p>
         </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Retention targets. The table scrolls sideways on a narrow screen.">
+          <table class="schedule">
+            <caption>Manual targets adopted November 7, 2026. Not automatic expiry. Not a guarantee that material is gone on that day.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Material</th>
+                <th scope="col">Target</th>
+                <th scope="col">Clock starts</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Saved work. My originals, references, final deliverables, and project knowledge I explicitly save.</th>
+                <td>Kept until I request deletion, or until an expiry I set for that project. Closed projects get an annual review. Authoritative work is not deleted because of age.</td>
+                <td>My deletion request, a project expiry I set, or the annual review.</td>
+                <td>Rule adopted. Adopting it did not delete existing work.</td>
+              </tr>
+              <tr>
+                <th scope="row">Transfer and staging copies</th>
+                <td>Remove within 7 days after a successful transfer and a verification of that transfer.</td>
+                <td>Successful transfer and verification.</td>
+                <td>Future rule. Routine Drive exchange is not enabled, so this is not an active workflow.</td>
+              </tr>
+              <tr>
+                <th scope="row">Failed transfer copies</th>
+                <td>Up to 30 days to investigate, then resolve or delete. The hold is not extended in silence.</td>
+                <td>The failed copy.</td>
+                <td>Future rule, for the same reason. Not an active workflow.</td>
+              </tr>
+              <tr>
+                <th scope="row">Inactive conversations and completed task records</th>
+                <td>90 days. Active tasks are excluded. Work I explicitly select is kept separately as saved work. A file’s modification time, by itself, does not show that a conversation is inactive.</td>
+                <td>Last activity, or completion of the task.</td>
+                <td>Manual target. Periodic cleanup is not implemented. Older records have not been checked against this target. No cleanup has been run.</td>
+              </tr>
+              <tr>
+                <th scope="row">Inbound attachments and generated intermediate media</th>
+                <td>30 days, unless I promote the item to saved work.</td>
+                <td>Completion of the related task.</td>
+                <td>Manual target. Not an automatic purge.</td>
+              </tr>
+              <tr>
+                <th scope="row">Diagnostics, application, and system logs</th>
+                <td>30 days or less, using rotation that already exists. A single purge of every log at 30 days is not configured. Existing defaults differ. The instruction is also to keep unnecessary file contents, credentials, and full prompts out of logs. That instruction is not proof of what logs contain today.</td>
+                <td>Existing rotation, with 30 days as the target ceiling.</td>
+                <td>Manual target. The unified 30-day purge is not configured.</td>
+              </tr>
+              <tr>
+                <th scope="row">Security evidence</th>
+                <td>Up to 90 days after the incident is closed, and only what is narrowly necessary, with a written reason and restricted access.</td>
+                <td>Incident closure.</td>
+                <td>Manual exception. Not automatic.</td>
+              </tr>
+              <tr>
+                <th scope="row">Deletion receipts</th>
+                <td>One year after the matter is closed. A receipt is minimal and has no file content: an opaque id, dates, categories, the outcome, and provider limits. It does not include sensitive file names or file content. The ledger is kept apart from the server recovery image. That separation is a manual step.</td>
+                <td>Closure of the deletion matter.</td>
+                <td>Manual target. The receipt tooling is not implemented.</td>
+              </tr>
+              <tr>
+                <th scope="row">Daily DigitalOcean backups</th>
+                <td>The daily plan’s documented standard is seven days, rolling. A copy can remain until that restore point expires. One file is not removed from a full-server image on request. Backups are not routinely turned into snapshots kept without an end date.</td>
+                <td>DigitalOcean’s daily backup cycle.</td>
+                <td>Backups are enabled, as I had already confirmed. Seven days is the documented plan standard, not a new audit of this account’s expiry setting.</td>
+              </tr>
+              <tr>
+                <th scope="row">Manual snapshots, exported backups, and migration archives</th>
+                <td>Review and delete 30 days after a migration or restore has succeeded, the result has been validated, and recovery coverage has been checked. A longer hold needs a purpose and a review date.</td>
+                <td>Successful validation of that migration or restore, including the recovery check.</td>
+                <td>Manual target. Older archives exist. They do not expire on their own, and the seven-day daily backup rule does not cover them.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Before older material is deleted, it is reviewed so active work, saved work, and inactive material are not treated as the same thing. Exceptions are written down. The first of those reviews is November 14, 2026, and exceptions are reviewed every 30 days after that. No cleanup has been run. This draft does not say older records already sit inside the 30-day or 90-day targets, and it does not publish an inventory of those records.</p>
+      </section>
+
+      <section id="deletion" aria-labelledby="deletion-title">
+        <h2 id="deletion-title">Deleting material</h2>
+        <p>Deletion under this policy is a manual process. The tooling for a complete deletion is not implemented. The steps below are the rule, not a claim that a button already does them.</p>
+        <ul>
+          <li>Confirm that the request is mine, and confirm the precise scope.</li>
+          <li>Deleting a Drive original has to be an explicit choice. Deleting a cache or staging copy is not that choice.</li>
+          <li>Pause related transfers, tasks, and any queue that would import the material again.</li>
+          <li>Write the content-free receipt outside the server recovery image.</li>
+          <li>Find the controlled copies, indexes, logs, and backups the scope covers. Remove those. Leave unrelated work in place. Confirm before the live copy is removed.</li>
+          <li>The target for that controlled live deletion is within 7 calendar days after the scope is confirmed. That is a manual target, not a service level.</li>
+          <li>Closing the request is a later step. It waits until backup expiry and provider limits are accounted for. Live deletion and full closure are not the same event.</li>
+          <li>Then check that no live or indexed copy remains, and that nothing is queued to bring the material back.</li>
+        </ul>
+        <p>Removing a file link is not physical sanitization of a disk. A file in Google Drive Trash can still be recovered. It is not permanent erasure. Records at Abacus, Telegram, or a model provider need that provider’s own process. Their retention, training, and backup terms are not verified here. Deleting a copy on the server does not say those records are erased.</p>
       </section>
 
       <section id="revoke" aria-labelledby="revoke-title">
         <h2 id="revoke-title">Revoking Google access</h2>
-        <p>Removing the app’s Google permission, or revoking it from the Google account, stops further API access with that permission. It does not automatically delete copies that may already exist on the DigitalOcean server, in a daily backup, or with Abacus, Telegram, or another provider. Whether any of those copies exist, and how to delete them, is part of the retention gap above.</p>
+        <p>Credentials the app needs stay in place while the Google account is authorized. Disconnecting is a separate manual set of steps: revoke Google access, remove the active credentials, and track when a backup that could still hold those credentials expires. Credentials are rotated when a compromise or a restore requires it. That rotation is manual.</p>
+        <p>Revoking the Google permission stops further API access. It does not delete downloads, results, conversation history, or backups. Credentials are also removed so an old backup cannot be used to resume access. The actual backup expiry is what gets recorded. If a provider’s schedule is longer than the seven-day daily plan, that longer schedule is what this policy has to disclose. Manual archives are tracked separately. They do not expire with the daily backups.</p>
+      </section>
+
+      <section id="restore" aria-labelledby="restore-title">
+        <h2 id="restore-title">Restore safeguard, not yet drilled</h2>
+        <div class="unsettled">
+          <p>This is the restore rule. It has not been implemented as a drill, and a restore has not been run successfully under it.</p>
+          <p>A restore is done in isolation. The gateway, the Telegram sender, transfers, and paid tasks stay off. The deletion ledger outside the server image is consulted. Deletions made after the backup are applied again. Stale credentials and queues are removed. Indexes are rebuilt. The result is checked before the server is put back on the network.</p>
+        </div>
+      </section>
+
+      <section id="open" aria-labelledby="open-title">
+        <h2 id="open-title">What is still not established</h2>
+        <div class="unsettled">
+          <p>The retention rules above are adopted. They are not the same as a finished purge. Periodic cleanup, complete deletion tooling, and the restore drill are not implemented. Exact storage locations for working copies and logs were not supplied. Exact OAuth scope strings were not supplied.</p>
+          <p>No statement is made here that data is not stored, not shared, encrypted, or excluded from model training. Drive file content going to Abacus or Telegram has not been demonstrated, and this page does not turn that into a promise that it never happens.</p>
+          <p>No Limited Use sentence is made. Google’s Workspace user-data policy asks apps that use the relevant scopes to say, in substance, that use of information received from Google Workspace scopes adheres to the Google User Data Policy, including the Limited Use requirements. This draft does not say that. The scopes, what providers receive, and whether any of it is used to train a model are not verified. Saying it now would claim a practice this page cannot show.</p>
+          <p>This draft is not an assurance that Google will approve the app, and it is not legal advice. The documents a later review would have to face include the <a href="https://developers.google.com/identity/protocols/oauth2/policies" target="_blank" rel="noopener noreferrer">OAuth 2.0 policies<span class="visually-hidden"> (opens in a new tab)</span></a>, the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy<span class="visually-hidden"> (opens in a new tab)</span></a>, and the <a href="https://developers.google.com/workspace/workspace-api-user-data-developer-policy" target="_blank" rel="noopener noreferrer">Workspace user data and developer policy<span class="visually-hidden"> (opens in a new tab)</span></a>. Linking them is not a claim of compliance.</p>
+        </div>
       </section>
 
       <section id="contact" aria-labelledby="contact-title">
@@ -326,12 +468,11 @@
 
       <section id="decisions" aria-labelledby="decisions-title">
         <h2 id="decisions-title">Decisions required before publication</h2>
-        <p>This list is why the page is still a draft. Publishing it, or pasting its URL into an OAuth consent screen, should wait until these are answered in words that can be checked.</p>
+        <p>The retention and deletion policy is adopted. It is written above as manual targets. The page is still a draft because the items below are not settled. Publishing it, or pasting its URL into an OAuth consent screen, should wait until they are answered in words that can be checked.</p>
         <ol>
-          <li><strong>Exact scopes and data.</strong> The scope strings Google shows, and a plain-language list of which Drive data the app can read or change. “Broad permission” and “configured for the Backstage Work folder” are not those strings, and they are not a provider-enforced folder limit.</li>
-          <li><strong>Working copies and logs.</strong> Where a file is written when the tool uses it, where logs are written, and whether a test file or its metadata is kept.</li>
-          <li><strong>Retention, deletion, and backups.</strong> How long working files, logs, and daily server backups are kept, what a backup contains, whether restore works, and how a person gets a copy deleted. Revoking Google access is not that policy.</li>
-          <li><strong>Providers, processing, and training.</strong> Whether Abacus, Telegram, or any other provider receives Drive file content, names, or other Drive data, and whether any of it is used to train a model.</li>
+          <li><strong>Automation, an actual purge, and a restore drill.</strong> The rules exist. Periodic cleanup, complete deletion tooling, and the restore drill are not implemented. No cleanup was run when the policy was adopted. Older records have not been shown to already meet the 30-day or 90-day targets.</li>
+          <li><strong>Exact scopes, and where copies sit.</strong> The scope strings Google shows, and a plain-language list of which Drive data the app can read or change, are still missing. So are the storage locations of working copies and logs. “Broad permission” and “configured for the Backstage Work folder” are not those strings, and they are not a provider-enforced folder limit.</li>
+          <li><strong>Providers and training.</strong> Whether Abacus, Telegram, or any other provider receives Drive file content, names, or other Drive data, and whether any of it is used to train a model. Their retention and backup terms are not verified. Server deletion does not settle that.</li>
           <li><strong>Support email.</strong> Whether a user-support email will be published for this app. The website’s public contact remains the homepage form. No address is invented here. Google’s consent screen commonly displays a support email; that value is not chosen in this draft.</li>
         </ol>
         <p>There is no separate terms page for this app. The website <a href="/terms/">Terms of Use</a> still cover the website only. A terms page for the tool is not added here, because the tool is private and the open privacy facts above are the blocking gap.</p>
