@@ -108,12 +108,14 @@ def main():
 
     # Agency is the navigation/section name; the content is client work.
     # Preserve genuine site screenshots and label the coaching illustration.
+    studio_start = html.find('<section class="section" id="studio"')
     agency_start = html.find('<section class="section" id="work"')
+    services_start = html.find('<section class="section" id="services"')
     about_start_for_work = html.find('<section class="section" id="about"')
-    if agency_start < 0 or about_start_for_work <= agency_start:
-        audit.errors.append("Agency section missing or out of order")
+    if not (0 <= studio_start < agency_start < services_start < about_start_for_work):
+        audit.errors.append("Homepage must read Studio → Agency → Services → About")
     else:
-        agency = html[agency_start:about_start_for_work]
+        agency = html[agency_start:services_start]
         if '<h2 id="work-title">Client work.</h2>' not in agency:
             audit.errors.append("Agency heading must be Client work.")
         for expected in (
@@ -174,6 +176,43 @@ def main():
         if agency.count('sd-home1.jpg') != 1 or agency.count('sd-home2.jpg') != 1:
             audit.errors.append("Sharrey's earrings and necklace must be present in full")
 
+    # The same hierarchy appears in both navigations, not only the document.
+    nav_order = ('href="#studio">Studio</a>', 'href="#work">Agency</a>',
+                 'href="#services">Services</a>')
+    for opening, closing in (('<nav aria-label="Primary">', '</nav>'),
+                             ('<nav class="footer-nav"', '</nav>')):
+        start = html.find(opening)
+        end = html.find(closing, start)
+        if start < 0 or end <= start:
+            audit.errors.append(f"Missing navigation: {opening}")
+        else:
+            nav = html[start:end]
+            positions = [nav.find(link) for link in nav_order]
+            if any(pos < 0 for pos in positions) or positions != sorted(positions):
+                audit.errors.append("Navigation must read Studio → Agency → Services")
+
+    if 0 <= services_start < about_start_for_work:
+        services = html[services_start:about_start_for_work]
+        for label, marker in {
+            "Updated Services heading": 'id="services-title">Find your starting point.</h2>',
+            "GBP original artwork": 'class="gbp-art"',
+            "GBP artwork disclosure": 'NO CLIENT RESULTS',
+            "GBP package link": 'href="/google-business-profile-home-services/"',
+            "Website Fixes package link": 'href="/website-fixes/"',
+            "Custom project invitation": 'Have something bigger in mind?',
+            "Contact call to action": 'href="#contact">Discuss a project</a>',
+            "New websites and marketing copy": 'digital marketing',
+        }.items():
+            if marker not in services:
+                audit.errors.append(f"Missing {label}: {marker}")
+        if 'Two ways to hire the studio.' in services or 'class="typecard"' in services:
+            audit.errors.append("Services still has old studio-hiring copy or placeholder")
+
+    for topic in ('<option>New website or redesign</option>',
+                  '<option>Digital marketing</option>'):
+        if topic not in html:
+            audit.errors.append(f"Missing inquiry topic: {topic}")
+
     if html.count('href="#work">Agency</a>') != 2:
         audit.errors.append("Both primary and footer navigation must say Agency")
     if 'href="#work">Client work</a>' in html:
@@ -198,7 +237,7 @@ def main():
                 audit.errors.append(f"Missing permanent redirect: {legacy} → /")
 
     # Section numbers belong to the homepage sections, not individual Studio projects.
-    for expected in ('01 — Studio', '02 — Services', '03 — Agency'):
+    for expected in ('01 — Studio', '02 — Agency', '03 — Services'):
         if f'<p class="kicker">{expected}</p>' not in html:
             audit.errors.append(f"Missing numbered section kicker: {expected}")
 
