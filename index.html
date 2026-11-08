@@ -615,27 +615,43 @@
       isolation: isolate;
       background: #f6f3ed;
     }
-    /* Keep the complete, unzoomed screenshots within the decorative rule.
-       Absolute positioning resolves the image size reliably at every card width. */
-    .client-art__visual--screenshot img {
+    /* Images reach the inside edge of the hairline rule. The surrounding
+       off-white field stays visible between that rule and the outer frame. */
+    .client-art__visual--screenshot { --image-inset: 0.6rem; }
+    .client-art--nina .client-art__visual img {
       display: block;
       position: absolute;
-      top: 1rem;
-      left: 1rem;
-      width: calc(100% - 2rem);
-      height: calc(100% - 2rem);
-      object-fit: contain;
-      object-position: center;
+      inset: var(--image-inset);
+      width: calc(100% - 2 * var(--image-inset));
+      height: calc(100% - 2 * var(--image-inset));
+      object-fit: cover;
+      object-position: center center;
     }
-    /* A little extra breathing room above Nina's site heading and jewelry. */
-    .client-art--nina .client-art__visual img {
-      top: 1.25rem;
+    /* The original Sharrey homepage screenshot ended before the jewelry did.
+       Show the complete, genuine product photography from the client site. */
+    .client-art__jewelry {
+      position: absolute;
+      inset: var(--image-inset);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: stretch;
+      background: #fff;
+      overflow: hidden;
+    }
+    .client-art__jewelry img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      object-fit: contain;
+      object-position: center center;
     }
     .client-art__visual--screenshot::after {
       content: "";
       position: absolute;
-      inset: 0.5rem;
-      border: 1px solid rgba(30, 34, 59, 0.12);
+      z-index: 1;
+      inset: var(--image-inset);
+      border: 1px solid rgba(30, 34, 59, 0.22);
       pointer-events: none;
     }
     .client-art figcaption {
@@ -1050,17 +1066,25 @@
           <article class="work-card">
             <figure class="frame client-art client-art--sharrey">
               <div class="client-art__visual client-art__visual--screenshot">
-                <img
-                  src="/assets/work/sharrey.webp"
-                  srcset="/assets/work/sharrey-720.webp 720w, /assets/work/sharrey.webp 1200w"
-                  sizes="(min-width: 860px) 22rem, calc(100vw - 2.5rem)"
-                  width="1200"
-                  height="750"
-                  alt="Sharrey Doré homepage detail, showing handmade jewelry pieces."
-                  loading="lazy"
-                  decoding="async">
+                <div class="client-art__jewelry">
+                  <img
+                    src="https://i0.wp.com/www.sharreydore.com/wp-content/uploads/2025/01/sd-home1.jpg?fit=334%2C500&amp;ssl=1"
+                    width="334" height="500"
+                    alt="Full pair of gold and turquoise earrings by Sharrey Doré."
+                    loading="lazy" decoding="async">
+                  <img
+                    src="https://i0.wp.com/www.sharreydore.com/wp-content/uploads/2025/01/sd-home2.jpg?fit=334%2C500&amp;ssl=1"
+                    width="334" height="500"
+                    alt="Complete handmade necklace by Sharrey Doré."
+                    loading="lazy" decoding="async">
+                  <img
+                    src="https://i0.wp.com/www.sharreydore.com/wp-content/uploads/2025/01/sd-home3.jpg?fit=800%2C534&amp;ssl=1"
+                    width="800" height="534"
+                    alt="Handmade statement ring by Sharrey Doré."
+                    loading="lazy" decoding="async">
+                </div>
               </div>
-              <figcaption>Handmade jewelry · Website detail</figcaption>
+              <figcaption>Handmade jewelry · Client-site photography</figcaption>
             </figure>
             <h3>Sharrey Doré</h3>
             <p>A site for handmade, one-of-a-kind jewelry. The pieces shown include earrings, a necklace, and a ring, and the site describes commissioned work.</p>
