@@ -90,8 +90,10 @@ The homepage smoke check verifies this hierarchy and the existing layout rules.
 The primary/footer navigation uses **Agency** to match the numbered
 `03 — Agency` section. Its on-page title is **Client work.** This page uses
 real site captures for Nina Lara Design and Sharrey Doré. They are shown
-as more focused, art-directed crops of the existing 1200×750 WebP assets;
-the underlying images and external site links are unchanged.
+fully within inset decorative frames, without CSS zoom or cropping, using
+the existing 1200×750 WebP assets. Nina Lara's screenshot sits slightly
+lower for comfortable top spacing; the underlying images and links
+remain unchanged.
 
 Chris Willburn has an original botanical-style editorial graphic grounded
 in the site's "Inside Out" wording and its mental / emotional / physical
