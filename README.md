@@ -7,11 +7,14 @@ Static site for [backstageinteractive.com](https://backstageinteractive.com/). [
 | Route | What it is |
 | --- | --- |
 | `/` | Studio homepage: owned products, client work, service offers, about, and inquiry form. |
-| `/coming-soon.html` | Archived launch page; not the production homepage. |
 | `/google-business-profile-home-services/` | GBP Fix-and-Protect landing page for home service pros. |
 | `/website-fixes/` | Website improvement services (noindex). |
 | `/privacy/` and `/terms/` | Website policies linked from the public footer. |
 | `/tools/idea-validator/` | Internal preview tool. |
+
+The former Coming Soon page is retired and its file has been removed. Netlify
+permanently redirects `/coming-soon.html`, `/coming-soon`, and
+`/coming-soon/` to `/`. The root `index.html` is the only studio homepage.
 
 ## Preview locally
 
@@ -77,8 +80,10 @@ status does not prove a separate product domain is responding.
 
 At mobile widths, verify the project images, captions, SVG illustration,
 headlines, capability chips, links, and alternating piece order. Test both
-dark and light reading modes. The homepage smoke check also verifies the
-expected production headings.
+dark and light reading modes. Each product uses the same numbered kicker
+format as the site's main sections (`01 — Real estate` and
+`02 — Botanical research`), with a consistent gap before the title.
+The homepage smoke check verifies these labels and layout rules.
 
 ## Homepage v0.2 — Production Bible alignment
 
