@@ -293,6 +293,7 @@
           <li><a href="#drive">Drive access now</a></li>
           <li><a href="#test">What was tested</a></li>
           <li><a href="#services">Server and other services</a></li>
+          <li><a href="#planned-flow">Requirements for future Drive analysis</a></li>
           <li><a href="#retention">How long material is kept</a></li>
           <li><a href="#deletion">Deleting material</a></li>
           <li><a href="#revoke">Revoking Google access</a></li>
@@ -336,6 +337,19 @@
         <p>In its <a href="https://api.abacus.ai/privacy-policy">published privacy policy</a>, reviewed November 7, 2026, Abacus says customer prompts, uploads, API data, and Google data are not used to develop, train, or improve generalized or proprietary models. It also says downstream model providers operate under zero-data-retention agreements. These are Abacus’s published commitments, not an independent audit or a verification of account-specific contract terms.</p>
         <p>That downstream commitment does not mean Abacus itself retains nothing. Retention and deletion deadlines for this RouteLLM API account’s requests, responses, logs, caches, and backup copies remain unconfirmed. Abacus’s policy allows some backup, archive, and audit retention after account termination without a fixed deadline. Separate chatbot retention documentation does not establish RouteLLM API retention.</p>
         <p><a href="https://telegram.org/privacy#3-3-1-cloud-chats">Telegram stores cloud-chat messages and attachments</a>. Deleting a server copy does not delete a Telegram copy. If owner-requested Drive analysis is implemented, the selected content and necessary context would pass through Abacus to the model. That future workflow and any Drive-derived Telegram delivery still need to be implemented and checked before being described as active.</p>
+      </section>
+
+      <section id="planned-flow" aria-labelledby="planned-flow-title">
+        <h2 id="planned-flow-title">Requirements for future Drive analysis</h2>
+        <p>These are requirements for a future workflow, not features running now. Before enabling it, I will update the disclosures and obtain consent for the actual data use.</p>
+        <ul>
+          <li>Only files I identify for a specific task may be processed. Adding a file to Drive will not start a paid model task.</li>
+          <li>Selected file content, necessary names and metadata, task instructions, and relevant conversation context would pass through Abacus to the selected model service. Unrelated files and conversation history must be excluded.</li>
+          <li>Private-file analysis must have web search, web fetch, and other unrelated outbound tools disabled through permissions. Any public research must run separately with sanitized or explicitly approved queries. These restrictions are not yet implemented.</li>
+          <li>Results should be saved with restricted Drive access. Default Telegram delivery would contain only a neutral completion notice and restricted Drive link; Telegram would receive that notice and link. Sending titles, excerpts, summaries, or attachments would require my explicit request. Sharing permissions must not be broadened.</li>
+          <li>Google-derived data must not be used for model training, advertising, sale, unrelated profiling, or unrequested redistribution. Retention and deletion rules must cover derived records and backup copies as well as downloaded files.</li>
+        </ul>
+        <p>Provider retention details and these controls must be reviewed before private-file analysis is enabled. No automatic deletion synchronization is planned.</p>
       </section>
 
       <section id="retention" aria-labelledby="retention-title">
