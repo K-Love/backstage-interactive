@@ -88,9 +88,8 @@ The homepage smoke check verifies this hierarchy and the existing layout rules.
 ## Agency — client work cards
 
 The cards are ordered by project recency: **Chris Willburn**, **Nina Lara
-Design**, **Sharrey Doré**. Their short image captions are **Wellness Coach**,
-**JEWELRY DESIGN**, and **HANDMADE JEWELRY**, respectively. The Chris caption
-keeps title case while the two jewelry captions are uppercase. The concise
+Design**, **Sharrey Doré**. Their short image captions are **WELLNESS COACH**,
+**JEWELRY DESIGN**, and **HANDMADE JEWELRY**, respectively. All three captions use uppercase for a consistent look. The concise
 captions are intended to stay on one line, keeping the three image cards
 visually even. The artwork, card copy and outbound links remain unchanged.
 
