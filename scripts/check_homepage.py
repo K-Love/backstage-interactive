@@ -123,7 +123,7 @@ def main():
             'sd-home1.jpg', 'sd-home2.jpg', 'sd-home3.jpg',
             '<figcaption>JEWELRY DESIGN</figcaption>',
             '<figcaption>HANDMADE JEWELRY</figcaption>',
-            '<figcaption>Wellness Coach</figcaption>',
+            '<figcaption>WELLNESS COACH</figcaption>',
             'aria-label="Editorial artwork for the Chris Willburn coaching website',
         ):
             if expected not in agency:
@@ -138,11 +138,9 @@ def main():
             audit.errors.append("Agency cards must be Chris, Nina, then Sharrey")
 
         # Short captions should stay a single line across card breakpoints.
-        for caption in ('Wellness Coach', 'JEWELRY DESIGN', 'HANDMADE JEWELRY'):
+        for caption in ('WELLNESS COACH', 'JEWELRY DESIGN', 'HANDMADE JEWELRY'):
             if agency.count(f'<figcaption>{caption}</figcaption>') != 1:
                 audit.errors.append(f"Missing or duplicate Agency caption: {caption}")
-        if '.client-art--chris figcaption { text-transform: none; }' not in html:
-            audit.errors.append("Wellness Coach caption must preserve title case")
 
         if '<div class="typecard">' in agency:
             audit.errors.append("Agency still uses a placeholder typecard")
