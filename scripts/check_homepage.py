@@ -106,6 +106,33 @@ def main():
         if marker not in html:
             audit.errors.append(f"Missing {label}: {marker}")
 
+    # Agency is the navigation/section name; the content is client work.
+    # Preserve genuine site screenshots and label the coaching illustration.
+    agency_start = html.find('<section class="section" id="work"')
+    about_start_for_work = html.find('<section class="section" id="about"')
+    if agency_start < 0 or about_start_for_work <= agency_start:
+        audit.errors.append("Agency section missing or out of order")
+    else:
+        agency = html[agency_start:about_start_for_work]
+        if '<h2 id="work-title">Client work.</h2>' not in agency:
+            audit.errors.append("Agency heading must be Client work.")
+        for expected in (
+            'client-art--nina', 'client-art--sharrey', 'client-art--chris',
+            'src="/assets/work/ninalara.webp"',
+            'src="/assets/work/sharrey.webp"',
+            'Coaching · Editorial illustration',
+            'aria-label="Editorial artwork for the Chris Willburn coaching website',
+        ):
+            if expected not in agency:
+                audit.errors.append(f"Missing Agency visual: {expected}")
+        if '<div class="typecard">' in agency:
+            audit.errors.append("Agency still uses a placeholder typecard")
+
+    if html.count('href="#work">Agency</a>') != 2:
+        audit.errors.append("Both primary and footer navigation must say Agency")
+    if 'href="#work">Client work</a>' in html:
+        audit.errors.append("Old Client work navigation label remains")
+
     # The former launch placeholder must be absent, and old URLs redirect
     # instead of remaining publicly accessible as a second homepage.
     if (ROOT / "coming-soon.html").exists():
