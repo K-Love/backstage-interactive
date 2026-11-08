@@ -119,7 +119,9 @@ def main():
         for expected in (
             'client-art--nina', 'client-art--sharrey', 'client-art--chris',
             'src="/assets/work/ninalara.webp"',
-            'src="/assets/work/sharrey.webp"',
+            'client-art__jewelry',
+            'sd-home1.jpg', 'sd-home2.jpg', 'sd-home3.jpg',
+            'Handmade jewelry · Client-site photography',
             'Coaching · Editorial illustration',
             'aria-label="Editorial artwork for the Chris Willburn coaching website',
         ):
@@ -128,19 +130,25 @@ def main():
         if '<div class="typecard">' in agency:
             audit.errors.append("Agency still uses a placeholder typecard")
 
-        # Avoid scaling screenshots outside their decorative inner borders.
+        # The frame's inner image edges meet its hairline border, while the
+        # off-white outer margin remains. Nina is centered, and Sharrey's
+        # three genuine product photos are complete rather than clipped.
         screenshot_css = html[html.find("    /* Client work uses genuine site captures"):html.find("    .client-art figcaption")]
         for expected in (
+            "--image-inset: 0.6rem;",
+            "inset: var(--image-inset);",
+            "object-position: center center;",
+            ".client-art__jewelry",
+            "grid-template-columns: 1fr 1fr 1fr;",
             "object-fit: contain;",
-            "width: calc(100% - 2rem);",
-            "height: calc(100% - 2rem);",
-            "top: 1.25rem;",
-            "inset: 0.5rem;",
         ):
             if expected not in screenshot_css:
-                audit.errors.append(f"Missing screenshot frame containment: {expected}")
-        if "transform: scale(" in screenshot_css or "object-fit: cover;" in screenshot_css:
-            audit.errors.append("Client screenshots must fit without zoom or cropping")
+                audit.errors.append(f"Missing screenshot frame alignment: {expected}")
+        if "transform: scale(" in screenshot_css:
+            audit.errors.append("Client screenshots must not use CSS zoom")
+
+        if agency.count('sd-home1.jpg') != 1 or agency.count('sd-home2.jpg') != 1:
+            audit.errors.append("Sharrey's earrings and necklace must be present in full")
 
     if html.count('href="#work">Agency</a>') != 2:
         audit.errors.append("Both primary and footer navigation must say Agency")
