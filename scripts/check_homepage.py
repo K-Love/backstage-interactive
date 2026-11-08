@@ -121,12 +121,27 @@ def main():
             'src="/assets/work/ninalara.webp"',
             'client-art__jewelry',
             'sd-home1.jpg', 'sd-home2.jpg', 'sd-home3.jpg',
-            'Handmade jewelry · Client-site photography',
-            'Coaching · Editorial illustration',
+            '<figcaption>JEWELRY DESIGN</figcaption>',
+            '<figcaption>HANDMADE JEWELRY</figcaption>',
+            '<figcaption>WELLNESS COACH</figcaption>',
             'aria-label="Editorial artwork for the Chris Willburn coaching website',
         ):
             if expected not in agency:
                 audit.errors.append(f"Missing Agency visual: {expected}")
+        # Most recently built client project first. Keep each entire card
+        # together when reordering so its art, caption, copy and link stay paired.
+        expected_order = ('<h3>Chris Willburn</h3>',
+                          '<h3>Nina Lara Design</h3>',
+                          '<h3>Sharrey Doré</h3>')
+        positions = [agency.find(title) for title in expected_order]
+        if any(position < 0 for position in positions) or positions != sorted(positions):
+            audit.errors.append("Agency cards must be Chris, Nina, then Sharrey")
+
+        # Short captions should stay a single line across card breakpoints.
+        for caption in ('WELLNESS COACH', 'JEWELRY DESIGN', 'HANDMADE JEWELRY'):
+            if agency.count(f'<figcaption>{caption}</figcaption>') != 1:
+                audit.errors.append(f"Missing or duplicate Agency caption: {caption}")
+
         if '<div class="typecard">' in agency:
             audit.errors.append("Agency still uses a placeholder typecard")
 
