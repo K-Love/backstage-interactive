@@ -190,6 +190,7 @@
     a { color: var(--blue-ink); text-underline-offset: 0.22em; }
     a:hover { color: var(--ink); }
     strong { color: var(--ink); font-weight: 560; }
+    code { overflow-wrap: anywhere; color: var(--ink); }
     .table-scroll {
       overflow-x: auto;
       margin-top: 1rem;
@@ -316,24 +317,22 @@
 
       <section id="drive" aria-labelledby="drive-title">
         <h2 id="drive-title">Drive access now</h2>
-        <p>A dedicated Google account has authorized Drive access for this app. This draft does not publish that account, and it does not publish a password or a client secret.</p>
-        <p>The Google app is in Testing mode. That is not a production publishing status. This draft does not list test users.</p>
-        <p>The permission was described as broad. The exact scope strings were not supplied. This draft does not name scopes, because a guessed name would be false precision.</p>
-        <p>The connector is configured for a folder named Backstage Work. That is a configuration choice on the tool. It is not the same fact as the Google permission. This draft does not say Google enforces a folder-only sandbox, and it does not say the broad permission is limited to that folder by the provider.</p>
+        <p>A dedicated Google account has authorized Drive for this app. The app is in Testing mode, not a production publishing status. The account address, test users, and credentials are not printed here.</p>
+        <p>The scope is <code>https://www.googleapis.com/auth/drive</code>. It allows the app to view, create, edit, and delete Drive files that account can access.</p>
+        <p>The connector is set to a folder named Backstage Work. That restriction is in the connector configuration. It is not a boundary Google enforces on the scope.</p>
       </section>
 
       <section id="test" aria-labelledby="test-title">
         <h2 id="test-title">What was tested</h2>
-        <p>One upload test passed, and one download test passed. This draft does not name the file, list metadata fields, or say whether that test file is still in the folder. Those details were not supplied.</p>
-        <p>Routine Drive exchange is not enabled. Chief integration is not enabled. Rules for removing transfer and staging copies are a future requirement if that exchange is turned on. They are not an active workflow, and this page is not announcing a build schedule.</p>
+        <p>One test used a 171-byte file. The upload, the download, and a byte-for-byte comparison passed. The file remains in Deliverables and belongs to the dedicated automation account. That is one test. Routine Drive exchange is not enabled, and Chief integration is not enabled.</p>
+        <p>The 7-day and 30-day rules for transfer and staging copies apply if that exchange is turned on. They are a future requirement, not a workflow running now.</p>
       </section>
 
       <section id="services" aria-labelledby="services-title">
         <h2 id="services-title">Server and other services</h2>
         <p>OpenClaw runs on a DigitalOcean server. Daily backups of that server are enabled. I had already confirmed that they were turned on. DigitalOcean’s documents for the daily plan describe a standard seven-day rolling retention. I checked those documents on November 7, 2026: the <a href="https://docs.digitalocean.com/products/backups/getting-started/quickstart/" target="_blank" rel="noopener noreferrer">backups quick start<span class="visually-hidden"> (opens in a new tab)</span></a> and <a href="https://docs.digitalocean.com/products/backups/how-to/convert-to-snapshot/" target="_blank" rel="noopener noreferrer">how backups convert to snapshots<span class="visually-hidden"> (opens in a new tab)</span></a>. Seven days is that documented standard. It is not a fresh audit of this account’s expiry setting. A copy can remain until that restore point actually expires.</p>
-        <p>This draft does not say one file can be deleted out of a full-server backup image. It does not say daily backups are routinely converted into snapshots that are kept indefinitely. Restoring a backup has not been tested. Manual snapshots, exported backups, and migration archives are a different hold, described with the other targets below. They are not covered by the seven-day daily rule.</p>
-        <p>OpenClaw uses Abacus for model requests. It uses Telegram for conversations with me. Drive file content going to Abacus or Telegram has not been demonstrated. This draft does not convert that gap into a promise that file content never goes there, and it does not claim the opposite. What those services receive from this app is not established.</p>
-        <p>The website itself is hosted on Netlify. That host is described in the website Privacy Policy. This draft does not move the private tool onto Netlify, and it does not say Netlify stores Drive files.</p>
+        <p>A full-server backup image is not edited to delete one file. Daily backups are not routinely converted into snapshots kept without an end date. Restoring a backup has not been tested. Manual snapshots, exported backups, and migration archives are a separate hold. The seven-day daily rule does not cover them.</p>
+        <p>OpenClaw uses Abacus for model requests and Telegram for conversations with me. Whether either one receives Drive file content is not shown. Their retention and training terms are not verified. The public website is hosted on Netlify and does not store this tool’s Drive files.</p>
       </section>
 
       <section id="retention" aria-labelledby="retention-title">
@@ -417,7 +416,7 @@
             </tbody>
           </table>
         </div>
-        <p>Before older material is deleted, it is reviewed so active work, saved work, and inactive material are not treated as the same thing. Exceptions are written down. The first of those reviews is November 14, 2026, and exceptions are reviewed every 30 days after that. No cleanup has been run. This draft does not say older records already sit inside the 30-day or 90-day targets, and it does not publish an inventory of those records.</p>
+        <p>Before older material is deleted, it is sorted into active work, saved work, and inactive material. Exceptions are written down. November 14, 2026 is a review deadline only. It is not a scheduled job, and nothing runs automatically that day. A later look at exceptions every 30 days is the same kind of manual deadline. No cleanup has been run. Older records have not been measured against the 30-day or 90-day targets.</p>
       </section>
 
       <section id="deletion" aria-labelledby="deletion-title">
@@ -438,8 +437,7 @@
 
       <section id="revoke" aria-labelledby="revoke-title">
         <h2 id="revoke-title">Revoking Google access</h2>
-        <p>Credentials the app needs stay in place while the Google account is authorized. Disconnecting is a separate manual set of steps: revoke Google access, remove the active credentials, and track when a backup that could still hold those credentials expires. Credentials are rotated when a compromise or a restore requires it. That rotation is manual.</p>
-        <p>Revoking the Google permission stops further API access. It does not delete downloads, results, conversation history, or backups. Credentials are also removed so an old backup cannot be used to resume access. The actual backup expiry is what gets recorded. If a provider’s schedule is longer than the seven-day daily plan, that longer schedule is what this policy has to disclose. Manual archives are tracked separately. They do not expire with the daily backups.</p>
+        <p>Revoking the Google authorization invalidates that authorized access. Copies already downloaded stay where they are. Deleting the active credential file does not remove credentials that remain inside older backups. Tracking when those backups expire, and rotating credentials after a compromise or a restore, are manual steps. Manual archives are separate from the seven-day daily backups.</p>
       </section>
 
       <section id="restore" aria-labelledby="restore-title">
@@ -453,29 +451,20 @@
       <section id="open" aria-labelledby="open-title">
         <h2 id="open-title">What is still not established</h2>
         <div class="unsettled">
-          <p>The retention rules above are adopted. They are not the same as a finished purge. Periodic cleanup, complete deletion tooling, and the restore drill are not implemented. Exact storage locations for working copies and logs were not supplied. Exact OAuth scope strings were not supplied.</p>
-          <p>No statement is made here that data is not stored, not shared, encrypted, or excluded from model training. Drive file content going to Abacus or Telegram has not been demonstrated, and this page does not turn that into a promise that it never happens.</p>
-          <p>No Limited Use sentence is made. Google’s Workspace user-data policy asks apps that use the relevant scopes to say, in substance, that use of information received from Google Workspace scopes adheres to the Google User Data Policy, including the Limited Use requirements. This draft does not say that. The scopes, what providers receive, and whether any of it is used to train a model are not verified. Saying it now would claim a practice this page cannot show.</p>
-          <p>This draft is not an assurance that Google will approve the app, and it is not legal advice. The documents a later review would have to face include the <a href="https://developers.google.com/identity/protocols/oauth2/policies" target="_blank" rel="noopener noreferrer">OAuth 2.0 policies<span class="visually-hidden"> (opens in a new tab)</span></a>, the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy<span class="visually-hidden"> (opens in a new tab)</span></a>, and the <a href="https://developers.google.com/workspace/workspace-api-user-data-developer-policy" target="_blank" rel="noopener noreferrer">Workspace user data and developer policy<span class="visually-hidden"> (opens in a new tab)</span></a>. Linking them is not a claim of compliance.</p>
+          <p>Drive file content sent to Abacus or Telegram is not shown. Whether a model provider trains on Drive data from this app is not known. There is no Limited Use statement and no claim that Google has approved the app. The <a href="https://developers.google.com/identity/protocols/oauth2/policies" target="_blank" rel="noopener noreferrer">OAuth 2.0 policies<span class="visually-hidden"> (opens in a new tab)</span></a>, the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy<span class="visually-hidden"> (opens in a new tab)</span></a>, and the <a href="https://developers.google.com/workspace/workspace-api-user-data-developer-policy" target="_blank" rel="noopener noreferrer">Workspace user data and developer policy<span class="visually-hidden"> (opens in a new tab)</span></a> are the documents that question has to meet. Linking them is not compliance.</p>
         </div>
       </section>
 
       <section id="contact" aria-labelledby="contact-title">
         <h2 id="contact-title">Questions about this draft</h2>
         <p>Use the <a href="/#contact">contact form on the studio homepage</a>. Say that the note is about the Backstage OpenClaw Drive privacy draft. That form is a website form. It collects the name, email, topic, and note described in the website Privacy Policy. It does not connect to Google Drive.</p>
-        <p>This site does not publish an email address, a phone number, or a street address. This draft does not add one. A support email shown to a Google user is an open decision, listed below. Until that decision is made, the homepage form is the only public contact path.</p>
+        <p>The OAuth consent screen is already configured with a support address for the dedicated automation account. That address is not printed on this website. Publishing it is a separate choice from having it configured. The public contact path remains the homepage form. This site does not publish a phone number or a street address.</p>
       </section>
 
       <section id="decisions" aria-labelledby="decisions-title">
-        <h2 id="decisions-title">Decisions required before publication</h2>
-        <p>The retention and deletion policy is adopted. It is written above as manual targets. The page is still a draft because the items below are not settled. Publishing it, or pasting its URL into an OAuth consent screen, should wait until they are answered in words that can be checked.</p>
-        <ol>
-          <li><strong>Automation, an actual purge, and a restore drill.</strong> The rules exist. Periodic cleanup, complete deletion tooling, and the restore drill are not implemented. No cleanup was run when the policy was adopted. Older records have not been shown to already meet the 30-day or 90-day targets.</li>
-          <li><strong>Exact scopes, and where copies sit.</strong> The scope strings Google shows, and a plain-language list of which Drive data the app can read or change, are still missing. So are the storage locations of working copies and logs. “Broad permission” and “configured for the Backstage Work folder” are not those strings, and they are not a provider-enforced folder limit.</li>
-          <li><strong>Providers and training.</strong> Whether Abacus, Telegram, or any other provider receives Drive file content, names, or other Drive data, and whether any of it is used to train a model. Their retention and backup terms are not verified. Server deletion does not settle that.</li>
-          <li><strong>Support email.</strong> Whether a user-support email will be published for this app. The website’s public contact remains the homepage form. No address is invented here. Google’s consent screen commonly displays a support email; that value is not chosen in this draft.</li>
-        </ol>
-        <p>There is no separate terms page for this app. The website <a href="/terms/">Terms of Use</a> still cover the website only. A terms page for the tool is not added here, because the tool is private and the open privacy facts above are the blocking gap.</p>
+        <h2 id="decisions-title">Why this is still a draft</h2>
+        <p>The retention rules above are adopted. This page stays a draft until it is known whether Abacus, Telegram, or a model provider receives Drive data from this app, and whether any of that data is used to train a model. A Limited Use statement has to rest on that answer. None is made here.</p>
+        <p>Automatic cleanup and a restore drill are safeguards in the operating rules. They are not treated as conditions that must be finished before a later public version. The website <a href="/terms/">Terms of Use</a> still cover only the website.</p>
       </section>
     </article>
   </main>

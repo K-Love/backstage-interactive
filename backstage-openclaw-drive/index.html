@@ -172,6 +172,7 @@
     a { color: var(--blue-ink); text-underline-offset: 0.22em; }
     a:hover { color: var(--ink); }
     strong { color: var(--ink); font-weight: 560; }
+    code { overflow-wrap: anywhere; color: var(--ink); }
     .site-footer { border-top: 1px solid var(--line); padding: 2rem 0 2.6rem; }
     .footer-inner {
       display: flex;
@@ -247,15 +248,13 @@
 
       <section id="current" aria-labelledby="current-title">
         <h2 id="current-title">What is in place</h2>
-        <p>The points in this section were supplied on November 7, 2026 for this draft. The server and the Google account were not inspected while the page was written. Nothing here adds a file name, a log line, or a claim that a test file is still stored.</p>
+        <p>These points were supplied for this draft. The server and the Google account were not inspected while the page was written.</p>
         <ul>
-          <li>OpenClaw runs on a DigitalOcean server.</li>
-          <li>Daily DigitalOcean backups are enabled. I had already confirmed they were on. The documented standard for that daily plan is seven days of rolling retention, from DigitalOcean’s documents checked on November 7, 2026. That figure is not a fresh audit of this account’s expiry setting. Restoring a backup has not been tested. This page does not say what a backup contains, and it does not say one file can be removed from a full-server image.</li>
-          <li>A dedicated Google account has authorized Drive access for this app. The Google app is in Testing mode, which is not a production publishing status. This page does not publish the account or the test users.</li>
-          <li>The connector is configured for a folder named Backstage Work.</li>
-          <li>One upload test passed, and one download test passed.</li>
-          <li>The Google permission was described as broad. The exact permission names were not supplied, so this draft does not invent them. Aiming the connector at one folder is a configuration choice. It is not a statement that Google confines the app to that folder.</li>
-          <li>OpenClaw uses Abacus for model requests, and Telegram for conversations with me.</li>
+          <li>OpenClaw runs on a DigitalOcean server. Daily backups are enabled. The documented standard for that daily plan is seven days of rolling retention. That figure comes from DigitalOcean’s documents, not from a fresh audit of this account’s expiry setting. A full-server image is not edited to remove one file. Restoring a backup has not been tested.</li>
+          <li>The Google app is in Testing mode, not a production publishing status. A dedicated account authorized Drive with the scope <code>https://www.googleapis.com/auth/drive</code>. That scope can view, create, edit, and delete Drive files the account can access.</li>
+          <li>The connector is set to a folder named Backstage Work. That limit is in the connector configuration. Google does not enforce it as the boundary of the scope.</li>
+          <li>One test used a 171-byte file. The upload, the download, and a byte-for-byte comparison passed. The file remains in Deliverables and belongs to the dedicated automation account. That is one test, not routine automation.</li>
+          <li>OpenClaw uses Abacus for model requests and Telegram for conversations with me. Whether Drive file content is sent to either one is not shown. Their training terms are not verified.</li>
         </ul>
       </section>
 
@@ -265,13 +264,11 @@
       </section>
 
       <section id="not-claimed" aria-labelledby="not-claimed-title">
-        <h2 id="not-claimed-title">What this draft does not claim</h2>
+        <h2 id="not-claimed-title">Retention, revocation, and what is still unknown</h2>
         <div class="unsettled">
-          <p>Drive file content being sent to Abacus or Telegram has not been demonstrated. This page does not turn that into a promise that file content is never sent there. A full account of what those providers receive is not written. Their retention and training terms are not verified.</p>
-          <p>On November 7, 2026 I adopted a retention and deletion policy. Saved work stays until I delete it or set an expiry. Other copies have manual targets. Automatic cleanup is not fully implemented, and adopting the policy did not delete existing material. The day counts are not guaranteed deadlines. The schedule, and the separate handling of live copies, daily backups, and manual archives, is in the <a href="/backstage-openclaw-drive/privacy/#retention">privacy draft</a>.</p>
-          <p>Revoking the Google permission stops future access through the API. It does not, by itself, delete copies that may already sit on the server, in a backup, or with a provider.</p>
-          <p>This draft does not say the files are encrypted, or that a model is opted out of training. It does not say one file can be wiped from a full-server backup image, or that manual archives expire with the seven-day daily backups.</p>
-          <p>This draft does not say the app meets Google’s Limited Use rules. The scopes and what providers do with Drive data are not verified, so no compliance sentence is made here. It also does not say Google has approved the app. Putting this URL on an OAuth consent screen would be a later decision, after the open items in the <a href="/backstage-openclaw-drive/privacy/#decisions">privacy draft</a> are filled in. This page does not say that step would be enough.</p>
+          <p>I adopted a retention and deletion policy on November 7, 2026. Saved work stays until I delete it or set an expiry. Other copies follow manual targets. Automatic cleanup is not fully implemented, and adopting the policy deleted nothing. The schedule is in the <a href="/backstage-openclaw-drive/privacy/#retention">privacy draft</a>.</p>
+          <p>Revoking the Google authorization ends that authorized access. It does not erase copies already downloaded. Deleting the active credential file does not remove credentials that remain in older backups.</p>
+          <p>What Abacus, Telegram, or a model provider does with Drive data, including training, is still unknown. This page makes no Limited Use statement and no claim of Google approval. It stays a draft until that handling is known.</p>
         </div>
       </section>
 
@@ -283,7 +280,7 @@
       <section id="contact" aria-labelledby="contact-title">
         <h2 id="contact-title">How to comment on this draft</h2>
         <p>The public contact path is the <a href="/#contact">form on the studio homepage</a>. In the note, say it is about the Backstage OpenClaw Drive draft. That form is the website’s form. It does not connect to Drive.</p>
-        <p>No support email, phone number, or street address is published on this site, and this draft does not invent one. A user-support email is one of the open decisions on the privacy draft. Google’s consent screen often shows one. None has been chosen here.</p>
+        <p>The OAuth consent screen already has a support address for the dedicated automation account. That address is not printed here. Whether to publish it is a separate choice. This website’s public contact stays the homepage form.</p>
       </section>
 
       <section id="terms" aria-labelledby="terms-title">
