@@ -92,6 +92,13 @@ def main():
         if expected not in html:
             audit.errors.append(f"Expected homepage content missing: {expected}")
 
+    # Keep the inquiry invitation friction-free: no payment reference.
+    # Preserve the brief warning about credentials and sensitive information.
+    if '<p class="form-note">Please don’t include passwords or sensitive customer information.</p>' not in html:
+        audit.errors.append("Expected concise homepage contact form note")
+    if 'No payment is required to write.' in html:
+        audit.errors.append("Remove unnecessary payment language from homepage form")
+
     # Studio presentation decisions: approved copy, clean product-image crop,
     # and image-first ordering below the desktop two-column breakpoint.
     studio_checks = {
