@@ -615,27 +615,26 @@
       isolation: isolate;
       background: #f6f3ed;
     }
+    /* Keep the complete, unzoomed screenshots within the decorative rule.
+       Absolute positioning resolves the image size reliably at every card width. */
     .client-art__visual--screenshot img {
       display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: calc(100% - 2rem);
+      height: calc(100% - 2rem);
+      object-fit: contain;
       object-position: center;
     }
-    /* Enlarging the existing 1200px screenshots makes the work readable at
-       portfolio-card size; no fabricated website elements are introduced. */
+    /* A little extra breathing room above Nina's site heading and jewelry. */
     .client-art--nina .client-art__visual img {
-      transform: scale(1.18);
-      transform-origin: center 42%;
-    }
-    .client-art--sharrey .client-art__visual img {
-      transform: scale(1.13);
-      transform-origin: center 55%;
+      top: 1.25rem;
     }
     .client-art__visual--screenshot::after {
       content: "";
       position: absolute;
-      inset: clamp(0.65rem, 1.7vw, 1rem);
+      inset: 0.5rem;
       border: 1px solid rgba(30, 34, 59, 0.12);
       pointer-events: none;
     }
