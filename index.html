@@ -748,6 +748,19 @@
       .hero::after { display: none; }
       section[id] { scroll-margin-top: 9rem; }
     }
+    /* On phones, prevent the botanical artwork from stretching its grid cell
+       and give its right-hand inner rule a touch more breathing room. */
+    @media (max-width: 600px) {
+      .studio-art--botanical { min-width: 0; }
+      .studio-art--botanical .botanical-plate {
+        width: 100%;
+        min-width: 0;
+      }
+      .studio-art--botanical .botanical-plate::after {
+        inset: 1rem 1.35rem 1rem 1rem;
+      }
+    }
+
     @media (max-width: 420px) {
       .wrap { width: min(var(--wrap), calc(100% - 1.7rem)); }
       .nav-list { justify-content: flex-start; gap: 0 0.35rem; }
