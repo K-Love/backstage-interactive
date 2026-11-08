@@ -129,6 +129,22 @@ def main():
         if f'<p class="kicker">{expected}</p>' not in html:
             audit.errors.append(f"Missing numbered section kicker: {expected}")
 
+    # About's section number must lead the whole section, above the portrait
+    # on mobile and above the two-column portrait/bio grid on desktop.
+    about_start = html.find('<section class="section" id="about"')
+    contact_start = html.find('<section class="section" id="contact"')
+    if about_start < 0 or contact_start < about_start:
+        audit.errors.append("About section missing or out of order")
+    else:
+        about = html[about_start:contact_start]
+        heading = '<p class="kicker">04 — About</p>'
+        photo = '<figure class="portrait">'
+        grid = '<div class="about-grid">'
+        if about.count(heading) != 1 or not (
+            0 <= about.find(heading) < about.find(grid) < about.find(photo)
+        ):
+            audit.errors.append("About kicker must appear once above portrait grid")
+
     if 'project-kicker' in html:
         audit.errors.append("Studio projects must not have numbered project kickers")
 
