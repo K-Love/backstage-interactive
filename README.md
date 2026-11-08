@@ -60,6 +60,26 @@ in-page section links, and the pages print legibly. Submit a studio inquiry
 on Netlify and confirm the `/thank-you.html` screen follows the chosen
 reading mode. Do not merge or publish without a Netlify preview check.
 
+## Studio portfolio — editorial production cards
+
+The homepage's Studio section is an editorial showcase, not a testimonial or a
+product benchmark. KeyProse is shown with the existing interface screenshot.
+Wild Thesis has a custom botanical illustration **clearly labeled as art
+direction rather than a screenshot**. Both productions have concise,
+source-grounded descriptions, visible capability labels, and limitations where
+appropriate. No user counts, customer outcomes, or efficacy claims are made.
+
+The public site and the source repositories use **Wild Thesis** (two words).
+Keep the public project name consistent with the product's canonical branding.
+The two owned product links remain external destinations, and must be checked
+in a normal browser before the production merge. A GitHub or Netlify preview
+status does not prove a separate product domain is responding.
+
+At mobile widths, verify the project images, captions, SVG illustration,
+headlines, capability chips, links, and alternating piece order. Test both
+dark and light reading modes. The homepage smoke check also verifies the
+expected production headings.
+
 ## Homepage v0.2 — Production Bible alignment
 
 The homepage deliberately makes two paths visible: **Studio / owned work** and

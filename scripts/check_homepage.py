@@ -88,9 +88,23 @@ def main():
     ):
         audit.errors.append("Expected Netlify homepage inquiry form is missing")
 
-    for expected in ("KeyProse", "WildThesis", "Where ideas become", "id=\"contact\""):
+    for expected in ("KeyProse", "Wild Thesis", "keyprose-title", "wildthesis-title", "Where ideas become", "id=\"contact\""):
         if expected not in html:
             audit.errors.append(f"Expected homepage content missing: {expected}")
+
+    # Studio presentation decisions: approved copy, clean product-image crop,
+    # and image-first ordering below the desktop two-column breakpoint.
+    studio_checks = {
+        "Approved Studio intro": "Original products, built to be useful, thoughtful, and real.",
+        "KeyProse shot wrapper": 'class="studio-shot"',
+        "KeyProse crop": "aspect-ratio: 1200 / 666;",
+        "Mobile image-first layout": "@media (max-width: 859px)",
+        "Mobile image ordering": ".piece .studio-art { order: 0; }",
+        "Mobile copy ordering": ".piece > div { order: 1; }",
+    }
+    for label, marker in studio_checks.items():
+        if marker not in html:
+            audit.errors.append(f"Missing {label}: {marker}")
 
     if audit.errors:
         print("Homepage check failed:")
