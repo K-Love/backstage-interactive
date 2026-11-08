@@ -85,6 +85,25 @@ homepage sections (such as `01 — Studio`, `02 — Services`,
 and `03 — Agency`), never to the KeyProse or Wild Thesis product cards.
 The homepage smoke check verifies this hierarchy and the existing layout rules.
 
+## Agency — client work cards
+
+The primary/footer navigation uses **Agency** to match the numbered
+`03 — Agency` section. Its on-page title is **Client work.** This page uses
+real site captures for Nina Lara Design and Sharrey Doré. They are shown
+as more focused, art-directed crops of the existing 1200×750 WebP assets;
+the underlying images and external site links are unchanged.
+
+Chris Willburn has an original botanical-style editorial graphic grounded
+in the site's "Inside Out" wording and its mental / emotional / physical
+theme. It is explicitly presented as an *illustration*, not a website
+screenshot or client testimonial. Do not replace it with an invented
+interface, or claim results that aren't documented.
+
+Preview the three cards at 320/375/768/1440px in both themes. Confirm
+the site images remain legible, decorative borders do not crowd their
+content, captions don't obscure images, the coaching graphic fits without
+overflow, and all three external client site links still work.
+
 ## Homepage v0.2 — Production Bible alignment
 
 The homepage deliberately makes two paths visible: **Studio / owned work** and
