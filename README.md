@@ -80,10 +80,10 @@ status does not prove a separate product domain is responding.
 
 At mobile widths, verify the project images, captions, SVG illustration,
 headlines, capability chips, links, and alternating piece order. Test both
-dark and light reading modes. Each product uses the same numbered kicker
-format as the site's main sections (`01 — Real estate` and
-`02 — Botanical research`), with a consistent gap before the title.
-The homepage smoke check verifies these labels and layout rules.
+dark and light reading modes. Numbered kickers belong exclusively to the
+homepage sections (such as `01 — Studio`, `02 — Services`,
+and `03 — Agency`), never to the KeyProse or Wild Thesis product cards.
+The homepage smoke check verifies this hierarchy and the existing layout rules.
 
 ## Homepage v0.2 — Production Bible alignment
 
