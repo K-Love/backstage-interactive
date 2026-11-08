@@ -106,6 +106,32 @@ def main():
         if marker not in html:
             audit.errors.append(f"Missing {label}: {marker}")
 
+    # The former launch placeholder must be absent, and old URLs redirect
+    # instead of remaining publicly accessible as a second homepage.
+    if (ROOT / "coming-soon.html").exists():
+        audit.errors.append("Retired coming-soon.html must not be published")
+
+    netlify_file = ROOT / "netlify.toml"
+    if not netlify_file.is_file():
+        audit.errors.append("Missing Netlify configuration")
+    else:
+        config = netlify_file.read_text(encoding="utf-8")
+        for legacy in ("/coming-soon.html", "/coming-soon", "/coming-soon/"):
+            expected = (
+                f'from = "{legacy}"\\n  to = "/"\\n  status = 301\\n  force = true'
+            )
+            expected = expected.replace("\\n", "\n")
+            if expected not in config:
+                audit.errors.append(f"Missing permanent redirect: {legacy} → /")
+
+    for expected in (
+        '<p class="kicker project-kicker">01 — Real estate</p>',
+        '<p class="kicker project-kicker">02 — Botanical research</p>',
+        ".piece .project-kicker { margin: 0 0 1.1rem; color: var(--faint); }",
+    ):
+        if expected not in html:
+            audit.errors.append(f"Missing consistent Studio kicker: {expected}")
+
     if audit.errors:
         print("Homepage check failed:")
         for issue in sorted(set(audit.errors)):
