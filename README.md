@@ -89,9 +89,12 @@ The homepage smoke check verifies this hierarchy and the existing layout rules.
 
 The primary/footer navigation uses **Agency** to match the numbered
 `03 — Agency` section. Its on-page title is **Client work.** This page uses
-a real site capture for Nina Lara Design, centered in both directions
-with its edges reaching the thin-line border while retaining the off-white
-outer margin. The original Sharrey Doré screenshot ended halfway through
+a real site capture for Nina Lara Design, centered horizontally and
+nudged downward within a clipped white window to balance its content
+vertically without crossing the frame. All three client cards now share
+the same 0.9rem inner-rule inset and 1px stroke as the Chris Willburn
+illustration, with an appropriate subtle dark line for the pale jewelry
+images; the off-white area outside the rule stays intact. The original Sharrey Doré screenshot ended halfway through
 the earrings and necklace; that card now uses the complete, original
 earring, necklace and ring photos served by the client's WordPress image
 CDN. The three photographs stay fully in view in a simple white collage
@@ -106,9 +109,10 @@ screenshot or client testimonial. Do not replace it with an invented
 interface, or claim results that aren't documented.
 
 Preview the three cards at 320/375/768/1440px in both themes. Confirm
-Nina is centered within the thin inner border, Sharrey's full earrings and
-necklace are visible, both image areas meet their thin-line borders, and
-the surrounding off-white band remains intact. Also confirm the three
+Nina's jewelry and heading feel vertically balanced after the gentle
+downward shift, Sharrey's full earrings and necklace are visible, all
+three thin inner borders have identical insets, and the surrounding
+off-white band remains intact on the two jewelry cards. Also confirm the three
 client-site images load, the coaching graphic fits without overflow, and
 all three external client site links still work.
 
