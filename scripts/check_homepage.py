@@ -128,6 +128,20 @@ def main():
         if '<div class="typecard">' in agency:
             audit.errors.append("Agency still uses a placeholder typecard")
 
+        # Avoid scaling screenshots outside their decorative inner borders.
+        screenshot_css = html[html.find("    /* Client work uses genuine site captures"):html.find("    .client-art figcaption")]
+        for expected in (
+            "object-fit: contain;",
+            "width: calc(100% - 2rem);",
+            "height: calc(100% - 2rem);",
+            "top: 1.25rem;",
+            "inset: 0.5rem;",
+        ):
+            if expected not in screenshot_css:
+                audit.errors.append(f"Missing screenshot frame containment: {expected}")
+        if "transform: scale(" in screenshot_css or "object-fit: cover;" in screenshot_css:
+            audit.errors.append("Client screenshots must fit without zoom or cropping")
+
     if html.count('href="#work">Agency</a>') != 2:
         audit.errors.append("Both primary and footer navigation must say Agency")
     if 'href="#work">Client work</a>' in html:
