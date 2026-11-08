@@ -254,7 +254,7 @@
           <li>The Google app is in Testing mode, not a production publishing status. A dedicated account authorized Drive with the scope <code>https://www.googleapis.com/auth/drive</code>. That scope can view, create, edit, and delete Drive files the account can access.</li>
           <li>The connector is set to a folder named Backstage Work. That limit is in the connector configuration. Google does not enforce it as the boundary of the scope.</li>
           <li>One test used a 171-byte file. The upload, the download, and a byte-for-byte comparison passed. The file remains in Deliverables and belongs to the dedicated automation account. That is one test, not routine automation.</li>
-          <li>OpenClaw uses Abacus for model requests and Telegram for conversations with me. Whether Drive file content is sent to either one is not shown. Their training terms are not verified.</li>
+          <li>OpenClaw uses Abacus for model requests and Telegram for conversations with me. The controlled Drive connection test used the file-transfer connector directly and made no model requests or Telegram delivery. Abacus’s published no-training and downstream retention commitments, and the limits of those findings, are described in the <a href="/backstage-openclaw-drive/privacy/#services">privacy draft’s provider review</a>.</li>
         </ul>
       </section>
 
@@ -268,7 +268,7 @@
         <div class="unsettled">
           <p>I adopted a retention and deletion policy on November 7, 2026. Saved work stays until I delete it or set an expiry. Other copies follow manual targets. Automatic cleanup is not fully implemented, and adopting the policy deleted nothing. The schedule is in the <a href="/backstage-openclaw-drive/privacy/#retention">privacy draft</a>.</p>
           <p>Revoking the Google authorization ends that authorized access. It does not erase copies already downloaded. Deleting the active credential file does not remove credentials that remain in older backups.</p>
-          <p>What Abacus, Telegram, or a model provider does with Drive data, including training, is still unknown. This page makes no Limited Use statement and no claim of Google approval. It stays a draft until that handling is known.</p>
+          <p>Abacus’s published policy says customer data is not used to train generalized or proprietary models and describes zero-data-retention agreements with downstream model providers. This does not establish Abacus’s own RouteLLM API retention or deletion deadlines. Those details and the future Drive data flow and delivery controls remain unresolved. This page makes no Limited Use statement and no claim of Google approval. It stays a draft while that handling is settled.</p>
         </div>
       </section>
 
