@@ -87,6 +87,13 @@ The homepage smoke check verifies this hierarchy and the existing layout rules.
 
 ## Agency — client work cards
 
+The cards are ordered by project recency: **Chris Willburn**, **Nina Lara
+Design**, **Sharrey Doré**. Their short image captions are **Wellness Coach**,
+**JEWELRY DESIGN**, and **HANDMADE JEWELRY**, respectively. The Chris caption
+keeps title case while the two jewelry captions are uppercase. The concise
+captions are intended to stay on one line, keeping the three image cards
+visually even. The artwork, card copy and outbound links remain unchanged.
+
 The primary/footer navigation uses **Agency** to match the numbered
 `03 — Agency` section. Its on-page title is **Client work.** This page uses
 a real site capture for Nina Lara Design, centered horizontally and
