@@ -89,10 +89,14 @@ The homepage smoke check verifies this hierarchy and the existing layout rules.
 
 The primary/footer navigation uses **Agency** to match the numbered
 `03 — Agency` section. Its on-page title is **Client work.** This page uses
-real site captures for Nina Lara Design and Sharrey Doré. They are shown
-fully within inset decorative frames, without CSS zoom or cropping, using
-the existing 1200×750 WebP assets. Nina Lara's screenshot sits slightly
-lower for comfortable top spacing; the underlying images and links
+a real site capture for Nina Lara Design, centered in both directions
+with its edges reaching the thin-line border while retaining the off-white
+outer margin. The original Sharrey Doré screenshot ended halfway through
+the earrings and necklace; that card now uses the complete, original
+earring, necklace and ring photos served by the client's WordPress image
+CDN. The three photographs stay fully in view in a simple white collage
+that meets the same inner border. The Sharrey card therefore depends on
+those client-hosted images remaining available. Client links and copy
 remain unchanged.
 
 Chris Willburn has an original botanical-style editorial graphic grounded
@@ -102,9 +106,11 @@ screenshot or client testimonial. Do not replace it with an invented
 interface, or claim results that aren't documented.
 
 Preview the three cards at 320/375/768/1440px in both themes. Confirm
-the site images remain legible, decorative borders do not crowd their
-content, captions don't obscure images, the coaching graphic fits without
-overflow, and all three external client site links still work.
+Nina is centered within the thin inner border, Sharrey's full earrings and
+necklace are visible, both image areas meet their thin-line borders, and
+the surrounding off-white band remains intact. Also confirm the three
+client-site images load, the coaching graphic fits without overflow, and
+all three external client site links still work.
 
 ## Homepage v0.2 — Production Bible alignment
 
