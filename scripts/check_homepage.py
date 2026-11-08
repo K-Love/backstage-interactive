@@ -124,13 +124,18 @@ def main():
             if expected not in config:
                 audit.errors.append(f"Missing permanent redirect: {legacy} → /")
 
-    for expected in (
-        '<p class="kicker project-kicker">01 — Real estate</p>',
-        '<p class="kicker project-kicker">02 — Botanical research</p>',
-        ".piece .project-kicker { margin: 0 0 1.1rem; color: var(--faint); }",
-    ):
+    # Section numbers belong to the homepage sections, not individual Studio projects.
+    for expected in ('01 — Studio', '02 — Services', '03 — Agency'):
+        if f'<p class="kicker">{expected}</p>' not in html:
+            audit.errors.append(f"Missing numbered section kicker: {expected}")
+
+    if 'project-kicker' in html:
+        audit.errors.append("Studio projects must not have numbered project kickers")
+
+    for expected in ('<h3 id="keyprose-title">KeyProse</h3>',
+                     '<h3 id="wildthesis-title">Wild Thesis</h3>'):
         if expected not in html:
-            audit.errors.append(f"Missing consistent Studio kicker: {expected}")
+            audit.errors.append(f"Missing project title: {expected}")
 
     if audit.errors:
         print("Homepage check failed:")
