@@ -470,20 +470,15 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-    .eyebrow {
-      margin: 0 0 0.35rem;
-      color: var(--faint);
-      font-size: 0.75rem;
-      font-weight: 560;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
     h3 {
       margin: 0;
       font-size: clamp(1.85rem, 3vw, 2.45rem);
       line-height: 1.05;
     }
     .piece p, .offer p, .work-card p { margin: 0.75rem 0 0; color: var(--muted); }
+    /* Match section kickers, including the space before each product title.
+       Specificity keeps the general .piece paragraph margins from collapsing it. */
+    .piece .project-kicker { margin: 0 0 1.1rem; color: var(--faint); }
     .more {
       display: inline-flex;
       align-items: center;
@@ -841,7 +836,7 @@
             <figcaption>01 / Real-estate workflows — product interface</figcaption>
           </figure>
           <div>
-            <p class="eyebrow">Production 01 / Real estate</p>
+            <p class="kicker project-kicker">01 — Real estate</p>
             <h3 id="keyprose-title">KeyProse</h3>
             <p class="project-hook">One property brief. Multiple useful drafts.</p>
             <p class="project-description">A toolkit for listing agents that brings listing descriptions, comparative market analysis drafts, social posts, and email campaigns into one workflow. Built around turning supplied property details into materials a person can review and refine.</p>
@@ -879,7 +874,7 @@
             <figcaption>02 / Botanical research — illustration, not a product screenshot</figcaption>
           </figure>
           <div>
-            <p class="eyebrow">Production 02 / Botanical research</p>
+            <p class="kicker project-kicker">02 — Botanical research</p>
             <h3 id="wildthesis-title">Wild Thesis</h3>
             <p class="project-hook">Find the source. Understand the limits.</p>
             <p class="project-description">An educational herbal research reference that organizes herb information alongside source material and safety context. Explore herb profiles, use the guided finder, and investigate documented herb–herb and herb–drug interaction notes.</p>
