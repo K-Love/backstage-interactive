@@ -130,20 +130,29 @@ def main():
         if '<div class="typecard">' in agency:
             audit.errors.append("Agency still uses a placeholder typecard")
 
-        # The frame's inner image edges meet its hairline border, while the
-        # off-white outer margin remains. Nina is centered, and Sharrey's
-        # three genuine product photos are complete rather than clipped.
+        # All three image rules share the Chris Willburn 0.9rem inset and
+        # 1px weight, with a light-appropriate ink on the jewelry cards.
+        # Nina's image slides down inside a white clipped window, so it
+        # cannot overlap the hairline border or the off-white outside band.
         screenshot_css = html[html.find("    /* Client work uses genuine site captures"):html.find("    .client-art figcaption")]
         for expected in (
-            "--image-inset: 0.6rem;",
-            "inset: var(--image-inset);",
-            "object-position: center center;",
+            "--art-inset: 0.9rem;",
+            "--art-rule: rgba(30, 34, 59, 0.24);",
+            "inset: var(--art-inset);",
+            "border: 1px solid var(--art-rule);",
+            ".client-art__screenshot-window",
+            "overflow: hidden;",
+            "transform: translateY(0.65rem);",
             ".client-art__jewelry",
             "grid-template-columns: 1fr 1fr 1fr;",
             "object-fit: contain;",
         ):
             if expected not in screenshot_css:
-                audit.errors.append(f"Missing screenshot frame alignment: {expected}")
+                audit.errors.append(f"Missing shared image border: {expected}")
+        if screenshot_css.count("inset: var(--art-inset);") < 3:
+            audit.errors.append("Nina, Sharrey and shared border must use one inset")
+        if 'class="client-art__screenshot-window"' not in agency:
+            audit.errors.append("Nina screenshot must be inside its clipped window")
         if "transform: scale(" in screenshot_css:
             audit.errors.append("Client screenshots must not use CSS zoom")
 
