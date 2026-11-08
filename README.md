@@ -81,8 +81,8 @@ status does not prove a separate product domain is responding.
 At mobile widths, verify the project images, captions, SVG illustration,
 headlines, capability chips, links, and alternating piece order. Test both
 dark and light reading modes. Numbered kickers belong exclusively to the
-homepage sections (such as `01 — Studio`, `02 — Services`,
-and `03 — Agency`), never to the KeyProse or Wild Thesis product cards.
+homepage sections (such as `01 — Studio`, `02 — Agency`,
+and `03 — Services`), never to the KeyProse or Wild Thesis product cards.
 The homepage smoke check verifies this hierarchy and the existing layout rules.
 
 ## Agency — client work cards
@@ -94,7 +94,7 @@ captions are intended to stay on one line, keeping the three image cards
 visually even. The artwork, card copy and outbound links remain unchanged.
 
 The primary/footer navigation uses **Agency** to match the numbered
-`03 — Agency` section. Its on-page title is **Client work.** This page uses
+`02 — Agency` section. Its on-page title is **Client work.** This page uses
 a real site capture for Nina Lara Design, centered horizontally and
 nudged downward within a clipped white window to balance its content
 vertically without crossing the frame. All three client cards now share
@@ -122,6 +122,32 @@ off-white band remains intact on the two jewelry cards. Also confirm the three
 client-site images load, the coaching graphic fits without overflow, and
 all three external client site links still work.
 
+## Homepage flow and Services invitation (Nov 2026)
+
+The homepage and both primary/footer navigation menus read **Studio → Agency
+→ Services → About → Contact**. The numbered section kickers follow the same
+order. This keeps the Studio strictly for **owned products**, places client
+proof in Agency, and then invites visitors to hire Backstage Interactive.
+The hero still provides a direct link to `#services` for ready-to-buy visitors.
+
+Services has two focused, existing offers. The GBP Fix-and-Protect card now
+uses an **original inline SVG** about reviewing a local business profile,
+not a fictional search ranking, endorsement, or client screenshot. It is
+explicitly identified in the graphic as an illustrative checklist without
+client results. Website Fixes retains its actual page screenshot.
+
+The new headline is **Find your starting point.** The small invitation below
+the two offers says **Have something bigger in mind?** and names new
+websites, redesigns, and digital marketing, linking to the existing
+`#contact` inquiry form. The form keeps its Netlify name, action, and
+honeypot, and adds `New website or redesign` and `Digital marketing` to
+the topic selection. Do not imply that a third fixed-price package exists.
+
+QA: review 320/375/768/1440px, light and dark modes, the SVG readability
+and contrast, menu/anchor order, mobile navigation, the two existing offer
+links, and the new custom-project CTA's scroll to the contact form. Check
+that the form is still recognized after the Netlify preview deploy.
+
 ## Homepage v0.2 — Production Bible alignment
 
 The homepage deliberately makes two paths visible: **Studio / owned work** and
@@ -140,7 +166,7 @@ Before proposing or publishing future homepage changes:
 2. Preview at **320, 375, 768, and 1440 CSS pixels**. Verify the header has no
    horizontal overflow, all navigation links are visible, and anchor headings
    aren't obscured by the sticky header.
-3. Open Studio, Services, Client work, About, and Contact. Check the project
+3. Open Studio, Agency, Services, About, and Contact. Check the project
    links and local assets, including responsive images.
 4. On a Netlify deploy preview, verify the inquiry form markup still appears.
    After a production deployment, submit a real test, check the Netlify
