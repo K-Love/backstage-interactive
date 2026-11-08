@@ -15,6 +15,26 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# The retired launch placeholder must never be served again.
+# Legacy bookmarks resolve permanently to the current flagship homepage.
+[[redirects]]
+  from = "/coming-soon.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/coming-soon"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/coming-soon/"
+  to = "/"
+  status = 301
+  force = true
+
 # Review draft for a private tool. Not the website privacy policy.
 [[headers]]
   for = "/backstage-openclaw-drive"

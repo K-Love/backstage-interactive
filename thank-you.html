@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#07070f">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
+  <script src="/assets/theme-preference.js"></script>
   <title>Note received | Backstage Interactive</title>
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -25,7 +26,24 @@
       font-style: normal;
       font-display: swap;
     }
-    :root { color-scheme: dark; }
+    :root {
+      color-scheme: dark;
+      --bg: #07070f;
+      --ink: #efedf6;
+      --muted: #c4c3d4;
+      --faint: #a7a6bc;
+      --link: #c9ccff;
+      --beam: rgba(46, 49, 146, 0.35);
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f7f5f0;
+      --ink: #182134;
+      --muted: #37445a;
+      --faint: #506078;
+      --link: #343786;
+      --beam: rgba(46, 49, 146, 0.09);
+    }
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -33,10 +51,39 @@
       display: flex;
       flex-direction: column;
       background:
-        radial-gradient(ellipse 60% 50% at 70% 0%, rgba(46, 49, 146, 0.35), transparent 60%),
-        #07070f;
-      color: #efedf6;
+        radial-gradient(ellipse 60% 50% at 70% 0%, var(--beam), transparent 60%),
+        var(--bg);
+      color: var(--ink);
       font: 1.0625rem/1.65 Inter, system-ui, sans-serif;
+    }
+    .theme-bar {
+      display: flex;
+      justify-content: flex-end;
+      width: min(40rem, calc(100% - 2.5rem));
+      margin: 0 auto;
+      padding-top: 1rem;
+    }
+    .theme-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 44px;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid #454769;
+      border-radius: 99px;
+      background: #101018;
+      color: #efedf6;
+      font: 560 0.8rem Inter, system-ui, sans-serif;
+      cursor: pointer;
+    }
+    html[data-theme] .theme-toggle { display: inline-flex; }
+    .theme-toggle:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+    .theme-symbol { font-size: 1.12rem; line-height: 1; }
+    :root[data-theme="light"] .theme-toggle {
+      border-color: rgba(24, 33, 52, 0.5);
+      color: var(--ink);
+      background: #fffdf9;
     }
     main {
       width: min(40rem, calc(100% - 2.5rem));
@@ -49,7 +96,7 @@
     }
     p.kicker {
       margin: 0;
-      color: #a7a6bc;
+      color: var(--faint);
       font-size: 0.75rem;
       font-weight: 560;
       letter-spacing: 0.16em;
@@ -63,7 +110,7 @@
       line-height: 0.95;
       letter-spacing: -0.02em;
     }
-    p { margin: 0; max-width: 36rem; color: #c4c3d4; }
+    p { margin: 0; max-width: 36rem; color: var(--muted); }
     a.back {
       display: inline-flex;
       align-self: flex-start;
@@ -76,7 +123,7 @@
       text-decoration: none;
       font-weight: 560;
     }
-    a:focus-visible { outline: 3px solid #c9ccff; outline-offset: 3px; }
+    a:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
     .policies {
       width: min(40rem, calc(100% - 2.5rem));
       margin: 0 auto;
@@ -89,13 +136,19 @@
       display: inline-flex;
       align-items: center;
       min-height: 44px;
-      color: #c9ccff;
+      color: var(--link);
       font-weight: 560;
       text-underline-offset: 0.2em;
     }
   </style>
 </head>
 <body>
+  <header class="theme-bar">
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode">
+      <span class="theme-symbol" aria-hidden="true">☼</span>
+      <span class="theme-label">Light mode</span>
+    </button>
+  </header>
   <main>
     <p class="kicker">Backstage Interactive</p>
     <h1>Thank you.</h1>

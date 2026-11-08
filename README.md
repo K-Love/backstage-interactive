@@ -6,10 +6,15 @@ Static site for [backstageinteractive.com](https://backstageinteractive.com/). [
 
 | Route | What it is |
 | --- | --- |
-| `/` | Coming Soon. Leave this page as it is until the studio home page is ready. |
-| `/google-business-profile-home-services` | GBP Fix-and-Protect landing page for home service pros. |
+| `/` | Studio homepage: owned products, client work, service offers, about, and inquiry form. |
+| `/google-business-profile-home-services/` | GBP Fix-and-Protect landing page for home service pros. |
 | `/website-fixes/` | Website improvement services (noindex). |
+| `/privacy/` and `/terms/` | Website policies linked from the public footer. |
 | `/tools/idea-validator/` | Internal preview tool. |
+
+The former Coming Soon page is retired and its file has been removed. Netlify
+permanently redirects `/coming-soon.html`, `/coming-soon`, and
+`/coming-soon/` to `/`. The root `index.html` is the only studio homepage.
 
 ## Preview locally
 
@@ -19,9 +24,98 @@ From the repository root:
 python3 -m http.server 8080
 ```
 
-Open [http://localhost:8080/google-business-profile-home-services/](http://localhost:8080/google-business-profile-home-services/).
+Open [http://localhost:8080/](http://localhost:8080/) for the flagship homepage, or [the GBP offer](http://localhost:8080/google-business-profile-home-services/).
 
 A local server will not store form submissions. Netlify does that after deploy.
+
+## Homepage theme preview (dark / light)
+
+The homepage supports a dark/light toggle in its header. On an initial visit,
+JavaScript reads the device's `prefers-color-scheme` preference; after a manual
+choice, a `backstage-theme` localStorage value takes precedence. A system
+preference change is followed only when no manual choice is stored.
+
+The dark header/footer stay midnight in both modes so the current Backstage
+wordmark remains legible. The light palette uses a warm paper background and
+dark text; the body, project cards, and inquiry form change together. The two
+palettes were checked mathematically for foreground/background text contrast
+at or above 4.5:1. These checks are not a substitute for visual, keyboard,
+focus, and accessibility-device tests.
+
+**Scope as of this update:** The homepage, Privacy Policy, Terms of Use,
+and studio thank-you page honor the same `backstage-theme` preference.
+The legal and thank-you pages use the shared `/assets/theme-preference.js`
+controller; the homepage retains its existing inline controller and key.
+The Website Fixes and GBP pages are separate, intentionally light service
+designs, with their own inquiry flows; they do not inherit this theme toggle.
+The service-specific thank-you pages and archived/tools pages also remain
+independent. Do not imply that every site route is theme-enabled.
+
+The theme preference is localStorage only, not a cookie, analytics event,
+or form field. The Privacy Policy discloses the optional preference.
+
+Acceptance: test 320/375/768/1440px, click the toggle, reload to confirm
+persistence, remove `backstage-theme` from local storage to restore device
+preference behavior, test keyboard activation, inspect forms and cards, then
+test the opposite OS theme. On `/privacy/` and `/terms/`, verify
+the same preference survives navigation, the sticky header does not obscure
+in-page section links, and the pages print legibly. Submit a studio inquiry
+on Netlify and confirm the `/thank-you.html` screen follows the chosen
+reading mode. Do not merge or publish without a Netlify preview check.
+
+## Studio portfolio — editorial production cards
+
+The homepage's Studio section is an editorial showcase, not a testimonial or a
+product benchmark. KeyProse is shown with the existing interface screenshot.
+Wild Thesis has a custom botanical illustration **clearly labeled as art
+direction rather than a screenshot**. Both productions have concise,
+source-grounded descriptions, visible capability labels, and limitations where
+appropriate. No user counts, customer outcomes, or efficacy claims are made.
+
+The public site and the source repositories use **Wild Thesis** (two words).
+Keep the public project name consistent with the product's canonical branding.
+The two owned product links remain external destinations, and must be checked
+in a normal browser before the production merge. A GitHub or Netlify preview
+status does not prove a separate product domain is responding.
+
+At mobile widths, verify the project images, captions, SVG illustration,
+headlines, capability chips, links, and alternating piece order. Test both
+dark and light reading modes. Numbered kickers belong exclusively to the
+homepage sections (such as `01 — Studio`, `02 — Services`,
+and `03 — Agency`), never to the KeyProse or Wild Thesis product cards.
+The homepage smoke check verifies this hierarchy and the existing layout rules.
+
+## Homepage v0.2 — Production Bible alignment
+
+The homepage deliberately makes two paths visible: **Studio / owned work** and
+**Agency / client work**. Its creative direction is restrained and cinematic,
+rather than a literal theater set. Keep the site's official wordmark and the
+headline “Where ideas become real things”; favor real projects and accurate
+claims over decorative manifesto copy.
+
+The v0.2 pass improves mobile navigation, clarifies both paths in the hero,
+and refines the studio/about language. It does not change any existing form
+names, thank-you URLs, legal pages, or the separate GBP/Website Fixes offers.
+
+Before proposing or publishing future homepage changes:
+
+1. Run `python3 scripts/check_homepage.py` from the repository root.
+2. Preview at **320, 375, 768, and 1440 CSS pixels**. Verify the header has no
+   horizontal overflow, all navigation links are visible, and anchor headings
+   aren't obscured by the sticky header.
+3. Open Studio, Services, Client work, About, and Contact. Check the project
+   links and local assets, including responsive images.
+4. On a Netlify deploy preview, verify the inquiry form markup still appears.
+   After a production deployment, submit a real test, check the Netlify
+   notification, and confirm `/thank-you.html`. A local HTTP server cannot
+   verify form submission.
+5. Check keyboard navigation and reduced-motion behavior.
+
+**Deployment note:** `netlify.toml` publishes the repository root. Check the
+actual Netlify site's connected repository, branch, and deploy status before
+concluding that the live domain is serving this commit. Do not equate a merge
+with a verified public deployment.
+
 
 ## Launch values
 

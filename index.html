@@ -4,9 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Backstage Interactive — Where ideas become real things</title>
-  <meta name="description" content="Kevin Love’s one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes for home service pros.">
+  <meta name="description" content="Kevin Love’s one-person studio. Owned products KeyProse and Wild Thesis, plus client sites and practical fixes for home service pros.">
   <meta name="theme-color" content="#07070f">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
+  <script>
+    // Apply an existing choice or the device preference before styles render.
+    (function () {
+      var choice = null;
+      try { choice = localStorage.getItem("backstage-theme"); } catch (error) {}
+      if (choice !== "dark" && choice !== "light") {
+        choice = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", choice);
+      document.querySelector('meta[name="theme-color"]').setAttribute("content", choice === "light" ? "#f7f5f0" : "#07070f");
+    })();
+  </script>
   <link rel="canonical" href="https://backstageinteractive.com/">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -15,7 +27,7 @@
   <meta property="og:site_name" content="Backstage Interactive">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Backstage Interactive — Where ideas become real things">
-  <meta property="og:description" content="A one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes.">
+  <meta property="og:description" content="A one-person studio. Owned products KeyProse and Wild Thesis, plus client sites and practical fixes.">
   <meta property="og:url" content="https://backstageinteractive.com/">
   <meta property="og:image" content="https://backstageinteractive.com/assets/og.png">
   <meta property="og:image:width" content="1200">
@@ -24,7 +36,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Backstage Interactive — Where ideas become real things">
-  <meta name="twitter:description" content="A one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes.">
+  <meta name="twitter:description" content="A one-person studio. Owned products KeyProse and Wild Thesis, plus client sites and practical fixes.">
   <meta name="twitter:image" content="https://backstageinteractive.com/assets/og.png">
 
   <link rel="preload" href="/assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -39,7 +51,7 @@
         "@id": "https://backstageinteractive.com/#website",
         "url": "https://backstageinteractive.com/",
         "name": "Backstage Interactive",
-        "description": "Kevin Love’s one-person studio. Owned products KeyProse and WildThesis, plus client sites and practical fixes.",
+        "description": "Kevin Love’s one-person studio. Owned products KeyProse and Wild Thesis, plus client sites and practical fixes.",
         "publisher": { "@id": "https://backstageinteractive.com/#studio" }
       },
       {
@@ -86,6 +98,7 @@
     }
 
     :root {
+      color-scheme: dark;
       --bg: #07070f;
       --ink: #efedf6;
       --muted: #c4c3d4;
@@ -94,10 +107,37 @@
       --blue: #2e3192;
       --blue-ink: #c9ccff;
       --warm: #e7a07a;
+      --panel: #101018;
+      --field-bg: #07070f;
+      --field-line: rgba(239, 237, 246, 0.28);
+      --placeholder: #a7a6bc;
+      --light-beam: rgba(46, 49, 146, 0.24);
+      --warm-beam: rgba(231, 160, 122, 0.065);
+      --stage-line: rgba(201, 204, 255, 0.38);
+      --type-glow: rgba(46, 49, 146, 0.55);
       --display: "Cormorant", "Iowan Old Style", Palatino, Georgia, serif;
       --sans: "Inter", system-ui, sans-serif;
       --wrap: 1120px;
       --header: 4.5rem;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f7f5f0;
+      --ink: #182134;
+      --muted: #37445a;
+      --faint: #506078;
+      --line: rgba(24, 33, 52, 0.20);
+      --blue: #2e3192;
+      --blue-ink: #343786;
+      --warm: #8a3e1c;
+      --panel: #fffdf9;
+      --field-bg: #ffffff;
+      --field-line: rgba(24, 33, 52, 0.46);
+      --placeholder: #58657b;
+      --light-beam: rgba(46, 49, 146, 0.09);
+      --warm-beam: rgba(170, 87, 47, 0.06);
+      --stage-line: rgba(46, 49, 146, 0.27);
+      --type-glow: rgba(46, 49, 146, 0.16);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -153,6 +193,16 @@
       margin-inline: auto;
     }
 
+    /* Keep the branded header and footer midnight in either theme, including the logo. */
+    .site-header, .site-footer {
+      --ink: #efedf6;
+      --muted: #c4c3d4;
+      --faint: #a7a6bc;
+      --blue-ink: #c9ccff;
+      --line: rgba(239, 237, 246, 0.14);
+      color: var(--ink);
+      background: #07070f;
+    }
     .site-header {
       position: sticky;
       top: 0;
@@ -231,9 +281,52 @@
       border-bottom: 1px solid var(--blue-ink);
       border-radius: 0;
     }
+    .theme-toggle {
+      display: none;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 44px;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(239, 237, 246, 0.48);
+      border-radius: 99px;
+      background: rgba(239, 237, 246, 0.08);
+      color: #efedf6;
+      font: 560 0.8rem var(--sans);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    html[data-theme] .theme-toggle { display: inline-flex; }
+    .theme-toggle:hover { background: rgba(239, 237, 246, 0.17); }
+    .theme-toggle:focus-visible { outline: 3px solid #c9ccff; outline-offset: 3px; }
+    .theme-symbol { font-size: 1.12rem; line-height: 1; }
 
     .hero {
+      position: relative;
+      isolation: isolate;
       padding: clamp(3.2rem, 8vw, 6.5rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+    }
+    /* A quiet opening-night spotlight, not a decorative hero image. */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 58% 75% at 78% 43%, var(--light-beam), transparent 78%),
+        radial-gradient(ellipse 30% 42% at 95% 87%, var(--warm-beam), transparent 85%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 12%;
+      right: 0;
+      bottom: 12%;
+      width: 1px;
+      pointer-events: none;
+      background: linear-gradient(to bottom, transparent, var(--stage-line), transparent);
     }
     .kicker {
       margin: 0 0 1.1rem;
@@ -277,6 +370,28 @@
       align-items: center;
       gap: 0.8rem 1.4rem;
       margin-top: 1.9rem;
+    }
+    .hero-cue {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem 1rem;
+      width: fit-content;
+      margin: clamp(2.5rem, 6vw, 4.5rem) 0 0;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 0.73rem;
+      font-weight: 560;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .hero-cue .cue-dot {
+      width: 0.3rem;
+      height: 0.3rem;
+      border-radius: 50%;
+      background: var(--warm);
+      flex: none;
     }
     .btn {
       display: inline-flex;
@@ -325,7 +440,7 @@
       border-top: 1px solid var(--line);
     }
     .frame {
-      background: #101018;
+      background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 2px;
       overflow: hidden;
@@ -339,8 +454,8 @@
       gap: 0.45rem;
       padding: 1.2rem 1.25rem 1.3rem;
       background:
-        radial-gradient(ellipse 80% 70% at 0% 0%, rgba(46, 49, 146, 0.55), transparent 60%),
-        #101018;
+        radial-gradient(ellipse 80% 70% at 0% 0%, var(--type-glow), transparent 60%),
+        var(--panel);
     }
     .typecard b {
       font-family: var(--display);
@@ -353,14 +468,6 @@
       color: var(--faint);
       font-size: 0.78rem;
       letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .eyebrow {
-      margin: 0 0 0.35rem;
-      color: var(--faint);
-      font-size: 0.75rem;
-      font-weight: 560;
-      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
     h3 {
@@ -380,6 +487,116 @@
     }
     .more:hover { color: var(--blue-ink); }
 
+    /* Studio productions: an editorial presentation grounded in the actual work. */
+    .studio-art { margin: 0; }
+    /* Crop the existing 1200 × 750 product screenshot below its toolkit subtitle,
+       before the next row of cards begins. Preserve the original source asset. */
+    .studio-art--keyprose .studio-shot {
+      aspect-ratio: 1200 / 666;
+      overflow: hidden;
+    }
+    .studio-art figcaption {
+      padding: 0.65rem 0.95rem;
+      background: var(--panel);
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 0.71rem;
+      font-weight: 560;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .studio-art--botanical .botanical-plate {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 240px;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      padding: clamp(1.4rem, 4vw, 2.25rem);
+      color: #f3eedf;
+      background: radial-gradient(ellipse 95% 92% at 85% 10%, #34534a 0%, #162a27 72%, #10211f 100%);
+    }
+    .botanical-plate::after {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      pointer-events: none;
+      border: 1px solid rgba(225, 233, 210, 0.22);
+    }
+    .botanical-drawing {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: min(65%, 390px);
+      height: 100%;
+      color: #b9d3af;
+      opacity: 0.84;
+      pointer-events: none;
+    }
+    .botanical-edition {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      color: #cbdcc6;
+    }
+    .botanical-name {
+      position: relative;
+      z-index: 1;
+      margin-top: 0.85rem;
+      font-family: var(--display);
+      font-size: clamp(2.35rem, 5vw, 4.3rem);
+      font-weight: 520;
+      line-height: 0.93;
+      letter-spacing: -0.035em;
+    }
+    .botanical-tagline {
+      position: relative;
+      z-index: 1;
+      margin-top: 0.65rem;
+      color: #d9e3d3;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+    .piece .project-hook {
+      margin-top: 0.65rem;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      font-weight: 520;
+      line-height: 1.13;
+      letter-spacing: -0.015em;
+    }
+    .piece .project-description { margin-top: 0.9rem; }
+    .project-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0 0;
+    }
+    .project-points li {
+      padding: 0.33rem 0.65rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 550;
+      letter-spacing: 0.01em;
+    }
+    .piece .project-boundary {
+      margin-top: 0.9rem;
+      color: var(--faint);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    .piece .project-link { margin-top: 1.15rem; }
+
     .offers, .work-grid {
       display: grid;
       gap: 2rem;
@@ -396,7 +613,7 @@
     .about-grid p:first-child, .contact-copy .section-intro { margin-top: 0.9rem; }
 
     form {
-      background: #101018;
+      background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 2px;
       padding: 1.25rem 1.15rem 1.3rem;
@@ -413,14 +630,14 @@
       width: 100%;
       min-height: 48px;
       padding: 0.65rem 0.75rem;
-      background: #07070f;
+      background: var(--field-bg);
       color: var(--ink);
-      border: 1px solid rgba(239, 237, 246, 0.28);
+      border: 1px solid var(--field-line);
       border-radius: 2px;
       font: inherit;
     }
     textarea { min-height: 140px; resize: vertical; }
-    input::placeholder, textarea::placeholder { color: #a7a6bc; opacity: 1; }
+    input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
     .form-note { margin: 0.85rem 0 0; color: var(--faint); font-size: 0.86rem; }
     form .btn { margin-top: 1.1rem; width: 100%; }
     .hp {
@@ -488,10 +705,62 @@
       form .btn { width: auto; min-width: 11rem; }
     }
 
+    /* The desktop alternating composition becomes image-first for both products
+       on narrower screens; keep source and keyboard order aligned. */
+    @media (max-width: 859px) {
+      .piece { grid-template-columns: minmax(0, 1fr); }
+      .piece .studio-art { order: 0; }
+      .piece > div { order: 1; }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.45rem;
+        padding-block: 0.6rem 0.35rem;
+      }
+      .site-header .brand { grid-column: 1; grid-row: 1; }
+      .site-header .brand img { width: min(190px, 52vw); }
+      .site-header nav { grid-column: 1 / -1; grid-row: 2; width: 100%; min-width: 0; }
+      .theme-toggle { grid-column: 2; grid-row: 1; justify-self: end; }
+      .nav-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0 0.2rem;
+      }
+      .nav-list a {
+        min-height: 40px;
+        padding-inline: 0.35rem;
+        font-size: 0.84rem;
+      }
+      .nav-list a[href="#contact"] { margin-left: 0; }
+      .hero { padding-top: clamp(2.5rem, 7vw, 4rem); }
+      .hero::after { display: none; }
+      section[id] { scroll-margin-top: 9rem; }
+    }
+    /* On phones, prevent the botanical artwork from stretching its grid cell
+       and give its right-hand inner rule a touch more breathing room. */
+    @media (max-width: 600px) {
+      .studio-art--botanical { min-width: 0; }
+      .studio-art--botanical .botanical-plate {
+        width: 100%;
+        min-width: 0;
+      }
+      .studio-art--botanical .botanical-plate::after {
+        inset: 1rem 1.35rem 1rem 1rem;
+      }
+    }
+
     @media (max-width: 420px) {
       .wrap { width: min(var(--wrap), calc(100% - 1.7rem)); }
-      .nav-list { flex-wrap: nowrap; gap: 0.05rem; }
-      .nav-list a { padding-inline: 0.32rem; }
+      .nav-list { justify-content: flex-start; gap: 0 0.35rem; }
+      .nav-list a { padding-inline: 0.2rem; font-size: 0.8rem; }
+      .site-header .brand img { width: min(165px, 48vw); }
+      .theme-toggle { padding-inline: 0.55rem; font-size: 0.75rem; }
+      .hero-cue { font-size: 0.68rem; }
+      section[id] { scroll-margin-top: 10.5rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -523,57 +792,95 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode">
+        <span class="theme-symbol" aria-hidden="true">☼</span>
+        <span class="theme-label">Light mode</span>
+      </button>
     </div>
   </header>
 
   <main id="main">
     <section class="hero wrap" id="top" aria-labelledby="hero-title">
-      <p class="kicker">One-person studio</p>
+      <p class="kicker">One person. Modern tools. Unreasonable ambition.</p>
       <h1 id="hero-title">Where ideas become <em>real</em> things</h1>
-      <p class="lede">I build products I own, and I take client work that pays for the next one. You see the finished piece. The making happens backstage.</p>
+      <p class="lede">Original digital products and thoughtful client work, built with human judgment and modern tools. Independent by design. Ambitious by nature.</p>
       <div class="hero-actions">
-        <a class="btn" href="#studio">See the work</a>
-        <a class="text-link" href="#contact">Start a conversation</a>
+        <a class="btn" href="#studio">Explore the studio</a>
+        <a class="text-link" href="#services">See client services</a>
       </div>
+      <p class="hero-cue"><span>Studio / owned work</span><span class="cue-dot" aria-hidden="true"></span><span>Agency / client work</span></p>
     </section>
 
     <section class="section" id="studio" aria-labelledby="studio-title">
       <div class="wrap">
         <p class="kicker">01 — Studio</p>
         <h2 id="studio-title">Work I own.</h2>
-        <p class="section-intro">These products are the studio. Client work is fuel, not the identity.</p>
+        <p class="section-intro">Original products, built to be useful, thoughtful, and real.</p>
 
-        <article class="piece">
-          <div class="frame">
-            <img
-              src="/assets/work/keyprose.webp"
-              srcset="/assets/work/keyprose-720.webp 720w, /assets/work/keyprose.webp 1200w"
-              sizes="(min-width: 860px) 36rem, calc(100vw - 2.5rem)"
-              width="1200"
-              height="750"
-              alt="KeyProse homepage. The headline reads: the AI back office for listing agents."
-              decoding="async">
-          </div>
+        <article class="piece" aria-labelledby="keyprose-title">
+          <figure class="frame studio-art studio-art--keyprose">
+            <div class="studio-shot">
+              <img
+                src="/assets/work/keyprose.webp"
+                srcset="/assets/work/keyprose-720.webp 720w, /assets/work/keyprose.webp 1200w"
+                sizes="(min-width: 860px) 36rem, calc(100vw - 2.5rem)"
+                width="1200"
+                height="750"
+                alt="KeyProse interface showing an AI back office for real-estate listing agents."
+                loading="lazy"
+                decoding="async">
+            </div>
+            <figcaption>Real-estate workflows — product interface</figcaption>
+          </figure>
           <div>
-            <p class="eyebrow">Owned product</p>
-            <h3>KeyProse</h3>
-            <p>The AI back office for listing agents. A self-hosted toolkit that drafts MLS listings, CMA reports, social posts, and email campaigns. The public demo runs without an API key. Listing copy and CMA figures on the site are samples for review, not an appraisal.</p>
-            <a class="more" href="https://keyprose.com" target="_blank" rel="noopener noreferrer">Visit KeyProse<span class="visually-hidden"> (opens in a new tab)</span></a>
+            <h3 id="keyprose-title">KeyProse</h3>
+            <p class="project-hook">One property brief. Multiple useful drafts.</p>
+            <p class="project-description">A toolkit for listing agents that brings listing descriptions, comparative market analysis drafts, social posts, and email campaigns into one workflow. Built around turning supplied property details into materials a person can review and refine.</p>
+            <ul class="project-points" aria-label="KeyProse capabilities">
+              <li>Listing copy</li>
+              <li>CMA drafts</li>
+              <li>Social posts</li>
+              <li>Email campaigns</li>
+            </ul>
+            <p class="project-boundary">Demo copy and figures are illustrative. A CMA draft is not an appraisal; professional review remains essential.</p>
+            <a class="more project-link" href="https://keyprose.com" target="_blank" rel="noopener noreferrer">Explore KeyProse<span class="visually-hidden"> (opens in a new tab)</span></a>
           </div>
         </article>
 
-        <article class="piece is-flip">
-          <div class="frame" aria-hidden="true">
-            <div class="typecard">
-              <span>Owned product</span>
-              <b>WildThesis</b>
+        <article class="piece is-flip" aria-labelledby="wildthesis-title">
+          <figure class="frame studio-art studio-art--botanical">
+            <div class="botanical-plate" aria-hidden="true">
+              <svg class="botanical-drawing" viewBox="0 0 320 290" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <circle cx="203" cy="135" r="108" stroke="currentColor" stroke-opacity=".25" stroke-width="1"/>
+                <circle cx="203" cy="135" r="81" stroke="currentColor" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 7"/>
+                <path d="M168 270C178 218 182 191 189 154C199 106 211 69 228 25" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M188 169C157 143 143 127 126 99M198 130C226 105 244 92 268 80M180 211C149 192 123 178 111 159M208 97C186 78 179 62 175 44" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M126 99C88 90 76 64 72 45C100 48 123 62 126 99Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".09"/>
+                <path d="M268 80C282 53 290 31 289 18C259 28 244 51 268 80Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".11"/>
+                <path d="M111 159C78 159 62 143 50 124C82 118 100 130 111 159Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".10"/>
+                <path d="M175 44C155 33 148 17 149 6C170 12 177 25 175 44Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".09"/>
+                <path d="M228 25C225 11 229 4 240 0C245 17 241 26 228 25Z" stroke="currentColor" stroke-width="1.7" fill="currentColor" fill-opacity=".10"/>
+                <path d="M153 235C123 236 109 221 101 205C127 202 143 212 153 235Z" stroke="currentColor" stroke-width="1.6" fill="currentColor" fill-opacity=".07"/>
+                <path d="M181 202C210 188 225 173 234 151M234 151C252 151 267 139 274 123C248 121 236 133 234 151Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+              <span class="botanical-edition">Wild Thesis / Field notes</span>
+              <span class="botanical-name">Wild Thesis</span>
+              <span class="botanical-tagline">Research · Sources · Context</span>
             </div>
-          </div>
+            <figcaption>Botanical research — illustration, not a product screenshot</figcaption>
+          </figure>
           <div>
-            <p class="eyebrow">Owned product</p>
-            <h3>WildThesis</h3>
-            <p>An educational herbal research reference: a herb library, a five-question herb finder, and a checker for known herb–herb and herb–drug interactions. It organizes source material. It does not diagnose, recommend, or give medical advice.</p>
-            <a class="more" href="https://wildthesis.com" target="_blank" rel="noopener noreferrer">Visit WildThesis<span class="visually-hidden"> (opens in a new tab)</span></a>
+            <h3 id="wildthesis-title">Wild Thesis</h3>
+            <p class="project-hook">Find the source. Understand the limits.</p>
+            <p class="project-description">An educational herbal research reference that organizes herb information alongside source material and safety context. Explore herb profiles, use the guided finder, and investigate documented herb–herb and herb–drug interaction notes.</p>
+            <ul class="project-points" aria-label="Wild Thesis capabilities">
+              <li>Herb directory</li>
+              <li>Guided finder</li>
+              <li>Source context</li>
+              <li>Interaction notes</li>
+            </ul>
+            <p class="project-boundary">For research and education only. Not a diagnostic service, treatment recommendation, or substitute for professional medical advice.</p>
+            <a class="more project-link" href="https://wildthesis.com" target="_blank" rel="noopener noreferrer">Explore Wild Thesis<span class="visually-hidden"> (opens in a new tab)</span></a>
           </div>
         </article>
       </div>
@@ -670,23 +977,25 @@
     </section>
 
     <section class="section" id="about" aria-labelledby="about-title">
-      <div class="wrap about-grid">
-        <figure class="portrait">
-          <img
-            src="/assets/kevin-love-home.webp"
-            srcset="/assets/kevin-love-420.webp 420w, /assets/kevin-love-home.webp 467w"
-            sizes="(min-width: 860px) 22rem, calc(100vw - 2.5rem)"
-            width="467"
-            height="672"
-            alt="Kevin Love, seated outdoors by the water, wearing glasses and a black leather jacket."
-            loading="lazy"
-            decoding="async">
-        </figure>
-        <div>
-          <p class="kicker">04 — About</p>
-          <h2 id="about-title">Kevin Love.</h2>
-          <p>More than ten years in web development and digital marketing. I work alone. Backstage Interactive is not a team, and the name is not a stand-in for one.</p>
-          <p>Studio and agency are two engines of the same practice. KeyProse and WildThesis are the identity. Client sites and the service offers are how the next product gets made.</p>
+      <div class="wrap">
+        <p class="kicker">04 — About</p>
+        <div class="about-grid">
+          <figure class="portrait">
+            <img
+              src="/assets/kevin-love-home.webp"
+              srcset="/assets/kevin-love-420.webp 420w, /assets/kevin-love-home.webp 467w"
+              sizes="(min-width: 860px) 22rem, calc(100vw - 2.5rem)"
+              width="467"
+              height="672"
+              alt="Kevin Love, seated outdoors by the water, wearing glasses and a black leather jacket."
+              loading="lazy"
+              decoding="async">
+          </figure>
+          <div>
+            <h2 id="about-title">Kevin Love.</h2>
+            <p>More than ten years in web development and digital marketing. I work alone. Backstage Interactive is not a team, and the name is not a stand-in for one.</p>
+            <p>Studio work develops original digital products. Agency work solves concrete problems for clients. Both are guided by the same standard: choose worthwhile work, make it carefully, and be clear about what it does.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -717,7 +1026,7 @@
           </select>
           <label for="contact-message">The note</label>
           <textarea id="contact-message" name="message" required maxlength="5000" placeholder="What are you trying to make, or what needs fixing?"></textarea>
-          <button class="btn" type="submit">Send the note</button>
+          <button class="btn" type="submit">Send</button>
           <p class="form-note">No payment is required to write. Don’t include passwords or private customer information.</p>
         </form>
       </div>
@@ -739,5 +1048,43 @@
       <p class="colophon">Where ideas become real things. © 2026 Backstage Interactive.</p>
     </div>
   </footer>
+  <script>
+    (function () {
+      var button = document.getElementById("theme-toggle");
+      var label = button.querySelector(".theme-label");
+      var icon = button.querySelector(".theme-symbol");
+      var root = document.documentElement;
+      var preference = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+
+      function paint() {
+        var isDark = root.getAttribute("data-theme") !== "light";
+        label.textContent = isDark ? "Light mode" : "Dark mode";
+        icon.textContent = isDark ? "☼" : "☾";
+        button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", isDark ? "#07070f" : "#f7f5f0");
+      }
+
+      button.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("backstage-theme", next); } catch (error) {}
+        paint();
+      });
+
+      if (preference) {
+        var systemChanged = function (event) {
+          var saved = null;
+          try { saved = localStorage.getItem("backstage-theme"); } catch (error) {}
+          if (saved !== "dark" && saved !== "light") {
+            root.setAttribute("data-theme", event.matches ? "dark" : "light");
+            paint();
+          }
+        };
+        if (preference.addEventListener) preference.addEventListener("change", systemChanged);
+        else if (preference.addListener) preference.addListener(systemChanged);
+      }
+      paint();
+    })();
+  </script>
 </body>
 </html>
