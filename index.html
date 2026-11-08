@@ -604,6 +604,27 @@
     }
     .work-card h3 { font-size: clamp(1.55rem, 2.4vw, 1.9rem); }
 
+    /* Services: a genuine editorial illustration for the GBP review offer,
+       not a mocked-up live business listing, performance result or testimonial. */
+    .gbp-art { display: block; width: 100%; height: auto; }
+    .services-invitation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem 2.5rem;
+      padding-top: clamp(2.1rem, 4.5vw, 3.25rem);
+      margin-top: clamp(2.1rem, 4.5vw, 3.25rem);
+      border-top: 1px solid var(--line);
+    }
+    .services-invitation h3 { font-size: clamp(1.75rem, 3.2vw, 2.4rem); }
+    .services-invitation p { max-width: 44rem; margin: 0.65rem 0 0; color: var(--muted); }
+    .services-invitation .btn { flex: none; }
+    @media (max-width: 760px) {
+      .services-invitation { align-items: flex-start; flex-direction: column; }
+      .services-invitation .btn { width: 100%; }
+    }
+
+
     /* Client work uses genuine site captures for the two jewelry portfolios and
        a clearly labeled, original editorial illustration for the coaching site.
        Crops are scoped to the visual, keeping all underlying image files intact. */
@@ -905,8 +926,8 @@
       <nav aria-label="Primary">
         <ul class="nav-list">
           <li><a href="#studio">Studio</a></li>
-          <li><a href="#services">Services</a></li>
           <li><a href="#work">Agency</a></li>
+          <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -1005,46 +1026,9 @@
       </div>
     </section>
 
-    <section class="section" id="services" aria-labelledby="services-title">
-      <div class="wrap">
-        <p class="kicker">02 — Services</p>
-        <h2 id="services-title">Two ways to hire the studio.</h2>
-        <p class="section-intro">Productized offers for home service pros. The scope is written before any work starts.</p>
-        <div class="offers">
-          <article>
-            <div class="frame" aria-hidden="true">
-              <div class="typecard">
-                <span>Home service pros</span>
-                <b>GBP Fix-and-Protect</b>
-              </div>
-            </div>
-            <h3>GBP Fix-and-Protect</h3>
-            <p>Flat-price Google Business Profile work for roofing, HVAC, plumbing, electrical, cleaning, and carpet care. The offer starts with a free two-minute video audit of a profile.</p>
-            <a class="more" href="/google-business-profile-home-services/">See the offer</a>
-          </article>
-          <article>
-            <div class="frame">
-              <img
-                src="/assets/work/fixes.webp"
-                srcset="/assets/work/fixes-720.webp 720w, /assets/work/fixes.webp 1200w"
-                sizes="(min-width: 860px) 32rem, calc(100vw - 2.5rem)"
-                width="1200"
-                height="750"
-                alt="Website Fixes page. The headline reads: Fix what’s broken. Make what works better."
-                loading="lazy"
-                decoding="async">
-            </div>
-            <h3>Website Fixes</h3>
-            <p>Focused WordPress repairs and a prepaid block of improvement time. The scope, the price, and the timeline are written down before anything on the site changes.</p>
-            <a class="more" href="/website-fixes/">See the offer</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="work" aria-labelledby="work-title">
       <div class="wrap">
-        <p class="kicker">03 — Agency</p>
+        <p class="kicker">02 — Agency</p>
         <h2 id="work-title">Client work.</h2>
         <p class="section-intro">Selected sites for independent practices. Shown as they are. No results claimed.</p>
         <div class="work-grid">
@@ -1121,6 +1105,101 @@
       </div>
     </section>
 
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <p class="kicker">03 — Services</p>
+        <h2 id="services-title">Find your starting point.</h2>
+        <p class="section-intro">Two focused offers for practical problems—with room for bigger ideas.</p>
+        <div class="offers">
+          <article>
+            <div class="frame">
+              <svg class="gbp-art" viewBox="0 0 1200 750" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Original illustration of a local business profile audit: business details, services and categories, and profile protection. Not a real business profile or results." focusable="false">
+                <defs>
+                  <linearGradient id="gbp-stage" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#111a31"/>
+                    <stop offset=".68" stop-color="#20245b"/>
+                    <stop offset="1" stop-color="#2e3192"/>
+                  </linearGradient>
+                  <radialGradient id="gbp-glow">
+                    <stop offset="0" stop-color="#e7a07a" stop-opacity=".18"/>
+                    <stop offset="1" stop-color="#e7a07a" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <rect width="1200" height="750" fill="url(#gbp-stage)"/>
+                <circle cx="180" cy="550" r="395" fill="url(#gbp-glow)"/>
+                <g fill="none" stroke="#e1e2ff" stroke-opacity=".14">
+                  <circle cx="565" cy="372" r="268"/>
+                  <circle cx="565" cy="372" r="208"/>
+                  <path d="M0 680H1200M65 0V750M585 0V750"/>
+                </g>
+                <rect x="40" y="40" width="1120" height="670" fill="none" stroke="#f5f0e5" stroke-opacity=".22"/>
+                <g font-family="Arial, Helvetica, sans-serif">
+                  <text x="82" y="120" font-size="21" letter-spacing="4" fill="#dadcfb" font-weight="700">LOCAL PRESENCE / FIELD NOTES</text>
+                  <text x="80" y="302" font-family="Georgia, serif" font-size="95" fill="#fff8ef">Find it.</text>
+                  <text x="80" y="411" font-family="Georgia, serif" font-size="95" fill="#fff8ef">Fix it.</text>
+                  <text x="80" y="520" font-family="Georgia, serif" font-size="95" fill="#e7a07a">Protect it.</text>
+                  <path d="M84 578H330" stroke="#e7a07a" stroke-width="3"/>
+                  <text x="82" y="622" font-size="21" letter-spacing="3" fill="#d7d9ed">BUSINESS PROFILE REVIEW</text>
+                </g>
+                <g>
+                  <rect x="650" y="116" width="464" height="514" rx="8" fill="#f8f6ef"/>
+                  <rect x="650" y="116" width="464" height="105" rx="8" fill="#202a47"/>
+                  <path d="M650 212H1114V221H650Z" fill="#202a47"/>
+                  <g font-family="Arial, Helvetica, sans-serif">
+                    <text x="690" y="160" font-size="17" font-weight="700" letter-spacing="2.8" fill="#bfc8db">FIELD GUIDE / 01</text>
+                    <text x="690" y="197" font-size="32" font-weight="700" fill="#f7f5f0">PROFILE AUDIT</text>
+                    <text x="688" y="269" font-size="17" font-weight="700" letter-spacing="2.2" fill="#677288">AREAS TO REVIEW</text>
+                  </g>
+                  <g fill="none" stroke="#c8cbd3" stroke-width="2"><path d="M686 298H1078M686 390H1078M686 482H1078M686 574H1078"/></g>
+                  <g fill="none" stroke="#2e3192" stroke-width="3.4">
+                    <circle cx="716" cy="344" r="19"/><path d="M708 344L715 351L727 336"/>
+                    <circle cx="716" cy="436" r="19"/><path d="M708 436L715 443L727 428"/>
+                    <circle cx="716" cy="528" r="19"/><path d="M708 528L715 535L727 520"/>
+                  </g>
+                  <g font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#182134" font-weight="600">
+                    <text x="766" y="353">Business details</text>
+                    <text x="766" y="445">Services &amp; categories</text>
+                    <text x="766" y="537">Profile protection</text>
+                  </g>
+                  <g transform="translate(1044 263)" fill="none" stroke="#2e3192" stroke-width="3">
+                    <path d="M0-23C-16-23-28-11-28 4C-28 22 0 45 0 45S28 22 28 4C28-11 16-23 0-23Z"/>
+                    <circle cx="0" cy="3" r="9"/>
+                  </g>
+                </g>
+                <text x="683" y="606" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#68758c" letter-spacing="1.4">ILLUSTRATIVE CHECKLIST · NO CLIENT RESULTS</text>
+              </svg>
+            </div>
+            <h3>GBP Fix-and-Protect</h3>
+            <p>Flat-price Google Business Profile work for roofing, HVAC, plumbing, electrical, cleaning, and carpet care. The offer starts with a free two-minute video audit of a profile.</p>
+            <a class="more" href="/google-business-profile-home-services/">See the offer</a>
+          </article>
+          <article>
+            <div class="frame">
+              <img
+                src="/assets/work/fixes.webp"
+                srcset="/assets/work/fixes-720.webp 720w, /assets/work/fixes.webp 1200w"
+                sizes="(min-width: 860px) 32rem, calc(100vw - 2.5rem)"
+                width="1200"
+                height="750"
+                alt="Website Fixes page. The headline reads: Fix what’s broken. Make what works better."
+                loading="lazy"
+                decoding="async">
+            </div>
+            <h3>Website Fixes</h3>
+            <p>Focused WordPress repairs and a prepaid block of improvement time. The scope, the price, and the timeline are written down before anything on the site changes.</p>
+            <a class="more" href="/website-fixes/">See the offer</a>
+          </article>
+        </div>
+        <div class="services-invitation">
+          <div>
+            <h3>Have something bigger in mind?</h3>
+            <p>New websites, thoughtful redesigns, and digital marketing don't always fit into a fixed package. Bring the idea or the challenge, and see what's possible.</p>
+          </div>
+          <a class="btn" href="#contact">Discuss a project</a>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="wrap">
         <p class="kicker">04 — About</p>
@@ -1168,6 +1247,8 @@
             <option>Studio — a product or a collaboration</option>
             <option>Website fixes</option>
             <option>Google Business Profile</option>
+            <option>New website or redesign</option>
+            <option>Digital marketing</option>
           </select>
           <label for="contact-message">The note</label>
           <textarea id="contact-message" name="message" required maxlength="5000" placeholder="What are you trying to make, or what needs fixing?"></textarea>
@@ -1183,8 +1264,8 @@
       <a class="brand" href="/"><img src="/assets/bi-logo.svg" alt="Backstage Interactive" width="223" height="53"></a>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#studio">Studio</a>
-        <a href="#services">Services</a>
         <a href="#work">Agency</a>
+        <a href="#services">Services</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
         <a href="/privacy/">Privacy</a>
