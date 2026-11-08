@@ -609,35 +609,58 @@
        Crops are scoped to the visual, keeping all underlying image files intact. */
     .client-art { margin: 0; }
     .client-art__visual {
+      --art-inset: 0.9rem;
+      --art-rule: rgba(30, 34, 59, 0.24);
       position: relative;
       aspect-ratio: 16 / 10;
       overflow: hidden;
       isolation: isolate;
       background: #f6f3ed;
     }
-    .client-art__visual--screenshot img {
+    /* All three cards share one hairline rule, at exactly the same inset.
+       The light artwork uses a darker, equally subtle rule for contrast. */
+    .client-art__visual::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      inset: var(--art-inset);
+      border: 1px solid var(--art-rule);
+      pointer-events: none;
+    }
+    /* The white interior meets the inner line. A clipped window allows
+       Nina's artwork to sit a touch lower without spilling over the rule. */
+    .client-art__screenshot-window {
+      position: absolute;
+      inset: var(--art-inset);
+      overflow: hidden;
+      background: #fff;
+    }
+    .client-art--nina .client-art__screenshot-window img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center center;
+      transform: translateY(0.65rem);
     }
-    /* Enlarging the existing 1200px screenshots makes the work readable at
-       portfolio-card size; no fabricated website elements are introduced. */
-    .client-art--nina .client-art__visual img {
-      transform: scale(1.18);
-      transform-origin: center 42%;
-    }
-    .client-art--sharrey .client-art__visual img {
-      transform: scale(1.13);
-      transform-origin: center 55%;
-    }
-    .client-art__visual--screenshot::after {
-      content: "";
+    /* The original Sharrey homepage screenshot ended before the jewelry did.
+       Show the complete, genuine product photography from the client site. */
+    .client-art__jewelry {
       position: absolute;
-      inset: clamp(0.65rem, 1.7vw, 1rem);
-      border: 1px solid rgba(30, 34, 59, 0.12);
-      pointer-events: none;
+      inset: var(--art-inset);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: stretch;
+      background: #fff;
+      overflow: hidden;
+    }
+    .client-art__jewelry img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      object-fit: contain;
+      object-position: center center;
     }
     .client-art figcaption {
       padding: 0.65rem 0.95rem;
@@ -659,12 +682,8 @@
         linear-gradient(125deg, #102c38 0%, #143f44 53%, #071a27 100%);
       color: #f3ebdc;
     }
-    .client-art--chris .client-art__visual::after {
-      content: "";
-      position: absolute;
-      inset: 0.9rem;
-      border: 1px solid rgba(239, 235, 209, 0.24);
-      pointer-events: none;
+    .client-art--chris .client-art__visual {
+      --art-rule: rgba(239, 235, 209, 0.24);
     }
     .client-art__orbit {
       position: absolute;
@@ -1032,15 +1051,17 @@
           <article class="work-card">
             <figure class="frame client-art client-art--nina">
               <div class="client-art__visual client-art__visual--screenshot">
-                <img
-                  src="/assets/work/ninalara.webp"
-                  srcset="/assets/work/ninalara-720.webp 720w, /assets/work/ninalara.webp 1200w"
-                  sizes="(min-width: 860px) 22rem, calc(100vw - 2.5rem)"
-                  width="1200"
-                  height="750"
-                  alt="Nina Lara Design homepage detail, featuring five colorful enamel rings."
-                  loading="lazy"
-                  decoding="async">
+                <div class="client-art__screenshot-window">
+                  <img
+                    src="/assets/work/ninalara.webp"
+                    srcset="/assets/work/ninalara-720.webp 720w, /assets/work/ninalara.webp 1200w"
+                    sizes="(min-width: 860px) 22rem, calc(100vw - 2.5rem)"
+                    width="1200"
+                    height="750"
+                    alt="Nina Lara Design homepage detail, featuring five colorful enamel rings."
+                    loading="lazy"
+                    decoding="async">
+                </div>
               </div>
               <figcaption>Jewelry design · Website detail</figcaption>
             </figure>
@@ -1051,17 +1072,25 @@
           <article class="work-card">
             <figure class="frame client-art client-art--sharrey">
               <div class="client-art__visual client-art__visual--screenshot">
-                <img
-                  src="/assets/work/sharrey.webp"
-                  srcset="/assets/work/sharrey-720.webp 720w, /assets/work/sharrey.webp 1200w"
-                  sizes="(min-width: 860px) 22rem, calc(100vw - 2.5rem)"
-                  width="1200"
-                  height="750"
-                  alt="Sharrey Doré homepage detail, showing handmade jewelry pieces."
-                  loading="lazy"
-                  decoding="async">
+                <div class="client-art__jewelry">
+                  <img
+                    src="https://i0.wp.com/www.sharreydore.com/wp-content/uploads/2025/01/sd-home1.jpg?fit=334%2C500&amp;ssl=1"
+                    width="334" height="500"
+                    alt="Full pair of gold and turquoise earrings by Sharrey Doré."
+                    loading="lazy" decoding="async">
+                  <img
+                    src="https://i0.wp.com/www.sharreydore.com/wp-content/uploads/2025/01/sd-home2.jpg?fit=334%2C500&amp;ssl=1"
+                    width="334" height="500"
+                    alt="Complete handmade necklace by Sharrey Doré."
+                    loading="lazy" decoding="async">
+                  <img
+                    src="https://i0.wp.com/www.sharreydore.com/wp-content/uploads/2025/01/sd-home3.jpg?fit=800%2C534&amp;ssl=1"
+                    width="800" height="534"
+                    alt="Handmade statement ring by Sharrey Doré."
+                    loading="lazy" decoding="async">
+                </div>
               </div>
-              <figcaption>Handmade jewelry · Website detail</figcaption>
+              <figcaption>Handmade jewelry · Client-site photography</figcaption>
             </figure>
             <h3>Sharrey Doré</h3>
             <p>A site for handmade, one-of-a-kind jewelry. The pieces shown include earrings, a necklace, and a ring, and the site describes commissioned work.</p>

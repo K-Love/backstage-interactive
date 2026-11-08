@@ -119,7 +119,9 @@ def main():
         for expected in (
             'client-art--nina', 'client-art--sharrey', 'client-art--chris',
             'src="/assets/work/ninalara.webp"',
-            'src="/assets/work/sharrey.webp"',
+            'client-art__jewelry',
+            'sd-home1.jpg', 'sd-home2.jpg', 'sd-home3.jpg',
+            'Handmade jewelry · Client-site photography',
             'Coaching · Editorial illustration',
             'aria-label="Editorial artwork for the Chris Willburn coaching website',
         ):
@@ -127,6 +129,35 @@ def main():
                 audit.errors.append(f"Missing Agency visual: {expected}")
         if '<div class="typecard">' in agency:
             audit.errors.append("Agency still uses a placeholder typecard")
+
+        # All three image rules share the Chris Willburn 0.9rem inset and
+        # 1px weight, with a light-appropriate ink on the jewelry cards.
+        # Nina's image slides down inside a white clipped window, so it
+        # cannot overlap the hairline border or the off-white outside band.
+        screenshot_css = html[html.find("    /* Client work uses genuine site captures"):html.find("    .client-art figcaption")]
+        for expected in (
+            "--art-inset: 0.9rem;",
+            "--art-rule: rgba(30, 34, 59, 0.24);",
+            "inset: var(--art-inset);",
+            "border: 1px solid var(--art-rule);",
+            ".client-art__screenshot-window",
+            "overflow: hidden;",
+            "transform: translateY(0.65rem);",
+            ".client-art__jewelry",
+            "grid-template-columns: 1fr 1fr 1fr;",
+            "object-fit: contain;",
+        ):
+            if expected not in screenshot_css:
+                audit.errors.append(f"Missing shared image border: {expected}")
+        if screenshot_css.count("inset: var(--art-inset);") < 3:
+            audit.errors.append("Nina, Sharrey and shared border must use one inset")
+        if 'class="client-art__screenshot-window"' not in agency:
+            audit.errors.append("Nina screenshot must be inside its clipped window")
+        if "transform: scale(" in screenshot_css:
+            audit.errors.append("Client screenshots must not use CSS zoom")
+
+        if agency.count('sd-home1.jpg') != 1 or agency.count('sd-home2.jpg') != 1:
+            audit.errors.append("Sharrey's earrings and necklace must be present in full")
 
     if html.count('href="#work">Agency</a>') != 2:
         audit.errors.append("Both primary and footer navigation must say Agency")

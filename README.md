@@ -89,9 +89,18 @@ The homepage smoke check verifies this hierarchy and the existing layout rules.
 
 The primary/footer navigation uses **Agency** to match the numbered
 `03 — Agency` section. Its on-page title is **Client work.** This page uses
-real site captures for Nina Lara Design and Sharrey Doré. They are shown
-as more focused, art-directed crops of the existing 1200×750 WebP assets;
-the underlying images and external site links are unchanged.
+a real site capture for Nina Lara Design, centered horizontally and
+nudged downward within a clipped white window to balance its content
+vertically without crossing the frame. All three client cards now share
+the same 0.9rem inner-rule inset and 1px stroke as the Chris Willburn
+illustration, with an appropriate subtle dark line for the pale jewelry
+images; the off-white area outside the rule stays intact. The original Sharrey Doré screenshot ended halfway through
+the earrings and necklace; that card now uses the complete, original
+earring, necklace and ring photos served by the client's WordPress image
+CDN. The three photographs stay fully in view in a simple white collage
+that meets the same inner border. The Sharrey card therefore depends on
+those client-hosted images remaining available. Client links and copy
+remain unchanged.
 
 Chris Willburn has an original botanical-style editorial graphic grounded
 in the site's "Inside Out" wording and its mental / emotional / physical
@@ -100,9 +109,12 @@ screenshot or client testimonial. Do not replace it with an invented
 interface, or claim results that aren't documented.
 
 Preview the three cards at 320/375/768/1440px in both themes. Confirm
-the site images remain legible, decorative borders do not crowd their
-content, captions don't obscure images, the coaching graphic fits without
-overflow, and all three external client site links still work.
+Nina's jewelry and heading feel vertically balanced after the gentle
+downward shift, Sharrey's full earrings and necklace are visible, all
+three thin inner borders have identical insets, and the surrounding
+off-white band remains intact on the two jewelry cards. Also confirm the three
+client-site images load, the coaching graphic fits without overflow, and
+all three external client site links still work.
 
 ## Homepage v0.2 — Production Bible alignment
 
