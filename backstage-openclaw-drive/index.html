@@ -254,7 +254,7 @@
           <li>The Google app is in Testing mode, not a production publishing status. A dedicated account authorized Drive with the scope <code>https://www.googleapis.com/auth/drive</code>. That scope can view, create, edit, and delete Drive files the account can access.</li>
           <li>The connector is set to a folder named Backstage Work. That limit is in the connector configuration. Google does not enforce it as the boundary of the scope.</li>
           <li>One test used a 171-byte file. The upload, the download, and a byte-for-byte comparison passed. The file remains in Deliverables and belongs to the dedicated automation account. That is one test, not routine automation.</li>
-          <li>OpenClaw uses Abacus for model requests and Telegram for conversations with me. The controlled Drive connection test used the file-transfer connector directly and made no model requests or Telegram delivery. Abacus’s published no-training and downstream retention commitments, and the limits of those findings, are described in the <a href="/backstage-openclaw-drive/privacy/#services">privacy draft’s provider review</a>.</li>
+          <li>When OpenClaw’s AI reads a Drive file, it reads the file contents. The relevant content is sent to Abacus.AI for processing only, to carry out the request. OpenClaw does not store that content anywhere other than Google Drive, apart from the copies described in the <a href="/backstage-openclaw-drive/privacy/#retention">retention section</a>, such as temporary transfer copies.</li>
         </ul>
       </section>
 
@@ -264,12 +264,11 @@
       </section>
 
       <section id="not-claimed" aria-labelledby="not-claimed-title">
-        <h2 id="not-claimed-title">Retention, revocation, and what is still unknown</h2>
-        <div class="unsettled">
-          <p>I adopted a retention and deletion policy on November 7, 2026. Saved work stays until I delete it or set an expiry. Other copies follow manual targets. Automatic cleanup is not fully implemented, and adopting the policy deleted nothing. The schedule is in the <a href="/backstage-openclaw-drive/privacy/#retention">privacy draft</a>.</p>
-          <p>Revoking the Google authorization ends that authorized access. It does not erase copies already downloaded. Deleting the active credential file does not remove credentials that remain in older backups.</p>
-          <p>Abacus’s published policy says customer data is not used to train generalized or proprietary models and describes zero-data-retention agreements with downstream model providers. This does not establish Abacus’s own RouteLLM API retention or deletion deadlines. Those details and the future Drive data flow and delivery controls remain unresolved. This page makes no Limited Use statement and no claim of Google approval. It stays a draft while that handling is settled.</p>
-        </div>
+        <h2 id="not-claimed-title">Retention, training, and Limited Use</h2>
+        <p>I adopted a retention and deletion policy on November 7, 2026. Saved work stays until I delete it or set an expiry. Other copies follow manual targets. Automatic cleanup is not fully implemented, and adopting the policy deleted nothing. The schedule is in the <a href="/backstage-openclaw-drive/privacy/#retention">privacy draft</a>.</p>
+        <p>Revoking the Google authorization ends that authorized access. It does not erase copies already downloaded. Deleting the active credential file does not remove credentials that remain in older backups.</p>
+        <p>OpenClaw does not use Google Drive data to train AI models. We use Abacus.AI under terms that do not permit using this data to train models.</p>
+        <p>Backstage OpenClaw’s use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy<span class="visually-hidden"> (opens in a new tab)</span></a>, including the Limited Use requirements.</p>
       </section>
 
       <section id="privacy-draft" aria-labelledby="privacy-draft-title">
