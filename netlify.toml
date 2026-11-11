@@ -34,14 +34,3 @@
   to = "/"
   status = 301
   force = true
-
-# Review draft for a private tool. Not the website privacy policy.
-[[headers]]
-  for = "/backstage-openclaw-drive"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
-
-[[headers]]
-  for = "/backstage-openclaw-drive/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
