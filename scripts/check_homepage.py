@@ -92,6 +92,13 @@ def main():
         if expected not in html:
             audit.errors.append(f"Expected homepage content missing: {expected}")
 
+    # Keep the inquiry invitation friction-free: no payment reference.
+    # Preserve the brief warning about credentials and sensitive information.
+    if '<p class="form-note">Please don’t include passwords or sensitive customer information.</p>' not in html:
+        audit.errors.append("Expected concise homepage contact form note")
+    if 'No payment is required to write.' in html:
+        audit.errors.append("Remove unnecessary payment language from homepage form")
+
     # Studio presentation decisions: approved copy, clean product-image crop,
     # and image-first ordering below the desktop two-column breakpoint.
     studio_checks = {
@@ -105,6 +112,118 @@ def main():
     for label, marker in studio_checks.items():
         if marker not in html:
             audit.errors.append(f"Missing {label}: {marker}")
+
+    # Agency is the navigation/section name; the content is client work.
+    # Preserve genuine site screenshots and label the coaching illustration.
+    studio_start = html.find('<section class="section" id="studio"')
+    agency_start = html.find('<section class="section" id="work"')
+    services_start = html.find('<section class="section" id="services"')
+    about_start_for_work = html.find('<section class="section" id="about"')
+    if not (0 <= studio_start < agency_start < services_start < about_start_for_work):
+        audit.errors.append("Homepage must read Studio → Agency → Services → About")
+    else:
+        agency = html[agency_start:services_start]
+        if '<h2 id="work-title">Client work.</h2>' not in agency:
+            audit.errors.append("Agency heading must be Client work.")
+        for expected in (
+            'client-art--nina', 'client-art--sharrey', 'client-art--chris',
+            'src="/assets/work/ninalara.webp"',
+            'client-art__jewelry',
+            'sd-home1.jpg', 'sd-home2.jpg', 'sd-home3.jpg',
+            '<figcaption>JEWELRY DESIGN</figcaption>',
+            '<figcaption>HANDMADE JEWELRY</figcaption>',
+            '<figcaption>WELLNESS COACH</figcaption>',
+            'aria-label="Editorial artwork for the Chris Willburn coaching website',
+        ):
+            if expected not in agency:
+                audit.errors.append(f"Missing Agency visual: {expected}")
+        # Most recently built client project first. Keep each entire card
+        # together when reordering so its art, caption, copy and link stay paired.
+        expected_order = ('<h3>Chris Willburn</h3>',
+                          '<h3>Nina Lara Design</h3>',
+                          '<h3>Sharrey Doré</h3>')
+        positions = [agency.find(title) for title in expected_order]
+        if any(position < 0 for position in positions) or positions != sorted(positions):
+            audit.errors.append("Agency cards must be Chris, Nina, then Sharrey")
+
+        # Short captions should stay a single line across card breakpoints.
+        for caption in ('WELLNESS COACH', 'JEWELRY DESIGN', 'HANDMADE JEWELRY'):
+            if agency.count(f'<figcaption>{caption}</figcaption>') != 1:
+                audit.errors.append(f"Missing or duplicate Agency caption: {caption}")
+
+        if '<div class="typecard">' in agency:
+            audit.errors.append("Agency still uses a placeholder typecard")
+
+        # All three image rules share the Chris Willburn 0.9rem inset and
+        # 1px weight, with a light-appropriate ink on the jewelry cards.
+        # Nina's image slides down inside a white clipped window, so it
+        # cannot overlap the hairline border or the off-white outside band.
+        screenshot_css = html[html.find("    /* Client work uses genuine site captures"):html.find("    .client-art figcaption")]
+        for expected in (
+            "--art-inset: 0.9rem;",
+            "--art-rule: rgba(30, 34, 59, 0.24);",
+            "inset: var(--art-inset);",
+            "border: 1px solid var(--art-rule);",
+            ".client-art__screenshot-window",
+            "overflow: hidden;",
+            "transform: translateY(0.65rem);",
+            ".client-art__jewelry",
+            "grid-template-columns: 1fr 1fr 1fr;",
+            "object-fit: contain;",
+        ):
+            if expected not in screenshot_css:
+                audit.errors.append(f"Missing shared image border: {expected}")
+        if screenshot_css.count("inset: var(--art-inset);") < 3:
+            audit.errors.append("Nina, Sharrey and shared border must use one inset")
+        if 'class="client-art__screenshot-window"' not in agency:
+            audit.errors.append("Nina screenshot must be inside its clipped window")
+        if "transform: scale(" in screenshot_css:
+            audit.errors.append("Client screenshots must not use CSS zoom")
+
+        if agency.count('sd-home1.jpg') != 1 or agency.count('sd-home2.jpg') != 1:
+            audit.errors.append("Sharrey's earrings and necklace must be present in full")
+
+    # The same hierarchy appears in both navigations, not only the document.
+    nav_order = ('href="#studio">Studio</a>', 'href="#work">Agency</a>',
+                 'href="#services">Services</a>')
+    for opening, closing in (('<nav aria-label="Primary">', '</nav>'),
+                             ('<nav class="footer-nav"', '</nav>')):
+        start = html.find(opening)
+        end = html.find(closing, start)
+        if start < 0 or end <= start:
+            audit.errors.append(f"Missing navigation: {opening}")
+        else:
+            nav = html[start:end]
+            positions = [nav.find(link) for link in nav_order]
+            if any(pos < 0 for pos in positions) or positions != sorted(positions):
+                audit.errors.append("Navigation must read Studio → Agency → Services")
+
+    if 0 <= services_start < about_start_for_work:
+        services = html[services_start:about_start_for_work]
+        for label, marker in {
+            "Updated Services heading": 'id="services-title">Find your starting point.</h2>',
+            "GBP original artwork": 'class="gbp-art"',
+            "GBP artwork disclosure": 'NO CLIENT RESULTS',
+            "GBP package link": 'href="/google-business-profile-home-services/"',
+            "Website Fixes package link": 'href="/website-fixes/"',
+            "Custom project invitation": 'Have something bigger in mind?',
+            "Contact call to action": 'href="#contact">Discuss a project</a>',
+            "New websites and marketing copy": 'digital marketing',
+        }.items():
+            if marker not in services:
+                audit.errors.append(f"Missing {label}: {marker}")
+        if 'Two ways to hire the studio.' in services or 'class="typecard"' in services:
+            audit.errors.append("Services still has old studio-hiring copy or placeholder")
+
+    for topic in ('<option>New website or redesign</option>',
+                  '<option>Digital marketing</option>'):
+        if topic not in html:
+            audit.errors.append(f"Missing inquiry topic: {topic}")
+
+    if html.count('href="#work">Agency</a>') != 2:
+        audit.errors.append("Both primary and footer navigation must say Agency")
+    if 'href="#work">Client work</a>' in html:
+        audit.errors.append("Old Client work navigation label remains")
 
     # The former launch placeholder must be absent, and old URLs redirect
     # instead of remaining publicly accessible as a second homepage.
@@ -125,7 +244,7 @@ def main():
                 audit.errors.append(f"Missing permanent redirect: {legacy} → /")
 
     # Section numbers belong to the homepage sections, not individual Studio projects.
-    for expected in ('01 — Studio', '02 — Services', '03 — Agency'):
+    for expected in ('01 — Studio', '02 — Agency', '03 — Services'):
         if f'<p class="kicker">{expected}</p>' not in html:
             audit.errors.append(f"Missing numbered section kicker: {expected}")
 
