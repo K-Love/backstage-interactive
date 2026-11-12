@@ -282,6 +282,7 @@
           <li><a href="#test">What was tested</a></li>
           <li><a href="#services">Server and other services</a></li>
           <li><a href="#use">How Drive content is used</a></li>
+          <li><a href="#security">Access and protection</a></li>
           <li><a href="#retention">How long material is kept</a></li>
           <li><a href="#deletion">Deleting material</a></li>
           <li><a href="#revoke">Revoking Google access</a></li>
@@ -307,6 +308,7 @@
         <p>A dedicated Google account has authorized Drive for this app. The app is in Testing mode, not a production publishing status. The account address, test users, and credentials are not printed here.</p>
         <p>The scope is <code>https://www.googleapis.com/auth/drive</code>. It allows the app to view, create, edit, and delete Drive files that account can access.</p>
         <p>The connector is set to a folder named Backstage Work. That restriction is in the connector configuration. It is not a boundary Google enforces on the scope.</p>
+        <p>The purpose is to transfer owner-selected work files between that folder and the private server. For those operations the connector accesses file contents and relevant metadata, such as file names, IDs, folder relationships, size, modification time and ownership information. It also holds authorization tokens needed to maintain the connection. The dedicated account limits what files are available to this broad-scope connector; the app does not request access to Gmail, contacts or calendars.</p>
       </section>
 
       <section id="test" aria-labelledby="test-title">
@@ -324,10 +326,20 @@
 
       <section id="use" aria-labelledby="use-title">
         <h2 id="use-title">How Drive content is used</h2>
-        <p>When OpenClaw’s AI reads a Drive file, it reads the file contents. The relevant content is sent to Abacus.AI for processing only, to carry out the request. OpenClaw does not store that content anywhere other than Google Drive, apart from the copies described in <a href="#retention">How long material is kept</a>, such as temporary transfer copies.</p>
-        <p>OpenClaw does not use Google Drive data to train AI models. We use Abacus.AI under terms that do not permit using this data to train models, as stated in <a href="https://abacus.ai/privacy-policy" target="_blank" rel="noopener noreferrer">Abacus.AI’s privacy policy<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
-        <p>Backstage OpenClaw’s use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy<span class="visually-hidden"> (opens in a new tab)</span></a>, including the Limited Use requirements.</p>
-        <p>Drive data is used only to provide and improve user-facing features of OpenClaw for Kevin, never sold, never used for advertising, never used to train generalized AI models, and no human reads it unless the user gives permission, it is needed for security or abuse investigation, to comply with law, or it is aggregated and anonymized for internal operations.</p>
+        <p><strong>Current operation:</strong> this is an owner-operated file-transfer connection. The controlled connection test uploaded and downloaded a test file directly between Google Drive and the DigitalOcean server. It did not send the file to Abacus.AI, another AI model, or Telegram. Routine file exchange and AI analysis of Drive files are not enabled.</p>
+        <p><strong>Before any AI integration is enabled:</strong> I will explain the selected files, purpose, recipients, storage and deletion limits, and obtain explicit consent before processing. The planned analysis would send only selected file content, necessary filenames and metadata, task instructions and relevant context through Abacus.AI to the selected model service. This is a future workflow, not a currently available feature.</p>
+        <p>Downloaded files and derived work can create copies outside Drive, including working files, conversation records, indexes, diagnostic records and backups. The <a href="#retention">retention rules</a> apply to controlled copies. They do not establish how long outside providers retain their own records. A claim that all content stays only in Drive would be inaccurate.</p>
+        <p>Abacus.AI's <a href="https://api.abacus.ai/privacy-policy">published privacy policy</a> states that customer content, API data and Google data are not used to train generalized or proprietary models, and describes zero-retention agreements with downstream model providers. These are published provider commitments, not an independent audit or verification of this account's contract. Abacus's own RouteLLM request, response, cache, log and backup retention and deletion deadlines remain unconfirmed. A downstream retention agreement does not establish that Abacus itself stores nothing.</p>
+        <p>Telegram is used for owner conversations and operational briefings. Its <a href="https://telegram.org/privacy#3-3-1-cloud-chats">cloud chats store messages and attachments</a>. No Drive-file delivery workflow is enabled. Before enabling one, the default will be a neutral completion notice and restricted Drive link; sending file titles, excerpts, summaries or attachments will require a specific owner request. Telegram would receive the notice and link. Server deletion does not erase a Telegram copy.</p>
+        <p>Private-file analysis will not be enabled until unrelated outbound tools, including web search and web fetch, are disabled for that job through permissions. Any external research will use a separate task with sanitized or explicitly approved queries. These controls are requirements for future implementation, not claims that an active Drive-to-AI workflow already enforces them.</p>
+        <h2 id="limited-use-title">Limited Use commitment</h2>
+        <p>Backstage OpenClaw Drive's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements, and the applicable <a href="https://developers.google.com/workspace/workspace-api-user-data-developer-policy">Google Workspace user data and developer policy</a>.</p>
+        <p>I use Google-derived data only for the owner-requested file-transfer function and any separately disclosed, consented feature. I do not sell it, use it for advertising, or use it to train AI models. I do not permit other people to read it unless I have documented explicit consent for the specific data, access is necessary for security or abuse investigation, or applicable law requires it. This private tool does not use an aggregated-data exception for internal analytics. These restrictions apply to derived data as well as original files.</p>
+      </section>
+
+      <section id="security" aria-labelledby="security-title">
+        <h2 id="security-title">Access and protection</h2>
+        <p>The connector uses HTTPS to communicate with Google Drive. Its credentials are held in a restricted server account outside the Chief's workspace. The OpenClaw gateway is bound to the server's local interface, and administrative access uses SSH keys. The configured Drive folder restriction and file permissions reduce access; they do not narrow Google's granted OAuth scope. This policy does not claim an independent security certification or a completed backup-restoration test.</p>
       </section>
 
       <section id="retention" aria-labelledby="retention-title">
@@ -432,6 +444,7 @@
 
       <section id="revoke" aria-labelledby="revoke-title">
         <h2 id="revoke-title">Revoking Google access</h2>
+        <p>To disconnect, open <a href="https://myaccount.google.com/connections">Google Account third-party connections</a>, select Backstage OpenClaw Drive and remove its access. Then request removal of the server credential and any downloaded copies through the contact path below; these are separate steps.</p>
         <p>Revoking the Google authorization invalidates that authorized access. Copies already downloaded stay where they are. Deleting the active credential file does not remove credentials that remain inside older backups. Tracking when those backups expire, and rotating credentials after a compromise or a restore, are manual steps. Manual archives are separate from the seven-day daily backups.</p>
       </section>
 
@@ -443,9 +456,14 @@
         </div>
       </section>
 
+      <section id="changes" aria-labelledby="changes-title">
+        <h2 id="changes-title">Changes to this policy</h2>
+        <p>I will update this page and its effective date when the practices change. Before using Google-derived data in a new way, I will provide a prominent explanation in the authorization or task workflow and obtain affirmative consent. Publishing this policy does not enable a feature, change the Google app publishing status, or establish Google approval.</p>
+      </section>
+
       <section id="contact" aria-labelledby="contact-title">
         <h2 id="contact-title">Questions</h2>
-        <p>Use the <a href="/#contact">contact form on the studio homepage</a>. Say that the note is about Backstage OpenClaw Drive. That form is a website form. It collects the name, email, topic, and note described in the website Privacy Policy. It does not connect to Google Drive.</p>
+        <p>Use the <a href="/#contact">contact form on the studio homepage</a>. Say that the note is about Backstage OpenClaw Drive and whether you want to ask a question, obtain a copy, disconnect, or delete data. Identify the relevant file or project and approximate transfer date; do not send passwords or tokens. I will confirm ownership and scope before taking action. That form is a website form. It collects the name, email, topic, and note described in the website Privacy Policy. It does not connect to Google Drive.</p>
         <p>The OAuth consent screen is already configured with a support address for the dedicated automation account. That address is not printed on this website. Publishing it is a separate choice from having it configured. The public contact path remains the homepage form. This site does not publish a phone number or a street address.</p>
       </section>
 
