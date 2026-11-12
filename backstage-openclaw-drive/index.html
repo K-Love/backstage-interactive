@@ -230,7 +230,7 @@
       </div>
 
       <section id="website" aria-labelledby="website-title">
-        <h2 id="website-title">This is not the website forms</h2>
+        <h2 id="website-title">Purpose and scope</h2>
         <p>The public website at backstageinteractive.com has its own <a href="/privacy/">Privacy Policy</a> and <a href="/terms/">Terms of Use</a>. Those pages cover the studio site and its contact forms. The forms ask for a note, a website-review request, or a Google Business Profile audit. They do not ask anyone to sign in with Google, and they do not request Google Drive.</p>
         <p>This page describes a different thing: a private tool, on a Google account I use for it, with the connector aimed at a Drive folder I named. A person sending the homepage form is not using this tool, and this tool is not how the website stores form messages.</p>
       </section>
@@ -243,7 +243,7 @@
           <li>The Google app is in Testing mode, not a production publishing status. A dedicated account authorized Drive with the scope <code>https://www.googleapis.com/auth/drive</code>. That scope can view, create, edit, and delete Drive files the account can access.</li>
           <li>The connector is set to a folder named Backstage Work. That limit is in the connector configuration. Google does not enforce it as the boundary of the scope.</li>
           <li>One test used a 171-byte file. The upload, the download, and a byte-for-byte comparison passed. The file remains in Deliverables and belongs to the dedicated automation account. That is one test, not routine automation.</li>
-          <li>When OpenClaw’s AI reads a Drive file, it reads the file contents. The relevant content is sent to Abacus.AI for processing only, to carry out the request. OpenClaw does not store that content anywhere other than Google Drive, apart from the copies described in the <a href="/backstage-openclaw-drive/privacy/#retention">retention section</a>, such as temporary transfer copies.</li>
+          <li>The tested function transfers owner-selected files between Backstage Work and the private server. It accesses file contents and relevant metadata. The connection test did not send the test file to an AI model or Telegram. Routine exchange and AI analysis remain disabled.</li>
         </ul>
       </section>
 
@@ -256,8 +256,8 @@
         <h2 id="not-claimed-title">Retention, training, and Limited Use</h2>
         <p>I adopted a retention and deletion policy on November 7, 2026. Saved work stays until I delete it or set an expiry. Other copies follow manual targets. Automatic cleanup is not fully implemented, and adopting the policy deleted nothing. The schedule is in the <a href="/backstage-openclaw-drive/privacy/">privacy policy</a>.</p>
         <p>Revoking the Google authorization ends that authorized access. It does not erase copies already downloaded. Deleting the active credential file does not remove credentials that remain in older backups.</p>
-        <p>OpenClaw does not use Google Drive data to train AI models. We use Abacus.AI under terms that do not permit using this data to train models.</p>
-        <p>Backstage OpenClaw’s use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy<span class="visually-hidden"> (opens in a new tab)</span></a>, including the Limited Use requirements.</p>
+        <p>I do not use Google Drive data to train AI models. Abacus.AI publishes no-training commitments, but its own API retention and deletion deadlines remain unconfirmed. Future AI analysis requires a separate disclosure and consent before activation; see <a href="/backstage-openclaw-drive/privacy/#use">data use, recipients and provider limits</a>.</p>
+        <p>Backstage OpenClaw Drive's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy<span class="visually-hidden"> (opens in a new tab)</span></a>, including the Limited Use requirements.</p>
       </section>
 
       <section id="privacy-draft" aria-labelledby="privacy-draft-title">
