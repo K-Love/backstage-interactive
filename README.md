@@ -6,6 +6,7 @@ Static site for [backstageinteractive.com](https://backstageinteractive.com/). [
 
 | Route | What it is |
 | --- | --- |
+| `/agency/` | Client services, three new-website projects, process, and links to the existing homepage inquiry form. |
 | `/` | Studio homepage: owned products, client work, service offers, about, and inquiry form. |
 | `/google-business-profile-home-services/` | GBP Fix-and-Protect landing page for home service pros. |
 | `/website-fixes/` | Website improvement services (noindex). |
@@ -215,3 +216,26 @@ After a successful submit, Netlify sends the visitor to `/google-business-profil
 6. Optional: turn on Netlify’s other form spam filtering in the dashboard. If you later add a webhook, keep any secret URL out of the repository.
 
 If the site ever leaves Netlify, point the form `action` at your own endpoint, remove `data-netlify`, `netlify-honeypot`, and `data-netlify-recaptcha`, and keep the same field names.
+
+## Agency page (November 2026)
+
+`/agency/` expands the homepage’s client-work section, which remains an anchor
+in the homepage menus. The section has an explicit link into Agency. The
+Agency page marks its own navigation link with `aria-current="page"`; other
+header links return to homepage sections. It shares the existing theme
+controller and storage key. Its scoped stylesheet is `assets/agency.css`,
+using the established homepage tokens and client artwork. Keep these visual
+primitives aligned when changing the broader site design.
+
+Kevin confirmed all three featured projects were brand-new websites he
+personally built. No measured outcomes, client quotes, project constraints,
+or builder-specific portfolio claims are inferred. Chris’s visual remains
+labeled as editorial artwork in its accessible description.
+
+All inquiry buttons use the existing `/#contact` form: no new form, data
+collection, submission endpoint, or notification setup is introduced.
+
+Validation: run the homepage check; inspect Agency links/anchors, metadata
+and sitemap; review 320/375/768/1440px in both themes, theme persistence,
+keyboard focus, and reduced motion. Verify the Netlify preview before merge
+and the production page after deployment.
